@@ -1,27 +1,13 @@
--- ============================================
--- ZAIXPLOIT | AUTO COIN + WEBHOOK SETTINGS
--- Remote: Helios Coin
--- Bisa setting Webhook URL & Interval Time di GUI
--- ============================================
-
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local VirtualUser = game:GetService("VirtualUser")
 local HttpService = game:GetService("HttpService")
 local TweenService = game:GetService("TweenService")
 
--- ============================================
--- 1. VARIABEL WEBHOOK
--- ============================================
-
 local webhookURL = ""
 local webhookInterval = 300
-local webhookEnabled = false
+local webhookRunning = false
 local webhookLoop = nil
-
--- ============================================
--- 2. NUMBER MANIPULATOR
--- ============================================
 
 local NumberManipulator = require(game:GetService("ReplicatedStorage"):WaitForChild("Assets"):WaitForChild("Modules"):WaitForChild("NumberManipulator"))
 
@@ -29,24 +15,13 @@ local function FormatNumber(value)
     return NumberManipulator.formatNumber(nil, value)
 end
 
--- ============================================
--- 3. FUNGSI WEBHOOK
--- ============================================
-
 local function SendToDiscord(message)
-    if webhookURL == "" then
-        print("⚠️ Webhook URL kosong!")
-        return false
-    end
-    
+    if webhookURL == "" then return false end
     local data = { ["content"] = message }
     local json = HttpService:JSONEncode(data)
-    
     local success = pcall(function()
         HttpService:PostAsync(webhookURL, json, Enum.HttpContentType.ApplicationJson)
-        print("✅ Pesan terkirim ke Discord!")
     end)
-    
     return success
 end
 
@@ -55,12 +30,10 @@ local function GetStats()
     if not leaderstats then
         return { cash = 0, bestThrow = 0, throws = 0, name = player.Name, displayName = player.DisplayName }
     end
-    
     local cash = leaderstats:FindFirstChild("Cash")
     local hidden = leaderstats:FindFirstChild("Hidden")
     local bestThrow = hidden and hidden:FindFirstChild("BestThrow")
     local throws = leaderstats:FindFirstChild("Throws")
-    
     return {
         cash = cash and cash.Value or 0,
         bestThrow = bestThrow and bestThrow.Value or 0,
@@ -73,57 +46,29 @@ end
 local function SendReport()
     local stats = GetStats()
     local message = string.format(
-        "📊 **ZAIXPLOIT REPORT**\n" ..
-        "👤 **Player:** %s (%s)\n" ..
-        "💰 **Cash:** %s\n" ..
-        "🏆 **Best Throw:** %s\n" ..
-        "🔄 **Total Throws:** %s\n" ..
-        "⏰ **Time:** %s",
-        stats.displayName,
-        stats.name,
-        FormatNumber(stats.cash),
-        FormatNumber(stats.bestThrow),
-        FormatNumber(stats.throws),
-        os.date("%H:%M:%S")
+        "📊 **ZAIXPLOIT REPORT**\n👤 **Player:** %s (%s)\n💰 **Cash:** %s\n🏆 **Best Throw:** %s\n🔄 **Total Throws:** %s\n⏰ **Time:** %s",
+        stats.displayName, stats.name, FormatNumber(stats.cash), FormatNumber(stats.bestThrow), FormatNumber(stats.throws), os.date("%H:%M:%S")
     )
     SendToDiscord(message)
 end
 
 local function StartWebhook()
     if webhookRunning then return end
-    if webhookURL == "" then
-        print("⚠️ Isi Webhook URL dulu!")
-        return
-    end
-    
+    if webhookURL == "" then print("⚠️ Isi Webhook URL dulu!") return end
     webhookRunning = true
-    print("✅ WEBHOOK STARTED! Interval: " .. webhookInterval .. "s")
-    
-    -- Kirim report pertama
     SendReport()
-    
     webhookLoop = task.spawn(function()
         while webhookRunning do
             task.wait(webhookInterval)
-            if webhookRunning then
-                SendReport()
-            end
+            if webhookRunning then SendReport() end
         end
     end)
 end
 
 local function StopWebhook()
     webhookRunning = false
-    if webhookLoop then
-        task.cancel(webhookLoop)
-        webhookLoop = nil
-    end
-    print("⏹️ WEBHOOK STOPPED!")
+    if webhookLoop then task.cancel(webhookLoop) webhookLoop = nil end
 end
-
--- ============================================
--- 4. MATIKAN ANTI KICK BAWAAN
--- ============================================
 
 pcall(function()
     local scripts = player:FindFirstChild("PlayerScripts")
@@ -131,9 +76,7 @@ pcall(function()
         scripts = scripts:FindFirstChild("Scripts")
         if scripts then
             local antiKick = scripts:FindFirstChild("AntiKickScript")
-            if antiKick then
-                antiKick:Destroy()
-            end
+            if antiKick then antiKick:Destroy() end
         end
     end
 end)
@@ -145,9 +88,7 @@ pcall(function()
         scripts = scripts:FindFirstChild("Scripts")
         if scripts then
             local antiKick = scripts:FindFirstChild("AntiKickScript")
-            if antiKick then
-                antiKick:Destroy()
-            end
+            if antiKick then antiKick:Destroy() end
         end
     end
 end)
@@ -157,9 +98,7 @@ pcall(function()
     local remotes = {"AntiKickReconnect", "SetAFKSafe", "StartAFKSafe"}
     for _, name in ipairs(remotes) do
         local remote = events:FindFirstChild(name)
-        if remote then
-            remote:Destroy()
-        end
+        if remote then remote:Destroy() end
     end
 end)
 
@@ -172,17 +111,11 @@ pcall(function()
             local hud = main:FindFirstChild("HUD")
             if hud then
                 local afkSafe = hud:FindFirstChild("AFKSafe")
-                if afkSafe then
-                    afkSafe:Destroy()
-                end
+                if afkSafe then afkSafe:Destroy() end
             end
         end
     end
 end)
-
--- ============================================
--- 5. ANTI AFK
--- ============================================
 
 task.spawn(function()
     while true do
@@ -195,22 +128,10 @@ task.spawn(function()
     end
 end)
 
--- ============================================
--- 6. REMOTE HELIOS COIN
--- ============================================
-
 local CoinLanded = game:GetService("ReplicatedStorage"):WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("CoinLanded")
-
--- ============================================
--- 7. VARIABEL AUTO COIN
--- ============================================
 
 local autoCoin = true
 local coinLoop = nil
-
--- ============================================
--- 8. FUNGSI THROW HELIOS COIN
--- ============================================
 
 local function ThrowHeliosCoin()
     local args = {
@@ -220,9 +141,7 @@ local function ThrowHeliosCoin()
         [4] = Vector3.new(-1160.6558837890625, 0.7260000109672546, 72.45848846435547),
         [6] = 1
     }
-    pcall(function()
-        CoinLanded:FireServer(unpack(args))
-    end)
+    pcall(function() CoinLanded:FireServer(unpack(args)) end)
 end
 
 local function StartCoinLoop()
@@ -242,10 +161,6 @@ local function StopCoinLoop()
         coinLoop = nil
     end
 end
-
--- ============================================
--- 9. BUAT GUI
--- ============================================
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ZAIXPLOIT"
@@ -275,7 +190,6 @@ Glow.Transparency = 0.4
 Glow.Thickness = 2
 Glow.Parent = Main
 
--- ===== HEADER =====
 local Header = Instance.new("Frame")
 Header.Size = UDim2.new(1, 0, 0, 42)
 Header.Position = UDim2.new(0, 0, 0, 0)
@@ -306,7 +220,6 @@ SubTitle.TextSize = 11
 SubTitle.TextXAlignment = Enum.TextXAlignment.Left
 SubTitle.Parent = Header
 
--- ===== MINIMIZE =====
 local isMinimized = false
 local originalSize = Main.Size
 
@@ -348,7 +261,6 @@ MinBtn.MouseButton1Click:Connect(function()
     end
 end)
 
--- ===== CLOSE =====
 local CloseBtn = Instance.new("TextButton")
 CloseBtn.Size = UDim2.new(0, 24, 0, 24)
 CloseBtn.Position = UDim2.new(1, -26, 0, 9)
@@ -378,16 +290,11 @@ CloseBtn.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
 
--- ===== CONTENT =====
 local Content = Instance.new("Frame")
 Content.Size = UDim2.new(1, -14, 0, 220)
 Content.Position = UDim2.new(0, 7, 0, 48)
 Content.BackgroundTransparency = 1
 Content.Parent = Main
-
--- ============================================
--- AUTO COIN TOGGLE
--- ============================================
 
 local autoFrame = Instance.new("Frame")
 autoFrame.Size = UDim2.new(1, 0, 0, 45)
@@ -463,10 +370,6 @@ local autoSwitchBtnCorner = Instance.new("UICorner")
 autoSwitchBtnCorner.CornerRadius = UDim.new(0, 12)
 autoSwitchBtnCorner.Parent = autoSwitchBtn
 
--- ============================================
--- WEBHOOK SETTINGS
--- ============================================
-
 local webhookFrame = Instance.new("Frame")
 webhookFrame.Size = UDim2.new(1, 0, 0, 155)
 webhookFrame.Position = UDim2.new(0, 0, 0, 55)
@@ -480,7 +383,6 @@ local webhookCorner = Instance.new("UICorner")
 webhookCorner.CornerRadius = UDim.new(0, 10)
 webhookCorner.Parent = webhookFrame
 
--- Label Webhook
 local webhookLabel = Instance.new("TextLabel")
 webhookLabel.Size = UDim2.new(1, 0, 0, 18)
 webhookLabel.Position = UDim2.new(0, 14, 0, 5)
@@ -492,7 +394,6 @@ webhookLabel.TextSize = 13
 webhookLabel.TextXAlignment = Enum.TextXAlignment.Left
 webhookLabel.Parent = webhookFrame
 
--- Input URL
 local urlBox = Instance.new("TextBox")
 urlBox.Size = UDim2.new(1, -20, 0, 25)
 urlBox.Position = UDim2.new(0, 10, 0, 26)
@@ -512,10 +413,8 @@ urlCorner.Parent = urlBox
 
 urlBox.FocusLost:Connect(function()
     webhookURL = urlBox.Text
-    print("✅ Webhook URL disimpan!")
 end)
 
--- Interval
 local intervalLabel = Instance.new("TextLabel")
 intervalLabel.Size = UDim2.new(0, 80, 0, 20)
 intervalLabel.Position = UDim2.new(0, 14, 0, 56)
@@ -559,13 +458,11 @@ intervalBox.FocusLost:Connect(function()
     local val = tonumber(intervalBox.Text)
     if val and val > 0 then
         webhookInterval = val
-        print("✅ Interval diubah: " .. webhookInterval .. " detik")
     else
         intervalBox.Text = tostring(webhookInterval)
     end
 end)
 
--- Tombol START/STOP Webhook
 local webhookStartBtn = Instance.new("TextButton")
 webhookStartBtn.Size = UDim2.new(0, 80, 0, 28)
 webhookStartBtn.Position = UDim2.new(0, 14, 0, 85)
@@ -597,16 +494,13 @@ webhookStartBtn.MouseButton1Click:Connect(function()
     else
         webhookURL = urlBox.Text
         local val = tonumber(intervalBox.Text)
-        if val and val > 0 then
-            webhookInterval = val
-        end
+        if val and val > 0 then webhookInterval = val end
         StartWebhook()
         webhookStartBtn.Text = "⏹ STOP"
         webhookStartBtn.BackgroundColor3 = Color3.fromRGB(180, 60, 60)
     end
 end)
 
--- Status Webhook
 local webhookStatus = Instance.new("TextLabel")
 webhookStatus.Size = UDim2.new(0, 120, 0, 20)
 webhookStatus.Position = UDim2.new(1, -130, 0, 90)
@@ -617,10 +511,6 @@ webhookStatus.Font = Enum.Font.FredokaOne
 webhookStatus.TextSize = 11
 webhookStatus.TextXAlignment = Enum.TextXAlignment.Right
 webhookStatus.Parent = webhookFrame
-
--- ============================================
--- UPDATE FUNCTIONS
--- ============================================
 
 local function SmoothMove(object, targetPos, duration)
     local tween = TweenService:Create(object, TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = targetPos})
@@ -653,20 +543,14 @@ local function UpdateMainBorder()
     end
 end
 
--- ============================================
--- KLIK TOGGLE
--- ============================================
-
 autoSwitchBtn.MouseButton1Click:Connect(function()
     autoCoin = not autoCoin
     UpdateAutoSwitch(autoCoin)
     UpdateMainBorder()
     if autoCoin then
         StartCoinLoop()
-        print("🟢 AUTO HELIOS ON")
     else
         StopCoinLoop()
-        print("🔴 AUTO HELIOS OFF")
     end
 end)
 
@@ -676,21 +560,13 @@ autoFrame.MouseButton1Click:Connect(function()
     UpdateMainBorder()
     if autoCoin then
         StartCoinLoop()
-        print("🟢 AUTO HELIOS ON")
     else
         StopCoinLoop()
-        print("🔴 AUTO HELIOS OFF")
     end
 end)
 
--- ============================================
--- START AUTO COIN (DEFAULT ON)
--- ============================================
-
 StartCoinLoop()
-print("✅ AUTO HELIOS ON (Default)")
 
--- Update status webhook periodically
 task.spawn(function()
     while true do
         task.wait(1)
@@ -703,10 +579,6 @@ task.spawn(function()
         end
     end
 end)
-
--- ============================================
--- DRAG
--- ============================================
 
 local isDragging = false
 local dragStartPos = Vector2.new()
@@ -749,10 +621,3 @@ end
 UserInputService.InputBegan:Connect(onInputBegan)
 UserInputService.InputChanged:Connect(onInputChanged)
 UserInputService.InputEnded:Connect(onInputEnded)
-
-print("═══════════════════════════════════")
-print("✅ ZAIXPLOIT | AUTO HELIOS + WEBHOOK")
-print("📌 AUTO HELIOS DEFAULT ON")
-print("📌 Webhook bisa di setting di GUI")
-print("📌 Interval bisa diubah (detik)")
-print("═══════════════════════════════════")
