@@ -1,15 +1,128 @@
 -- ============================================
--- ZAIXPLOIT | FULL SCRIPT
--- Auto Coin + Anti AFK + Matikan Anti Kick
+-- ZAIXPLOIT | AUTO COIN + WEBHOOK SETTINGS
+-- Remote: Helios Coin
+-- Bisa setting Webhook URL & Interval Time di GUI
 -- ============================================
 
 local player = game.Players.LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 local VirtualUser = game:GetService("VirtualUser")
+local HttpService = game:GetService("HttpService")
 local TweenService = game:GetService("TweenService")
 
 -- ============================================
--- 1. MATIKAN ANTI KICK BAWAAN GAME
+-- 1. VARIABEL WEBHOOK
+-- ============================================
+
+local webhookURL = ""
+local webhookInterval = 300
+local webhookEnabled = false
+local webhookLoop = nil
+
+-- ============================================
+-- 2. NUMBER MANIPULATOR
+-- ============================================
+
+local NumberManipulator = require(game:GetService("ReplicatedStorage"):WaitForChild("Assets"):WaitForChild("Modules"):WaitForChild("NumberManipulator"))
+
+local function FormatNumber(value)
+    return NumberManipulator.formatNumber(nil, value)
+end
+
+-- ============================================
+-- 3. FUNGSI WEBHOOK
+-- ============================================
+
+local function SendToDiscord(message)
+    if webhookURL == "" then
+        print("⚠️ Webhook URL kosong!")
+        return false
+    end
+    
+    local data = { ["content"] = message }
+    local json = HttpService:JSONEncode(data)
+    
+    local success = pcall(function()
+        HttpService:PostAsync(webhookURL, json, Enum.HttpContentType.ApplicationJson)
+        print("✅ Pesan terkirim ke Discord!")
+    end)
+    
+    return success
+end
+
+local function GetStats()
+    local leaderstats = player:FindFirstChild("leaderstats")
+    if not leaderstats then
+        return { cash = 0, bestThrow = 0, throws = 0, name = player.Name, displayName = player.DisplayName }
+    end
+    
+    local cash = leaderstats:FindFirstChild("Cash")
+    local hidden = leaderstats:FindFirstChild("Hidden")
+    local bestThrow = hidden and hidden:FindFirstChild("BestThrow")
+    local throws = leaderstats:FindFirstChild("Throws")
+    
+    return {
+        cash = cash and cash.Value or 0,
+        bestThrow = bestThrow and bestThrow.Value or 0,
+        throws = throws and throws.Value or 0,
+        name = player.Name,
+        displayName = player.DisplayName
+    }
+end
+
+local function SendReport()
+    local stats = GetStats()
+    local message = string.format(
+        "📊 **ZAIXPLOIT REPORT**\n" ..
+        "👤 **Player:** %s (%s)\n" ..
+        "💰 **Cash:** %s\n" ..
+        "🏆 **Best Throw:** %s\n" ..
+        "🔄 **Total Throws:** %s\n" ..
+        "⏰ **Time:** %s",
+        stats.displayName,
+        stats.name,
+        FormatNumber(stats.cash),
+        FormatNumber(stats.bestThrow),
+        FormatNumber(stats.throws),
+        os.date("%H:%M:%S")
+    )
+    SendToDiscord(message)
+end
+
+local function StartWebhook()
+    if webhookRunning then return end
+    if webhookURL == "" then
+        print("⚠️ Isi Webhook URL dulu!")
+        return
+    end
+    
+    webhookRunning = true
+    print("✅ WEBHOOK STARTED! Interval: " .. webhookInterval .. "s")
+    
+    -- Kirim report pertama
+    SendReport()
+    
+    webhookLoop = task.spawn(function()
+        while webhookRunning do
+            task.wait(webhookInterval)
+            if webhookRunning then
+                SendReport()
+            end
+        end
+    end)
+end
+
+local function StopWebhook()
+    webhookRunning = false
+    if webhookLoop then
+        task.cancel(webhookLoop)
+        webhookLoop = nil
+    end
+    print("⏹️ WEBHOOK STOPPED!")
+end
+
+-- ============================================
+-- 4. MATIKAN ANTI KICK BAWAAN
 -- ============================================
 
 pcall(function()
@@ -20,7 +133,6 @@ pcall(function()
             local antiKick = scripts:FindFirstChild("AntiKickScript")
             if antiKick then
                 antiKick:Destroy()
-                print("✅ AntiKickScript (LocalPlayer) dihapus!")
             end
         end
     end
@@ -35,7 +147,6 @@ pcall(function()
             local antiKick = scripts:FindFirstChild("AntiKickScript")
             if antiKick then
                 antiKick:Destroy()
-                print("✅ AntiKickScript (StarterPlayer) dihapus!")
             end
         end
     end
@@ -48,7 +159,6 @@ pcall(function()
         local remote = events:FindFirstChild(name)
         if remote then
             remote:Destroy()
-            print("✅ Remote " .. name .. " dihapus!")
         end
     end
 end)
@@ -64,7 +174,6 @@ pcall(function()
                 local afkSafe = hud:FindFirstChild("AFKSafe")
                 if afkSafe then
                     afkSafe:Destroy()
-                    print("✅ AFKSafe UI dihapus!")
                 end
             end
         end
@@ -72,7 +181,7 @@ pcall(function()
 end)
 
 -- ============================================
--- 2. ANTI AFK SENDIRI
+-- 5. ANTI AFK
 -- ============================================
 
 task.spawn(function()
@@ -87,28 +196,23 @@ task.spawn(function()
 end)
 
 -- ============================================
--- 3. REMOTE & ANIMASI
+-- 6. REMOTE HELIOS COIN
 -- ============================================
 
 local CoinLanded = game:GetService("ReplicatedStorage"):WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("CoinLanded")
 
-local Animations = game:GetService("ReplicatedStorage"):WaitForChild("Assets"):WaitForChild("Animations")
-local ThrowAnim = Animations:WaitForChild("Throw")
-local BackAnim = Animations:WaitForChild("Back")
-
 -- ============================================
--- 4. VARIABEL
+-- 7. VARIABEL AUTO COIN
 -- ============================================
 
 local autoCoin = true
-local useAnimasi = false
 local coinLoop = nil
 
 -- ============================================
--- 5. FUNGSI THROW COIN
+-- 8. FUNGSI THROW HELIOS COIN
 -- ============================================
 
-local function ThrowCoin()
+local function ThrowHeliosCoin()
     local args = {
         [1] = 1.3370886103455577,
         [2] = Vector3.new(-1155.1026611328125, 0.7260000109672546, 74.73015594482422),
@@ -121,35 +225,12 @@ local function ThrowCoin()
     end)
 end
 
-local function ThrowWithAnimasi()
-    local character = player.Character
-    if not character then return end
-    local humanoid = character:FindFirstChild("Humanoid")
-    if not humanoid then return end
-    local animator = humanoid:FindFirstChild("Animator")
-    if not animator then return end
-    
-    local throwTrack = animator:LoadAnimation(ThrowAnim)
-    throwTrack:Play()
-    task.wait(0.3)
-    ThrowCoin()
-    task.wait(0.2)
-    local backTrack = animator:LoadAnimation(BackAnim)
-    backTrack:Play()
-    task.wait(0.3)
-end
-
 local function StartCoinLoop()
     if coinLoop then return end
     coinLoop = task.spawn(function()
         while autoCoin do
-            if useAnimasi then
-                ThrowWithAnimasi()
-                task.wait(0.1)
-            else
-                ThrowCoin()
-                task.wait(0.05)
-            end
+            ThrowHeliosCoin()
+            task.wait(0.05)
         end
     end)
 end
@@ -163,7 +244,7 @@ local function StopCoinLoop()
 end
 
 -- ============================================
--- 6. BUAT GUI
+-- 9. BUAT GUI
 -- ============================================
 
 local screenGui = Instance.new("ScreenGui")
@@ -172,8 +253,8 @@ screenGui.ResetOnSpawn = false
 screenGui.Parent = player:WaitForChild("PlayerGui")
 
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 340, 0, 170)
-Main.Position = UDim2.new(0.5, -170, 0.5, -85)
+Main.Size = UDim2.new(0, 380, 0, 280)
+Main.Position = UDim2.new(0.5, -190, 0.5, -140)
 Main.BackgroundColor3 = Color3.fromRGB(10, 8, 20)
 Main.BackgroundTransparency = 0.05
 Main.BorderSizePixel = 3
@@ -194,6 +275,7 @@ Glow.Transparency = 0.4
 Glow.Thickness = 2
 Glow.Parent = Main
 
+-- ===== HEADER =====
 local Header = Instance.new("Frame")
 Header.Size = UDim2.new(1, 0, 0, 42)
 Header.Position = UDim2.new(0, 0, 0, 0)
@@ -217,13 +299,14 @@ local SubTitle = Instance.new("TextLabel")
 SubTitle.Size = UDim2.new(1, -60, 0, 14)
 SubTitle.Position = UDim2.new(0, 12, 0, 23)
 SubTitle.BackgroundTransparency = 1
-SubTitle.Text = "🪙 AUTO COIN"
+SubTitle.Text = "🪙 AUTO HELIOS + WEBHOOK"
 SubTitle.TextColor3 = Color3.fromRGB(255, 200, 50)
 SubTitle.Font = Enum.Font.FredokaOne
 SubTitle.TextSize = 11
 SubTitle.TextXAlignment = Enum.TextXAlignment.Left
 SubTitle.Parent = Header
 
+-- ===== MINIMIZE =====
 local isMinimized = false
 local originalSize = Main.Size
 
@@ -253,7 +336,7 @@ end)
 MinBtn.MouseButton1Click:Connect(function()
     isMinimized = not isMinimized
     if isMinimized then
-        Main.Size = UDim2.new(0, 340, 0, 42)
+        Main.Size = UDim2.new(0, 380, 0, 42)
         MinBtn.Text = "➕"
         Content.Visible = false
         CloseBtn.Visible = false
@@ -265,6 +348,7 @@ MinBtn.MouseButton1Click:Connect(function()
     end
 end)
 
+-- ===== CLOSE =====
 local CloseBtn = Instance.new("TextButton")
 CloseBtn.Size = UDim2.new(0, 24, 0, 24)
 CloseBtn.Position = UDim2.new(1, -26, 0, 9)
@@ -290,43 +374,44 @@ end)
 
 CloseBtn.MouseButton1Click:Connect(function()
     StopCoinLoop()
+    StopWebhook()
     screenGui:Destroy()
 end)
 
+-- ===== CONTENT =====
 local Content = Instance.new("Frame")
-Content.Size = UDim2.new(1, -14, 0, 110)
+Content.Size = UDim2.new(1, -14, 0, 220)
 Content.Position = UDim2.new(0, 7, 0, 48)
 Content.BackgroundTransparency = 1
 Content.Parent = Main
 
--- ===== AUTO COIN TOGGLE =====
-local autoBtn = Instance.new("TextButton")
-autoBtn.Size = UDim2.new(1, 0, 0, 45)
-autoBtn.Position = UDim2.new(0, 0, 0, 5)
-autoBtn.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-autoBtn.BackgroundTransparency = 0.1
-autoBtn.BorderSizePixel = 1
-autoBtn.BorderColor3 = Color3.fromRGB(60, 60, 80)
-autoBtn.Text = ""
-autoBtn.Font = Enum.Font.FredokaOne
-autoBtn.TextSize = 14
-autoBtn.TextXAlignment = Enum.TextXAlignment.Left
-autoBtn.Parent = Content
+-- ============================================
+-- AUTO COIN TOGGLE
+-- ============================================
+
+local autoFrame = Instance.new("Frame")
+autoFrame.Size = UDim2.new(1, 0, 0, 45)
+autoFrame.Position = UDim2.new(0, 0, 0, 5)
+autoFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+autoFrame.BackgroundTransparency = 0.1
+autoFrame.BorderSizePixel = 1
+autoFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+autoFrame.Parent = Content
 
 local autoCorner = Instance.new("UICorner")
 autoCorner.CornerRadius = UDim.new(0, 10)
-autoCorner.Parent = autoBtn
+autoCorner.Parent = autoFrame
 
 local autoLabel = Instance.new("TextLabel")
-autoLabel.Size = UDim2.new(0, 130, 1, 0)
+autoLabel.Size = UDim2.new(0, 160, 1, 0)
 autoLabel.Position = UDim2.new(0, 14, 0, 0)
 autoLabel.BackgroundTransparency = 1
-autoLabel.Text = "🪙 AUTO COIN"
+autoLabel.Text = "🪙 AUTO HELIOS"
 autoLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 autoLabel.Font = Enum.Font.FredokaOne
 autoLabel.TextSize = 14
 autoLabel.TextXAlignment = Enum.TextXAlignment.Left
-autoLabel.Parent = autoBtn
+autoLabel.Parent = autoFrame
 
 local autoSwitchBg = Instance.new("Frame")
 autoSwitchBg.Size = UDim2.new(0, 60, 0, 30)
@@ -335,7 +420,7 @@ autoSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
 autoSwitchBg.BackgroundTransparency = 0.1
 autoSwitchBg.BorderSizePixel = 2
 autoSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-autoSwitchBg.Parent = autoBtn
+autoSwitchBg.Parent = autoFrame
 
 local autoSwitchCorner = Instance.new("UICorner")
 autoSwitchCorner.CornerRadius = UDim.new(0, 15)
@@ -378,87 +463,163 @@ local autoSwitchBtnCorner = Instance.new("UICorner")
 autoSwitchBtnCorner.CornerRadius = UDim.new(0, 12)
 autoSwitchBtnCorner.Parent = autoSwitchBtn
 
--- ===== ANIMASI TOGGLE =====
-local animBtn = Instance.new("TextButton")
-animBtn.Size = UDim2.new(1, 0, 0, 45)
-animBtn.Position = UDim2.new(0, 0, 0, 55)
-animBtn.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-animBtn.BackgroundTransparency = 0.1
-animBtn.BorderSizePixel = 1
-animBtn.BorderColor3 = Color3.fromRGB(60, 60, 80)
-animBtn.Text = ""
-animBtn.Font = Enum.Font.FredokaOne
-animBtn.TextSize = 14
-animBtn.TextXAlignment = Enum.TextXAlignment.Left
-animBtn.Parent = Content
+-- ============================================
+-- WEBHOOK SETTINGS
+-- ============================================
 
-local animCorner = Instance.new("UICorner")
-animCorner.CornerRadius = UDim.new(0, 10)
-animCorner.Parent = animBtn
+local webhookFrame = Instance.new("Frame")
+webhookFrame.Size = UDim2.new(1, 0, 0, 155)
+webhookFrame.Position = UDim2.new(0, 0, 0, 55)
+webhookFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+webhookFrame.BackgroundTransparency = 0.1
+webhookFrame.BorderSizePixel = 1
+webhookFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+webhookFrame.Parent = Content
 
-local animLabel = Instance.new("TextLabel")
-animLabel.Size = UDim2.new(0, 160, 1, 0)
-animLabel.Position = UDim2.new(0, 14, 0, 0)
-animLabel.BackgroundTransparency = 1
-animLabel.Text = "🎬 WITH ANIMASI"
-animLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
-animLabel.Font = Enum.Font.FredokaOne
-animLabel.TextSize = 14
-animLabel.TextXAlignment = Enum.TextXAlignment.Left
-animLabel.Parent = animBtn
+local webhookCorner = Instance.new("UICorner")
+webhookCorner.CornerRadius = UDim.new(0, 10)
+webhookCorner.Parent = webhookFrame
 
-local animSwitchBg = Instance.new("Frame")
-animSwitchBg.Size = UDim2.new(0, 60, 0, 30)
-animSwitchBg.Position = UDim2.new(1, -72, 0.5, -15)
-animSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
-animSwitchBg.BackgroundTransparency = 0.1
-animSwitchBg.BorderSizePixel = 2
-animSwitchBg.BorderColor3 = Color3.fromRGB(80, 80, 100)
-animSwitchBg.Parent = animBtn
+-- Label Webhook
+local webhookLabel = Instance.new("TextLabel")
+webhookLabel.Size = UDim2.new(1, 0, 0, 18)
+webhookLabel.Position = UDim2.new(0, 14, 0, 5)
+webhookLabel.BackgroundTransparency = 1
+webhookLabel.Text = "📡 WEBHOOK SETTINGS"
+webhookLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
+webhookLabel.Font = Enum.Font.FredokaOne
+webhookLabel.TextSize = 13
+webhookLabel.TextXAlignment = Enum.TextXAlignment.Left
+webhookLabel.Parent = webhookFrame
 
-local animSwitchCorner = Instance.new("UICorner")
-animSwitchCorner.CornerRadius = UDim.new(0, 15)
-animSwitchCorner.Parent = animSwitchBg
+-- Input URL
+local urlBox = Instance.new("TextBox")
+urlBox.Size = UDim2.new(1, -20, 0, 25)
+urlBox.Position = UDim2.new(0, 10, 0, 26)
+urlBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
+urlBox.BackgroundTransparency = 0.2
+urlBox.TextColor3 = Color3.fromRGB(200, 200, 210)
+urlBox.Font = Enum.Font.Gotham
+urlBox.TextSize = 11
+urlBox.Text = "https://discord.com/api/webhooks/..."
+urlBox.TextXAlignment = Enum.TextXAlignment.Left
+urlBox.ClearTextOnFocus = false
+urlBox.Parent = webhookFrame
 
-local animOffLabel = Instance.new("TextLabel")
-animOffLabel.Size = UDim2.new(0, 22, 1, 0)
-animOffLabel.Position = UDim2.new(0, 5, 0, 0)
-animOffLabel.BackgroundTransparency = 1
-animOffLabel.Text = "OFF"
-animOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-animOffLabel.Font = Enum.Font.FredokaOne
-animOffLabel.TextSize = 10
-animOffLabel.TextXAlignment = Enum.TextXAlignment.Center
-animOffLabel.Parent = animSwitchBg
+local urlCorner = Instance.new("UICorner")
+urlCorner.CornerRadius = UDim.new(0, 6)
+urlCorner.Parent = urlBox
 
-local animOnLabel = Instance.new("TextLabel")
-animOnLabel.Size = UDim2.new(0, 22, 1, 0)
-animOnLabel.Position = UDim2.new(1, -27, 0, 0)
-animOnLabel.BackgroundTransparency = 1
-animOnLabel.Text = "ON"
-animOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-animOnLabel.Font = Enum.Font.FredokaOne
-animOnLabel.TextSize = 10
-animOnLabel.TextXAlignment = Enum.TextXAlignment.Center
-animOnLabel.Parent = animSwitchBg
+urlBox.FocusLost:Connect(function()
+    webhookURL = urlBox.Text
+    print("✅ Webhook URL disimpan!")
+end)
 
-local animSwitchBtn = Instance.new("TextButton")
-animSwitchBtn.Size = UDim2.new(0, 24, 0, 24)
-animSwitchBtn.Position = UDim2.new(0, 3, 0.5, -12)
-animSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-animSwitchBtn.BackgroundTransparency = 0.05
-animSwitchBtn.BorderSizePixel = 2
-animSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
-animSwitchBtn.Text = ""
-animSwitchBtn.ZIndex = 10
-animSwitchBtn.Parent = animSwitchBg
+-- Interval
+local intervalLabel = Instance.new("TextLabel")
+intervalLabel.Size = UDim2.new(0, 80, 0, 20)
+intervalLabel.Position = UDim2.new(0, 14, 0, 56)
+intervalLabel.BackgroundTransparency = 1
+intervalLabel.Text = "⏱️ Interval:"
+intervalLabel.TextColor3 = Color3.fromRGB(200, 200, 210)
+intervalLabel.Font = Enum.Font.FredokaOne
+intervalLabel.TextSize = 12
+intervalLabel.TextXAlignment = Enum.TextXAlignment.Left
+intervalLabel.Parent = webhookFrame
 
-local animSwitchBtnCorner = Instance.new("UICorner")
-animSwitchBtnCorner.CornerRadius = UDim.new(0, 12)
-animSwitchBtnCorner.Parent = animSwitchBtn
+local intervalBox = Instance.new("TextBox")
+intervalBox.Size = UDim2.new(0, 70, 0, 22)
+intervalBox.Position = UDim2.new(0, 90, 0, 55)
+intervalBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
+intervalBox.BackgroundTransparency = 0.2
+intervalBox.TextColor3 = Color3.fromRGB(200, 200, 210)
+intervalBox.Font = Enum.Font.Gotham
+intervalBox.TextSize = 12
+intervalBox.Text = "300"
+intervalBox.TextXAlignment = Enum.TextXAlignment.Center
+intervalBox.ClearTextOnFocus = false
+intervalBox.Parent = webhookFrame
+
+local intervalCorner = Instance.new("UICorner")
+intervalCorner.CornerRadius = UDim.new(0, 6)
+intervalCorner.Parent = intervalBox
+
+local intervalSec = Instance.new("TextLabel")
+intervalSec.Size = UDim2.new(0, 30, 0, 20)
+intervalSec.Position = UDim2.new(0, 165, 0, 56)
+intervalSec.BackgroundTransparency = 1
+intervalSec.Text = "detik"
+intervalSec.TextColor3 = Color3.fromRGB(150, 150, 160)
+intervalSec.Font = Enum.Font.FredokaOne
+intervalSec.TextSize = 11
+intervalSec.TextXAlignment = Enum.TextXAlignment.Left
+intervalSec.Parent = webhookFrame
+
+intervalBox.FocusLost:Connect(function()
+    local val = tonumber(intervalBox.Text)
+    if val and val > 0 then
+        webhookInterval = val
+        print("✅ Interval diubah: " .. webhookInterval .. " detik")
+    else
+        intervalBox.Text = tostring(webhookInterval)
+    end
+end)
+
+-- Tombol START/STOP Webhook
+local webhookStartBtn = Instance.new("TextButton")
+webhookStartBtn.Size = UDim2.new(0, 80, 0, 28)
+webhookStartBtn.Position = UDim2.new(0, 14, 0, 85)
+webhookStartBtn.Text = "▶ START"
+webhookStartBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+webhookStartBtn.Font = Enum.Font.GothamBold
+webhookStartBtn.TextSize = 12
+webhookStartBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 60)
+webhookStartBtn.BackgroundTransparency = 0.2
+webhookStartBtn.BorderSizePixel = 0
+webhookStartBtn.Parent = webhookFrame
+
+local webhookStartCorner = Instance.new("UICorner")
+webhookStartCorner.CornerRadius = UDim.new(0, 6)
+webhookStartCorner.Parent = webhookStartBtn
+
+webhookStartBtn.MouseEnter:Connect(function()
+    webhookStartBtn.BackgroundTransparency = 0.05
+end)
+webhookStartBtn.MouseLeave:Connect(function()
+    webhookStartBtn.BackgroundTransparency = 0.2
+end)
+
+webhookStartBtn.MouseButton1Click:Connect(function()
+    if webhookRunning then
+        StopWebhook()
+        webhookStartBtn.Text = "▶ START"
+        webhookStartBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 60)
+    else
+        webhookURL = urlBox.Text
+        local val = tonumber(intervalBox.Text)
+        if val and val > 0 then
+            webhookInterval = val
+        end
+        StartWebhook()
+        webhookStartBtn.Text = "⏹ STOP"
+        webhookStartBtn.BackgroundColor3 = Color3.fromRGB(180, 60, 60)
+    end
+end)
+
+-- Status Webhook
+local webhookStatus = Instance.new("TextLabel")
+webhookStatus.Size = UDim2.new(0, 120, 0, 20)
+webhookStatus.Position = UDim2.new(1, -130, 0, 90)
+webhookStatus.BackgroundTransparency = 1
+webhookStatus.Text = "⚪ Stopped"
+webhookStatus.TextColor3 = Color3.fromRGB(150, 150, 160)
+webhookStatus.Font = Enum.Font.FredokaOne
+webhookStatus.TextSize = 11
+webhookStatus.TextXAlignment = Enum.TextXAlignment.Right
+webhookStatus.Parent = webhookFrame
 
 -- ============================================
--- 7. ANIMASI SWITCH
+-- UPDATE FUNCTIONS
 -- ============================================
 
 local function SmoothMove(object, targetPos, duration)
@@ -482,22 +643,6 @@ local function UpdateAutoSwitch(isOn)
     end
 end
 
-local function UpdateAnimSwitch(isOn)
-    if isOn then
-        animSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-        animSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-        SmoothMove(animSwitchBtn, UDim2.new(1, -27, 0.5, -12), 0.3)
-        animOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-        animOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    else
-        animSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
-        animSwitchBg.BorderColor3 = Color3.fromRGB(80, 80, 100)
-        SmoothMove(animSwitchBtn, UDim2.new(0, 3, 0.5, -12), 0.3)
-        animOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-        animOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-    end
-end
-
 local function UpdateMainBorder()
     if autoCoin then
         TweenService:Create(Main, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BorderColor3 = Color3.fromRGB(60, 200, 80)}):Play()
@@ -509,21 +654,8 @@ local function UpdateMainBorder()
 end
 
 -- ============================================
--- 8. KLIK TOGGLE
+-- KLIK TOGGLE
 -- ============================================
-
-autoBtn.MouseButton1Click:Connect(function()
-    autoCoin = not autoCoin
-    UpdateAutoSwitch(autoCoin)
-    UpdateMainBorder()
-    if autoCoin then
-        StartCoinLoop()
-        print("🟢 AUTO COIN ON")
-    else
-        StopCoinLoop()
-        print("🔴 AUTO COIN OFF")
-    end
-end)
 
 autoSwitchBtn.MouseButton1Click:Connect(function()
     autoCoin = not autoCoin
@@ -531,34 +663,49 @@ autoSwitchBtn.MouseButton1Click:Connect(function()
     UpdateMainBorder()
     if autoCoin then
         StartCoinLoop()
-        print("🟢 AUTO COIN ON")
+        print("🟢 AUTO HELIOS ON")
     else
         StopCoinLoop()
-        print("🔴 AUTO COIN OFF")
+        print("🔴 AUTO HELIOS OFF")
     end
 end)
 
-animBtn.MouseButton1Click:Connect(function()
-    useAnimasi = not useAnimasi
-    UpdateAnimSwitch(useAnimasi)
-    print(useAnimasi and "🎬 ANIMASI ON" or "🎬 ANIMASI OFF")
-end)
-
-animSwitchBtn.MouseButton1Click:Connect(function()
-    useAnimasi = not useAnimasi
-    UpdateAnimSwitch(useAnimasi)
-    print(useAnimasi and "🎬 ANIMASI ON" or "🎬 ANIMASI OFF")
+autoFrame.MouseButton1Click:Connect(function()
+    autoCoin = not autoCoin
+    UpdateAutoSwitch(autoCoin)
+    UpdateMainBorder()
+    if autoCoin then
+        StartCoinLoop()
+        print("🟢 AUTO HELIOS ON")
+    else
+        StopCoinLoop()
+        print("🔴 AUTO HELIOS OFF")
+    end
 end)
 
 -- ============================================
--- 9. START AUTO COIN (DEFAULT ON)
+-- START AUTO COIN (DEFAULT ON)
 -- ============================================
 
 StartCoinLoop()
-print("✅ AUTO COIN LANGSUNG ON (Default)")
+print("✅ AUTO HELIOS ON (Default)")
+
+-- Update status webhook periodically
+task.spawn(function()
+    while true do
+        task.wait(1)
+        if webhookRunning then
+            webhookStatus.Text = "🟢 Running (" .. webhookInterval .. "s)"
+            webhookStatus.TextColor3 = Color3.fromRGB(60, 200, 80)
+        else
+            webhookStatus.Text = "⚪ Stopped"
+            webhookStatus.TextColor3 = Color3.fromRGB(150, 150, 160)
+        end
+    end
+end)
 
 -- ============================================
--- 10. DRAG
+-- DRAG
 -- ============================================
 
 local isDragging = false
@@ -602,3 +749,10 @@ end
 UserInputService.InputBegan:Connect(onInputBegan)
 UserInputService.InputChanged:Connect(onInputChanged)
 UserInputService.InputEnded:Connect(onInputEnded)
+
+print("═══════════════════════════════════")
+print("✅ ZAIXPLOIT | AUTO HELIOS + WEBHOOK")
+print("📌 AUTO HELIOS DEFAULT ON")
+print("📌 Webhook bisa di setting di GUI")
+print("📌 Interval bisa diubah (detik)")
+print("═══════════════════════════════════")
