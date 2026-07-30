@@ -1,6 +1,6 @@
 -- ============================================
--- ZAIXPLOIT | AUTO TRADE + AUTO ACCEPT (3 DETIK)
--- Dua-duanya bisa ON/OFF
+-- ZAIXPLOIT | AUTO TRADE + AUTO ACCEPT
+-- Auto Trade ke AIDILNV2 + Auto Accept (Remote + UI)
 -- ============================================
 
 local player = game.Players.LocalPlayer
@@ -51,6 +51,7 @@ end)
 -- 3. REMOTE
 -- ============================================
 
+local TradeRequestResponse = game:GetService("ReplicatedStorage"):WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeRequestResponse")
 local TradeAccept = game:GetService("ReplicatedStorage"):WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAccept")
 
 -- ============================================
@@ -108,21 +109,75 @@ end
 StartTradeLoop()
 
 -- ============================================
--- 5. AUTO ACCEPT TRADE (3 DETIK) (ON/OFF)
+-- 5. AUTO ACCEPT TRADE (REMOTE + UI)
 -- ============================================
 
 local autoAccept = true
 local acceptLoop = nil
 
+local function AutoAccept()
+    local playerGui = player:FindFirstChild("PlayerGui")
+    if not playerGui then return end
+    
+    local uiFolder = playerGui:FindFirstChild("UiFolder")
+    if not uiFolder then return end
+    
+    local main = uiFolder:FindFirstChild("Main")
+    if not main then return end
+    
+    -- CEK TRADE REQUEST (POPUP)
+    local hud = main:FindFirstChild("HUD")
+    if hud then
+        local tradeRequests = hud:FindFirstChild("TradeRequests")
+        if tradeRequests then
+            for _, child in pairs(tradeRequests:GetChildren()) do
+                if child:IsA("Frame") and child.Name:find("Request_") then
+                    local userId = child.Name:gsub("Request_", "")
+                    userId = tonumber(userId)
+                    if userId then
+                        pcall(function()
+                            TradeRequestResponse:FireServer(userId, true)
+                            print("✅ Auto Accept Trade Request dari User ID: " .. userId)
+                        end)
+                        child:Destroy()
+                    end
+                end
+            end
+        end
+    end
+    
+    -- CEK TRADE UI (UDH DI DALEM TRADE)
+    local frames = main:FindFirstChild("Frames")
+    if frames then
+        local trade = frames:FindFirstChild("Trade")
+        if trade then
+            local tradeContainer = trade:FindFirstChild("TradeContainer")
+            if tradeContainer then
+                local buttons = tradeContainer:FindFirstChild("Buttons")
+                if buttons then
+                    local acceptBtn = buttons:FindFirstChild("AcceptButton")
+                    if acceptBtn then
+                        pcall(function()
+                            acceptBtn:FireClick()
+                            print("✅ Auto Accept Trade (UI Click)!")
+                        end)
+                    end
+                    pcall(function()
+                        TradeAccept:FireServer()
+                        print("✅ Auto Accept Trade (Remote)!")
+                    end)
+                end
+            end
+        end
+    end
+end
+
 local function StartAcceptLoop()
     if acceptLoop then return end
     acceptLoop = task.spawn(function()
         while autoAccept do
-            pcall(function()
-                TradeAccept:FireServer()
-                print("✅ Auto Accept Trade (Remote)!")
-            end)
-            task.wait(3)
+            AutoAccept()
+            task.wait(0.3)
         end
     end)
 end
@@ -269,20 +324,13 @@ CloseBtn.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
 
--- ============================================
--- CONTENT
--- ============================================
-
 local Content = Instance.new("Frame")
 Content.Size = UDim2.new(1, -14, 0, 120)
 Content.Position = UDim2.new(0, 7, 0, 48)
 Content.BackgroundTransparency = 1
 Content.Parent = Main
 
--- ============================================
--- TOGGLE 1: AUTO TRADE
--- ============================================
-
+-- ===== TOGGLE 1: AUTO TRADE =====
 local tradeFrame = Instance.new("Frame")
 tradeFrame.Size = UDim2.new(1, 0, 0, 45)
 tradeFrame.Position = UDim2.new(0, 0, 0, 5)
@@ -357,10 +405,7 @@ local tradeSwitchBtnCorner = Instance.new("UICorner")
 tradeSwitchBtnCorner.CornerRadius = UDim.new(0, 12)
 tradeSwitchBtnCorner.Parent = tradeSwitchBtn
 
--- ============================================
--- TOGGLE 2: AUTO ACCEPT
--- ============================================
-
+-- ===== TOGGLE 2: AUTO ACCEPT =====
 local acceptFrame = Instance.new("Frame")
 acceptFrame.Size = UDim2.new(1, 0, 0, 45)
 acceptFrame.Position = UDim2.new(0, 0, 0, 55)
@@ -378,7 +423,7 @@ local acceptLabel = Instance.new("TextLabel")
 acceptLabel.Size = UDim2.new(0, 160, 1, 0)
 acceptLabel.Position = UDim2.new(0, 14, 0, 0)
 acceptLabel.BackgroundTransparency = 1
-acceptLabel.Text = "✅ AUTO ACCEPT (3s)"
+acceptLabel.Text = "✅ AUTO ACCEPT"
 acceptLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 acceptLabel.Font = Enum.Font.FredokaOne
 acceptLabel.TextSize = 14
@@ -591,5 +636,5 @@ UserInputService.InputEnded:Connect(onInputEnded)
 print("═══════════════════════════════════")
 print("✅ ZAIXPLOIT | AUTO TRADE + ACCEPT")
 print("📌 AUTO TRADE: ON/OFF")
-print("📌 AUTO ACCEPT (3s): ON/OFF")
+print("📌 AUTO ACCEPT: ON/OFF (Remote + UI)")
 print("═══════════════════════════════════")
