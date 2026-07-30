@@ -1,11 +1,11 @@
 -- ============================================
--- ZAIXPLOIT | AUTO ACCEPT TRADE + AUTO TRADE
--- Khusus Trade (Auto Trade ke AIDILNV2 + Auto Accept)
+-- ZAIXPLOIT | AUTO TRADE + AUTO ACCEPT
 -- ============================================
 
 local player = game.Players.LocalPlayer
 local VirtualUser = game:GetService("VirtualUser")
 local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 
 -- ============================================
 -- 1. ANTI AFK
@@ -47,7 +47,13 @@ pcall(function()
 end)
 
 -- ============================================
--- 3. AUTO TRADE KE AIDILNV2
+-- 3. REMOTE
+-- ============================================
+
+local TradeAccept = game:GetService("ReplicatedStorage"):WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAccept")
+
+-- ============================================
+-- 4. AUTO TRADE KE AIDILNV2
 -- ============================================
 
 local autoTrade = true
@@ -63,15 +69,8 @@ end
 
 local function FireTrade()
     local tradePrompt = GetTradePrompt()
-    if not tradePrompt then
-        print("❌ TradePrompt tidak ditemukan!")
-        return false
-    end
-    
-    if not tradePrompt.Enabled then
-        print("❌ TradePrompt disabled!")
-        return false
-    end
+    if not tradePrompt then return false end
+    if not tradePrompt.Enabled then return false end
     
     pcall(function()
         tradePrompt:Prompt()
@@ -82,7 +81,7 @@ local function FireTrade()
         VirtualUser:Button2Down(Vector2.new())
         task.wait(0.05)
         VirtualUser:Button2Up(Vector2.new())
-        print("✅ Trade Prompt fired! (AIDILNV2)")
+        print("✅ Trade Prompt fired!")
     end)
     return true
 end
@@ -106,74 +105,58 @@ local function StopTradeLoop()
 end
 
 StartTradeLoop()
-print("✅ AUTO TRADE ON (Default)")
 
 -- ============================================
--- 4. AUTO ACCEPT TRADE (Otomatis Accept semua request)
+-- 5. AUTO ACCEPT TRADE
 -- ============================================
 
-local function AutoAcceptTrade()
-    local playerGui = player:FindFirstChild("PlayerGui")
-    if not playerGui then return end
-    
-    local uiFolder = playerGui:FindFirstChild("UiFolder")
-    if not uiFolder then return end
-    
-    local main = uiFolder:FindFirstChild("Main")
-    if not main then return end
-    
-    local hud = main:FindFirstChild("HUD")
-    if not hud then return end
-    
-    -- Cek di TradeRequests (Popup trade request)
-    local tradeRequests = hud:FindFirstChild("TradeRequests")
-    if tradeRequests then
-        for _, child in pairs(tradeRequests:GetChildren()) do
-            if child:IsA("Frame") and child.Name:find("Request_") then
-                local acceptBtn = child:FindFirstChild("Accept")
-                if acceptBtn and acceptBtn:IsA("TextButton") then
-                    pcall(function()
-                        acceptBtn:FireClick()
-                        print("✅ Auto Accept Trade Request!")
-                    end)
-                end
-            end
-        end
-    end
-    
-    -- Cek di Trade UI (Accept button di dalam trade)
-    local frames = main:FindFirstChild("Frames")
-    if frames then
-        local trade = frames:FindFirstChild("Trade")
-        if trade then
-            local tradeContainer = trade:FindFirstChild("TradeContainer")
-            if tradeContainer then
-                local buttons = tradeContainer:FindFirstChild("Buttons")
-                if buttons then
-                    local acceptBtn = buttons:FindFirstChild("AcceptButton")
-                    if acceptBtn and acceptBtn:IsA("ImageButton") then
-                        pcall(function()
-                            acceptBtn:FireClick()
-                            print("✅ Auto Accept Trade!")
-                        end)
+local function AutoAccept()
+    -- Klik UI Accept
+    pcall(function()
+        local playerGui = player:FindFirstChild("PlayerGui")
+        if playerGui then
+            local uiFolder = playerGui:FindFirstChild("UiFolder")
+            if uiFolder then
+                local main = uiFolder:FindFirstChild("Main")
+                if main then
+                    local frames = main:FindFirstChild("Frames")
+                    if frames then
+                        local trade = frames:FindFirstChild("Trade")
+                        if trade then
+                            local tradeContainer = trade:FindFirstChild("TradeContainer")
+                            if tradeContainer then
+                                local buttons = tradeContainer:FindFirstChild("Buttons")
+                                if buttons then
+                                    local acceptBtn = buttons:FindFirstChild("AcceptButton")
+                                    if acceptBtn then
+                                        acceptBtn:FireClick()
+                                        print("✅ Auto Accept (UI)")
+                                    end
+                                end
+                            end
+                        end
                     end
                 end
             end
         end
-    end
+    end)
+    
+    -- Fire Remote langsung
+    pcall(function()
+        TradeAccept:FireServer()
+        print("✅ Auto Accept (Remote)")
+    end)
 end
 
 task.spawn(function()
     while true do
-        AutoAcceptTrade()
+        AutoAccept()
         task.wait(0.5)
     end
 end)
 
-print("✅ AUTO ACCEPT TRADE AKTIF!")
-
 -- ============================================
--- 5. BUAT GUI
+-- 6. GUI
 -- ============================================
 
 local screenGui = Instance.new("ScreenGui")
@@ -309,10 +292,6 @@ Content.Position = UDim2.new(0, 7, 0, 48)
 Content.BackgroundTransparency = 1
 Content.Parent = Main
 
--- ============================================
--- AUTO TRADE TOGGLE
--- ============================================
-
 local tradeFrame = Instance.new("Frame")
 tradeFrame.Size = UDim2.new(1, 0, 0, 45)
 tradeFrame.Position = UDim2.new(0, 0, 0, 5)
@@ -387,10 +366,6 @@ local tradeSwitchBtnCorner = Instance.new("UICorner")
 tradeSwitchBtnCorner.CornerRadius = UDim.new(0, 12)
 tradeSwitchBtnCorner.Parent = tradeSwitchBtn
 
--- ============================================
--- ANIMASI SWITCH
--- ============================================
-
 local function SmoothMove(object, targetPos, duration)
     local tween = TweenService:Create(object, TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = targetPos})
     tween:Play()
@@ -422,10 +397,6 @@ local function UpdateMainBorder()
     end
 end
 
--- ============================================
--- KLIK TOGGLE
--- ============================================
-
 tradeSwitchBtn.MouseButton1Click:Connect(function()
     autoTrade = not autoTrade
     UpdateTradeSwitch(autoTrade)
@@ -451,10 +422,6 @@ tradeFrame.MouseButton1Click:Connect(function()
         print("🔴 AUTO TRADE OFF")
     end
 end)
-
--- ============================================
--- DRAG
--- ============================================
 
 local isDragging = false
 local dragStartPos = Vector2.new()
@@ -501,6 +468,5 @@ UserInputService.InputEnded:Connect(onInputEnded)
 print("═══════════════════════════════════")
 print("✅ ZAIXPLOIT | AUTO TRADE + ACCEPT")
 print("📌 AUTO TRADE DEFAULT ON")
-print("📌 AUTO ACCEPT TRADE DEFAULT ON")
-print("📌 Bisa toggle ON/OFF")
+print("📌 AUTO ACCEPT (Remote + UI)")
 print("═══════════════════════════════════")
