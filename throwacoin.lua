@@ -100,7 +100,7 @@ task.spawn(function()
 end)
 
 -- ============================================
--- BACKEND: TELEPORT WORLD 3 → VIP AREA (1x SAJA)
+-- BACKEND: TELEPORT WORLD 3 → VIP POSITION (1x)
 -- ============================================
 
 local RequestWorldTeleport = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("RequestWorldTeleport")
@@ -112,38 +112,7 @@ local function TeleportToWorld3()
     end)
 end
 
-local function TeleportToVIP()
-    local vipArea = workspace:FindFirstChild("Map")
-    if not vipArea then
-        print("❌ Map tidak ditemukan!")
-        return
-    end
-    
-    vipArea = vipArea:FindFirstChild("VIPArea")
-    if not vipArea then
-        print("❌ VIPArea tidak ditemukan!")
-        return
-    end
-    
-    local misc = vipArea:FindFirstChild("Miscellanous")
-    if not misc then
-        print("❌ Miscellanous tidak ditemukan!")
-        return
-    end
-    
-    local children = misc:GetChildren()
-    local targetPart = children[8]
-    
-    if not targetPart then
-        print("❌ Part index 8 tidak ditemukan! Total: " .. #children)
-        return
-    end
-    
-    if not targetPart:IsA("BasePart") then
-        print("❌ Target bukan BasePart!")
-        return
-    end
-    
+local function TeleportToVIPPosition()
     local character = player.Character
     if not character then
         character = player.CharacterAdded:Wait()
@@ -151,21 +120,19 @@ local function TeleportToVIP()
     
     local hrp = character:FindFirstChild("HumanoidRootPart")
     if hrp then
-        hrp.CFrame = CFrame.new(targetPart.Position + Vector3.new(0, 3, 0))
-        print("✅ Teleport ke VIP Area berhasil!")
+        hrp.CFrame = CFrame.new(Vector3.new(-1152, 4, 52))
+        print("✅ Teleport ke VIP Position (-1152, 4, 52)!")
     end
 end
 
 -- ===== URUTAN TELEPORT (1x SAJA) =====
--- 1. Tunggu 1 detik, teleport ke World 3
 task.wait(1)
 TeleportToWorld3()
 
--- 2. Tunggu 3 detik setelah World 3, teleport ke VIP Area
 task.wait(3)
-TeleportToVIP()
+TeleportToVIPPosition()
 
-print("✅ TELEPORT SELESAI (World 3 → VIP Area)")
+print("✅ TELEPORT SELESAI (World 3 → VIP Position)")
 
 -- ============================================
 -- GUI: AUTO COIN (LANGSUNG ON)
@@ -206,6 +173,10 @@ local function StopCoinLoop()
 end
 
 StartCoinLoop()
+
+-- ============================================
+-- GUI
+-- ============================================
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ZAIXPLOIT"
@@ -560,5 +531,5 @@ print("✅ ZAIXPLOIT RUNNING!")
 print("📌 AUTO COIN (ON)")
 print("📌 ANTI AFK (Backend)")
 print("📌 INSTAN PROMPT (Backend)")
-print("📌 TELEPORT: World 3 → VIP Area (1x)")
+print("📌 TELEPORT: World 3 → VIP Position (-1152, 4, 52)")
 print("═══════════════════════════════════")
