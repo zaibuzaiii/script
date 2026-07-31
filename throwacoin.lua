@@ -11,7 +11,7 @@ local CoinLanded = Events:WaitForChild("CoinLanded")
 -- ============================================
 
 local autoCoin = true
-local autoCoin2Spot = true
+local autoCoin2Spot = false  -- DEFAULT OFF
 
 local coinLoop = nil
 local coin2SpotLoop = nil
@@ -61,15 +61,15 @@ pcall(function()
 end)
 
 -- ============================================
--- 3. AUTO COIN (1 REMOTE)
+-- 3. AUTO COIN (1 REMOTE) - PAKAI REMOTE BARU
 -- ============================================
 
 local function ThrowCoin()
     local args = {
-        1.936590120355019,
-        Vector3.new(-1156.46337890625, 0.7260000109672546, 88.29557037353516),
+        1.9999999999,
+        Vector3.new(-1162.6304931640625, 0.7260000109672546, 89.36738586425781),
         "Helios Coin",
-        Vector3.new(-1152.761474609375, 0.7260000109672546, 83.5737075805664),
+        Vector3.new(-1156.7032470703125, 0.7260000109672546, 88.43637084960938),
         [6] = 1
     }
     pcall(function()
@@ -99,7 +99,7 @@ end
 StartCoinLoop()
 
 -- ============================================
--- 4. AUTO COIN 2 SPOT (GANTIAN 1 DETIK)
+-- 4. AUTO COIN 2 SPOT (GANTIAN 1 DETIK) - DEFAULT OFF
 -- ============================================
 
 -- SPOT 1: Remote 1 ([6]=5)
@@ -156,7 +156,7 @@ local function StopCoin2SpotLoop()
     end
 end
 
-StartCoin2SpotLoop()
+-- TIDAK DIJALANKAN OTOMATIS (DEFAULT OFF)
 
 -- ============================================
 -- 5. SET HOLD DURATION = 0
@@ -357,7 +357,7 @@ Content.BackgroundTransparency = 1
 Content.Parent = Main
 
 -- ============================================
--- TOGGLE 1: AUTO COIN
+-- TOGGLE 1: AUTO COIN (DEFAULT ON)
 -- ============================================
 
 local coinFrame = Instance.new("Frame")
@@ -435,7 +435,7 @@ coinSwitchBtnCorner.CornerRadius = UDim.new(0, 12)
 coinSwitchBtnCorner.Parent = coinSwitchBtn
 
 -- ============================================
--- TOGGLE 2: AUTO COIN 2 SPOT
+-- TOGGLE 2: AUTO COIN 2 SPOT (DEFAULT OFF)
 -- ============================================
 
 local coin2SpotFrame = Instance.new("Frame")
@@ -465,10 +465,10 @@ coin2SpotLabel.Parent = coin2SpotFrame
 local coin2SpotSwitchBg = Instance.new("Frame")
 coin2SpotSwitchBg.Size = UDim2.new(0, 60, 0, 30)
 coin2SpotSwitchBg.Position = UDim2.new(1, -72, 0.5, -15)
-coin2SpotSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+coin2SpotSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)  -- OFF STATE
 coin2SpotSwitchBg.BackgroundTransparency = 0.1
 coin2SpotSwitchBg.BorderSizePixel = 2
-coin2SpotSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
+coin2SpotSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)  -- OFF STATE
 coin2SpotSwitchBg.Parent = coin2SpotFrame
 
 local coin2SpotSwitchCorner = Instance.new("UICorner")
@@ -480,7 +480,7 @@ coin2SpotOffLabel.Size = UDim2.new(0, 22, 1, 0)
 coin2SpotOffLabel.Position = UDim2.new(0, 5, 0, 0)
 coin2SpotOffLabel.BackgroundTransparency = 1
 coin2SpotOffLabel.Text = "OFF"
-coin2SpotOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+coin2SpotOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)  -- ON STATE (karena OFF)
 coin2SpotOffLabel.Font = Enum.Font.FredokaOne
 coin2SpotOffLabel.TextSize = 10
 coin2SpotOffLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -491,7 +491,7 @@ coin2SpotOnLabel.Size = UDim2.new(0, 22, 1, 0)
 coin2SpotOnLabel.Position = UDim2.new(1, -27, 0, 0)
 coin2SpotOnLabel.BackgroundTransparency = 1
 coin2SpotOnLabel.Text = "ON"
-coin2SpotOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+coin2SpotOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)  -- OFF STATE
 coin2SpotOnLabel.Font = Enum.Font.FredokaOne
 coin2SpotOnLabel.TextSize = 10
 coin2SpotOnLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -499,11 +499,11 @@ coin2SpotOnLabel.Parent = coin2SpotSwitchBg
 
 local coin2SpotSwitchBtn = Instance.new("TextButton")
 coin2SpotSwitchBtn.Size = UDim2.new(0, 24, 0, 24)
-coin2SpotSwitchBtn.Position = UDim2.new(1, -27, 0.5, -12)
+coin2SpotSwitchBtn.Position = UDim2.new(0, 3, 0.5, -12)  -- POSISI OFF
 coin2SpotSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 coin2SpotSwitchBtn.BackgroundTransparency = 0.05
 coin2SpotSwitchBtn.BorderSizePixel = 2
-coin2SpotSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+coin2SpotSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)  -- OFF STATE
 coin2SpotSwitchBtn.Text = ""
 coin2SpotSwitchBtn.ZIndex = 10
 coin2SpotSwitchBtn.Parent = coin2SpotSwitchBg
@@ -516,24 +516,26 @@ coin2SpotSwitchBtnCorner.Parent = coin2SpotSwitchBtn
 -- TOGGLE FUNCTIONS (SWITCH ANIMATION)
 -- ============================================
 
-local function SetToggleState(switchBtn, isOn, switchBg)
+local function SetToggleState(switchBtn, isOn, switchBg, offLabel, onLabel)
     if isOn then
         switchBtn.Position = UDim2.new(1, -27, 0.5, -12)
         switchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
         switchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
         switchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-        switchBg.BackgroundTransparency = 0.1
+        offLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+        onLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     else
         switchBtn.Position = UDim2.new(0, 3, 0.5, -12)
         switchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
         switchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
         switchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
-        switchBg.BackgroundTransparency = 0.1
+        offLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        onLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
     end
 end
 
 -- ============================================
--- TOGGLE 1: AUTO COIN
+-- TOGGLE 1: AUTO COIN (DEFAULT ON)
 -- ============================================
 
 coinSwitchBtn.MouseButton1Click:Connect(function()
@@ -541,17 +543,17 @@ coinSwitchBtn.MouseButton1Click:Connect(function()
     
     if autoCoin then
         StartCoinLoop()
-        SetToggleState(coinSwitchBtn, true, coinSwitchBg)
+        SetToggleState(coinSwitchBtn, true, coinSwitchBg, coinOffLabel, coinOnLabel)
         print("✅ AUTO COIN: ON")
     else
         StopCoinLoop()
-        SetToggleState(coinSwitchBtn, false, coinSwitchBg)
+        SetToggleState(coinSwitchBtn, false, coinSwitchBg, coinOffLabel, coinOnLabel)
         print("❌ AUTO COIN: OFF")
     end
 end)
 
 -- ============================================
--- TOGGLE 2: AUTO COIN 2 SPOT
+-- TOGGLE 2: AUTO COIN 2 SPOT (DEFAULT OFF)
 -- ============================================
 
 coin2SpotSwitchBtn.MouseButton1Click:Connect(function()
@@ -559,21 +561,24 @@ coin2SpotSwitchBtn.MouseButton1Click:Connect(function()
     
     if autoCoin2Spot then
         StartCoin2SpotLoop()
-        SetToggleState(coin2SpotSwitchBtn, true, coin2SpotSwitchBg)
+        SetToggleState(coin2SpotSwitchBtn, true, coin2SpotSwitchBg, coin2SpotOffLabel, coin2SpotOnLabel)
         print("✅ AUTO COIN 2 SPOT: ON")
     else
         StopCoin2SpotLoop()
-        SetToggleState(coin2SpotSwitchBtn, false, coin2SpotSwitchBg)
+        SetToggleState(coin2SpotSwitchBtn, false, coin2SpotSwitchBg, coin2SpotOffLabel, coin2SpotOnLabel)
         print("❌ AUTO COIN 2 SPOT: OFF")
     end
 end)
 
 -- ============================================
--- SET INITIAL STATE (ON)
+-- SET INITIAL STATE
 -- ============================================
 
-SetToggleState(coinSwitchBtn, true, coinSwitchBg)
-SetToggleState(coin2SpotSwitchBtn, true, coin2SpotSwitchBg)
+-- AUTO COIN: ON
+SetToggleState(coinSwitchBtn, true, coinSwitchBg, coinOffLabel, coinOnLabel)
+
+-- AUTO COIN 2 SPOT: OFF
+SetToggleState(coin2SpotSwitchBtn, false, coin2SpotSwitchBg, coin2SpotOffLabel, coin2SpotOnLabel)
 
 -- ============================================
 -- DRAG
@@ -624,7 +629,7 @@ UserInputService.InputEnded:Connect(onInputEnded)
 print("═══════════════════════════════════")
 print("✅ ZAIXPLOIT RUNNING")
 print("📌 AUTO COIN (ON)")
-print("📌 AUTO COIN 2 SPOT (ON) - Gantian 1s")
+print("📌 AUTO COIN 2 SPOT (OFF) - Gantian 1s")
 print("   ├─ Spot 1: [6]=5")
 print("   └─ Spot 2: [6]=3")
 print("📌 ANTI AFK (Backend)")
