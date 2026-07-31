@@ -1,11 +1,26 @@
 local player = game.Players.LocalPlayer
-local UserInputService = game:GetService("UserInputService")
 local VirtualUser = game:GetService("VirtualUser")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 
 -- ============================================
--- BACKEND: ANTI AFK
+-- 1. SET HOLD DURATION = 0 (INSTAN PROMPT)
+-- ============================================
+
+-- Loop terus set HoldDuration = 0
+task.spawn(function()
+    while true do
+        for i, v in ipairs(game:GetService("Workspace"):GetDescendants()) do
+            if v.ClassName == "ProximityPrompt" then
+                v.HoldDuration = 0
+            end
+        end
+        task.wait(5) -- Cek setiap 5 detik
+    end
+end)
+
+-- ============================================
+-- 2. ANTI AFK
 -- ============================================
 
 task.spawn(function()
@@ -20,64 +35,73 @@ task.spawn(function()
 end)
 
 -- ============================================
--- BACKEND: MATIKAN ANTI KICK
+-- 3. MATIKAN ANTI KICK (LOOP TERUS)
 -- ============================================
 
-pcall(function()
-    local scripts = player:FindFirstChild("PlayerScripts")
-    if scripts then
-        scripts = scripts:FindFirstChild("Scripts")
-        if scripts then
-            local antiKick = scripts:FindFirstChild("AntiKickScript")
-            if antiKick then antiKick:Destroy() end
-        end
+task.spawn(function()
+    while true do
+        pcall(function()
+            local scripts = player:FindFirstChild("PlayerScripts")
+            if scripts then
+                scripts = scripts:FindFirstChild("Scripts")
+                if scripts then
+                    local antiKick = scripts:FindFirstChild("AntiKickScript")
+                    if antiKick then antiKick:Destroy() end
+                end
+            end
+        end)
+
+        pcall(function()
+            local events = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events")
+            local remotes = {"AntiKickReconnect", "SetAFKSafe", "StartAFKSafe"}
+            for _, name in ipairs(remotes) do
+                local remote = events:FindFirstChild(name)
+                if remote then remote:Destroy() end
+            end
+        end)
+
+        pcall(function()
+            local playerGui = player:WaitForChild("PlayerGui")
+            local uiFolder = playerGui:FindFirstChild("UiFolder")
+            if uiFolder then
+                local main = uiFolder:FindFirstChild("Main")
+                if main then
+                    local hud = main:FindFirstChild("HUD")
+                    if hud then
+                        local afkSafe = hud:FindFirstChild("AFKSafe")
+                        if afkSafe then afkSafe:Destroy() end
+                    end
+                end
+            end
+        end)
+
+        task.wait(10)
     end
 end)
 
-pcall(function()
-    local events = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events")
-    local remotes = {"AntiKickReconnect", "SetAFKSafe", "StartAFKSafe"}
-    for _, name in ipairs(remotes) do
-        local remote = events:FindFirstChild(name)
-        if remote then remote:Destroy() end
-    end
-end)
+-- ============================================
+-- 4. INSTAN PROMPT (SCAN SEMUA SLOT + LOOP)
+-- ============================================
 
-pcall(function()
-    local playerGui = player:WaitForChild("PlayerGui")
-    local uiFolder = playerGui:FindFirstChild("UiFolder")
-    if uiFolder then
-        local main = uiFolder:FindFirstChild("Main")
-        if main then
-            local hud = main:FindFirstChild("HUD")
-            if hud then
-                local afkSafe = hud:FindFirstChild("AFKSafe")
-                if afkSafe then afkSafe:Destroy() end
+local function GetAllPrompts()
+    local prompts = {}
+    local huntSlots = workspace:FindFirstChild("HuntSlots")
+    if not huntSlots then return prompts end
+    
+    for _, slot in ipairs(huntSlots:GetChildren()) do
+        if slot.Name:find("HuntSlot_") then
+            for _, child in ipairs(slot:GetChildren()) do
+                local prompt = child:FindFirstChild("ProximityPrompt")
+                if prompt and prompt.Enabled then
+                    table.insert(prompts, prompt)
+                end
             end
         end
     end
-end)
-
--- ============================================
--- BACKEND: INSTAN PROMPT (LOOP 1 DETIK)
--- ============================================
-
-local function GetPrompt()
-    local huntSlots = workspace:FindFirstChild("HuntSlots")
-    if not huntSlots then return nil end
-    local huntSlot = huntSlots:FindFirstChild("HuntSlot_1")
-    if not huntSlot then return nil end
-    for _, child in ipairs(huntSlot:GetChildren()) do
-        local prompt = child:FindFirstChild("ProximityPrompt")
-        if prompt and prompt.Enabled then
-            return prompt
-        end
-    end
-    return nil
+    return prompts
 end
 
-local function FirePrompt()
-    local prompt = GetPrompt()
+local function FirePrompt(prompt)
     if not prompt then return false end
     pcall(function()
         prompt:Prompt()
@@ -94,13 +118,19 @@ end
 
 task.spawn(function()
     while true do
-        FirePrompt()
+        local prompts = GetAllPrompts()
+        if #prompts > 0 then
+            for _, prompt in ipairs(prompts) do
+                FirePrompt(prompt)
+                task.wait(0.2)
+            end
+        end
         task.wait(1)
     end
 end)
 
 -- ============================================
--- BACKEND: TELEPORT WORLD 3 → VIP POSITION (1x)
+-- 5. TELEPORT WORLD 3 → VIP POSITION (LOOP)
 -- ============================================
 
 local RequestWorldTeleport = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("RequestWorldTeleport")
@@ -125,17 +155,17 @@ local function TeleportToVIPPosition()
     end
 end
 
--- ===== URUTAN TELEPORT (1x SAJA) =====
-task.wait(1)
-TeleportToWorld3()
-
-task.wait(3)
-TeleportToVIPPosition()
-
-print("✅ TELEPORT SELESAI (World 3 → VIP Position)")
+task.spawn(function()
+    while true do
+        TeleportToWorld3()
+        task.wait(3)
+        TeleportToVIPPosition()
+        task.wait(60) -- Loop setiap 60 detik
+    end
+end)
 
 -- ============================================
--- GUI: AUTO COIN (LANGSUNG ON)
+-- 6. AUTO COIN (LOOP)
 -- ============================================
 
 local CoinLanded = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("CoinLanded")
@@ -247,7 +277,7 @@ local SubTitle = Instance.new("TextLabel")
 SubTitle.Size = UDim2.new(1, -60, 0, 13)
 SubTitle.Position = UDim2.new(0, 12, 0, 22)
 SubTitle.BackgroundTransparency = 1
-SubTitle.Text = "🪙 THROW A COIN"
+SubTitle.Text = "🪙 AUTO COIN"
 SubTitle.TextColor3 = Color3.fromRGB(255, 200, 50)
 SubTitle.Font = Enum.Font.FredokaOne
 SubTitle.TextSize = 10
@@ -527,9 +557,11 @@ UserInputService.InputChanged:Connect(onInputChanged)
 UserInputService.InputEnded:Connect(onInputEnded)
 
 print("═══════════════════════════════════")
-print("✅ ZAIXPLOIT RUNNING!")
+print("✅ ZAIXPLOIT RUNNING (LOOP FOREVER)")
 print("📌 AUTO COIN (ON)")
 print("📌 ANTI AFK (Backend)")
-print("📌 INSTAN PROMPT (Backend)")
-print("📌 TELEPORT: World 3 → VIP Position (-1152, 4, 52)")
+print("📌 INSTAN PROMPT (LOOP - Scan all slots)")
+print("📌 TELEPORT LOOP: World 3 → VIP")
+print("📌 ANTI KICK: Dimatikan (LOOP)")
+print("📌 HoldDuration=0 (LOOP)")
 print("═══════════════════════════════════")
