@@ -1,25 +1,147 @@
 local player = game.Players.LocalPlayer
 local VirtualUser = game:GetService("VirtualUser")
+local UserInputService = game:GetService("UserInputService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
+local Events = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events")
+
+local CoinLanded = Events:WaitForChild("CoinLanded")
 
 -- ============================================
--- 1. SET HOLD DURATION = 0 (LOOP)
+-- TOGGLE VARIABEL
 -- ============================================
 
-task.spawn(function()
-    while true do
-        for i, v in ipairs(game:GetService("Workspace"):GetDescendants()) do
-            if v.ClassName == "ProximityPrompt" then
-                v.HoldDuration = 0
-            end
+local toggles = {
+    autoCoin = true,
+    autoCoin2Spot = true
+}
+
+local loops = {
+    autoCoin = nil,
+    autoCoin2Spot = nil
+}
+
+-- ============================================
+-- AUTO COIN (1 REMOTE LAMA)
+-- ============================================
+
+local function ThrowOldCoin()
+    local args = {
+        [1] = 1.3370886103455577,
+        [2] = Vector3.new(-1155.1026611328125, 0.7260000109672546, 74.73015594482422),
+        [3] = "Helios Coin",
+        [4] = Vector3.new(-1160.6558837890625, 0.7260000109672546, 72.45848846435547),
+        [6] = 1
+    }
+    pcall(function()
+        CoinLanded:FireServer(unpack(args))
+        print("🪙 Old Coin thrown!")
+    end)
+end
+
+local function StartAutoCoin()
+    if loops.autoCoin then return end
+    loops.autoCoin = task.spawn(function()
+        while toggles.autoCoin do
+            ThrowOldCoin()
+            task.wait(2)
         end
-        task.wait(5)
+    end)
+end
+
+local function StopAutoCoin()
+    if loops.autoCoin then
+        task.cancel(loops.autoCoin)
+        loops.autoCoin = nil
     end
-end)
+end
 
 -- ============================================
--- 2. ANTI AFK (LOOP)
+-- AUTO COIN 2 SPOT (2 REMOTE BERGANTIAN)
+-- ============================================
+
+local coin2SpotIndex = 1
+
+local function ThrowNormalCoin()
+    local args = {
+        [1] = 1.0064544024479687,
+        [2] = Vector3.new(-1155.8770751953125, 0.7260000109672546, 87.9044189453125),
+        [3] = "Helios Coin",
+        [4] = Vector3.new(-1152.5770263671875, 0.7260000109672546, 82.89352416992188),
+        [6] = 4
+    }
+    pcall(function()
+        CoinLanded:FireServer(unpack(args))
+        print("🪙 Normal Coin thrown!")
+    end)
+end
+
+local function ThrowVIPCoin()
+    local args = {
+        [1] = 1.00916329985579,
+        [2] = Vector3.new(-1164.35400390625, 0.7260000109672546, -155.0728759765625),
+        [3] = "Helios Coin",
+        [4] = Vector3.new(-1158.4072265625, 0.7260000109672546, -154.275146484375),
+        [6] = 3
+    }
+    pcall(function()
+        CoinLanded:FireServer(unpack(args))
+        print("👑 VIP Coin thrown!")
+    end)
+end
+
+local function StartAutoCoin2Spot()
+    if loops.autoCoin2Spot then return end
+    loops.autoCoin2Spot = task.spawn(function()
+        while toggles.autoCoin2Spot do
+            if coin2SpotIndex == 1 then
+                ThrowNormalCoin()
+                coin2SpotIndex = 2
+            else
+                ThrowVIPCoin()
+                coin2SpotIndex = 1
+            end
+            task.wait(2)
+        end
+    end)
+end
+
+local function StopAutoCoin2Spot()
+    if loops.autoCoin2Spot then
+        task.cancel(loops.autoCoin2Spot)
+        loops.autoCoin2Spot = nil
+    end
+end
+
+-- ============================================
+-- CONTROL FUNCTIONS
+-- ============================================
+
+local function RestartFeature(feature)
+    if feature == "autoCoin" then
+        StopAutoCoin()
+        if toggles.autoCoin then StartAutoCoin() end
+    elseif feature == "autoCoin2Spot" then
+        StopAutoCoin2Spot()
+        if toggles.autoCoin2Spot then StartAutoCoin2Spot() end
+    end
+end
+
+local function StopFeature(feature)
+    if feature == "autoCoin" then StopAutoCoin()
+    elseif feature == "autoCoin2Spot" then StopAutoCoin2Spot()
+    end
+end
+
+-- ============================================
+-- START ALL (DEFAULT ON)
+-- ============================================
+
+StartAutoCoin()
+StartAutoCoin2Spot()
+
+-- ============================================
+-- ANTI AFK
 -- ============================================
 
 task.spawn(function()
@@ -34,7 +156,22 @@ task.spawn(function()
 end)
 
 -- ============================================
--- 3. MATIKAN ANTI KICK (LOOP)
+-- SET HOLD DURATION = 0
+-- ============================================
+
+task.spawn(function()
+    while true do
+        for i, v in ipairs(game:GetService("Workspace"):GetDescendants()) do
+            if v.ClassName == "ProximityPrompt" then
+                v.HoldDuration = 0
+            end
+        end
+        task.wait(5)
+    end
+end)
+
+-- ============================================
+-- MATIKAN ANTI KICK
 -- ============================================
 
 task.spawn(function()
@@ -79,7 +216,7 @@ task.spawn(function()
 end)
 
 -- ============================================
--- 4. INSTAN PROMPT (LOOP)
+-- INSTAN PROMPT
 -- ============================================
 
 local function GetAllPrompts()
@@ -129,7 +266,7 @@ task.spawn(function()
 end)
 
 -- ============================================
--- 5. TELEPORT (1x SAJA, TIDAK LOOP)
+-- TELEPORT (1x SAJA)
 -- ============================================
 
 local RequestWorldTeleport = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("RequestWorldTeleport")
@@ -154,54 +291,10 @@ local function TeleportToVIPPosition()
     end
 end
 
--- Jalankan 1x (tidak loop)
 task.wait(1)
 TeleportToWorld3()
-
 task.wait(3)
 TeleportToVIPPosition()
-
-print("✅ TELEPORT SELESAI (World 3 → VIP Position) - TIDAK LOOP!")
-
--- ============================================
--- 6. AUTO COIN (LOOP)
--- ============================================
-
-local CoinLanded = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("CoinLanded")
-
-local autoCoin = true
-local coinLoop = nil
-
-local function ThrowHeliosCoin()
-    local args = {
-        [1] = 1.3370886103455577,
-        [2] = Vector3.new(-1155.1026611328125, 0.7260000109672546, 74.73015594482422),
-        [3] = "Helios Coin",
-        [4] = Vector3.new(-1160.6558837890625, 0.7260000109672546, 72.45848846435547),
-        [6] = 1
-    }
-    pcall(function() CoinLanded:FireServer(unpack(args)) end)
-end
-
-local function StartCoinLoop()
-    if coinLoop then return end
-    coinLoop = task.spawn(function()
-        while autoCoin do
-            ThrowHeliosCoin()
-            task.wait(2)
-        end
-    end)
-end
-
-local function StopCoinLoop()
-    autoCoin = false
-    if coinLoop then
-        task.cancel(coinLoop)
-        coinLoop = nil
-    end
-end
-
-StartCoinLoop()
 
 -- ============================================
 -- GUI
@@ -213,8 +306,8 @@ screenGui.ResetOnSpawn = false
 screenGui.Parent = player:WaitForChild("PlayerGui")
 
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 300, 0, 120)
-Main.Position = UDim2.new(0.5, -150, 0.5, -60)
+Main.Size = UDim2.new(0, 320, 0, 200)
+Main.Position = UDim2.new(0.5, -160, 0.5, -100)
 Main.BackgroundColor3 = Color3.fromRGB(10, 8, 20)
 Main.BackgroundTransparency = 0
 Main.BorderSizePixel = 2
@@ -245,7 +338,7 @@ Glow.Thickness = 1.5
 Glow.Parent = Main
 
 local Header = Instance.new("Frame")
-Header.Size = UDim2.new(1, 0, 0, 40)
+Header.Size = UDim2.new(1, 0, 0, 42)
 Header.Position = UDim2.new(0, 0, 0, 0)
 Header.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
 Header.BackgroundTransparency = 0.3
@@ -312,7 +405,7 @@ end)
 MinBtn.MouseButton1Click:Connect(function()
     isMinimized = not isMinimized
     if isMinimized then
-        Main.Size = UDim2.new(0, 300, 0, 40)
+        Main.Size = UDim2.new(0, 320, 0, 42)
         MinBtn.Text = "➕"
         Content.Visible = false
         CloseBtn.Visible = false
@@ -348,170 +441,147 @@ CloseBtn.MouseLeave:Connect(function()
 end)
 
 CloseBtn.MouseButton1Click:Connect(function()
-    StopCoinLoop()
+    StopAutoCoin()
+    StopAutoCoin2Spot()
     screenGui:Destroy()
 end)
 
+-- ============================================
+-- CONTENT
+-- ============================================
+
 local Content = Instance.new("Frame")
-Content.Size = UDim2.new(1, -14, 0, 60)
-Content.Position = UDim2.new(0, 7, 0, 45)
+Content.Size = UDim2.new(1, -14, 0, 140)
+Content.Position = UDim2.new(0, 7, 0, 48)
 Content.BackgroundTransparency = 1
 Content.Parent = Main
 
-local autoFrame = Instance.new("Frame")
-autoFrame.Size = UDim2.new(1, 0, 0, 40)
-autoFrame.Position = UDim2.new(0, 0, 0, 5)
-autoFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-autoFrame.BackgroundTransparency = 0.2
-autoFrame.BorderSizePixel = 1
-autoFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
-autoFrame.Parent = Content
+local function CreateToggleButton(name, label, y)
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(1, 0, 0, 35)
+    frame.Position = UDim2.new(0, 0, 0, y)
+    frame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+    frame.BackgroundTransparency = 0.2
+    frame.BorderSizePixel = 1
+    frame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+    frame.Parent = Content
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 6)
+    corner.Parent = frame
+    
+    local text = Instance.new("TextLabel")
+    text.Size = UDim2.new(0.5, 0, 1, 0)
+    text.Position = UDim2.new(0, 10, 0, 0)
+    text.BackgroundTransparency = 1
+    text.Text = label
+    text.TextColor3 = Color3.fromRGB(200, 200, 210)
+    text.Font = Enum.Font.FredokaOne
+    text.TextSize = 12
+    text.TextXAlignment = Enum.TextXAlignment.Left
+    text.Parent = frame
+    
+    local status = Instance.new("TextLabel")
+    status.Size = UDim2.new(0.2, 0, 1, 0)
+    status.Position = UDim2.new(0.6, 0, 0, 0)
+    status.BackgroundTransparency = 1
+    status.Text = "✅ ON"
+    status.TextColor3 = Color3.fromRGB(60, 200, 80)
+    status.Font = Enum.Font.FredokaOne
+    status.TextSize = 11
+    status.TextXAlignment = Enum.TextXAlignment.Center
+    status.Parent = frame
+    
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0.2, 0, 0.7, 0)
+    btn.Position = UDim2.new(0.8, 0, 0.5, -12)
+    btn.Text = "⏹ OFF"
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 11
+    btn.BackgroundColor3 = Color3.fromRGB(180, 60, 60)
+    btn.BackgroundTransparency = 0.2
+    btn.BorderSizePixel = 1
+    btn.BorderColor3 = Color3.fromRGB(180, 60, 60)
+    btn.Parent = frame
+    
+    local btnCorner = Instance.new("UICorner")
+    btnCorner.CornerRadius = UDim.new(0, 4)
+    btnCorner.Parent = btn
+    
+    btn.MouseEnter:Connect(function()
+        btn.BackgroundTransparency = 0.05
+    end)
+    btn.MouseLeave:Connect(function()
+        btn.BackgroundTransparency = 0.2
+    end)
+    
+    btn.MouseButton1Click:Connect(function()
+        toggles[name] = not toggles[name]
+        if toggles[name] then
+            status.Text = "✅ ON"
+            status.TextColor3 = Color3.fromRGB(60, 200, 80)
+            btn.Text = "⏹ OFF"
+            btn.BackgroundColor3 = Color3.fromRGB(180, 60, 60)
+            btn.BorderColor3 = Color3.fromRGB(180, 60, 60)
+            RestartFeature(name)
+        else
+            status.Text = "❌ OFF"
+            status.TextColor3 = Color3.fromRGB(255, 50, 50)
+            btn.Text = "▶ ON"
+            btn.BackgroundColor3 = Color3.fromRGB(60, 180, 60)
+            btn.BorderColor3 = Color3.fromRGB(60, 180, 60)
+            StopFeature(name)
+        end
+        UpdateStatus()
+    end)
+    
+    return status, btn
+end
 
-local autoCorner = Instance.new("UICorner")
-autoCorner.CornerRadius = UDim.new(0, 8)
-autoCorner.Parent = autoFrame
+local statuses = {}
+local buttons = {}
 
-local autoGradient = Instance.new("UIGradient")
-autoGradient.Color = ColorSequence.new({
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(25, 23, 40)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 35, 55)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 23, 40))
-})
-autoGradient.Rotation = 45
-autoGradient.Parent = autoFrame
+statuses.autoCoin, buttons.autoCoin = CreateToggleButton("autoCoin", "🪙 AUTO COIN", 2)
+statuses.autoCoin2Spot, buttons.autoCoin2Spot = CreateToggleButton("autoCoin2Spot", "🪙 AUTO COIN 2 SPOT", 42)
 
-local autoLabel = Instance.new("TextLabel")
-autoLabel.Size = UDim2.new(0, 130, 1, 0)
-autoLabel.Position = UDim2.new(0, 14, 0, 0)
-autoLabel.BackgroundTransparency = 1
-autoLabel.Text = "🪙 AUTO COIN"
-autoLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
-autoLabel.Font = Enum.Font.FredokaOne
-autoLabel.TextSize = 14
-autoLabel.TextXAlignment = Enum.TextXAlignment.Left
-autoLabel.Parent = autoFrame
-
-local autoSwitchBg = Instance.new("Frame")
-autoSwitchBg.Size = UDim2.new(0, 55, 0, 26)
-autoSwitchBg.Position = UDim2.new(1, -67, 0.5, -13)
-autoSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-autoSwitchBg.BackgroundTransparency = 0.2
-autoSwitchBg.BorderSizePixel = 2
-autoSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-autoSwitchBg.Parent = autoFrame
-
-local autoSwitchCorner = Instance.new("UICorner")
-autoSwitchCorner.CornerRadius = UDim.new(0, 13)
-autoSwitchCorner.Parent = autoSwitchBg
-
-local autoOffLabel = Instance.new("TextLabel")
-autoOffLabel.Size = UDim2.new(0, 20, 1, 0)
-autoOffLabel.Position = UDim2.new(0, 4, 0, 0)
-autoOffLabel.BackgroundTransparency = 1
-autoOffLabel.Text = "OFF"
-autoOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-autoOffLabel.Font = Enum.Font.FredokaOne
-autoOffLabel.TextSize = 9
-autoOffLabel.TextXAlignment = Enum.TextXAlignment.Center
-autoOffLabel.Parent = autoSwitchBg
-
-local autoOnLabel = Instance.new("TextLabel")
-autoOnLabel.Size = UDim2.new(0, 20, 1, 0)
-autoOnLabel.Position = UDim2.new(1, -24, 0, 0)
-autoOnLabel.BackgroundTransparency = 1
-autoOnLabel.Text = "ON"
-autoOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-autoOnLabel.Font = Enum.Font.FredokaOne
-autoOnLabel.TextSize = 9
-autoOnLabel.TextXAlignment = Enum.TextXAlignment.Center
-autoOnLabel.Parent = autoSwitchBg
-
-local autoSwitchBtn = Instance.new("TextButton")
-autoSwitchBtn.Size = UDim2.new(0, 22, 0, 22)
-autoSwitchBtn.Position = UDim2.new(1, -24, 0.5, -11)
-autoSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-autoSwitchBtn.BackgroundTransparency = 0.1
-autoSwitchBtn.BorderSizePixel = 2
-autoSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
-autoSwitchBtn.Text = ""
-autoSwitchBtn.ZIndex = 10
-autoSwitchBtn.Parent = autoSwitchBg
-
-local autoSwitchBtnCorner = Instance.new("UICorner")
-autoSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
-autoSwitchBtnCorner.Parent = autoSwitchBtn
+-- ============================================
+-- STATUS
+-- ============================================
 
 local statusLabel = Instance.new("TextLabel")
 statusLabel.Size = UDim2.new(1, 0, 0, 14)
-statusLabel.Position = UDim2.new(0, 0, 1, -2)
+statusLabel.Position = UDim2.new(0, 0, 1, -5)
 statusLabel.BackgroundTransparency = 1
-statusLabel.Text = "🟢 Running"
+statusLabel.Text = "🟢 2 Running"
 statusLabel.TextColor3 = Color3.fromRGB(60, 200, 80)
 statusLabel.Font = Enum.Font.FredokaOne
 statusLabel.TextSize = 10
 statusLabel.TextXAlignment = Enum.TextXAlignment.Center
 statusLabel.Parent = Content
 
-local function SmoothMove(object, targetPos, duration)
-    local tween = TweenService:Create(object, TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = targetPos})
-    tween:Play()
-end
-
-local function UpdateAutoSwitch(isOn)
-    if isOn then
-        autoSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-        autoSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-        SmoothMove(autoSwitchBtn, UDim2.new(1, -24, 0.5, -11), 0.3)
-        autoOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-        autoOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-        statusLabel.Text = "🟢 Running"
+local function UpdateStatus()
+    local count = 0
+    if toggles.autoCoin then count = count + 1 end
+    if toggles.autoCoin2Spot then count = count + 1 end
+    
+    if count == 2 then
+        statusLabel.Text = "🟢 2 Running"
         statusLabel.TextColor3 = Color3.fromRGB(60, 200, 80)
+    elseif count == 1 then
+        statusLabel.Text = "🟡 1 Running"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
     else
-        autoSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
-        autoSwitchBg.BorderColor3 = Color3.fromRGB(80, 80, 100)
-        SmoothMove(autoSwitchBtn, UDim2.new(0, 2, 0.5, -11), 0.3)
-        autoOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-        autoOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-        statusLabel.Text = "⚪ Stopped"
-        statusLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+        statusLabel.Text = "🔴 All Stopped"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
     end
 end
 
-local function UpdateMainBorder()
-    if autoCoin then
-        TweenService:Create(Main, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BorderColor3 = Color3.fromRGB(60, 200, 80)}):Play()
-        TweenService:Create(Glow, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(60, 200, 80)}):Play()
-    else
-        TweenService:Create(Main, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BorderColor3 = Color3.fromRGB(200, 50, 50)}):Play()
-        TweenService:Create(Glow, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(200, 50, 50)}):Play()
-    end
-end
+UpdateStatus()
 
-autoSwitchBtn.MouseButton1Click:Connect(function()
-    autoCoin = not autoCoin
-    UpdateAutoSwitch(autoCoin)
-    UpdateMainBorder()
-    if autoCoin then
-        StartCoinLoop()
-        print("🟢 AUTO COIN ON")
-    else
-        StopCoinLoop()
-        print("🔴 AUTO COIN OFF")
-    end
-end)
-
-autoFrame.MouseButton1Click:Connect(function()
-    autoCoin = not autoCoin
-    UpdateAutoSwitch(autoCoin)
-    UpdateMainBorder()
-    if autoCoin then
-        StartCoinLoop()
-        print("🟢 AUTO COIN ON")
-    else
-        StopCoinLoop()
-        print("🔴 AUTO COIN OFF")
-    end
-end)
+-- ============================================
+-- DRAG
+-- ============================================
 
 local isDragging = false
 local dragStartPos = Vector2.new()
@@ -558,6 +628,7 @@ UserInputService.InputEnded:Connect(onInputEnded)
 print("═══════════════════════════════════")
 print("✅ ZAIXPLOIT RUNNING")
 print("📌 AUTO COIN (ON)")
+print("📌 AUTO COIN 2 SPOT (ON)")
 print("📌 ANTI AFK (Backend)")
 print("📌 INSTAN PROMPT (LOOP)")
 print("📌 TELEPORT: World 3 → VIP (1x SAJA)")
