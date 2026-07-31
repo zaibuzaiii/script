@@ -61,7 +61,7 @@ pcall(function()
 end)
 
 -- ============================================
--- 3. AUTO COIN (1 REMOTE) - DELAY 2 DETIK
+-- 3. AUTO COIN (1 REMOTE)
 -- ============================================
 
 local function ThrowCoin()
@@ -99,12 +99,12 @@ end
 StartCoinLoop()
 
 -- ============================================
--- 4. AUTO COIN 2 SPOT (2 REMOTE BARU) - DELAY 0.1 DETIK
+-- 4. AUTO COIN 2 SPOT (GANTIAN 1 DETIK)
 -- ============================================
 
-local function ThrowBothCoins()
-    -- Spot 1 (Normal) - Remote 1
-    local args1 = {
+-- SPOT 1: Remote 1 ([6]=5)
+local function ThrowSpot1()
+    local args = {
         1.933600201243827,
         Vector3.new(-1155.275634765625, 0.7260000109672546, -169.50115966796875),
         "Helios Coin",
@@ -112,12 +112,14 @@ local function ThrowBothCoins()
         [6] = 5
     }
     pcall(function()
-        CoinLanded:FireServer(unpack(args1))
-        print("🪙 Spot 1 thrown!")
+        CoinLanded:FireServer(unpack(args))
+        print("🪙 SPOT 1 thrown!")
     end)
-    
-    -- Spot 2 (VIP) - Remote 2
-    local args2 = {
+end
+
+-- SPOT 2: Remote 2 ([6]=3)
+local function ThrowSpot2()
+    local args = {
         1.9143838290784843,
         Vector3.new(-1168.4803466796875, 0.7260000109672546, 77.04112243652344),
         "Helios Coin",
@@ -125,17 +127,23 @@ local function ThrowBothCoins()
         [6] = 3
     }
     pcall(function()
-        CoinLanded:FireServer(unpack(args2))
-        print("👑 Spot 2 thrown!")
+        CoinLanded:FireServer(unpack(args))
+        print("👑 SPOT 2 thrown!")
     end)
 end
 
 local function StartCoin2SpotLoop()
     if coin2SpotLoop then return end
     coin2SpotLoop = task.spawn(function()
+        local toggle = true
         while autoCoin2Spot do
-            ThrowBothCoins()
-            task.wait(0.1) -- DELAY 0.1 DETIK (CEPAT BANGET!)
+            if toggle then
+                ThrowSpot1()
+            else
+                ThrowSpot2()
+            end
+            toggle = not toggle
+            task.wait(1)
         end
     end)
 end
@@ -207,7 +215,7 @@ task.wait(3)
 TeleportToVIPPosition()
 
 -- ============================================
--- 7. GUI (SWITCH TOGGLE)
+-- 7. GUI
 -- ============================================
 
 local screenGui = Instance.new("ScreenGui")
@@ -261,10 +269,10 @@ local SubTitle = Instance.new("TextLabel")
 SubTitle.Size = UDim2.new(1, -60, 0, 14)
 SubTitle.Position = UDim2.new(0, 12, 0, 23)
 SubTitle.BackgroundTransparency = 1
-SubTitle.Text = "🪙 AUTO COIN + AUTO COIN 2 SPOT"
+SubTitle.Text = "🪙 THROW A COIN"
 SubTitle.TextColor3 = Color3.fromRGB(255, 200, 50)
 SubTitle.Font = Enum.Font.FredokaOne
-SubTitle.TextSize = 11
+SubTitle.TextSize = 12
 SubTitle.TextXAlignment = Enum.TextXAlignment.Left
 SubTitle.Parent = Header
 
@@ -349,7 +357,7 @@ Content.BackgroundTransparency = 1
 Content.Parent = Main
 
 -- ============================================
--- TOGGLE 1: AUTO COIN (DELAY 2s)
+-- TOGGLE 1: AUTO COIN
 -- ============================================
 
 local coinFrame = Instance.new("Frame")
@@ -366,13 +374,13 @@ coinCorner.CornerRadius = UDim.new(0, 10)
 coinCorner.Parent = coinFrame
 
 local coinLabel = Instance.new("TextLabel")
-coinLabel.Size = UDim2.new(0, 180, 1, 0)
+coinLabel.Size = UDim2.new(0, 160, 1, 0)
 coinLabel.Position = UDim2.new(0, 14, 0, 0)
 coinLabel.BackgroundTransparency = 1
-coinLabel.Text = "🪙 AUTO COIN (2s)"
+coinLabel.Text = "🪙 AUTO COIN"
 coinLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 coinLabel.Font = Enum.Font.FredokaOne
-coinLabel.TextSize = 13
+coinLabel.TextSize = 14
 coinLabel.TextXAlignment = Enum.TextXAlignment.Left
 coinLabel.Parent = coinFrame
 
@@ -427,7 +435,7 @@ coinSwitchBtnCorner.CornerRadius = UDim.new(0, 12)
 coinSwitchBtnCorner.Parent = coinSwitchBtn
 
 -- ============================================
--- TOGGLE 2: AUTO COIN 2 SPOT (DELAY 0.1s)
+-- TOGGLE 2: AUTO COIN 2 SPOT
 -- ============================================
 
 local coin2SpotFrame = Instance.new("Frame")
@@ -447,10 +455,10 @@ local coin2SpotLabel = Instance.new("TextLabel")
 coin2SpotLabel.Size = UDim2.new(0, 180, 1, 0)
 coin2SpotLabel.Position = UDim2.new(0, 14, 0, 0)
 coin2SpotLabel.BackgroundTransparency = 1
-coin2SpotLabel.Text = "🪙 AUTO COIN 2 SPOT (0.1s)"
+coin2SpotLabel.Text = "🪙 AUTO COIN 2 SPOT"
 coin2SpotLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 coin2SpotLabel.Font = Enum.Font.FredokaOne
-coin2SpotLabel.TextSize = 13
+coin2SpotLabel.TextSize = 14
 coin2SpotLabel.TextXAlignment = Enum.TextXAlignment.Left
 coin2SpotLabel.Parent = coin2SpotFrame
 
@@ -615,8 +623,8 @@ UserInputService.InputEnded:Connect(onInputEnded)
 
 print("═══════════════════════════════════")
 print("✅ ZAIXPLOIT RUNNING")
-print("📌 AUTO COIN (ON) - Delay 2s")
-print("📌 AUTO COIN 2 SPOT (ON) - Delay 0.1s ⚡")
+print("📌 AUTO COIN (ON)")
+print("📌 AUTO COIN 2 SPOT (ON) - Gantian 1s")
 print("   ├─ Spot 1: [6]=5")
 print("   └─ Spot 2: [6]=3")
 print("📌 ANTI AFK (Backend)")
