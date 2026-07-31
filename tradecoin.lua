@@ -2,7 +2,7 @@
 -- ZAIXPLOIT | AUTO TRADE + AUTO ACCEPT (DUAL TOGGLE)
 -- Toggle 1: Auto Trade (ke AIDILNV2)
 -- Toggle 2: Auto Accept UI (0.1s)
--- Toggle 3: Auto Accept Remote (3s)
+-- Toggle 3: Auto Accept Remote (0.001s) ⚡
 -- SEMUA BISA ON/OFF
 -- ============================================
 
@@ -192,7 +192,7 @@ end
 StartAcceptUILoop()
 
 -- ============================================
--- 6. TOGGLE 3: AUTO ACCEPT REMOTE (3s) (ON/OFF)
+-- 6. TOGGLE 3: AUTO ACCEPT REMOTE (0.001s) ⚡
 -- ============================================
 
 local autoAcceptRemote = true
@@ -204,9 +204,9 @@ local function StartAcceptRemoteLoop()
         while autoAcceptRemote do
             pcall(function()
                 TradeAccept:FireServer()
-                print("✅ Auto Accept Remote (3s)!")
+                print("⚡ Auto Accept Remote (0.001s)!")
             end)
-            task.wait(5)
+            task.wait(0.001) -- DELAY 0.001 DETIK (SUPER CEPAT!)
         end
     end)
 end
@@ -460,13 +460,13 @@ acceptUICorner.CornerRadius = UDim.new(0, 10)
 acceptUICorner.Parent = acceptUIFrame
 
 local acceptUILabel = Instance.new("TextLabel")
-acceptUILabel.Size = UDim2.new(0, 160, 1, 0)
+acceptUILabel.Size = UDim2.new(0, 170, 1, 0)
 acceptUILabel.Position = UDim2.new(0, 14, 0, 0)
 acceptUILabel.BackgroundTransparency = 1
 acceptUILabel.Text = "✅ AUTO ACCEPT UI (0.1s)"
 acceptUILabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 acceptUILabel.Font = Enum.Font.FredokaOne
-acceptUILabel.TextSize = 14
+acceptUILabel.TextSize = 13
 acceptUILabel.TextXAlignment = Enum.TextXAlignment.Left
 acceptUILabel.Parent = acceptUIFrame
 
@@ -521,7 +521,7 @@ acceptUISwitchBtnCorner.CornerRadius = UDim.new(0, 12)
 acceptUISwitchBtnCorner.Parent = acceptUISwitchBtn
 
 -- ============================================
--- TOGGLE 3: AUTO ACCEPT REMOTE (3s)
+-- TOGGLE 3: AUTO ACCEPT REMOTE (0.001s) ⚡
 -- ============================================
 
 local acceptRemoteFrame = Instance.new("Frame")
@@ -538,13 +538,13 @@ acceptRemoteCorner.CornerRadius = UDim.new(0, 10)
 acceptRemoteCorner.Parent = acceptRemoteFrame
 
 local acceptRemoteLabel = Instance.new("TextLabel")
-acceptRemoteLabel.Size = UDim2.new(0, 160, 1, 0)
+acceptRemoteLabel.Size = UDim2.new(0, 190, 1, 0)
 acceptRemoteLabel.Position = UDim2.new(0, 14, 0, 0)
 acceptRemoteLabel.BackgroundTransparency = 1
-acceptRemoteLabel.Text = "✅ AUTO ACCEPT REMOTE (3s)"
+acceptRemoteLabel.Text = "⚡ AUTO ACCEPT REMOTE (0.001s)"
 acceptRemoteLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 acceptRemoteLabel.Font = Enum.Font.FredokaOne
-acceptRemoteLabel.TextSize = 14
+acceptRemoteLabel.TextSize = 13
 acceptRemoteLabel.TextXAlignment = Enum.TextXAlignment.Left
 acceptRemoteLabel.Parent = acceptRemoteFrame
 
@@ -599,7 +599,7 @@ acceptRemoteSwitchBtnCorner.CornerRadius = UDim.new(0, 12)
 acceptRemoteSwitchBtnCorner.Parent = acceptRemoteSwitchBtn
 
 -- ============================================
--- ANIMASI SWITCH
+-- TOGGLE FUNCTIONS
 -- ============================================
 
 local function SmoothMove(object, targetPos, duration)
@@ -607,51 +607,19 @@ local function SmoothMove(object, targetPos, duration)
     tween:Play()
 end
 
-local function UpdateTradeSwitch(isOn)
+local function SetToggleState(switchBtn, isOn, switchBg, offLabel, onLabel)
     if isOn then
-        tradeSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-        tradeSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-        SmoothMove(tradeSwitchBtn, UDim2.new(1, -27, 0.5, -12), 0.3)
-        tradeOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-        tradeOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        switchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+        switchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
+        SmoothMove(switchBtn, UDim2.new(1, -27, 0.5, -12), 0.3)
+        offLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+        onLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     else
-        tradeSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
-        tradeSwitchBg.BorderColor3 = Color3.fromRGB(80, 80, 100)
-        SmoothMove(tradeSwitchBtn, UDim2.new(0, 3, 0.5, -12), 0.3)
-        tradeOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-        tradeOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-    end
-end
-
-local function UpdateAcceptUISwitch(isOn)
-    if isOn then
-        acceptUISwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-        acceptUISwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-        SmoothMove(acceptUISwitchBtn, UDim2.new(1, -27, 0.5, -12), 0.3)
-        acceptUIOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-        acceptUIOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    else
-        acceptUISwitchBg.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
-        acceptUISwitchBg.BorderColor3 = Color3.fromRGB(80, 80, 100)
-        SmoothMove(acceptUISwitchBtn, UDim2.new(0, 3, 0.5, -12), 0.3)
-        acceptUIOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-        acceptUIOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-    end
-end
-
-local function UpdateAcceptRemoteSwitch(isOn)
-    if isOn then
-        acceptRemoteSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-        acceptRemoteSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-        SmoothMove(acceptRemoteSwitchBtn, UDim2.new(1, -27, 0.5, -12), 0.3)
-        acceptRemoteOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-        acceptRemoteOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    else
-        acceptRemoteSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
-        acceptRemoteSwitchBg.BorderColor3 = Color3.fromRGB(80, 80, 100)
-        SmoothMove(acceptRemoteSwitchBtn, UDim2.new(0, 3, 0.5, -12), 0.3)
-        acceptRemoteOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-        acceptRemoteOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+        switchBg.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+        switchBg.BorderColor3 = Color3.fromRGB(80, 80, 100)
+        SmoothMove(switchBtn, UDim2.new(0, 3, 0.5, -12), 0.3)
+        offLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        onLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
     end
 end
 
@@ -669,9 +637,10 @@ end
 -- KLIK TOGGLE
 -- ============================================
 
+-- Toggle 1: AUTO TRADE
 tradeSwitchBtn.MouseButton1Click:Connect(function()
     autoTrade = not autoTrade
-    UpdateTradeSwitch(autoTrade)
+    SetToggleState(tradeSwitchBtn, autoTrade, tradeSwitchBg, tradeOffLabel, tradeOnLabel)
     UpdateMainBorder()
     if autoTrade then
         StartTradeLoop()
@@ -684,7 +653,7 @@ end)
 
 tradeFrame.MouseButton1Click:Connect(function()
     autoTrade = not autoTrade
-    UpdateTradeSwitch(autoTrade)
+    SetToggleState(tradeSwitchBtn, autoTrade, tradeSwitchBg, tradeOffLabel, tradeOnLabel)
     UpdateMainBorder()
     if autoTrade then
         StartTradeLoop()
@@ -695,9 +664,10 @@ tradeFrame.MouseButton1Click:Connect(function()
     end
 end)
 
+-- Toggle 2: AUTO ACCEPT UI
 acceptUISwitchBtn.MouseButton1Click:Connect(function()
     autoAcceptUI = not autoAcceptUI
-    UpdateAcceptUISwitch(autoAcceptUI)
+    SetToggleState(acceptUISwitchBtn, autoAcceptUI, acceptUISwitchBg, acceptUIOffLabel, acceptUIOnLabel)
     UpdateMainBorder()
     if autoAcceptUI then
         StartAcceptUILoop()
@@ -710,7 +680,7 @@ end)
 
 acceptUIFrame.MouseButton1Click:Connect(function()
     autoAcceptUI = not autoAcceptUI
-    UpdateAcceptUISwitch(autoAcceptUI)
+    SetToggleState(acceptUISwitchBtn, autoAcceptUI, acceptUISwitchBg, acceptUIOffLabel, acceptUIOnLabel)
     UpdateMainBorder()
     if autoAcceptUI then
         StartAcceptUILoop()
@@ -721,13 +691,14 @@ acceptUIFrame.MouseButton1Click:Connect(function()
     end
 end)
 
+-- Toggle 3: AUTO ACCEPT REMOTE (0.001s)
 acceptRemoteSwitchBtn.MouseButton1Click:Connect(function()
     autoAcceptRemote = not autoAcceptRemote
-    UpdateAcceptRemoteSwitch(autoAcceptRemote)
+    SetToggleState(acceptRemoteSwitchBtn, autoAcceptRemote, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
     UpdateMainBorder()
     if autoAcceptRemote then
         StartAcceptRemoteLoop()
-        print("✅ AUTO ACCEPT REMOTE ON (3s)")
+        print("⚡ AUTO ACCEPT REMOTE ON (0.001s)")
     else
         StopAcceptRemoteLoop()
         print("🔴 AUTO ACCEPT REMOTE OFF")
@@ -736,16 +707,24 @@ end)
 
 acceptRemoteFrame.MouseButton1Click:Connect(function()
     autoAcceptRemote = not autoAcceptRemote
-    UpdateAcceptRemoteSwitch(autoAcceptRemote)
+    SetToggleState(acceptRemoteSwitchBtn, autoAcceptRemote, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
     UpdateMainBorder()
     if autoAcceptRemote then
         StartAcceptRemoteLoop()
-        print("✅ AUTO ACCEPT REMOTE ON (3s)")
+        print("⚡ AUTO ACCEPT REMOTE ON (0.001s)")
     else
         StopAcceptRemoteLoop()
         print("🔴 AUTO ACCEPT REMOTE OFF")
     end
 end)
+
+-- ============================================
+-- SET INITIAL STATE (ON)
+-- ============================================
+
+SetToggleState(tradeSwitchBtn, true, tradeSwitchBg, tradeOffLabel, tradeOnLabel)
+SetToggleState(acceptUISwitchBtn, true, acceptUISwitchBg, acceptUIOffLabel, acceptUIOnLabel)
+SetToggleState(acceptRemoteSwitchBtn, true, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
 
 -- ============================================
 -- DRAG
@@ -795,7 +774,7 @@ UserInputService.InputEnded:Connect(onInputEnded)
 
 print("═══════════════════════════════════")
 print("✅ ZAIXPLOIT | AUTO TRADE + ACCEPT")
-print("📌 AUTO TRADE: ON/OFF")
-print("📌 AUTO ACCEPT UI (0.1s): ON/OFF")
-print("📌 AUTO ACCEPT REMOTE (3s): ON/OFF")
+print("📌 AUTO TRADE: ON")
+print("📌 AUTO ACCEPT UI (0.1s): ON")
+print("📌 AUTO ACCEPT REMOTE (0.001s): ON ⚡")
 print("═══════════════════════════════════")
