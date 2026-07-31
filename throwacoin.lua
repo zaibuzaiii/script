@@ -169,7 +169,7 @@ local Main = Instance.new("Frame")
 Main.Size = UDim2.new(0, 300, 0, 120)
 Main.Position = UDim2.new(0.5, -150, 0.5, -60)
 Main.BackgroundColor3 = Color3.fromRGB(10, 8, 20)
-Main.BackgroundTransparency = 0.3
+Main.BackgroundTransparency = 0
 Main.BorderSizePixel = 2
 Main.BorderColor3 = Color3.fromRGB(60, 200, 80)
 Main.ClipsDescendants = true
@@ -182,6 +182,16 @@ local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 14)
 MainCorner.Parent = Main
 
+-- GRADIENT BACKGROUND
+local MainGradient = Instance.new("UIGradient")
+MainGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(10, 8, 20)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(25, 20, 40)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(10, 8, 20))
+})
+MainGradient.Rotation = 45
+MainGradient.Parent = Main
+
 local Glow = Instance.new("UIStroke")
 Glow.Color = Color3.fromRGB(60, 200, 80)
 Glow.Transparency = 0.3
@@ -192,9 +202,18 @@ local Header = Instance.new("Frame")
 Header.Size = UDim2.new(1, 0, 0, 40)
 Header.Position = UDim2.new(0, 0, 0, 0)
 Header.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
-Header.BackgroundTransparency = 0.2
+Header.BackgroundTransparency = 0.3
 Header.BorderSizePixel = 0
 Header.Parent = Main
+
+local HeaderGradient = Instance.new("UIGradient")
+HeaderGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(20, 18, 35)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 35, 60)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(20, 18, 35))
+})
+HeaderGradient.Rotation = 90
+HeaderGradient.Parent = Header
 
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, -60, 0, 16)
@@ -305,6 +324,16 @@ autoFrame.Parent = Content
 local autoCorner = Instance.new("UICorner")
 autoCorner.CornerRadius = UDim.new(0, 8)
 autoCorner.Parent = autoFrame
+
+-- Gradient untuk autoFrame
+local autoGradient = Instance.new("UIGradient")
+autoGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(25, 23, 40)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40, 35, 55)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 23, 40))
+})
+autoGradient.Rotation = 45
+autoGradient.Parent = autoFrame
 
 local autoLabel = Instance.new("TextLabel")
 autoLabel.Size = UDim2.new(0, 130, 1, 0)
@@ -453,7 +482,7 @@ local function onInputBegan(input)
             isDragging = true
             dragStartPos = Main.Position
             dragStartMousePos = input.Position
-            Main.BackgroundTransparency = 0.5
+            Main.BackgroundTransparency = 0.3
         end
     end
 end
@@ -473,7 +502,7 @@ end
 local function onInputEnded(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         isDragging = false
-        Main.BackgroundTransparency = 0.3
+        Main.BackgroundTransparency = 0
     end
 end
 
