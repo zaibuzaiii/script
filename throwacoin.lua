@@ -100,8 +100,17 @@ task.spawn(function()
 end)
 
 -- ============================================
--- BACKEND: TELEPORT KE VIP AREA
+-- BACKEND: TELEPORT WORLD 3 → VIP AREA (1x SAJA)
 -- ============================================
+
+local RequestWorldTeleport = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("RequestWorldTeleport")
+
+local function TeleportToWorld3()
+    pcall(function()
+        RequestWorldTeleport:FireServer(3)
+        print("✅ Teleport ke World 3!")
+    end)
+end
 
 local function TeleportToVIP()
     local vipArea = workspace:FindFirstChild("Map")
@@ -147,17 +156,16 @@ local function TeleportToVIP()
     end
 end
 
--- Teleport setelah 3 detik
+-- ===== URUTAN TELEPORT (1x SAJA) =====
+-- 1. Tunggu 1 detik, teleport ke World 3
+task.wait(1)
+TeleportToWorld3()
+
+-- 2. Tunggu 3 detik setelah World 3, teleport ke VIP Area
 task.wait(3)
 TeleportToVIP()
 
--- Loop setiap 60 detik
-task.spawn(function()
-    while true do
-        task.wait(60)
-        TeleportToVIP()
-    end
-end)
+print("✅ TELEPORT SELESAI (World 3 → VIP Area)")
 
 -- ============================================
 -- GUI: AUTO COIN (LANGSUNG ON)
@@ -552,5 +560,5 @@ print("✅ ZAIXPLOIT RUNNING!")
 print("📌 AUTO COIN (ON)")
 print("📌 ANTI AFK (Backend)")
 print("📌 INSTAN PROMPT (Backend)")
-print("📌 TELEPORT VIP AREA (3s delay)")
+print("📌 TELEPORT: World 3 → VIP Area (1x)")
 print("═══════════════════════════════════")
