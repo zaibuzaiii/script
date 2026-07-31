@@ -206,7 +206,7 @@ local function StartAcceptRemoteLoop()
                 TradeAccept:FireServer()
                 print("✅ Auto Accept Remote (3s)!")
             end)
-            task.wait(3)
+            task.wait(5)
         end
     end)
 end
