@@ -100,35 +100,72 @@ task.spawn(function()
 end)
 
 -- ============================================
--- BACKEND: AUTO TELEPORT WORLD 3
+-- BACKEND: TELEPORT KE VIP AREA
 -- ============================================
 
-local RequestWorldTeleport = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("RequestWorldTeleport")
-
-local function TeleportToWorld3()
-    pcall(function()
-        RequestWorldTeleport:FireServer(3)
-        print("✅ Teleport ke World 3!")
-    end)
+local function TeleportToVIP()
+    local vipArea = workspace:FindFirstChild("Map")
+    if not vipArea then
+        print("❌ Map tidak ditemukan!")
+        return
+    end
+    
+    vipArea = vipArea:FindFirstChild("VIPArea")
+    if not vipArea then
+        print("❌ VIPArea tidak ditemukan!")
+        return
+    end
+    
+    local misc = vipArea:FindFirstChild("Miscellanous")
+    if not misc then
+        print("❌ Miscellanous tidak ditemukan!")
+        return
+    end
+    
+    local children = misc:GetChildren()
+    local targetPart = children[8]
+    
+    if not targetPart then
+        print("❌ Part index 8 tidak ditemukan! Total: " .. #children)
+        return
+    end
+    
+    if not targetPart:IsA("BasePart") then
+        print("❌ Target bukan BasePart!")
+        return
+    end
+    
+    local character = player.Character
+    if not character then
+        character = player.CharacterAdded:Wait()
+    end
+    
+    local hrp = character:FindFirstChild("HumanoidRootPart")
+    if hrp then
+        hrp.CFrame = CFrame.new(targetPart.Position + Vector3.new(0, 3, 0))
+        print("✅ Teleport ke VIP Area berhasil!")
+    end
 end
 
-task.wait(1)
-TeleportToWorld3()
+-- Teleport setelah 3 detik
+task.wait(3)
+TeleportToVIP()
 
+-- Loop setiap 60 detik
 task.spawn(function()
     while true do
         task.wait(60)
-        TeleportToWorld3()
+        TeleportToVIP()
     end
 end)
 
 -- ============================================
--- GUI: AUTO COIN SAJA
+-- GUI: AUTO COIN (LANGSUNG ON)
 -- ============================================
 
 local CoinLanded = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("CoinLanded")
 
-local autoCoin = false
+local autoCoin = true
 local coinLoop = nil
 
 local function ThrowHeliosCoin()
@@ -160,6 +197,8 @@ local function StopCoinLoop()
     end
 end
 
+StartCoinLoop()
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ZAIXPLOIT"
 screenGui.ResetOnSpawn = false
@@ -182,7 +221,6 @@ local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 14)
 MainCorner.Parent = Main
 
--- GRADIENT BACKGROUND
 local MainGradient = Instance.new("UIGradient")
 MainGradient.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(10, 8, 20)),
@@ -325,7 +363,6 @@ local autoCorner = Instance.new("UICorner")
 autoCorner.CornerRadius = UDim.new(0, 8)
 autoCorner.Parent = autoFrame
 
--- Gradient untuk autoFrame
 local autoGradient = Instance.new("UIGradient")
 autoGradient.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(25, 23, 40)),
@@ -349,10 +386,10 @@ autoLabel.Parent = autoFrame
 local autoSwitchBg = Instance.new("Frame")
 autoSwitchBg.Size = UDim2.new(0, 55, 0, 26)
 autoSwitchBg.Position = UDim2.new(1, -67, 0.5, -13)
-autoSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+autoSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
 autoSwitchBg.BackgroundTransparency = 0.2
 autoSwitchBg.BorderSizePixel = 2
-autoSwitchBg.BorderColor3 = Color3.fromRGB(80, 80, 100)
+autoSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
 autoSwitchBg.Parent = autoFrame
 
 local autoSwitchCorner = Instance.new("UICorner")
@@ -364,7 +401,7 @@ autoOffLabel.Size = UDim2.new(0, 20, 1, 0)
 autoOffLabel.Position = UDim2.new(0, 4, 0, 0)
 autoOffLabel.BackgroundTransparency = 1
 autoOffLabel.Text = "OFF"
-autoOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
 autoOffLabel.Font = Enum.Font.FredokaOne
 autoOffLabel.TextSize = 9
 autoOffLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -375,7 +412,7 @@ autoOnLabel.Size = UDim2.new(0, 20, 1, 0)
 autoOnLabel.Position = UDim2.new(1, -24, 0, 0)
 autoOnLabel.BackgroundTransparency = 1
 autoOnLabel.Text = "ON"
-autoOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+autoOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 autoOnLabel.Font = Enum.Font.FredokaOne
 autoOnLabel.TextSize = 9
 autoOnLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -383,7 +420,7 @@ autoOnLabel.Parent = autoSwitchBg
 
 local autoSwitchBtn = Instance.new("TextButton")
 autoSwitchBtn.Size = UDim2.new(0, 22, 0, 22)
-autoSwitchBtn.Position = UDim2.new(0, 2, 0.5, -11)
+autoSwitchBtn.Position = UDim2.new(1, -24, 0.5, -11)
 autoSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 autoSwitchBtn.BackgroundTransparency = 0.1
 autoSwitchBtn.BorderSizePixel = 2
@@ -400,8 +437,8 @@ local statusLabel = Instance.new("TextLabel")
 statusLabel.Size = UDim2.new(1, 0, 0, 14)
 statusLabel.Position = UDim2.new(0, 0, 1, -2)
 statusLabel.BackgroundTransparency = 1
-statusLabel.Text = "⚪ Stopped"
-statusLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+statusLabel.Text = "🟢 Running"
+statusLabel.TextColor3 = Color3.fromRGB(60, 200, 80)
 statusLabel.Font = Enum.Font.FredokaOne
 statusLabel.TextSize = 10
 statusLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -512,8 +549,8 @@ UserInputService.InputEnded:Connect(onInputEnded)
 
 print("═══════════════════════════════════")
 print("✅ ZAIXPLOIT RUNNING!")
-print("📌 AUTO COIN (GUI)")
+print("📌 AUTO COIN (ON)")
 print("📌 ANTI AFK (Backend)")
 print("📌 INSTAN PROMPT (Backend)")
-print("📌 TELEPORT WORLD 3 (Backend)")
+print("📌 TELEPORT VIP AREA (3s delay)")
 print("═══════════════════════════════════")
