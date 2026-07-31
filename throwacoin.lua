@@ -8,7 +8,7 @@ local Events = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events")
 local CoinLanded = Events:WaitForChild("CoinLanded")
 
 -- ============================================
--- TOGGLE VARIABEL
+-- TOGGLE VARIABEL (AWAL ON SEMUA)
 -- ============================================
 
 local toggles = {
@@ -57,13 +57,12 @@ local function StopAutoCoin()
 end
 
 -- ============================================
--- AUTO COIN 2 SPOT (2 REMOTE BERGANTIAN)
+-- AUTO COIN 2 SPOT (2 REMOTE SEKALIGUS)
 -- ============================================
 
-local coin2SpotIndex = 1
-
-local function ThrowNormalCoin()
-    local args = {
+local function ThrowBothCoins()
+    -- Normal Coin
+    local argsNormal = {
         [1] = 1.0064544024479687,
         [2] = Vector3.new(-1155.8770751953125, 0.7260000109672546, 87.9044189453125),
         [3] = "Helios Coin",
@@ -71,13 +70,12 @@ local function ThrowNormalCoin()
         [6] = 4
     }
     pcall(function()
-        CoinLanded:FireServer(unpack(args))
+        CoinLanded:FireServer(unpack(argsNormal))
         print("🪙 Normal Coin thrown!")
     end)
-end
-
-local function ThrowVIPCoin()
-    local args = {
+    
+    -- VIP Coin
+    local argsVip = {
         [1] = 1.00916329985579,
         [2] = Vector3.new(-1164.35400390625, 0.7260000109672546, -155.0728759765625),
         [3] = "Helios Coin",
@@ -85,7 +83,7 @@ local function ThrowVIPCoin()
         [6] = 3
     }
     pcall(function()
-        CoinLanded:FireServer(unpack(args))
+        CoinLanded:FireServer(unpack(argsVip))
         print("👑 VIP Coin thrown!")
     end)
 end
@@ -94,13 +92,7 @@ local function StartAutoCoin2Spot()
     if loops.autoCoin2Spot then return end
     loops.autoCoin2Spot = task.spawn(function()
         while toggles.autoCoin2Spot do
-            if coin2SpotIndex == 1 then
-                ThrowNormalCoin()
-                coin2SpotIndex = 2
-            else
-                ThrowVIPCoin()
-                coin2SpotIndex = 1
-            end
+            ThrowBothCoins()
             task.wait(2)
         end
     end)
@@ -628,7 +620,7 @@ UserInputService.InputEnded:Connect(onInputEnded)
 print("═══════════════════════════════════")
 print("✅ ZAIXPLOIT RUNNING")
 print("📌 AUTO COIN (ON)")
-print("📌 AUTO COIN 2 SPOT (ON)")
+print("📌 AUTO COIN 2 SPOT (ON - 2 Remote Sekaligus)")
 print("📌 ANTI AFK (Backend)")
 print("📌 INSTAN PROMPT (LOOP)")
 print("📌 TELEPORT: World 3 → VIP (1x SAJA)")
