@@ -4,10 +4,9 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 
 -- ============================================
--- 1. SET HOLD DURATION = 0 (INSTAN PROMPT)
+-- 1. SET HOLD DURATION = 0 (LOOP)
 -- ============================================
 
--- Loop terus set HoldDuration = 0
 task.spawn(function()
     while true do
         for i, v in ipairs(game:GetService("Workspace"):GetDescendants()) do
@@ -15,12 +14,12 @@ task.spawn(function()
                 v.HoldDuration = 0
             end
         end
-        task.wait(5) -- Cek setiap 5 detik
+        task.wait(5)
     end
 end)
 
 -- ============================================
--- 2. ANTI AFK
+-- 2. ANTI AFK (LOOP)
 -- ============================================
 
 task.spawn(function()
@@ -35,7 +34,7 @@ task.spawn(function()
 end)
 
 -- ============================================
--- 3. MATIKAN ANTI KICK (LOOP TERUS)
+-- 3. MATIKAN ANTI KICK (LOOP)
 -- ============================================
 
 task.spawn(function()
@@ -80,7 +79,7 @@ task.spawn(function()
 end)
 
 -- ============================================
--- 4. INSTAN PROMPT (SCAN SEMUA SLOT + LOOP)
+-- 4. INSTAN PROMPT (LOOP)
 -- ============================================
 
 local function GetAllPrompts()
@@ -130,7 +129,7 @@ task.spawn(function()
 end)
 
 -- ============================================
--- 5. TELEPORT WORLD 3 → VIP POSITION (LOOP)
+-- 5. TELEPORT (1x SAJA, TIDAK LOOP)
 -- ============================================
 
 local RequestWorldTeleport = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("RequestWorldTeleport")
@@ -155,14 +154,14 @@ local function TeleportToVIPPosition()
     end
 end
 
-task.spawn(function()
-    while true do
-        TeleportToWorld3()
-        task.wait(3)
-        TeleportToVIPPosition()
-        task.wait(60) -- Loop setiap 60 detik
-    end
-end)
+-- Jalankan 1x (tidak loop)
+task.wait(1)
+TeleportToWorld3()
+
+task.wait(3)
+TeleportToVIPPosition()
+
+print("✅ TELEPORT SELESAI (World 3 → VIP Position) - TIDAK LOOP!")
 
 -- ============================================
 -- 6. AUTO COIN (LOOP)
@@ -557,11 +556,11 @@ UserInputService.InputChanged:Connect(onInputChanged)
 UserInputService.InputEnded:Connect(onInputEnded)
 
 print("═══════════════════════════════════")
-print("✅ ZAIXPLOIT RUNNING (LOOP FOREVER)")
+print("✅ ZAIXPLOIT RUNNING")
 print("📌 AUTO COIN (ON)")
 print("📌 ANTI AFK (Backend)")
-print("📌 INSTAN PROMPT (LOOP - Scan all slots)")
-print("📌 TELEPORT LOOP: World 3 → VIP")
+print("📌 INSTAN PROMPT (LOOP)")
+print("📌 TELEPORT: World 3 → VIP (1x SAJA)")
 print("📌 ANTI KICK: Dimatikan (LOOP)")
 print("📌 HoldDuration=0 (LOOP)")
 print("═══════════════════════════════════")
