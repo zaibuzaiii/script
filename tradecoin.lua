@@ -631,7 +631,7 @@ tradeSwitchBtn.BackgroundTransparency = 0.05
 tradeSwitchBtn.BorderSizePixel = 2
 tradeSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
 tradeSwitchBtn.Text = ""
-tradeSwitchBtn.ZIndex = 50
+tradeSwitchBtn.ZIndex = 100
 tradeSwitchBtn.Parent = tradeSwitchBg
 
 local tradeSwitchBtnCorner = Instance.new("UICorner")
@@ -639,7 +639,7 @@ tradeSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
 tradeSwitchBtnCorner.Parent = tradeSwitchBtn
 
 -- ============================================
--- TOGGLE 2: AUTO ACCEPT (DEFAULT ON) - DIPERBAIKI
+-- TOGGLE 2: AUTO ACCEPT (DEFAULT ON) - PAKAI CARA BARU
 -- ============================================
 
 local acceptFrame = Instance.new("Frame")
@@ -660,7 +660,7 @@ local acceptLabel = Instance.new("TextLabel")
 acceptLabel.Size = UDim2.new(0, 160, 1, 0)
 acceptLabel.Position = UDim2.new(0, 14, 0, 0)
 acceptLabel.BackgroundTransparency = 1
-acceptLabel.Text = "✅ AUTO ACCEPT TRADE"
+acceptLabel.Text = "✅ AUTO ACCEPT"
 acceptLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 acceptLabel.Font = Enum.Font.FredokaOne
 acceptLabel.TextSize = 12
@@ -714,7 +714,7 @@ acceptSwitchBtn.BackgroundTransparency = 0.05
 acceptSwitchBtn.BorderSizePixel = 2
 acceptSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
 acceptSwitchBtn.Text = ""
-acceptSwitchBtn.ZIndex = 50
+acceptSwitchBtn.ZIndex = 100
 acceptSwitchBtn.Parent = acceptSwitchBg
 
 local acceptSwitchBtnCorner = Instance.new("UICorner")
@@ -722,7 +722,7 @@ acceptSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
 acceptSwitchBtnCorner.Parent = acceptSwitchBtn
 
 -- ============================================
--- TOGGLE 3: AUTO ACCEPT TRADE (DEFAULT ON) - DIPERBAIKI
+-- TOGGLE 3: AUTO ACCEPT TRADE (DEFAULT ON) - PAKAI CARA BARU
 -- ============================================
 
 local acceptTradeFrame = Instance.new("Frame")
@@ -743,7 +743,7 @@ local acceptTradeLabel = Instance.new("TextLabel")
 acceptTradeLabel.Size = UDim2.new(0, 190, 1, 0)
 acceptTradeLabel.Position = UDim2.new(0, 14, 0, 0)
 acceptTradeLabel.BackgroundTransparency = 1
-acceptTradeLabel.Text = "✅ AUTO ACCEPT"
+acceptTradeLabel.Text = "✅ AUTO ACCEPT TRADE"
 acceptTradeLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 acceptTradeLabel.Font = Enum.Font.FredokaOne
 acceptTradeLabel.TextSize = 12
@@ -797,7 +797,7 @@ acceptTradeSwitchBtn.BackgroundTransparency = 0.05
 acceptTradeSwitchBtn.BorderSizePixel = 2
 acceptTradeSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
 acceptTradeSwitchBtn.Text = ""
-acceptTradeSwitchBtn.ZIndex = 50
+acceptTradeSwitchBtn.ZIndex = 100
 acceptTradeSwitchBtn.Parent = acceptTradeSwitchBg
 
 local acceptTradeSwitchBtnCorner = Instance.new("UICorner")
@@ -873,7 +873,7 @@ local function UpdateStatus()
 end
 
 -- ============================================
--- KLIK TOGGLE (PAKAI MOUSEBUTTON1CLICK)
+-- KLIK TOGGLE (PAKAI MOUSEBUTTON1CLICK + ZINDEX TINGGI)
 -- ============================================
 
 -- Toggle 1: AUTO TRADE
@@ -894,7 +894,7 @@ end
 tradeSwitchBtn.MouseButton1Click:Connect(ToggleTrade)
 tradeFrame.MouseButton1Click:Connect(ToggleTrade)
 
--- Toggle 2: AUTO ACCEPT
+-- Toggle 2: AUTO ACCEPT (ZINDEX 100)
 local function ToggleAccept()
     autoAccept = not autoAccept
     SetToggleState(acceptSwitchBtn, autoAccept, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
@@ -911,7 +911,7 @@ end
 acceptSwitchBtn.MouseButton1Click:Connect(ToggleAccept)
 acceptFrame.MouseButton1Click:Connect(ToggleAccept)
 
--- Toggle 3: AUTO ACCEPT TRADE
+-- Toggle 3: AUTO ACCEPT TRADE (ZINDEX 100)
 local function ToggleAcceptTrade()
     autoAcceptTrade = not autoAcceptTrade
     SetToggleState(acceptTradeSwitchBtn, autoAcceptTrade, acceptTradeSwitchBg, acceptTradeOffLabel, acceptTradeOnLabel)
