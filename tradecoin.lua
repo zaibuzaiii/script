@@ -1,9 +1,8 @@
-
 -- ============================================
--- ZAIXPLOIT | AUTO TRADE + AUTO ACCEPT (SMART)
--- Toggle 1: Auto Trade (CUSTOM TARGET)
--- Toggle 2: Auto Accept UI (0.1s)
--- Toggle 3: Auto Accept Remote (NUNGGU LAWAN)
+-- ZAIXPLOIT | AUTO TRADE + TELEPORT + SMART ACCEPT
+-- Toggle 1: Auto Trade (TELEPORT + TRADE) - DEFAULT OFF
+-- Toggle 2: Auto Accept UI (0.1s) - DEFAULT ON
+-- Toggle 3: Auto Accept Remote (NUNGGU LAWAN) - DEFAULT ON
 -- ============================================
 
 local player = game.Players.LocalPlayer
@@ -59,23 +58,56 @@ local TradeRequestResponse = ReplicatedStorage:WaitForChild("Assets"):WaitForChi
 local TradeAccept = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAccept")
 
 -- ============================================
--- 4. VARIABEL
+-- 4. VARIABEL (DEFAULT OFF)
 -- ============================================
 
 local targetName = "AIDILNV2"
-local autoTrade = true
-local autoAcceptUI = true
-local autoAcceptRemote = true
+local autoTrade = false  -- DEFAULT OFF
+local autoAcceptUI = true  -- DEFAULT ON
+local autoAcceptRemote = true  -- DEFAULT ON
 
 local tradeLoop = nil
 local acceptUILoop = nil
 local acceptRemoteLoop = nil
 
 local alreadyAccepted = false
+local isTeleporting = false
 
 -- ============================================
--- 5. TOGGLE 1: AUTO TRADE
+-- 5. TOGGLE 1: AUTO TRADE (DEFAULT OFF)
 -- ============================================
+
+local function TeleportToTarget()
+    if not targetName or targetName == "" then return false end
+    
+    local target = workspace:FindFirstChild(targetName)
+    if not target then
+        print("❌ Target not found: " .. targetName)
+        return false
+    end
+    
+    local hrp = target:FindFirstChild("HumanoidRootPart")
+    if not hrp then return false end
+    
+    local character = player.Character
+    if not character or not character.Parent then
+        character = player.CharacterAdded:Wait()
+        task.wait(1)
+    end
+    
+    local playerHrp = character:FindFirstChild("HumanoidRootPart")
+    if not playerHrp then return false end
+    
+    local targetPos = hrp.Position
+    local teleportPos = targetPos + Vector3.new(0, 0, 5)
+    
+    pcall(function()
+        playerHrp.CFrame = CFrame.new(teleportPos)
+        print("✅ Teleport to: " .. targetName)
+    end)
+    
+    return true
+end
 
 local function GetTradePrompt()
     if not targetName or targetName == "" then return nil end
@@ -88,7 +120,16 @@ end
 
 local function FireTrade()
     local tradePrompt = GetTradePrompt()
-    if not tradePrompt then return false end
+    if not tradePrompt then
+        if not isTeleporting then
+            isTeleporting = true
+            TeleportToTarget()
+            task.wait(0.5)
+            isTeleporting = false
+        end
+        return false
+    end
+    
     if not tradePrompt.Enabled then return false end
     
     pcall(function()
@@ -123,10 +164,10 @@ local function StopTradeLoop()
     end
 end
 
-StartTradeLoop()
+-- TIDAK DIJALANKAN (DEFAULT OFF)
 
 -- ============================================
--- 6. TOGGLE 2: AUTO ACCEPT UI
+-- 6. TOGGLE 2: AUTO ACCEPT UI (DEFAULT ON)
 -- ============================================
 
 local function AutoAcceptUI()
@@ -210,10 +251,10 @@ local function StopAcceptUILoop()
     end
 end
 
-StartAcceptUILoop()
+StartAcceptUILoop() -- LANGSUNG JALAN (DEFAULT ON)
 
 -- ============================================
--- 7. TOGGLE 3: AUTO ACCEPT REMOTE
+-- 7. TOGGLE 3: AUTO ACCEPT REMOTE (DEFAULT ON)
 -- ============================================
 
 local function IsLawanAccept()
@@ -282,7 +323,7 @@ local function StopAcceptRemoteLoop()
     end
 end
 
-StartAcceptRemoteLoop()
+StartAcceptRemoteLoop() -- LANGSUNG JALAN (DEFAULT ON)
 
 -- ============================================
 -- 8. GUI
@@ -359,7 +400,7 @@ MinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 MinBtn.Font = Enum.Font.GothamBold
 MinBtn.TextSize = 18
 MinBtn.BorderSizePixel = 0
-MinBtn.ZIndex = 20
+MinBtn.ZIndex = 30
 MinBtn.Parent = Header
 
 local MinCorner = Instance.new("UICorner")
@@ -398,7 +439,7 @@ CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 CloseBtn.Font = Enum.Font.GothamBold
 CloseBtn.TextSize = 14
 CloseBtn.BorderSizePixel = 0
-CloseBtn.ZIndex = 20
+CloseBtn.ZIndex = 30
 CloseBtn.Parent = Header
 
 local CloseCorner = Instance.new("UICorner")
@@ -483,7 +524,7 @@ targetBox:GetPropertyChangedSignal("Text"):Connect(function()
 end)
 
 -- ============================================
--- TOGGLE 1: AUTO TRADE
+-- TOGGLE 1: AUTO TRADE (DEFAULT OFF)
 -- ============================================
 
 local tradeFrame = Instance.new("Frame")
@@ -501,13 +542,13 @@ tradeCorner.CornerRadius = UDim.new(0, 8)
 tradeCorner.Parent = tradeFrame
 
 local tradeLabel = Instance.new("TextLabel")
-tradeLabel.Size = UDim2.new(0, 160, 1, 0)
+tradeLabel.Size = UDim2.new(0, 190, 1, 0)
 tradeLabel.Position = UDim2.new(0, 14, 0, 0)
 tradeLabel.BackgroundTransparency = 1
-tradeLabel.Text = "🔄 AUTO TRADE"
+tradeLabel.Text = "🔄 AUTO TRADE (TELEPORT)"
 tradeLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 tradeLabel.Font = Enum.Font.FredokaOne
-tradeLabel.TextSize = 13
+tradeLabel.TextSize = 12
 tradeLabel.TextXAlignment = Enum.TextXAlignment.Left
 tradeLabel.ZIndex = 10
 tradeLabel.Parent = tradeFrame
@@ -515,10 +556,10 @@ tradeLabel.Parent = tradeFrame
 local tradeSwitchBg = Instance.new("Frame")
 tradeSwitchBg.Size = UDim2.new(0, 60, 0, 28)
 tradeSwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
-tradeSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+tradeSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
 tradeSwitchBg.BackgroundTransparency = 0.1
 tradeSwitchBg.BorderSizePixel = 2
-tradeSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
+tradeSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
 tradeSwitchBg.ZIndex = 10
 tradeSwitchBg.Parent = tradeFrame
 
@@ -531,7 +572,7 @@ tradeOffLabel.Size = UDim2.new(0, 22, 1, 0)
 tradeOffLabel.Position = UDim2.new(0, 4, 0, 0)
 tradeOffLabel.BackgroundTransparency = 1
 tradeOffLabel.Text = "OFF"
-tradeOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+tradeOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 tradeOffLabel.Font = Enum.Font.FredokaOne
 tradeOffLabel.TextSize = 9
 tradeOffLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -543,7 +584,7 @@ tradeOnLabel.Size = UDim2.new(0, 22, 1, 0)
 tradeOnLabel.Position = UDim2.new(1, -26, 0, 0)
 tradeOnLabel.BackgroundTransparency = 1
 tradeOnLabel.Text = "ON"
-tradeOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+tradeOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
 tradeOnLabel.Font = Enum.Font.FredokaOne
 tradeOnLabel.TextSize = 9
 tradeOnLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -552,13 +593,13 @@ tradeOnLabel.Parent = tradeSwitchBg
 
 local tradeSwitchBtn = Instance.new("TextButton")
 tradeSwitchBtn.Size = UDim2.new(0, 22, 0, 22)
-tradeSwitchBtn.Position = UDim2.new(1, -26, 0.5, -11)
+tradeSwitchBtn.Position = UDim2.new(0, 4, 0.5, -11)
 tradeSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 tradeSwitchBtn.BackgroundTransparency = 0.05
 tradeSwitchBtn.BorderSizePixel = 2
-tradeSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+tradeSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
 tradeSwitchBtn.Text = ""
-tradeSwitchBtn.ZIndex = 20
+tradeSwitchBtn.ZIndex = 30
 tradeSwitchBtn.Parent = tradeSwitchBg
 
 local tradeSwitchBtnCorner = Instance.new("UICorner")
@@ -566,7 +607,7 @@ tradeSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
 tradeSwitchBtnCorner.Parent = tradeSwitchBtn
 
 -- ============================================
--- TOGGLE 2: AUTO ACCEPT UI (DIPERBAIKI)
+-- TOGGLE 2: AUTO ACCEPT UI (DEFAULT ON)
 -- ============================================
 
 local acceptUIFrame = Instance.new("Frame")
@@ -641,7 +682,7 @@ acceptUISwitchBtn.BackgroundTransparency = 0.05
 acceptUISwitchBtn.BorderSizePixel = 2
 acceptUISwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
 acceptUISwitchBtn.Text = ""
-acceptUISwitchBtn.ZIndex = 20
+acceptUISwitchBtn.ZIndex = 30
 acceptUISwitchBtn.Parent = acceptUISwitchBg
 
 local acceptUISwitchBtnCorner = Instance.new("UICorner")
@@ -649,7 +690,7 @@ acceptUISwitchBtnCorner.CornerRadius = UDim.new(0, 11)
 acceptUISwitchBtnCorner.Parent = acceptUISwitchBtn
 
 -- ============================================
--- TOGGLE 3: AUTO ACCEPT REMOTE (DIPERBAIKI)
+-- TOGGLE 3: AUTO ACCEPT REMOTE (DEFAULT ON)
 -- ============================================
 
 local acceptRemoteFrame = Instance.new("Frame")
@@ -724,7 +765,7 @@ acceptRemoteSwitchBtn.BackgroundTransparency = 0.05
 acceptRemoteSwitchBtn.BorderSizePixel = 2
 acceptRemoteSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
 acceptRemoteSwitchBtn.Text = ""
-acceptRemoteSwitchBtn.ZIndex = 20
+acceptRemoteSwitchBtn.ZIndex = 30
 acceptRemoteSwitchBtn.Parent = acceptRemoteSwitchBg
 
 local acceptRemoteSwitchBtnCorner = Instance.new("UICorner")
@@ -739,8 +780,8 @@ local statusLabel = Instance.new("TextLabel")
 statusLabel.Size = UDim2.new(1, 0, 0, 18)
 statusLabel.Position = UDim2.new(0, 0, 1, -2)
 statusLabel.BackgroundTransparency = 1
-statusLabel.Text = "🟢 SEMUA ON | Target: AIDILNV2"
-statusLabel.TextColor3 = Color3.fromRGB(60, 200, 80)
+statusLabel.Text = "🟡 2 ON | Target: AIDILNV2"
+statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
 statusLabel.Font = Enum.Font.FredokaOne
 statusLabel.TextSize = 10
 statusLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -782,8 +823,11 @@ local function UpdateStatus()
     if count == 3 then
         statusLabel.Text = statusText .. "🟢 SEMUA ON"
         statusLabel.TextColor3 = Color3.fromRGB(60, 200, 80)
-    elseif count > 0 then
-        statusLabel.Text = statusText .. "🟡 " .. count .. " ON"
+    elseif count == 2 then
+        statusLabel.Text = statusText .. "🟡 2 ON"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
+    elseif count == 1 then
+        statusLabel.Text = statusText .. "🟡 1 ON"
         statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
     else
         statusLabel.Text = statusText .. "🔴 ALL OFF"
@@ -792,10 +836,30 @@ local function UpdateStatus()
 end
 
 -- ============================================
--- KLIK TOGGLE (PAKAI FUNGSI TERPISAH)
+-- KLIK TOGGLE (SEMUA BISA DI KLIK)
 -- ============================================
 
--- Toggle 2: AUTO ACCEPT UI (DIPERBAIKI)
+-- Toggle 1: AUTO TRADE (DEFAULT OFF)
+local function ToggleTrade()
+    autoTrade = not autoTrade
+    SetToggleState(tradeSwitchBtn, autoTrade, tradeSwitchBg, tradeOffLabel, tradeOnLabel)
+    UpdateStatus()
+    if autoTrade then
+        StartTradeLoop()
+        print("🔄 AUTO TRADE ON → Target: " .. targetName)
+        task.spawn(function()
+            TeleportToTarget()
+        end)
+    else
+        StopTradeLoop()
+        print("🔴 AUTO TRADE OFF")
+    end
+end
+
+tradeSwitchBtn.MouseButton1Click:Connect(ToggleTrade)
+tradeFrame.MouseButton1Click:Connect(ToggleTrade)
+
+-- Toggle 2: AUTO ACCEPT UI (DEFAULT ON)
 local function ToggleAcceptUI()
     autoAcceptUI = not autoAcceptUI
     SetToggleState(acceptUISwitchBtn, autoAcceptUI, acceptUISwitchBg, acceptUIOffLabel, acceptUIOnLabel)
@@ -812,14 +876,14 @@ end
 acceptUISwitchBtn.MouseButton1Click:Connect(ToggleAcceptUI)
 acceptUIFrame.MouseButton1Click:Connect(ToggleAcceptUI)
 
--- Toggle 3: AUTO ACCEPT REMOTE (DIPERBAIKI)
+-- Toggle 3: AUTO ACCEPT REMOTE (DEFAULT ON)
 local function ToggleAcceptRemote()
     autoAcceptRemote = not autoAcceptRemote
     SetToggleState(acceptRemoteSwitchBtn, autoAcceptRemote, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
     UpdateStatus()
     if autoAcceptRemote then
         StartAcceptRemoteLoop()
-        print("⚡ AUTO ACCEPT REMOTE ON (NUNGGU LAWAN)")
+        print("🟢 AUTO ACCEPT REMOTE ON (NUNGGU LAWAN)")
     else
         StopAcceptRemoteLoop()
         print("🔴 AUTO ACCEPT REMOTE OFF")
@@ -830,10 +894,10 @@ acceptRemoteSwitchBtn.MouseButton1Click:Connect(ToggleAcceptRemote)
 acceptRemoteFrame.MouseButton1Click:Connect(ToggleAcceptRemote)
 
 -- ============================================
--- SET INITIAL STATE (AUTO TRADE OFF, OTHERS ON)
+-- SET INITIAL STATE
 -- ============================================
 
--- AUTO TRADE: OFF (default)
+-- AUTO TRADE: OFF
 SetToggleState(tradeSwitchBtn, false, tradeSwitchBg, tradeOffLabel, tradeOnLabel)
 
 -- AUTO ACCEPT UI: ON
@@ -891,7 +955,7 @@ UserInputService.InputChanged:Connect(onInputChanged)
 UserInputService.InputEnded:Connect(onInputEnded)
 
 print("═══════════════════════════════════════════")
-print("✅ ZAIXPLOIT | SMART AUTO TRADE + ACCEPT")
+print("✅ ZAIXPLOIT | AUTO TRADE + TELEPORT")
 print("📌 TARGET: " .. targetName .. " (BISA DIGANTI)")
 print("📌 AUTO TRADE: OFF (Nyalakan manual)")
 print("📌 AUTO ACCEPT UI: ON (0.1s)")
