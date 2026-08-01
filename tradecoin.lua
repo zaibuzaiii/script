@@ -1,6 +1,6 @@
 -- ============================================
--- ZAIXPLOIT | AUTO TRADE + TELEPORT + SMART ACCEPT
--- Toggle 1: Auto Trade (TELEPORT + TRADE) - DEFAULT OFF
+-- ZAIXPLOIT | AUTO TRADE + FOLLOW + SMART ACCEPT
+-- Toggle 1: Auto Trade (FOLLOW + TRADE) - DEFAULT OFF
 -- Toggle 2: Auto Accept UI (0.1s) - DEFAULT ON
 -- Toggle 3: Auto Accept Remote (NUNGGU LAWAN) - DEFAULT ON
 -- ============================================
@@ -10,6 +10,7 @@ local VirtualUser = game:GetService("VirtualUser")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
 
 -- ============================================
 -- 1. ANTI AFK
@@ -61,7 +62,7 @@ local TradeAccept = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Event
 -- 4. VARIABEL (DEFAULT OFF)
 -- ============================================
 
-local targetName = "AIDILNV2"
+local targetName = "zaihunt4"
 local autoTrade = false  -- DEFAULT OFF
 local autoAcceptUI = true  -- DEFAULT ON
 local autoAcceptRemote = true  -- DEFAULT ON
@@ -69,15 +70,52 @@ local autoAcceptRemote = true  -- DEFAULT ON
 local tradeLoop = nil
 local acceptUILoop = nil
 local acceptRemoteLoop = nil
+local followConnection = nil
 
 local alreadyAccepted = false
-local isTeleporting = false
 
 -- ============================================
--- 5. TOGGLE 1: AUTO TRADE (DEFAULT OFF)
+-- 5. TOGGLE 1: AUTO TRADE (FOLLOW + TRADE)
 -- ============================================
 
-local function TeleportToTarget()
+local function FollowTarget()
+    if not targetName or targetName == "" then return end
+    
+    local target = workspace:FindFirstChild(targetName)
+    if not target then
+        print("❌ Target not found: " .. targetName)
+        return
+    end
+    
+    local targetHrp = target:FindFirstChild("HumanoidRootPart")
+    if not targetHrp then return end
+    
+    local character = player.Character
+    if not character or not character.Parent then
+        character = player.CharacterAdded:Wait()
+        task.wait(1)
+    end
+    
+    local playerHrp = character:FindFirstChild("HumanoidRootPart")
+    if not playerHrp then return end
+    
+    -- Tween ke target (di depan target)
+    local targetPos = targetHrp.Position
+    local followPos = targetPos + Vector3.new(0, 0, 5) -- 5 studs di depan
+    
+    local tweenInfo = TweenInfo.new(
+        0.5, -- durasi
+        Enum.EasingStyle.Quad,
+        Enum.EasingDirection.Out
+    )
+    
+    local tween = TweenService:Create(playerHrp, tweenInfo, {CFrame = CFrame.new(followPos)})
+    tween:Play()
+    
+    print("📍 Following: " .. targetName)
+end
+
+local function FireTrade()
     if not targetName or targetName == "" then return false end
     
     local target = workspace:FindFirstChild(targetName)
@@ -89,69 +127,93 @@ local function TeleportToTarget()
     local hrp = target:FindFirstChild("HumanoidRootPart")
     if not hrp then return false end
     
-    local character = player.Character
-    if not character or not character.Parent then
-        character = player.CharacterAdded:Wait()
-        task.wait(1)
-    end
-    
-    local playerHrp = character:FindFirstChild("HumanoidRootPart")
-    if not playerHrp then return false end
-    
-    local targetPos = hrp.Position
-    local teleportPos = targetPos + Vector3.new(0, 0, 5)
-    
-    pcall(function()
-        playerHrp.CFrame = CFrame.new(teleportPos)
-        print("✅ Teleport to: " .. targetName)
-    end)
-    
-    return true
-end
-
-local function GetTradePrompt()
-    if not targetName or targetName == "" then return nil end
-    local target = workspace:FindFirstChild(targetName)
-    if not target then return nil end
-    local hrp = target:FindFirstChild("HumanoidRootPart")
-    if not hrp then return nil end
-    return hrp:FindFirstChild("TradePrompt")
-end
-
-local function FireTrade()
-    local tradePrompt = GetTradePrompt()
+    local tradePrompt = hrp:FindFirstChild("TradePrompt")
     if not tradePrompt then
-        if not isTeleporting then
-            isTeleporting = true
-            TeleportToTarget()
-            task.wait(0.5)
-            isTeleporting = false
-        end
+        print("❌ TradePrompt not found on: " .. targetName)
         return false
     end
     
-    if not tradePrompt.Enabled then return false end
+    if not tradePrompt.Enabled then
+        print("⚠️ TradePrompt disabled")
+        return false
+    end
     
     pcall(function()
+        -- Prompt trade
         tradePrompt:Prompt()
-        task.wait(0.05)
+        task.wait(0.1)
+        
+        -- Klik tombol menggunakan VirtualUser
         VirtualUser:Button1Down(Vector2.new())
         task.wait(0.05)
         VirtualUser:Button1Up(Vector2.new())
         VirtualUser:Button2Down(Vector2.new())
         task.wait(0.05)
         VirtualUser:Button2Up(Vector2.new())
+        
         print("✅ Trade Prompt fired to: " .. targetName)
     end)
+    
     return true
+end
+
+-- FOLLOW LOOP (pake RunService biar smooth)
+local function StartFollowLoop()
+    if followConnection then return end
+    
+    followConnection = RunService.Heartbeat:Connect(function()
+        if not autoTrade then return end
+        if not targetName or targetName == "" then return end
+        
+        local target = workspace:FindFirstChild(targetName)
+        if not target then return end
+        
+        local targetHrp = target:FindFirstChild("HumanoidRootPart")
+        if not targetHrp then return end
+        
+        local character = player.Character
+        if not character or not character.Parent then return end
+        
+        local playerHrp = character:FindFirstChild("HumanoidRootPart")
+        if not playerHrp then return end
+        
+        -- Cek jarak
+        local distance = (playerHrp.Position - targetHrp.Position).Magnitude
+        if distance > 8 then
+            -- Kalo jauh, tween ke target
+            local targetPos = targetHrp.Position
+            local followPos = targetPos + Vector3.new(0, 0, 5)
+            
+            local tweenInfo = TweenInfo.new(
+                0.3,
+                Enum.EasingStyle.Quad,
+                Enum.EasingDirection.Out
+            )
+            
+            local tween = TweenService:Create(playerHrp, tweenInfo, {CFrame = CFrame.new(followPos)})
+            tween:Play()
+        end
+    end)
+end
+
+local function StopFollowLoop()
+    if followConnection then
+        followConnection:Disconnect()
+        followConnection = nil
+    end
 end
 
 local function StartTradeLoop()
     if tradeLoop then return end
     tradeLoop = task.spawn(function()
         while autoTrade do
+            -- Follow target
+            FollowTarget()
+            task.wait(0.5)
+            
+            -- Fire trade prompt
             FireTrade()
-            task.wait(1)
+            task.wait(1.5)
         end
     end)
 end
@@ -162,6 +224,7 @@ local function StopTradeLoop()
         task.cancel(tradeLoop)
         tradeLoop = nil
     end
+    StopFollowLoop()
 end
 
 -- TIDAK DIJALANKAN (DEFAULT OFF)
@@ -251,7 +314,7 @@ local function StopAcceptUILoop()
     end
 end
 
-StartAcceptUILoop() -- LANGSUNG JALAN (DEFAULT ON)
+StartAcceptUILoop()
 
 -- ============================================
 -- 7. TOGGLE 3: AUTO ACCEPT REMOTE (DEFAULT ON)
@@ -323,10 +386,10 @@ local function StopAcceptRemoteLoop()
     end
 end
 
-StartAcceptRemoteLoop() -- LANGSUNG JALAN (DEFAULT ON)
+StartAcceptRemoteLoop()
 
 -- ============================================
--- 8. GUI
+-- 8. GUI (SAMA KAYA SEBELUMNYA)
 -- ============================================
 
 local screenGui = Instance.new("ScreenGui")
@@ -380,7 +443,7 @@ local SubTitle = Instance.new("TextLabel")
 SubTitle.Size = UDim2.new(1, -60, 0, 14)
 SubTitle.Position = UDim2.new(0, 12, 0, 23)
 SubTitle.BackgroundTransparency = 1
-SubTitle.Text = "🔄 AUTO TRADE + SMART ACCEPT"
+SubTitle.Text = "🔄 AUTO TRADE + FOLLOW + SMART ACCEPT"
 SubTitle.TextColor3 = Color3.fromRGB(255, 200, 50)
 SubTitle.Font = Enum.Font.FredokaOne
 SubTitle.TextSize = 11
@@ -508,7 +571,7 @@ targetBox.BorderColor3 = Color3.fromRGB(60, 200, 80)
 targetBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 targetBox.Font = Enum.Font.GothamBold
 targetBox.TextSize = 14
-targetBox.Text = "AIDILNV2"
+targetBox.Text = "zaihunt4"
 targetBox.TextXAlignment = Enum.TextXAlignment.Left
 targetBox.ZIndex = 15
 targetBox.Parent = targetFrame
@@ -542,10 +605,10 @@ tradeCorner.CornerRadius = UDim.new(0, 8)
 tradeCorner.Parent = tradeFrame
 
 local tradeLabel = Instance.new("TextLabel")
-tradeLabel.Size = UDim2.new(0, 190, 1, 0)
+tradeLabel.Size = UDim2.new(0, 200, 1, 0)
 tradeLabel.Position = UDim2.new(0, 14, 0, 0)
 tradeLabel.BackgroundTransparency = 1
-tradeLabel.Text = "🔄 AUTO TRADE (TELEPORT)"
+tradeLabel.Text = "🔄 AUTO TRADE (FOLLOW)"
 tradeLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 tradeLabel.Font = Enum.Font.FredokaOne
 tradeLabel.TextSize = 12
@@ -780,7 +843,7 @@ local statusLabel = Instance.new("TextLabel")
 statusLabel.Size = UDim2.new(1, 0, 0, 18)
 statusLabel.Position = UDim2.new(0, 0, 1, -2)
 statusLabel.BackgroundTransparency = 1
-statusLabel.Text = "🟡 2 ON | Target: AIDILNV2"
+statusLabel.Text = "🟡 2 ON | Target: zaihunt4"
 statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
 statusLabel.Font = Enum.Font.FredokaOne
 statusLabel.TextSize = 10
@@ -836,7 +899,7 @@ local function UpdateStatus()
 end
 
 -- ============================================
--- KLIK TOGGLE (SEMUA BISA DI KLIK)
+-- KLIK TOGGLE
 -- ============================================
 
 -- Toggle 1: AUTO TRADE (DEFAULT OFF)
@@ -846,10 +909,8 @@ local function ToggleTrade()
     UpdateStatus()
     if autoTrade then
         StartTradeLoop()
+        StartFollowLoop()
         print("🔄 AUTO TRADE ON → Target: " .. targetName)
-        task.spawn(function()
-            TeleportToTarget()
-        end)
     else
         StopTradeLoop()
         print("🔴 AUTO TRADE OFF")
@@ -955,7 +1016,7 @@ UserInputService.InputChanged:Connect(onInputChanged)
 UserInputService.InputEnded:Connect(onInputEnded)
 
 print("═══════════════════════════════════════════")
-print("✅ ZAIXPLOIT | AUTO TRADE + TELEPORT")
+print("✅ ZAIXPLOIT | AUTO TRADE + FOLLOW")
 print("📌 TARGET: " .. targetName .. " (BISA DIGANTI)")
 print("📌 AUTO TRADE: OFF (Nyalakan manual)")
 print("📌 AUTO ACCEPT UI: ON (0.1s)")
