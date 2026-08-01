@@ -206,7 +206,7 @@ local function StartAcceptRemoteLoop()
                 TradeAccept:FireServer()
                 print("⚡ Auto Accept Remote (0.001s)!")
             end)
-            task.wait(0.001) -- DELAY 0.001 DETIK (SUPER CEPAT!)
+            task.wait(0.1) -- DELAY 0.001 DETIK (SUPER CEPAT!)
         end
     end)
 end
