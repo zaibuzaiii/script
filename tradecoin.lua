@@ -1,3 +1,4 @@
+
 -- ============================================
 -- ZAIXPLOIT | AUTO TRADE + AUTO ACCEPT (SMART)
 -- Toggle 1: Auto Trade (CUSTOM TARGET)
@@ -212,7 +213,7 @@ end
 StartAcceptUILoop()
 
 -- ============================================
--- 7. TOGGLE 3: AUTO ACCEPT REMOTE (NUNGGU LAWAN)
+-- 7. TOGGLE 3: AUTO ACCEPT REMOTE
 -- ============================================
 
 local function IsLawanAccept()
@@ -557,7 +558,7 @@ tradeSwitchBtn.BackgroundTransparency = 0.05
 tradeSwitchBtn.BorderSizePixel = 2
 tradeSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
 tradeSwitchBtn.Text = ""
-tradeSwitchBtn.ZIndex = 20  -- TINGGI!
+tradeSwitchBtn.ZIndex = 20
 tradeSwitchBtn.Parent = tradeSwitchBg
 
 local tradeSwitchBtnCorner = Instance.new("UICorner")
@@ -565,7 +566,7 @@ tradeSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
 tradeSwitchBtnCorner.Parent = tradeSwitchBtn
 
 -- ============================================
--- TOGGLE 2: AUTO ACCEPT UI
+-- TOGGLE 2: AUTO ACCEPT UI (DIPERBAIKI)
 -- ============================================
 
 local acceptUIFrame = Instance.new("Frame")
@@ -640,7 +641,7 @@ acceptUISwitchBtn.BackgroundTransparency = 0.05
 acceptUISwitchBtn.BorderSizePixel = 2
 acceptUISwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
 acceptUISwitchBtn.Text = ""
-acceptUISwitchBtn.ZIndex = 20  -- TINGGI!
+acceptUISwitchBtn.ZIndex = 20
 acceptUISwitchBtn.Parent = acceptUISwitchBg
 
 local acceptUISwitchBtnCorner = Instance.new("UICorner")
@@ -648,7 +649,7 @@ acceptUISwitchBtnCorner.CornerRadius = UDim.new(0, 11)
 acceptUISwitchBtnCorner.Parent = acceptUISwitchBtn
 
 -- ============================================
--- TOGGLE 3: AUTO ACCEPT REMOTE
+-- TOGGLE 3: AUTO ACCEPT REMOTE (DIPERBAIKI)
 -- ============================================
 
 local acceptRemoteFrame = Instance.new("Frame")
@@ -723,7 +724,7 @@ acceptRemoteSwitchBtn.BackgroundTransparency = 0.05
 acceptRemoteSwitchBtn.BorderSizePixel = 2
 acceptRemoteSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
 acceptRemoteSwitchBtn.Text = ""
-acceptRemoteSwitchBtn.ZIndex = 20  -- TINGGI!
+acceptRemoteSwitchBtn.ZIndex = 20
 acceptRemoteSwitchBtn.Parent = acceptRemoteSwitchBg
 
 local acceptRemoteSwitchBtnCorner = Instance.new("UICorner")
@@ -791,27 +792,10 @@ local function UpdateStatus()
 end
 
 -- ============================================
--- KLIK TOGGLE (ZIndex tinggi biar bisa diklik)
+-- KLIK TOGGLE (PAKAI FUNGSI TERPISAH)
 -- ============================================
 
--- Toggle 1: AUTO TRADE
-local function ToggleTrade()
-    autoTrade = not autoTrade
-    SetToggleState(tradeSwitchBtn, autoTrade, tradeSwitchBg, tradeOffLabel, tradeOnLabel)
-    UpdateStatus()
-    if autoTrade then
-        StartTradeLoop()
-        print("🔄 AUTO TRADE ON → Target: " .. targetName)
-    else
-        StopTradeLoop()
-        print("🔴 AUTO TRADE OFF")
-    end
-end
-
-tradeSwitchBtn.MouseButton1Click:Connect(ToggleTrade)
-tradeFrame.MouseButton1Click:Connect(ToggleTrade)
-
--- Toggle 2: AUTO ACCEPT UI
+-- Toggle 2: AUTO ACCEPT UI (DIPERBAIKI)
 local function ToggleAcceptUI()
     autoAcceptUI = not autoAcceptUI
     SetToggleState(acceptUISwitchBtn, autoAcceptUI, acceptUISwitchBg, acceptUIOffLabel, acceptUIOnLabel)
@@ -828,14 +812,14 @@ end
 acceptUISwitchBtn.MouseButton1Click:Connect(ToggleAcceptUI)
 acceptUIFrame.MouseButton1Click:Connect(ToggleAcceptUI)
 
--- Toggle 3: AUTO ACCEPT REMOTE
+-- Toggle 3: AUTO ACCEPT REMOTE (DIPERBAIKI)
 local function ToggleAcceptRemote()
     autoAcceptRemote = not autoAcceptRemote
     SetToggleState(acceptRemoteSwitchBtn, autoAcceptRemote, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
     UpdateStatus()
     if autoAcceptRemote then
         StartAcceptRemoteLoop()
-        print("🟢 AUTO ACCEPT REMOTE ON (NUNGGU LAWAN)")
+        print("⚡ AUTO ACCEPT REMOTE ON (NUNGGU LAWAN)")
     else
         StopAcceptRemoteLoop()
         print("🔴 AUTO ACCEPT REMOTE OFF")
@@ -846,12 +830,18 @@ acceptRemoteSwitchBtn.MouseButton1Click:Connect(ToggleAcceptRemote)
 acceptRemoteFrame.MouseButton1Click:Connect(ToggleAcceptRemote)
 
 -- ============================================
--- SET INITIAL STATE
+-- SET INITIAL STATE (AUTO TRADE OFF, OTHERS ON)
 -- ============================================
 
-SetToggleState(tradeSwitchBtn, true, tradeSwitchBg, tradeOffLabel, tradeOnLabel)
+-- AUTO TRADE: OFF (default)
+SetToggleState(tradeSwitchBtn, false, tradeSwitchBg, tradeOffLabel, tradeOnLabel)
+
+-- AUTO ACCEPT UI: ON
 SetToggleState(acceptUISwitchBtn, true, acceptUISwitchBg, acceptUIOffLabel, acceptUIOnLabel)
+
+-- AUTO ACCEPT REMOTE: ON
 SetToggleState(acceptRemoteSwitchBtn, true, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
+
 UpdateStatus()
 
 -- ============================================
@@ -903,7 +893,7 @@ UserInputService.InputEnded:Connect(onInputEnded)
 print("═══════════════════════════════════════════")
 print("✅ ZAIXPLOIT | SMART AUTO TRADE + ACCEPT")
 print("📌 TARGET: " .. targetName .. " (BISA DIGANTI)")
-print("📌 AUTO TRADE: ON (1s)")
+print("📌 AUTO TRADE: OFF (Nyalakan manual)")
 print("📌 AUTO ACCEPT UI: ON (0.1s)")
 print("📌 AUTO ACCEPT REMOTE: ON (NUNGGU LAWAN) ⏳")
 print("═══════════════════════════════════════════")
