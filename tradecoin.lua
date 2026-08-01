@@ -1,8 +1,8 @@
 -- ============================================
--- ZAIXPLOIT | AUTO TRADE + FOLLOW + SMART ACCEPT
--- Toggle 1: Auto Trade (FOLLOW + TRADE) - DEFAULT OFF
--- Toggle 2: Auto Accept UI (0.1s) - DEFAULT ON
--- Toggle 3: Auto Accept Remote (NUNGGU LAWAN) - DEFAULT ON
+-- ZAIXPLOIT | AUTO TRADE
+-- Toggle 1: AUTO TRADE (FOLLOW + TRADE) - DEFAULT OFF
+-- Toggle 2: AUTO ACCEPT - DEFAULT ON
+-- Toggle 3: AUTO ACCEPT TRADE - DEFAULT ON
 -- ============================================
 
 local player = game.Players.LocalPlayer
@@ -59,17 +59,17 @@ local TradeRequestResponse = ReplicatedStorage:WaitForChild("Assets"):WaitForChi
 local TradeAccept = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAccept")
 
 -- ============================================
--- 4. VARIABEL (DEFAULT OFF)
+-- 4. VARIABEL
 -- ============================================
 
-local targetName = "zaihunt4"
-local autoTrade = false  -- DEFAULT OFF
-local autoAcceptUI = true  -- DEFAULT ON
-local autoAcceptRemote = true  -- DEFAULT ON
+local targetName = "username"
+local autoTrade = false
+local autoAccept = true
+local autoAcceptTrade = true
 
 local tradeLoop = nil
-local acceptUILoop = nil
-local acceptRemoteLoop = nil
+local acceptLoop = nil
+local acceptTradeLoop = nil
 local followConnection = nil
 
 local alreadyAccepted = false
@@ -79,7 +79,7 @@ local alreadyAccepted = false
 -- ============================================
 
 local function FollowTarget()
-    if not targetName or targetName == "" then return end
+    if not targetName or targetName == "" or targetName == "username" then return end
     
     local target = workspace:FindFirstChild(targetName)
     if not target then
@@ -99,24 +99,16 @@ local function FollowTarget()
     local playerHrp = character:FindFirstChild("HumanoidRootPart")
     if not playerHrp then return end
     
-    -- Tween ke target (di depan target)
     local targetPos = targetHrp.Position
-    local followPos = targetPos + Vector3.new(0, 0, 5) -- 5 studs di depan
+    local followPos = targetPos + Vector3.new(0, 0, 5)
     
-    local tweenInfo = TweenInfo.new(
-        0.5, -- durasi
-        Enum.EasingStyle.Quad,
-        Enum.EasingDirection.Out
-    )
-    
+    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
     local tween = TweenService:Create(playerHrp, tweenInfo, {CFrame = CFrame.new(followPos)})
     tween:Play()
-    
-    print("📍 Following: " .. targetName)
 end
 
 local function FireTrade()
-    if not targetName or targetName == "" then return false end
+    if not targetName or targetName == "" or targetName == "username" then return false end
     
     local target = workspace:FindFirstChild(targetName)
     if not target then
@@ -139,31 +131,25 @@ local function FireTrade()
     end
     
     pcall(function()
-        -- Prompt trade
         tradePrompt:Prompt()
         task.wait(0.1)
-        
-        -- Klik tombol menggunakan VirtualUser
         VirtualUser:Button1Down(Vector2.new())
         task.wait(0.05)
         VirtualUser:Button1Up(Vector2.new())
         VirtualUser:Button2Down(Vector2.new())
         task.wait(0.05)
         VirtualUser:Button2Up(Vector2.new())
-        
         print("✅ Trade Prompt fired to: " .. targetName)
     end)
     
     return true
 end
 
--- FOLLOW LOOP (pake RunService biar smooth)
 local function StartFollowLoop()
     if followConnection then return end
-    
     followConnection = RunService.Heartbeat:Connect(function()
         if not autoTrade then return end
-        if not targetName or targetName == "" then return end
+        if not targetName or targetName == "" or targetName == "username" then return end
         
         local target = workspace:FindFirstChild(targetName)
         if not target then return end
@@ -177,41 +163,23 @@ local function StartFollowLoop()
         local playerHrp = character:FindFirstChild("HumanoidRootPart")
         if not playerHrp then return end
         
-        -- Cek jarak
         local distance = (playerHrp.Position - targetHrp.Position).Magnitude
         if distance > 8 then
-            -- Kalo jauh, tween ke target
             local targetPos = targetHrp.Position
             local followPos = targetPos + Vector3.new(0, 0, 5)
-            
-            local tweenInfo = TweenInfo.new(
-                0.3,
-                Enum.EasingStyle.Quad,
-                Enum.EasingDirection.Out
-            )
-            
+            local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
             local tween = TweenService:Create(playerHrp, tweenInfo, {CFrame = CFrame.new(followPos)})
             tween:Play()
         end
     end)
 end
 
-local function StopFollowLoop()
-    if followConnection then
-        followConnection:Disconnect()
-        followConnection = nil
-    end
-end
-
 local function StartTradeLoop()
     if tradeLoop then return end
     tradeLoop = task.spawn(function()
         while autoTrade do
-            -- Follow target
             FollowTarget()
             task.wait(0.5)
-            
-            -- Fire trade prompt
             FireTrade()
             task.wait(1.5)
         end
@@ -224,13 +192,14 @@ local function StopTradeLoop()
         task.cancel(tradeLoop)
         tradeLoop = nil
     end
-    StopFollowLoop()
+    if followConnection then
+        followConnection:Disconnect()
+        followConnection = nil
+    end
 end
 
--- TIDAK DIJALANKAN (DEFAULT OFF)
-
 -- ============================================
--- 6. TOGGLE 2: AUTO ACCEPT UI (DEFAULT ON)
+-- 6. TOGGLE 2: AUTO ACCEPT (DEFAULT ON)
 -- ============================================
 
 local function AutoAcceptUI()
@@ -254,7 +223,7 @@ local function AutoAcceptUI()
                     if userId then
                         pcall(function()
                             TradeRequestResponse:FireServer(userId, true)
-                            print("✅ Auto Accept UI dari User ID: " .. userId)
+                            print("✅ Auto Accept dari User ID: " .. userId)
                         end)
                         child:Destroy()
                     end
@@ -283,7 +252,7 @@ local function AutoAcceptUI()
                                     if readyIcon and readyIcon.Enabled then
                                         pcall(function()
                                             acceptBtn:FireClick()
-                                            print("✅ Auto Accept UI - Lawan udah accept!")
+                                            print("✅ Auto Accept - Lawan udah accept!")
                                         end)
                                     end
                                 end
@@ -296,28 +265,28 @@ local function AutoAcceptUI()
     end
 end
 
-local function StartAcceptUILoop()
-    if acceptUILoop then return end
-    acceptUILoop = task.spawn(function()
-        while autoAcceptUI do
+local function StartAcceptLoop()
+    if acceptLoop then return end
+    acceptLoop = task.spawn(function()
+        while autoAccept do
             AutoAcceptUI()
             task.wait(0.1)
         end
     end)
 end
 
-local function StopAcceptUILoop()
-    autoAcceptUI = false
-    if acceptUILoop then
-        task.cancel(acceptUILoop)
-        acceptUILoop = nil
+local function StopAcceptLoop()
+    autoAccept = false
+    if acceptLoop then
+        task.cancel(acceptLoop)
+        acceptLoop = nil
     end
 end
 
-StartAcceptUILoop()
+StartAcceptLoop()
 
 -- ============================================
--- 7. TOGGLE 3: AUTO ACCEPT REMOTE (DEFAULT ON)
+-- 7. TOGGLE 3: AUTO ACCEPT TRADE (DEFAULT ON)
 -- ============================================
 
 local function IsLawanAccept()
@@ -356,15 +325,15 @@ local function IsLawanAccept()
     return false
 end
 
-local function StartAcceptRemoteLoop()
-    if acceptRemoteLoop then return end
-    acceptRemoteLoop = task.spawn(function()
-        while autoAcceptRemote do
+local function StartAcceptTradeLoop()
+    if acceptTradeLoop then return end
+    acceptTradeLoop = task.spawn(function()
+        while autoAcceptTrade do
             if IsLawanAccept() then
                 if not alreadyAccepted then
                     pcall(function()
                         TradeAccept:FireServer()
-                        print("⚡ Auto Accept Remote - Lawan udah accept! ✅")
+                        print("✅ Auto Accept Trade - Lawan udah accept!")
                         alreadyAccepted = true
                     end)
                 end
@@ -378,18 +347,18 @@ local function StartAcceptRemoteLoop()
     end)
 end
 
-local function StopAcceptRemoteLoop()
-    autoAcceptRemote = false
-    if acceptRemoteLoop then
-        task.cancel(acceptRemoteLoop)
-        acceptRemoteLoop = nil
+local function StopAcceptTradeLoop()
+    autoAcceptTrade = false
+    if acceptTradeLoop then
+        task.cancel(acceptTradeLoop)
+        acceptTradeLoop = nil
     end
 end
 
-StartAcceptRemoteLoop()
+StartAcceptTradeLoop()
 
 -- ============================================
--- 8. GUI (SAMA KAYA SEBELUMNYA)
+-- 8. GUI
 -- ============================================
 
 local screenGui = Instance.new("ScreenGui")
@@ -432,10 +401,10 @@ local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, -60, 0, 18)
 Title.Position = UDim2.new(0, 12, 0, 3)
 Title.BackgroundTransparency = 1
-Title.Text = "⭐ ZAIXPLOIT"
+Title.Text = "⭐ ZAIXPLOIT | AUTO TRADE"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.Font = Enum.Font.LuckiestGuy
-Title.TextSize = 17
+Title.TextSize = 16
 Title.TextXAlignment = Enum.TextXAlignment.Left
 Title.Parent = Header
 
@@ -443,7 +412,7 @@ local SubTitle = Instance.new("TextLabel")
 SubTitle.Size = UDim2.new(1, -60, 0, 14)
 SubTitle.Position = UDim2.new(0, 12, 0, 23)
 SubTitle.BackgroundTransparency = 1
-SubTitle.Text = "🔄 AUTO TRADE + FOLLOW + SMART ACCEPT"
+SubTitle.Text = "🪙 THROW A COIN"
 SubTitle.TextColor3 = Color3.fromRGB(255, 200, 50)
 SubTitle.Font = Enum.Font.FredokaOne
 SubTitle.TextSize = 11
@@ -518,8 +487,8 @@ end)
 
 CloseBtn.MouseButton1Click:Connect(function()
     StopTradeLoop()
-    StopAcceptUILoop()
-    StopAcceptRemoteLoop()
+    StopAcceptLoop()
+    StopAcceptTradeLoop()
     screenGui:Destroy()
 end)
 
@@ -534,55 +503,55 @@ Content.BackgroundTransparency = 1
 Content.Parent = Main
 
 -- ============================================
--- INPUT TARGET NAME
+-- INPUT USERNAME
 -- ============================================
 
-local targetFrame = Instance.new("Frame")
-targetFrame.Size = UDim2.new(1, 0, 0, 40)
-targetFrame.Position = UDim2.new(0, 0, 0, 2)
-targetFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-targetFrame.BackgroundTransparency = 0.1
-targetFrame.BorderSizePixel = 1
-targetFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
-targetFrame.Parent = Content
+local userFrame = Instance.new("Frame")
+userFrame.Size = UDim2.new(1, 0, 0, 40)
+userFrame.Position = UDim2.new(0, 0, 0, 2)
+userFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+userFrame.BackgroundTransparency = 0.1
+userFrame.BorderSizePixel = 1
+userFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+userFrame.Parent = Content
 
-local targetCorner = Instance.new("UICorner")
-targetCorner.CornerRadius = UDim.new(0, 8)
-targetCorner.Parent = targetFrame
+local userCorner = Instance.new("UICorner")
+userCorner.CornerRadius = UDim.new(0, 8)
+userCorner.Parent = userFrame
 
-local targetLabel = Instance.new("TextLabel")
-targetLabel.Size = UDim2.new(0, 80, 1, 0)
-targetLabel.Position = UDim2.new(0, 10, 0, 0)
-targetLabel.BackgroundTransparency = 1
-targetLabel.Text = "🎯 TARGET:"
-targetLabel.TextColor3 = Color3.fromRGB(200, 200, 210)
-targetLabel.Font = Enum.Font.FredokaOne
-targetLabel.TextSize = 12
-targetLabel.TextXAlignment = Enum.TextXAlignment.Left
-targetLabel.Parent = targetFrame
+local userLabel = Instance.new("TextLabel")
+userLabel.Size = UDim2.new(0, 90, 1, 0)
+userLabel.Position = UDim2.new(0, 10, 0, 0)
+userLabel.BackgroundTransparency = 1
+userLabel.Text = "👤 USERNAME:"
+userLabel.TextColor3 = Color3.fromRGB(200, 200, 210)
+userLabel.Font = Enum.Font.FredokaOne
+userLabel.TextSize = 12
+userLabel.TextXAlignment = Enum.TextXAlignment.Left
+userLabel.Parent = userFrame
 
-local targetBox = Instance.new("TextBox")
-targetBox.Size = UDim2.new(0, 200, 0, 28)
-targetBox.Position = UDim2.new(0, 85, 0.5, -14)
-targetBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
-targetBox.BackgroundTransparency = 0.3
-targetBox.BorderSizePixel = 2
-targetBox.BorderColor3 = Color3.fromRGB(60, 200, 80)
-targetBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-targetBox.Font = Enum.Font.GothamBold
-targetBox.TextSize = 14
-targetBox.Text = "zaihunt4"
-targetBox.TextXAlignment = Enum.TextXAlignment.Left
-targetBox.ZIndex = 15
-targetBox.Parent = targetFrame
+local userBox = Instance.new("TextBox")
+userBox.Size = UDim2.new(0, 190, 0, 28)
+userBox.Position = UDim2.new(0, 95, 0.5, -14)
+userBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
+userBox.BackgroundTransparency = 0.3
+userBox.BorderSizePixel = 2
+userBox.BorderColor3 = Color3.fromRGB(60, 200, 80)
+userBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+userBox.Font = Enum.Font.GothamBold
+userBox.TextSize = 14
+userBox.Text = "username"
+userBox.TextXAlignment = Enum.TextXAlignment.Left
+userBox.ZIndex = 15
+userBox.Parent = userFrame
 
-local targetBoxCorner = Instance.new("UICorner")
-targetBoxCorner.CornerRadius = UDim.new(0, 6)
-targetBoxCorner.Parent = targetBox
+local userBoxCorner = Instance.new("UICorner")
+userBoxCorner.CornerRadius = UDim.new(0, 6)
+userBoxCorner.Parent = userBox
 
-targetBox:GetPropertyChangedSignal("Text"):Connect(function()
-    targetName = targetBox.Text
-    print("🎯 Target changed to: " .. targetName)
+userBox:GetPropertyChangedSignal("Text"):Connect(function()
+    targetName = userBox.Text
+    print("👤 Username changed to: " .. targetName)
     UpdateStatus()
 end)
 
@@ -670,170 +639,170 @@ tradeSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
 tradeSwitchBtnCorner.Parent = tradeSwitchBtn
 
 -- ============================================
--- TOGGLE 2: AUTO ACCEPT UI (DEFAULT ON)
+-- TOGGLE 2: AUTO ACCEPT (DEFAULT ON)
 -- ============================================
 
-local acceptUIFrame = Instance.new("Frame")
-acceptUIFrame.Size = UDim2.new(1, 0, 0, 42)
-acceptUIFrame.Position = UDim2.new(0, 0, 0, 93)
-acceptUIFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-acceptUIFrame.BackgroundTransparency = 0.1
-acceptUIFrame.BorderSizePixel = 1
-acceptUIFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
-acceptUIFrame.ZIndex = 10
-acceptUIFrame.Parent = Content
+local acceptFrame = Instance.new("Frame")
+acceptFrame.Size = UDim2.new(1, 0, 0, 42)
+acceptFrame.Position = UDim2.new(0, 0, 0, 93)
+acceptFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+acceptFrame.BackgroundTransparency = 0.1
+acceptFrame.BorderSizePixel = 1
+acceptFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+acceptFrame.ZIndex = 10
+acceptFrame.Parent = Content
 
-local acceptUICorner = Instance.new("UICorner")
-acceptUICorner.CornerRadius = UDim.new(0, 8)
-acceptUICorner.Parent = acceptUIFrame
+local acceptCorner = Instance.new("UICorner")
+acceptCorner.CornerRadius = UDim.new(0, 8)
+acceptCorner.Parent = acceptFrame
 
-local acceptUILabel = Instance.new("TextLabel")
-acceptUILabel.Size = UDim2.new(0, 170, 1, 0)
-acceptUILabel.Position = UDim2.new(0, 14, 0, 0)
-acceptUILabel.BackgroundTransparency = 1
-acceptUILabel.Text = "✅ AUTO ACCEPT UI (0.1s)"
-acceptUILabel.TextColor3 = Color3.fromRGB(230, 230, 240)
-acceptUILabel.Font = Enum.Font.FredokaOne
-acceptUILabel.TextSize = 12
-acceptUILabel.TextXAlignment = Enum.TextXAlignment.Left
-acceptUILabel.ZIndex = 10
-acceptUILabel.Parent = acceptUIFrame
+local acceptLabel = Instance.new("TextLabel")
+acceptLabel.Size = UDim2.new(0, 160, 1, 0)
+acceptLabel.Position = UDim2.new(0, 14, 0, 0)
+acceptLabel.BackgroundTransparency = 1
+acceptLabel.Text = "✅ AUTO ACCEPT"
+acceptLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+acceptLabel.Font = Enum.Font.FredokaOne
+acceptLabel.TextSize = 12
+acceptLabel.TextXAlignment = Enum.TextXAlignment.Left
+acceptLabel.ZIndex = 10
+acceptLabel.Parent = acceptFrame
 
-local acceptUISwitchBg = Instance.new("Frame")
-acceptUISwitchBg.Size = UDim2.new(0, 60, 0, 28)
-acceptUISwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
-acceptUISwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-acceptUISwitchBg.BackgroundTransparency = 0.1
-acceptUISwitchBg.BorderSizePixel = 2
-acceptUISwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-acceptUISwitchBg.ZIndex = 10
-acceptUISwitchBg.Parent = acceptUIFrame
+local acceptSwitchBg = Instance.new("Frame")
+acceptSwitchBg.Size = UDim2.new(0, 60, 0, 28)
+acceptSwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
+acceptSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+acceptSwitchBg.BackgroundTransparency = 0.1
+acceptSwitchBg.BorderSizePixel = 2
+acceptSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
+acceptSwitchBg.ZIndex = 10
+acceptSwitchBg.Parent = acceptFrame
 
-local acceptUISwitchCorner = Instance.new("UICorner")
-acceptUISwitchCorner.CornerRadius = UDim.new(0, 14)
-acceptUISwitchCorner.Parent = acceptUISwitchBg
+local acceptSwitchCorner = Instance.new("UICorner")
+acceptSwitchCorner.CornerRadius = UDim.new(0, 14)
+acceptSwitchCorner.Parent = acceptSwitchBg
 
-local acceptUIOffLabel = Instance.new("TextLabel")
-acceptUIOffLabel.Size = UDim2.new(0, 22, 1, 0)
-acceptUIOffLabel.Position = UDim2.new(0, 4, 0, 0)
-acceptUIOffLabel.BackgroundTransparency = 1
-acceptUIOffLabel.Text = "OFF"
-acceptUIOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-acceptUIOffLabel.Font = Enum.Font.FredokaOne
-acceptUIOffLabel.TextSize = 9
-acceptUIOffLabel.TextXAlignment = Enum.TextXAlignment.Center
-acceptUIOffLabel.ZIndex = 10
-acceptUIOffLabel.Parent = acceptUISwitchBg
+local acceptOffLabel = Instance.new("TextLabel")
+acceptOffLabel.Size = UDim2.new(0, 22, 1, 0)
+acceptOffLabel.Position = UDim2.new(0, 4, 0, 0)
+acceptOffLabel.BackgroundTransparency = 1
+acceptOffLabel.Text = "OFF"
+acceptOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+acceptOffLabel.Font = Enum.Font.FredokaOne
+acceptOffLabel.TextSize = 9
+acceptOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+acceptOffLabel.ZIndex = 10
+acceptOffLabel.Parent = acceptSwitchBg
 
-local acceptUIOnLabel = Instance.new("TextLabel")
-acceptUIOnLabel.Size = UDim2.new(0, 22, 1, 0)
-acceptUIOnLabel.Position = UDim2.new(1, -26, 0, 0)
-acceptUIOnLabel.BackgroundTransparency = 1
-acceptUIOnLabel.Text = "ON"
-acceptUIOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-acceptUIOnLabel.Font = Enum.Font.FredokaOne
-acceptUIOnLabel.TextSize = 9
-acceptUIOnLabel.TextXAlignment = Enum.TextXAlignment.Center
-acceptUIOnLabel.ZIndex = 10
-acceptUIOnLabel.Parent = acceptUISwitchBg
+local acceptOnLabel = Instance.new("TextLabel")
+acceptOnLabel.Size = UDim2.new(0, 22, 1, 0)
+acceptOnLabel.Position = UDim2.new(1, -26, 0, 0)
+acceptOnLabel.BackgroundTransparency = 1
+acceptOnLabel.Text = "ON"
+acceptOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+acceptOnLabel.Font = Enum.Font.FredokaOne
+acceptOnLabel.TextSize = 9
+acceptOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+acceptOnLabel.ZIndex = 10
+acceptOnLabel.Parent = acceptSwitchBg
 
-local acceptUISwitchBtn = Instance.new("TextButton")
-acceptUISwitchBtn.Size = UDim2.new(0, 22, 0, 22)
-acceptUISwitchBtn.Position = UDim2.new(1, -26, 0.5, -11)
-acceptUISwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-acceptUISwitchBtn.BackgroundTransparency = 0.05
-acceptUISwitchBtn.BorderSizePixel = 2
-acceptUISwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
-acceptUISwitchBtn.Text = ""
-acceptUISwitchBtn.ZIndex = 30
-acceptUISwitchBtn.Parent = acceptUISwitchBg
+local acceptSwitchBtn = Instance.new("TextButton")
+acceptSwitchBtn.Size = UDim2.new(0, 22, 0, 22)
+acceptSwitchBtn.Position = UDim2.new(1, -26, 0.5, -11)
+acceptSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+acceptSwitchBtn.BackgroundTransparency = 0.05
+acceptSwitchBtn.BorderSizePixel = 2
+acceptSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+acceptSwitchBtn.Text = ""
+acceptSwitchBtn.ZIndex = 30
+acceptSwitchBtn.Parent = acceptSwitchBg
 
-local acceptUISwitchBtnCorner = Instance.new("UICorner")
-acceptUISwitchBtnCorner.CornerRadius = UDim.new(0, 11)
-acceptUISwitchBtnCorner.Parent = acceptUISwitchBtn
+local acceptSwitchBtnCorner = Instance.new("UICorner")
+acceptSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
+acceptSwitchBtnCorner.Parent = acceptSwitchBtn
 
 -- ============================================
--- TOGGLE 3: AUTO ACCEPT REMOTE (DEFAULT ON)
+-- TOGGLE 3: AUTO ACCEPT TRADE (DEFAULT ON)
 -- ============================================
 
-local acceptRemoteFrame = Instance.new("Frame")
-acceptRemoteFrame.Size = UDim2.new(1, 0, 0, 42)
-acceptRemoteFrame.Position = UDim2.new(0, 0, 0, 139)
-acceptRemoteFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-acceptRemoteFrame.BackgroundTransparency = 0.1
-acceptRemoteFrame.BorderSizePixel = 1
-acceptRemoteFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
-acceptRemoteFrame.ZIndex = 10
-acceptRemoteFrame.Parent = Content
+local acceptTradeFrame = Instance.new("Frame")
+acceptTradeFrame.Size = UDim2.new(1, 0, 0, 42)
+acceptTradeFrame.Position = UDim2.new(0, 0, 0, 139)
+acceptTradeFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+acceptTradeFrame.BackgroundTransparency = 0.1
+acceptTradeFrame.BorderSizePixel = 1
+acceptTradeFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+acceptTradeFrame.ZIndex = 10
+acceptTradeFrame.Parent = Content
 
-local acceptRemoteCorner = Instance.new("UICorner")
-acceptRemoteCorner.CornerRadius = UDim.new(0, 8)
-acceptRemoteCorner.Parent = acceptRemoteFrame
+local acceptTradeCorner = Instance.new("UICorner")
+acceptTradeCorner.CornerRadius = UDim.new(0, 8)
+acceptTradeCorner.Parent = acceptTradeFrame
 
-local acceptRemoteLabel = Instance.new("TextLabel")
-acceptRemoteLabel.Size = UDim2.new(0, 210, 1, 0)
-acceptRemoteLabel.Position = UDim2.new(0, 14, 0, 0)
-acceptRemoteLabel.BackgroundTransparency = 1
-acceptRemoteLabel.Text = "🟢 AUTO ACCEPT (NUNGGU LAWAN)"
-acceptRemoteLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
-acceptRemoteLabel.Font = Enum.Font.FredokaOne
-acceptRemoteLabel.TextSize = 12
-acceptRemoteLabel.TextXAlignment = Enum.TextXAlignment.Left
-acceptRemoteLabel.ZIndex = 10
-acceptRemoteLabel.Parent = acceptRemoteFrame
+local acceptTradeLabel = Instance.new("TextLabel")
+acceptTradeLabel.Size = UDim2.new(0, 190, 1, 0)
+acceptTradeLabel.Position = UDim2.new(0, 14, 0, 0)
+acceptTradeLabel.BackgroundTransparency = 1
+acceptTradeLabel.Text = "✅ AUTO ACCEPT TRADE"
+acceptTradeLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+acceptTradeLabel.Font = Enum.Font.FredokaOne
+acceptTradeLabel.TextSize = 12
+acceptTradeLabel.TextXAlignment = Enum.TextXAlignment.Left
+acceptTradeLabel.ZIndex = 10
+acceptTradeLabel.Parent = acceptTradeFrame
 
-local acceptRemoteSwitchBg = Instance.new("Frame")
-acceptRemoteSwitchBg.Size = UDim2.new(0, 60, 0, 28)
-acceptRemoteSwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
-acceptRemoteSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-acceptRemoteSwitchBg.BackgroundTransparency = 0.1
-acceptRemoteSwitchBg.BorderSizePixel = 2
-acceptRemoteSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-acceptRemoteSwitchBg.ZIndex = 10
-acceptRemoteSwitchBg.Parent = acceptRemoteFrame
+local acceptTradeSwitchBg = Instance.new("Frame")
+acceptTradeSwitchBg.Size = UDim2.new(0, 60, 0, 28)
+acceptTradeSwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
+acceptTradeSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+acceptTradeSwitchBg.BackgroundTransparency = 0.1
+acceptTradeSwitchBg.BorderSizePixel = 2
+acceptTradeSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
+acceptTradeSwitchBg.ZIndex = 10
+acceptTradeSwitchBg.Parent = acceptTradeFrame
 
-local acceptRemoteSwitchCorner = Instance.new("UICorner")
-acceptRemoteSwitchCorner.CornerRadius = UDim.new(0, 14)
-acceptRemoteSwitchCorner.Parent = acceptRemoteSwitchBg
+local acceptTradeSwitchCorner = Instance.new("UICorner")
+acceptTradeSwitchCorner.CornerRadius = UDim.new(0, 14)
+acceptTradeSwitchCorner.Parent = acceptTradeSwitchBg
 
-local acceptRemoteOffLabel = Instance.new("TextLabel")
-acceptRemoteOffLabel.Size = UDim2.new(0, 22, 1, 0)
-acceptRemoteOffLabel.Position = UDim2.new(0, 4, 0, 0)
-acceptRemoteOffLabel.BackgroundTransparency = 1
-acceptRemoteOffLabel.Text = "OFF"
-acceptRemoteOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-acceptRemoteOffLabel.Font = Enum.Font.FredokaOne
-acceptRemoteOffLabel.TextSize = 9
-acceptRemoteOffLabel.TextXAlignment = Enum.TextXAlignment.Center
-acceptRemoteOffLabel.ZIndex = 10
-acceptRemoteOffLabel.Parent = acceptRemoteSwitchBg
+local acceptTradeOffLabel = Instance.new("TextLabel")
+acceptTradeOffLabel.Size = UDim2.new(0, 22, 1, 0)
+acceptTradeOffLabel.Position = UDim2.new(0, 4, 0, 0)
+acceptTradeOffLabel.BackgroundTransparency = 1
+acceptTradeOffLabel.Text = "OFF"
+acceptTradeOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+acceptTradeOffLabel.Font = Enum.Font.FredokaOne
+acceptTradeOffLabel.TextSize = 9
+acceptTradeOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+acceptTradeOffLabel.ZIndex = 10
+acceptTradeOffLabel.Parent = acceptTradeSwitchBg
 
-local acceptRemoteOnLabel = Instance.new("TextLabel")
-acceptRemoteOnLabel.Size = UDim2.new(0, 22, 1, 0)
-acceptRemoteOnLabel.Position = UDim2.new(1, -26, 0, 0)
-acceptRemoteOnLabel.BackgroundTransparency = 1
-acceptRemoteOnLabel.Text = "ON"
-acceptRemoteOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-acceptRemoteOnLabel.Font = Enum.Font.FredokaOne
-acceptRemoteOnLabel.TextSize = 9
-acceptRemoteOnLabel.TextXAlignment = Enum.TextXAlignment.Center
-acceptRemoteOnLabel.ZIndex = 10
-acceptRemoteOnLabel.Parent = acceptRemoteSwitchBg
+local acceptTradeOnLabel = Instance.new("TextLabel")
+acceptTradeOnLabel.Size = UDim2.new(0, 22, 1, 0)
+acceptTradeOnLabel.Position = UDim2.new(1, -26, 0, 0)
+acceptTradeOnLabel.BackgroundTransparency = 1
+acceptTradeOnLabel.Text = "ON"
+acceptTradeOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+acceptTradeOnLabel.Font = Enum.Font.FredokaOne
+acceptTradeOnLabel.TextSize = 9
+acceptTradeOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+acceptTradeOnLabel.ZIndex = 10
+acceptTradeOnLabel.Parent = acceptTradeSwitchBg
 
-local acceptRemoteSwitchBtn = Instance.new("TextButton")
-acceptRemoteSwitchBtn.Size = UDim2.new(0, 22, 0, 22)
-acceptRemoteSwitchBtn.Position = UDim2.new(1, -26, 0.5, -11)
-acceptRemoteSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-acceptRemoteSwitchBtn.BackgroundTransparency = 0.05
-acceptRemoteSwitchBtn.BorderSizePixel = 2
-acceptRemoteSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
-acceptRemoteSwitchBtn.Text = ""
-acceptRemoteSwitchBtn.ZIndex = 30
-acceptRemoteSwitchBtn.Parent = acceptRemoteSwitchBg
+local acceptTradeSwitchBtn = Instance.new("TextButton")
+acceptTradeSwitchBtn.Size = UDim2.new(0, 22, 0, 22)
+acceptTradeSwitchBtn.Position = UDim2.new(1, -26, 0.5, -11)
+acceptTradeSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+acceptTradeSwitchBtn.BackgroundTransparency = 0.05
+acceptTradeSwitchBtn.BorderSizePixel = 2
+acceptTradeSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+acceptTradeSwitchBtn.Text = ""
+acceptTradeSwitchBtn.ZIndex = 30
+acceptTradeSwitchBtn.Parent = acceptTradeSwitchBg
 
-local acceptRemoteSwitchBtnCorner = Instance.new("UICorner")
-acceptRemoteSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
-acceptRemoteSwitchBtnCorner.Parent = acceptRemoteSwitchBtn
+local acceptTradeSwitchBtnCorner = Instance.new("UICorner")
+acceptTradeSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
+acceptTradeSwitchBtnCorner.Parent = acceptTradeSwitchBtn
 
 -- ============================================
 -- STATUS LABEL
@@ -843,7 +812,7 @@ local statusLabel = Instance.new("TextLabel")
 statusLabel.Size = UDim2.new(1, 0, 0, 18)
 statusLabel.Position = UDim2.new(0, 0, 1, -2)
 statusLabel.BackgroundTransparency = 1
-statusLabel.Text = "🟡 2 ON | Target: zaihunt4"
+statusLabel.Text = "🟡 2 ON | USERNAME: username"
 statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
 statusLabel.Font = Enum.Font.FredokaOne
 statusLabel.TextSize = 10
@@ -879,10 +848,15 @@ end
 local function UpdateStatus()
     local count = 0
     if autoTrade then count = count + 1 end
-    if autoAcceptUI then count = count + 1 end
-    if autoAcceptRemote then count = count + 1 end
+    if autoAccept then count = count + 1 end
+    if autoAcceptTrade then count = count + 1 end
     
-    local statusText = "🎯 " .. targetName .. " | "
+    local displayName = targetName
+    if displayName == "" or displayName == "username" then
+        displayName = "username"
+    end
+    
+    local statusText = "USERNAME: " .. displayName .. " | "
     if count == 3 then
         statusLabel.Text = statusText .. "🟢 SEMUA ON"
         statusLabel.TextColor3 = Color3.fromRGB(60, 200, 80)
@@ -910,7 +884,7 @@ local function ToggleTrade()
     if autoTrade then
         StartTradeLoop()
         StartFollowLoop()
-        print("🔄 AUTO TRADE ON → Target: " .. targetName)
+        print("🔄 AUTO TRADE ON → USERNAME: " .. targetName)
     else
         StopTradeLoop()
         print("🔴 AUTO TRADE OFF")
@@ -920,53 +894,47 @@ end
 tradeSwitchBtn.MouseButton1Click:Connect(ToggleTrade)
 tradeFrame.MouseButton1Click:Connect(ToggleTrade)
 
--- Toggle 2: AUTO ACCEPT UI (DEFAULT ON)
-local function ToggleAcceptUI()
-    autoAcceptUI = not autoAcceptUI
-    SetToggleState(acceptUISwitchBtn, autoAcceptUI, acceptUISwitchBg, acceptUIOffLabel, acceptUIOnLabel)
+-- Toggle 2: AUTO ACCEPT (DEFAULT ON)
+local function ToggleAccept()
+    autoAccept = not autoAccept
+    SetToggleState(acceptSwitchBtn, autoAccept, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
     UpdateStatus()
-    if autoAcceptUI then
-        StartAcceptUILoop()
-        print("✅ AUTO ACCEPT UI ON")
+    if autoAccept then
+        StartAcceptLoop()
+        print("✅ AUTO ACCEPT ON")
     else
-        StopAcceptUILoop()
-        print("🔴 AUTO ACCEPT UI OFF")
+        StopAcceptLoop()
+        print("🔴 AUTO ACCEPT OFF")
     end
 end
 
-acceptUISwitchBtn.MouseButton1Click:Connect(ToggleAcceptUI)
-acceptUIFrame.MouseButton1Click:Connect(ToggleAcceptUI)
+acceptSwitchBtn.MouseButton1Click:Connect(ToggleAccept)
+acceptFrame.MouseButton1Click:Connect(ToggleAccept)
 
--- Toggle 3: AUTO ACCEPT REMOTE (DEFAULT ON)
-local function ToggleAcceptRemote()
-    autoAcceptRemote = not autoAcceptRemote
-    SetToggleState(acceptRemoteSwitchBtn, autoAcceptRemote, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
+-- Toggle 3: AUTO ACCEPT TRADE (DEFAULT ON)
+local function ToggleAcceptTrade()
+    autoAcceptTrade = not autoAcceptTrade
+    SetToggleState(acceptTradeSwitchBtn, autoAcceptTrade, acceptTradeSwitchBg, acceptTradeOffLabel, acceptTradeOnLabel)
     UpdateStatus()
-    if autoAcceptRemote then
-        StartAcceptRemoteLoop()
-        print("🟢 AUTO ACCEPT REMOTE ON (NUNGGU LAWAN)")
+    if autoAcceptTrade then
+        StartAcceptTradeLoop()
+        print("✅ AUTO ACCEPT TRADE ON")
     else
-        StopAcceptRemoteLoop()
-        print("🔴 AUTO ACCEPT REMOTE OFF")
+        StopAcceptTradeLoop()
+        print("🔴 AUTO ACCEPT TRADE OFF")
     end
 end
 
-acceptRemoteSwitchBtn.MouseButton1Click:Connect(ToggleAcceptRemote)
-acceptRemoteFrame.MouseButton1Click:Connect(ToggleAcceptRemote)
+acceptTradeSwitchBtn.MouseButton1Click:Connect(ToggleAcceptTrade)
+acceptTradeFrame.MouseButton1Click:Connect(ToggleAcceptTrade)
 
 -- ============================================
 -- SET INITIAL STATE
 -- ============================================
 
--- AUTO TRADE: OFF
 SetToggleState(tradeSwitchBtn, false, tradeSwitchBg, tradeOffLabel, tradeOnLabel)
-
--- AUTO ACCEPT UI: ON
-SetToggleState(acceptUISwitchBtn, true, acceptUISwitchBg, acceptUIOffLabel, acceptUIOnLabel)
-
--- AUTO ACCEPT REMOTE: ON
-SetToggleState(acceptRemoteSwitchBtn, true, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
-
+SetToggleState(acceptSwitchBtn, true, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
+SetToggleState(acceptTradeSwitchBtn, true, acceptTradeSwitchBg, acceptTradeOffLabel, acceptTradeOnLabel)
 UpdateStatus()
 
 -- ============================================
@@ -1016,9 +984,9 @@ UserInputService.InputChanged:Connect(onInputChanged)
 UserInputService.InputEnded:Connect(onInputEnded)
 
 print("═══════════════════════════════════════════")
-print("✅ ZAIXPLOIT | AUTO TRADE + FOLLOW")
-print("📌 TARGET: " .. targetName .. " (BISA DIGANTI)")
+print("✅ ZAIXPLOIT | AUTO TRADE")
+print("📌 USERNAME: " .. targetName)
 print("📌 AUTO TRADE: OFF (Nyalakan manual)")
-print("📌 AUTO ACCEPT UI: ON (0.1s)")
-print("📌 AUTO ACCEPT REMOTE: ON (NUNGGU LAWAN) ⏳")
+print("📌 AUTO ACCEPT: ON")
+print("📌 AUTO ACCEPT TRADE: ON")
 print("═══════════════════════════════════════════")
