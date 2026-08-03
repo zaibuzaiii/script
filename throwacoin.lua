@@ -410,12 +410,12 @@ local function StartAddRandomItemLoop()
     if addRandomItemLoop then return end
     addRandomItemLoop = task.spawn(function()
         while autoAddRandomItem do
-            local randomIndex = math.random(1, 100000)
+            local randomIndex = math.random(1, 10000)
             pcall(function()
                 TradeAddItem:FireServer(randomIndex)
                 print("📦 Auto Add Random Item: " .. randomIndex)
             end)
-            task.wait(0.001)
+            task.wait(0)
         end
     end)
 end
