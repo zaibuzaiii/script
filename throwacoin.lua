@@ -71,10 +71,6 @@ local acceptRemoteLoop = nil
 local autoAddRandomItem = false
 local addRandomItemLoop = nil
 
-local autoRAP = false
-local rapLoop = nil
-local rapValue = "9999"
-
 local antiAFK = true
 local antiAFKLoop = nil
 local currentTab = "MAIN"
@@ -432,47 +428,14 @@ local function StopAddRandomItemLoop()
     end
 end
 
-local function StartRAPLoop()
-    if rapLoop then return end
-    rapLoop = task.spawn(function()
-        while autoRAP do
-            local myModel = workspace:FindFirstChild(player.Name)
-            if myModel and myModel:FindFirstChild("Head") then
-                local head = myModel.Head
-                local title = head:FindFirstChild("title")
-                if title then
-                    local rapValueLabel = title:FindFirstChild("RAP")
-                    if rapValueLabel and rapValueLabel:IsA("TextLabel") then
-                        pcall(function()
-                            if rapValueLabel.Text ~= rapValue then
-                                rapValueLabel.Text = rapValue
-                                print("💰 RAP kept at: " .. rapValue)
-                            end
-                        end)
-                    end
-                end
-            end
-            task.wait(1)
-        end
-    end)
-end
-
-local function StopRAPLoop()
-    autoRAP = false
-    if rapLoop then
-        task.cancel(rapLoop)
-        rapLoop = nil
-    end
-end
-
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ZAIXPLOIT"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = player:WaitForChild("PlayerGui")
 
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 380, 0, 380)
-Main.Position = UDim2.new(0.5, -190, 0.5, -190)
+Main.Size = UDim2.new(0, 380, 0, 330)
+Main.Position = UDim2.new(0.5, -190, 0.5, -165)
 Main.BackgroundColor3 = Color3.fromRGB(10, 8, 20)
 Main.BackgroundTransparency = 0.05
 Main.BorderSizePixel = 3
@@ -596,7 +559,6 @@ CloseBtn.MouseButton1Click:Connect(function()
     StopAcceptLoop()
     StopAcceptRemoteLoop()
     StopAddRandomItemLoop()
-    StopRAPLoop()
     StopAntiAFK()
     screenGui:Destroy()
 end)
@@ -680,7 +642,7 @@ TabMiscCorner.CornerRadius = UDim.new(0, 6)
 TabMiscCorner.Parent = TabMisc
 
 local Content = Instance.new("Frame")
-Content.Size = UDim2.new(1, -14, 0, 280)
+Content.Size = UDim2.new(1, -14, 0, 225)
 Content.Position = UDim2.new(0, 7, 0, 83)
 Content.BackgroundTransparency = 1
 Content.Parent = Main
@@ -1360,7 +1322,7 @@ MiscContent.Parent = Content
 
 local userFrame = Instance.new("Frame")
 userFrame.Size = UDim2.new(1, 0, 0, 55)
-userFrame.Position = UDim2.new(0, 0, 0, 5)
+userFrame.Position = UDim2.new(0, 0, 0, 10)
 userFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
 userFrame.BackgroundTransparency = 0.1
 userFrame.BorderSizePixel = 1
@@ -1373,25 +1335,25 @@ userCorner.Parent = userFrame
 
 local userLabel = Instance.new("TextLabel")
 userLabel.Size = UDim2.new(1, -10, 0, 16)
-userLabel.Position = UDim2.new(0, 10, 0, 3)
+userLabel.Position = UDim2.new(0, 10, 0, 4)
 userLabel.BackgroundTransparency = 1
 userLabel.Text = "👤 CHANGE USERNAME"
 userLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
 userLabel.Font = Enum.Font.FredokaOne
-userLabel.TextSize = 11
+userLabel.TextSize = 12
 userLabel.TextXAlignment = Enum.TextXAlignment.Left
 userLabel.Parent = userFrame
 
 local userBox = Instance.new("TextBox")
-userBox.Size = UDim2.new(1, -90, 0, 24)
-userBox.Position = UDim2.new(0, 10, 0, 22)
+userBox.Size = UDim2.new(1, -90, 0, 26)
+userBox.Position = UDim2.new(0, 10, 0, 23)
 userBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
 userBox.BackgroundTransparency = 0.3
 userBox.BorderSizePixel = 2
 userBox.BorderColor3 = Color3.fromRGB(255, 200, 50)
 userBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 userBox.Font = Enum.Font.GothamBold
-userBox.TextSize = 12
+userBox.TextSize = 13
 userBox.Text = player.Name
 userBox.PlaceholderText = "Username..."
 userBox.TextXAlignment = Enum.TextXAlignment.Left
@@ -1403,8 +1365,8 @@ userBoxCorner.CornerRadius = UDim.new(0, 6)
 userBoxCorner.Parent = userBox
 
 local userApplyBtn = Instance.new("TextButton")
-userApplyBtn.Size = UDim2.new(0, 70, 0, 24)
-userApplyBtn.Position = UDim2.new(1, -80, 0, 22)
+userApplyBtn.Size = UDim2.new(0, 70, 0, 26)
+userApplyBtn.Position = UDim2.new(1, -80, 0, 23)
 userApplyBtn.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
 userApplyBtn.BackgroundTransparency = 0.2
 userApplyBtn.BorderSizePixel = 2
@@ -1412,7 +1374,7 @@ userApplyBtn.BorderColor3 = Color3.fromRGB(60, 200, 80)
 userApplyBtn.Text = "APPLY"
 userApplyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 userApplyBtn.Font = Enum.Font.GothamBold
-userApplyBtn.TextSize = 10
+userApplyBtn.TextSize = 11
 userApplyBtn.ZIndex = 20
 userApplyBtn.Parent = userFrame
 
@@ -1450,193 +1412,9 @@ userApplyBtn.MouseButton1Click:Connect(function()
     end
 end)
 
-local rapFrame = Instance.new("Frame")
-rapFrame.Size = UDim2.new(1, 0, 0, 55)
-rapFrame.Position = UDim2.new(0, 0, 0, 65)
-rapFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-rapFrame.BackgroundTransparency = 0.1
-rapFrame.BorderSizePixel = 1
-rapFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
-rapFrame.Parent = MiscContent
-
-local rapCorner = Instance.new("UICorner")
-rapCorner.CornerRadius = UDim.new(0, 10)
-rapCorner.Parent = rapFrame
-
-local rapLabel = Instance.new("TextLabel")
-rapLabel.Size = UDim2.new(1, -10, 0, 16)
-rapLabel.Position = UDim2.new(0, 10, 0, 3)
-rapLabel.BackgroundTransparency = 1
-rapLabel.Text = "💰 RAP VALUE"
-rapLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
-rapLabel.Font = Enum.Font.FredokaOne
-rapLabel.TextSize = 11
-rapLabel.TextXAlignment = Enum.TextXAlignment.Left
-rapLabel.Parent = rapFrame
-
-local rapBox = Instance.new("TextBox")
-rapBox.Size = UDim2.new(1, -90, 0, 24)
-rapBox.Position = UDim2.new(0, 10, 0, 22)
-rapBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
-rapBox.BackgroundTransparency = 0.3
-rapBox.BorderSizePixel = 2
-rapBox.BorderColor3 = Color3.fromRGB(60, 200, 80)
-rapBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-rapBox.Font = Enum.Font.GothamBold
-rapBox.TextSize = 12
-rapBox.Text = "9999"
-rapBox.PlaceholderText = "RAP Value..."
-rapBox.TextXAlignment = Enum.TextXAlignment.Left
-rapBox.ZIndex = 15
-rapBox.Parent = rapFrame
-
-local rapBoxCorner = Instance.new("UICorner")
-rapBoxCorner.CornerRadius = UDim.new(0, 6)
-rapBoxCorner.Parent = rapBox
-
-rapBox:GetPropertyChangedSignal("Text"):Connect(function()
-    if rapBox.Text ~= "" then
-        rapValue = rapBox.Text
-        print("💰 RAP value set to: " .. rapValue)
-    end
-end)
-
-local rapApplyBtn = Instance.new("TextButton")
-rapApplyBtn.Size = UDim2.new(0, 70, 0, 24)
-rapApplyBtn.Position = UDim2.new(1, -80, 0, 22)
-rapApplyBtn.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
-rapApplyBtn.BackgroundTransparency = 0.2
-rapApplyBtn.BorderSizePixel = 2
-rapApplyBtn.BorderColor3 = Color3.fromRGB(60, 200, 80)
-rapApplyBtn.Text = "APPLY"
-rapApplyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-rapApplyBtn.Font = Enum.Font.GothamBold
-rapApplyBtn.TextSize = 10
-rapApplyBtn.ZIndex = 20
-rapApplyBtn.Parent = rapFrame
-
-local rapApplyCorner = Instance.new("UICorner")
-rapApplyCorner.CornerRadius = UDim.new(0, 6)
-rapApplyCorner.Parent = rapApplyBtn
-
-rapApplyBtn.MouseEnter:Connect(function()
-    rapApplyBtn.BackgroundTransparency = 0.05
-end)
-rapApplyBtn.MouseLeave:Connect(function()
-    rapApplyBtn.BackgroundTransparency = 0.2
-end)
-
-rapApplyBtn.MouseButton1Click:Connect(function()
-    local newRap = rapBox.Text
-    if newRap == "" then
-        print("❌ RAP cannot be empty!")
-        return
-    end
-    
-    local myModel = workspace:FindFirstChild(player.Name)
-    if myModel and myModel:FindFirstChild("Head") then
-        local head = myModel.Head
-        local title = head:FindFirstChild("title")
-        if title then
-            local rapValueLabel = title:FindFirstChild("RAP")
-            if rapValueLabel and rapValueLabel:IsA("TextLabel") then
-                pcall(function()
-                    rapValueLabel.Text = newRap
-                    print("💰 RAP changed to: " .. newRap)
-                end)
-            else
-                local newRapLabel = Instance.new("TextLabel")
-                newRapLabel.Name = "RAP"
-                newRapLabel.Size = UDim2.new(0, 100, 0, 20)
-                newRapLabel.Position = UDim2.new(0, 0, 0, 0)
-                newRapLabel.Text = newRap
-                newRapLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-                newRapLabel.Font = Enum.Font.GothamBold
-                newRapLabel.TextSize = 14
-                newRapLabel.Parent = title
-                print("💰 RAP label created with value: " .. newRap)
-            end
-        end
-    end
-end)
-
-local rapLoopFrame = Instance.new("Frame")
-rapLoopFrame.Size = UDim2.new(1, 0, 0, 40)
-rapLoopFrame.Position = UDim2.new(0, 0, 0, 125)
-rapLoopFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-rapLoopFrame.BackgroundTransparency = 0.1
-rapLoopFrame.BorderSizePixel = 1
-rapLoopFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
-rapLoopFrame.Parent = MiscContent
-
-local rapLoopCorner = Instance.new("UICorner")
-rapLoopCorner.CornerRadius = UDim.new(0, 8)
-rapLoopCorner.Parent = rapLoopFrame
-
-local rapLoopLabel = Instance.new("TextLabel")
-rapLoopLabel.Size = UDim2.new(0, 160, 1, 0)
-rapLoopLabel.Position = UDim2.new(0, 14, 0, 0)
-rapLoopLabel.BackgroundTransparency = 1
-rapLoopLabel.Text = "🔄 LOOP RAP"
-rapLoopLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
-rapLoopLabel.Font = Enum.Font.FredokaOne
-rapLoopLabel.TextSize = 13
-rapLoopLabel.TextXAlignment = Enum.TextXAlignment.Left
-rapLoopLabel.Parent = rapLoopFrame
-
-local rapLoopSwitchBg = Instance.new("Frame")
-rapLoopSwitchBg.Size = UDim2.new(0, 60, 0, 28)
-rapLoopSwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
-rapLoopSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
-rapLoopSwitchBg.BackgroundTransparency = 0.1
-rapLoopSwitchBg.BorderSizePixel = 2
-rapLoopSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
-rapLoopSwitchBg.Parent = rapLoopFrame
-
-local rapLoopSwitchCorner = Instance.new("UICorner")
-rapLoopSwitchCorner.CornerRadius = UDim.new(0, 14)
-rapLoopSwitchCorner.Parent = rapLoopSwitchBg
-
-local rapLoopOffLabel = Instance.new("TextLabel")
-rapLoopOffLabel.Size = UDim2.new(0, 22, 1, 0)
-rapLoopOffLabel.Position = UDim2.new(0, 4, 0, 0)
-rapLoopOffLabel.BackgroundTransparency = 1
-rapLoopOffLabel.Text = "OFF"
-rapLoopOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-rapLoopOffLabel.Font = Enum.Font.FredokaOne
-rapLoopOffLabel.TextSize = 9
-rapLoopOffLabel.TextXAlignment = Enum.TextXAlignment.Center
-rapLoopOffLabel.Parent = rapLoopSwitchBg
-
-local rapLoopOnLabel = Instance.new("TextLabel")
-rapLoopOnLabel.Size = UDim2.new(0, 22, 1, 0)
-rapLoopOnLabel.Position = UDim2.new(1, -27, 0, 0)
-rapLoopOnLabel.BackgroundTransparency = 1
-rapLoopOnLabel.Text = "ON"
-rapLoopOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-rapLoopOnLabel.Font = Enum.Font.FredokaOne
-rapLoopOnLabel.TextSize = 9
-rapLoopOnLabel.TextXAlignment = Enum.TextXAlignment.Center
-rapLoopOnLabel.Parent = rapLoopSwitchBg
-
-local rapLoopSwitchBtn = Instance.new("TextButton")
-rapLoopSwitchBtn.Size = UDim2.new(0, 22, 0, 22)
-rapLoopSwitchBtn.Position = UDim2.new(0, 4, 0.5, -11)
-rapLoopSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-rapLoopSwitchBtn.BackgroundTransparency = 0.05
-rapLoopSwitchBtn.BorderSizePixel = 2
-rapLoopSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
-rapLoopSwitchBtn.Text = ""
-rapLoopSwitchBtn.ZIndex = 10
-rapLoopSwitchBtn.Parent = rapLoopSwitchBg
-
-local rapLoopSwitchBtnCorner = Instance.new("UICorner")
-rapLoopSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
-rapLoopSwitchBtnCorner.Parent = rapLoopSwitchBtn
-
 local antiAFKFrame = Instance.new("Frame")
-antiAFKFrame.Size = UDim2.new(1, 0, 0, 40)
-antiAFKFrame.Position = UDim2.new(0, 0, 0, 170)
+antiAFKFrame.Size = UDim2.new(1, 0, 0, 45)
+antiAFKFrame.Position = UDim2.new(0, 0, 0, 75)
 antiAFKFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
 antiAFKFrame.BackgroundTransparency = 0.1
 antiAFKFrame.BorderSizePixel = 1
@@ -1644,7 +1422,7 @@ antiAFKFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
 antiAFKFrame.Parent = MiscContent
 
 local antiAFKCorner = Instance.new("UICorner")
-antiAFKCorner.CornerRadius = UDim.new(0, 8)
+antiAFKCorner.CornerRadius = UDim.new(0, 10)
 antiAFKCorner.Parent = antiAFKFrame
 
 local antiAFKLabel = Instance.new("TextLabel")
@@ -1654,13 +1432,13 @@ antiAFKLabel.BackgroundTransparency = 1
 antiAFKLabel.Text = "🛡️ ANTI AFK"
 antiAFKLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 antiAFKLabel.Font = Enum.Font.FredokaOne
-antiAFKLabel.TextSize = 13
+antiAFKLabel.TextSize = 14
 antiAFKLabel.TextXAlignment = Enum.TextXAlignment.Left
 antiAFKLabel.Parent = antiAFKFrame
 
 local antiAFKSwitchBg = Instance.new("Frame")
-antiAFKSwitchBg.Size = UDim2.new(0, 60, 0, 28)
-antiAFKSwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
+antiAFKSwitchBg.Size = UDim2.new(0, 60, 0, 30)
+antiAFKSwitchBg.Position = UDim2.new(1, -72, 0.5, -15)
 antiAFKSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
 antiAFKSwitchBg.BackgroundTransparency = 0.1
 antiAFKSwitchBg.BorderSizePixel = 2
@@ -1668,17 +1446,17 @@ antiAFKSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
 antiAFKSwitchBg.Parent = antiAFKFrame
 
 local antiAFKSwitchCorner = Instance.new("UICorner")
-antiAFKSwitchCorner.CornerRadius = UDim.new(0, 14)
+antiAFKSwitchCorner.CornerRadius = UDim.new(0, 15)
 antiAFKSwitchCorner.Parent = antiAFKSwitchBg
 
 local antiAFKOffLabel = Instance.new("TextLabel")
 antiAFKOffLabel.Size = UDim2.new(0, 22, 1, 0)
-antiAFKOffLabel.Position = UDim2.new(0, 4, 0, 0)
+antiAFKOffLabel.Position = UDim2.new(0, 5, 0, 0)
 antiAFKOffLabel.BackgroundTransparency = 1
 antiAFKOffLabel.Text = "OFF"
 antiAFKOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
 antiAFKOffLabel.Font = Enum.Font.FredokaOne
-antiAFKOffLabel.TextSize = 9
+antiAFKOffLabel.TextSize = 10
 antiAFKOffLabel.TextXAlignment = Enum.TextXAlignment.Center
 antiAFKOffLabel.Parent = antiAFKSwitchBg
 
@@ -1689,13 +1467,13 @@ antiAFKOnLabel.BackgroundTransparency = 1
 antiAFKOnLabel.Text = "ON"
 antiAFKOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 antiAFKOnLabel.Font = Enum.Font.FredokaOne
-antiAFKOnLabel.TextSize = 9
+antiAFKOnLabel.TextSize = 10
 antiAFKOnLabel.TextXAlignment = Enum.TextXAlignment.Center
 antiAFKOnLabel.Parent = antiAFKSwitchBg
 
 local antiAFKSwitchBtn = Instance.new("TextButton")
-antiAFKSwitchBtn.Size = UDim2.new(0, 22, 0, 22)
-antiAFKSwitchBtn.Position = UDim2.new(1, -27, 0.5, -11)
+antiAFKSwitchBtn.Size = UDim2.new(0, 24, 0, 24)
+antiAFKSwitchBtn.Position = UDim2.new(1, -27, 0.5, -12)
 antiAFKSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 antiAFKSwitchBtn.BackgroundTransparency = 0.05
 antiAFKSwitchBtn.BorderSizePixel = 2
@@ -1705,7 +1483,7 @@ antiAFKSwitchBtn.ZIndex = 10
 antiAFKSwitchBtn.Parent = antiAFKSwitchBg
 
 local antiAFKSwitchBtnCorner = Instance.new("UICorner")
-antiAFKSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
+antiAFKSwitchBtnCorner.CornerRadius = UDim.new(0, 12)
 antiAFKSwitchBtnCorner.Parent = antiAFKSwitchBtn
 
 local statusLabel = Instance.new("TextLabel")
@@ -1746,16 +1524,15 @@ local function UpdateStatus()
     if autoAccept then count = count + 1 end
     if autoAcceptRemote then count = count + 1 end
     if autoAddRandomItem then count = count + 1 end
-    if autoRAP then count = count + 1 end
     if antiAFK then count = count + 1 end
     
-    if count == 8 then
+    if count == 7 then
         statusLabel.Text = "🟢 SEMUA ON"
         statusLabel.TextColor3 = Color3.fromRGB(60, 200, 80)
-    elseif count >= 5 then
+    elseif count >= 4 then
         statusLabel.Text = "🟡 " .. count .. " ON"
         statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
-    elseif count >= 3 then
+    elseif count >= 2 then
         statusLabel.Text = "🟡 " .. count .. " ON"
         statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
     elseif count == 1 then
@@ -1916,19 +1693,6 @@ addRandomSwitchBtn.MouseButton1Click:Connect(function()
     end
 end)
 
-rapLoopSwitchBtn.MouseButton1Click:Connect(function()
-    autoRAP = not autoRAP
-    SetToggleState(rapLoopSwitchBtn, autoRAP, rapLoopSwitchBg, rapLoopOffLabel, rapLoopOnLabel)
-    UpdateStatus()
-    if autoRAP then
-        StartRAPLoop()
-        print("🔄 LOOP RAP: ON")
-    else
-        StopRAPLoop()
-        print("🔄 LOOP RAP: OFF")
-    end
-end)
-
 antiAFKSwitchBtn.MouseButton1Click:Connect(function()
     antiAFK = not antiAFK
     SetToggleState(antiAFKSwitchBtn, antiAFK, antiAFKSwitchBg, antiAFKOffLabel, antiAFKOnLabel)
@@ -1948,7 +1712,6 @@ SetToggleState(autoUpgradeSwitchBtn, false, autoUpgradeSwitchBg, autoUpgradeOffL
 SetToggleState(acceptSwitchBtn, true, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
 SetToggleState(acceptRemoteSwitchBtn, true, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
 SetToggleState(addRandomSwitchBtn, false, addRandomSwitchBg, addRandomOffLabel, addRandomOnLabel)
-SetToggleState(rapLoopSwitchBtn, false, rapLoopSwitchBg, rapLoopOffLabel, rapLoopOnLabel)
 SetToggleState(antiAFKSwitchBtn, true, antiAFKSwitchBg, antiAFKOffLabel, antiAFKOnLabel)
 UpdateStatus()
 
@@ -2002,4 +1765,4 @@ print("✅ ZAIXPLOIT | THROW A COIN + AUTO TRADE + MISC")
 print("📌 TAB 1: MAIN - AUTO COIN (ON) | AUTO SELL ALL (OFF) [3s]")
 print("📌 TAB 2: UPGRADE - AUTO UPGRADE (OFF) [0.1s]")
 print("📌 TAB 3: TRADE - AUTO ACCEPT (ON) [0.5s] | AUTO ACCEPT REMOTE (ON) [0.2s] | AUTO ADD RANDOM ITEM (OFF) [0.001s]")
-print("📌 TAB 4: MISC - CHANGE USERNAME | RAP VALUE (9999) | LOOP RAP (OFF) | ANTI AFK (ON)")
+print("📌 TAB 4: MISC - CHANGE USERNAME | ANTI AFK (ON)")
