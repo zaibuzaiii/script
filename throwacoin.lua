@@ -50,7 +50,7 @@ local selectedCoin = "Zeus Coin"
 local autoCoin = true
 local coinLoop = nil
 
-local autoSellAll = true
+local autoSellAll = false
 local sellAllLoop = nil
 
 local autoUpgrade = false
