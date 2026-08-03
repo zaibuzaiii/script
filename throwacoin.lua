@@ -126,7 +126,7 @@ end)
 
 local function ThrowCoin()
     local args = {
-        1.9999999999,
+        2.0,
         Vector3.new(-1162.6304931640625, 0.7260000109672546, 89.36738586425781),
         selectedCoin,
         Vector3.new(-1156.7032470703125, 0.7260000109672546, 88.43637084960938),
@@ -235,7 +235,7 @@ end
 local function TeleportToWorld3()
     if not RequestWorldTeleport then return end
     pcall(function()
-        RequestWorldTeleport:FireServer(3)
+        RequestWorldTeleport:FireServer(4)
         print("✅ Teleport ke World 3!")
     end)
 end
