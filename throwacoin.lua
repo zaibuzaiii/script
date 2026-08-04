@@ -235,7 +235,7 @@ end
 local function TeleportToWorld3()
     if not RequestWorldTeleport then return end
     pcall(function()
-        RequestWorldTeleport:FireServer(3)
+        RequestWorldTeleport:FireServer(4)
         print("✅ Teleport ke World 3!")
     end)
 end
