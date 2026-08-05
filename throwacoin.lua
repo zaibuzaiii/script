@@ -607,7 +607,7 @@ TabUpgradeCorner.Parent = TabUpgrade
 
 local TabTrade = Instance.new("TextButton")
 TabTrade.Size = UDim2.new(0.25, -3, 1, 0)
-TabTrade.Position = UDim2.new(0.5, 8, 0, 0)
+TabTrade.Position = UDim2.new(0.25, 8, 0, 0)
 TabTrade.BackgroundColor3 = Color3.fromRGB(40, 35, 60)
 TabTrade.BackgroundTransparency = 0.2
 TabTrade.BorderSizePixel = 2
@@ -1321,8 +1321,8 @@ MiscContent.Visible = false
 MiscContent.Parent = Content
 
 local userFrame = Instance.new("Frame")
-userFrame.Size = UDim2.new(1, 0, 0, 55)
-userFrame.Position = UDim2.new(0, 0, 0, 10)
+userFrame.Size = UDim2.new(1, 0, 0, 65)
+userFrame.Position = UDim2.new(0, 0, 0, 5)
 userFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
 userFrame.BackgroundTransparency = 0.1
 userFrame.BorderSizePixel = 1
@@ -1337,23 +1337,23 @@ local userLabel = Instance.new("TextLabel")
 userLabel.Size = UDim2.new(1, -10, 0, 16)
 userLabel.Position = UDim2.new(0, 10, 0, 4)
 userLabel.BackgroundTransparency = 1
-userLabel.Text = "👤 CHANGE USERNAME"
+userLabel.Text = "👤 CHANGE USERNAME + WARNA"
 userLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
 userLabel.Font = Enum.Font.FredokaOne
-userLabel.TextSize = 12
+userLabel.TextSize = 11
 userLabel.TextXAlignment = Enum.TextXAlignment.Left
 userLabel.Parent = userFrame
 
 local userBox = Instance.new("TextBox")
-userBox.Size = UDim2.new(1, -90, 0, 26)
-userBox.Position = UDim2.new(0, 10, 0, 23)
+userBox.Size = UDim2.new(0, 140, 0, 26)
+userBox.Position = UDim2.new(0, 10, 0, 24)
 userBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
 userBox.BackgroundTransparency = 0.3
 userBox.BorderSizePixel = 2
 userBox.BorderColor3 = Color3.fromRGB(255, 200, 50)
 userBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 userBox.Font = Enum.Font.GothamBold
-userBox.TextSize = 13
+userBox.TextSize = 12
 userBox.Text = player.Name
 userBox.PlaceholderText = "Username..."
 userBox.TextXAlignment = Enum.TextXAlignment.Left
@@ -1364,9 +1364,140 @@ local userBoxCorner = Instance.new("UICorner")
 userBoxCorner.CornerRadius = UDim.new(0, 6)
 userBoxCorner.Parent = userBox
 
+-- DROPDOWN WARNA
+local colorDropdown = Instance.new("TextButton")
+colorDropdown.Size = UDim2.new(0, 100, 0, 26)
+colorDropdown.Position = UDim2.new(1, -190, 0, 24)
+colorDropdown.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
+colorDropdown.BackgroundTransparency = 0.3
+colorDropdown.BorderSizePixel = 2
+colorDropdown.BorderColor3 = Color3.fromRGB(60, 200, 80)
+colorDropdown.Text = "🎨 Pilih Warna"
+colorDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
+colorDropdown.Font = Enum.Font.GothamBold
+colorDropdown.TextSize = 10
+colorDropdown.ZIndex = 20
+colorDropdown.Parent = userFrame
+
+local colorDropdownCorner = Instance.new("UICorner")
+colorDropdownCorner.CornerRadius = UDim.new(0, 6)
+colorDropdownCorner.Parent = colorDropdown
+
+-- Dropdown List
+local dropdownList = Instance.new("Frame")
+dropdownList.Size = UDim2.new(0, 100, 0, 140)
+dropdownList.Position = UDim2.new(1, -190, 0, 52)
+dropdownList.BackgroundColor3 = Color3.fromRGB(10, 8, 20)
+dropdownList.BackgroundTransparency = 0.1
+dropdownList.BorderSizePixel = 2
+dropdownList.BorderColor3 = Color3.fromRGB(60, 200, 80)
+dropdownList.Visible = false
+dropdownList.ZIndex = 25
+dropdownList.Parent = userFrame
+
+local dropdownListCorner = Instance.new("UICorner")
+dropdownListCorner.CornerRadius = UDim.new(0, 6)
+dropdownListCorner.Parent = dropdownList
+
+local dropdownScroller = Instance.new("ScrollingFrame")
+dropdownScroller.Size = UDim2.new(1, -6, 1, -6)
+dropdownScroller.Position = UDim2.new(0, 3, 0, 3)
+dropdownScroller.BackgroundTransparency = 1
+dropdownScroller.BorderSizePixel = 0
+dropdownScroller.CanvasSize = UDim2.new(0, 0, 0, 0)
+dropdownScroller.ScrollBarThickness = 3
+dropdownScroller.Parent = dropdownList
+
+local dropdownLayout = Instance.new("UIListLayout")
+dropdownLayout.Padding = UDim.new(0, 2)
+dropdownLayout.SortOrder = Enum.SortOrder.LayoutOrder
+dropdownLayout.Parent = dropdownScroller
+
+local colorNames = {"Putih", "Merah", "Kuning", "Hijau", "Biru", "Ungu", "Cyan", "Oranye", "Pink", "Abu-abu"}
+local colorMap = {
+    ["Putih"] = Color3.fromRGB(255, 255, 255),
+    ["Merah"] = Color3.fromRGB(255, 0, 0),
+    ["Kuning"] = Color3.fromRGB(255, 255, 0),
+    ["Hijau"] = Color3.fromRGB(0, 255, 0),
+    ["Biru"] = Color3.fromRGB(0, 0, 255),
+    ["Ungu"] = Color3.fromRGB(255, 0, 255),
+    ["Cyan"] = Color3.fromRGB(0, 255, 255),
+    ["Oranye"] = Color3.fromRGB(255, 165, 0),
+    ["Pink"] = Color3.fromRGB(255, 105, 180),
+    ["Abu-abu"] = Color3.fromRGB(128, 128, 128)
+}
+
+local selectedColorName = "Putih"
+
+-- Buat item dropdown
+for _, colorName in ipairs(colorNames) do
+    local item = Instance.new("TextButton")
+    item.Size = UDim2.new(1, -4, 0, 22)
+    item.Position = UDim2.new(0, 2, 0, 0)
+    item.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
+    item.BackgroundTransparency = 0.1
+    item.BorderSizePixel = 1
+    item.BorderColor3 = Color3.fromRGB(60, 60, 80)
+    item.Text = colorName
+    item.TextColor3 = colorMap[colorName]
+    item.Font = Enum.Font.GothamBold
+    item.TextSize = 11
+    item.ZIndex = 30
+    item.Parent = dropdownScroller
+    
+    local itemCorner = Instance.new("UICorner")
+    itemCorner.CornerRadius = UDim.new(0, 4)
+    itemCorner.Parent = item
+    
+    item.MouseEnter:Connect(function()
+        item.BackgroundTransparency = 0.2
+    end)
+    item.MouseLeave:Connect(function()
+        item.BackgroundTransparency = 0.1
+    end)
+    
+    item.MouseButton1Click:Connect(function()
+        selectedColorName = colorName
+        colorDropdown.Text = "🎨 " .. colorName
+        colorDropdown.TextColor3 = colorMap[colorName]
+        dropdownList.Visible = false
+        print("🎨 Warna dipilih: " .. colorName)
+    end)
+end
+
+dropdownScroller.CanvasSize = UDim2.new(0, 0, 0, #colorNames * 24 + 10)
+
+-- Toggle dropdown
+colorDropdown.MouseButton1Click:Connect(function()
+    dropdownList.Visible = not dropdownList.Visible
+end)
+
+-- Sembunyikan dropdown jika klik di luar
+UserInputService.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        if dropdownList.Visible then
+            local mousePos = input.Position
+            local absPos = colorDropdown.AbsolutePosition
+            local absSize = colorDropdown.AbsoluteSize
+            local listPos = dropdownList.AbsolutePosition
+            local listSize = dropdownList.AbsoluteSize
+            
+            local insideDropdown = mousePos.X >= absPos.X and mousePos.X <= absPos.X + absSize.X and
+                                   mousePos.Y >= absPos.Y and mousePos.Y <= absPos.Y + absSize.Y
+            
+            local insideList = mousePos.X >= listPos.X and mousePos.X <= listPos.X + listSize.X and
+                               mousePos.Y >= listPos.Y and mousePos.Y <= listPos.Y + listSize.Y
+            
+            if not insideDropdown and not insideList then
+                dropdownList.Visible = false
+            end
+        end
+    end
+end)
+
 local userApplyBtn = Instance.new("TextButton")
 userApplyBtn.Size = UDim2.new(0, 70, 0, 26)
-userApplyBtn.Position = UDim2.new(1, -80, 0, 23)
+userApplyBtn.Position = UDim2.new(1, -80, 0, 24)
 userApplyBtn.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
 userApplyBtn.BackgroundTransparency = 0.2
 userApplyBtn.BorderSizePixel = 2
@@ -1389,24 +1520,31 @@ userApplyBtn.MouseLeave:Connect(function()
     userApplyBtn.BackgroundTransparency = 0.2
 end)
 
+-- FUNGSI APPLY - GANTI NAMA + WARNA SEMUA PEMAIN
 userApplyBtn.MouseButton1Click:Connect(function()
     local newName = userBox.Text
     if newName == "" then
-        print("❌ Username cannot be empty!")
+        print("❌ Username tidak boleh kosong!")
         return
     end
     
-    local myModel = workspace:FindFirstChild(player.Name)
-    if myModel and myModel:FindFirstChild("Head") then
-        local head = myModel.Head
-        local title = head:FindFirstChild("title")
-        if title then
-            local usernameLabel = title:FindFirstChild("Username")
-            if usernameLabel and usernameLabel:IsA("TextLabel") then
-                pcall(function()
-                    usernameLabel.Text = newName
-                    print("✅ Username changed to: " .. newName)
-                end)
+    local color = colorMap[selectedColorName] or Color3.fromRGB(255, 255, 255)
+    
+    -- Ganti nama & warna semua pemain di server
+    for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+        local model = workspace:FindFirstChild(v.Name)
+        if model and model:FindFirstChild("Head") then
+            local head = model.Head
+            local title = head:FindFirstChild("title")
+            if title then
+                local usernameLabel = title:FindFirstChild("Username")
+                if usernameLabel and usernameLabel:IsA("TextLabel") then
+                    pcall(function()
+                        usernameLabel.Text = newName
+                        usernameLabel.TextColor3 = color
+                        print("✅ " .. v.Name .. " → " .. newName .. " (" .. selectedColorName .. ")")
+                    end)
+                end
             end
         end
     end
@@ -1414,7 +1552,7 @@ end)
 
 local antiAFKFrame = Instance.new("Frame")
 antiAFKFrame.Size = UDim2.new(1, 0, 0, 45)
-antiAFKFrame.Position = UDim2.new(0, 0, 0, 75)
+antiAFKFrame.Position = UDim2.new(0, 0, 0, 80)
 antiAFKFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
 antiAFKFrame.BackgroundTransparency = 0.1
 antiAFKFrame.BorderSizePixel = 1
@@ -1765,4 +1903,4 @@ print("✅ ZAIXPLOIT | THROW A COIN + AUTO TRADE + MISC")
 print("📌 TAB 1: MAIN - AUTO COIN (ON) | AUTO SELL ALL (OFF) [3s]")
 print("📌 TAB 2: UPGRADE - AUTO UPGRADE (OFF) [0.1s]")
 print("📌 TAB 3: TRADE - AUTO ACCEPT (ON) [0.5s] | AUTO ACCEPT REMOTE (ON) [0.2s] | AUTO ADD RANDOM ITEM (OFF) [0.001s]")
-print("📌 TAB 4: MISC - CHANGE USERNAME | ANTI AFK (ON)")
+print("📌 TAB 4: MISC - CHANGE USERNAME + WARNA (SEMUA PEMAIN) | ANTI AFK (ON)")
