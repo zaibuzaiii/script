@@ -433,13 +433,14 @@ screenGui.Name = "ZAIXPLOIT"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = player:WaitForChild("PlayerGui")
 
+-- MAIN FRAME (Ukuran diperbesar 420x370)
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 380, 0, 330)
-Main.Position = UDim2.new(0.5, -190, 0.5, -165)
+Main.Size = UDim2.new(0, 420, 0, 370)
+Main.Position = UDim2.new(0.5, -210, 0.5, -185)
 Main.BackgroundColor3 = Color3.fromRGB(10, 8, 20)
 Main.BackgroundTransparency = 0.05
 Main.BorderSizePixel = 3
-Main.BorderColor3 = Color3.fromRGB(60, 200, 80)
+Main.BorderColor3 = Color3.fromRGB(0, 100, 255)  -- BORDER BIRU
 Main.ClipsDescendants = true
 Main.Active = true
 Main.Draggable = true
@@ -450,9 +451,10 @@ local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 14)
 MainCorner.Parent = Main
 
+-- GLOW BIRU
 local Glow = Instance.new("UIStroke")
-Glow.Color = Color3.fromRGB(60, 200, 80)
-Glow.Transparency = 0.4
+Glow.Color = Color3.fromRGB(0, 150, 255)  -- WARNA BIRU TERANG
+Glow.Transparency = 0.3
 Glow.Thickness = 2
 Glow.Parent = Main
 
@@ -479,10 +481,10 @@ local SubTitle = Instance.new("TextLabel")
 SubTitle.Size = UDim2.new(1, -60, 0, 14)
 SubTitle.Position = UDim2.new(0, 12, 0, 23)
 SubTitle.BackgroundTransparency = 1
-SubTitle.Text = "🪙 THROW A COIN + AUTO TRADE + MISC"
-SubTitle.TextColor3 = Color3.fromRGB(255, 200, 50)
+SubTitle.Text = "🪙 THROW A COIN"
+SubTitle.TextColor3 = Color3.fromRGB(100, 180, 255)  -- BIRU MUDA
 SubTitle.Font = Enum.Font.FredokaOne
-SubTitle.TextSize = 10
+SubTitle.TextSize = 11
 SubTitle.TextXAlignment = Enum.TextXAlignment.Left
 SubTitle.Parent = Header
 
@@ -516,7 +518,7 @@ end)
 MinBtn.MouseButton1Click:Connect(function()
     isMinimized = not isMinimized
     if isMinimized then
-        Main.Size = UDim2.new(0, 380, 0, 42)
+        Main.Size = UDim2.new(0, 420, 0, 42)
         MinBtn.Text = "➕"
         Content.Visible = false
         CloseBtn.Visible = false
@@ -563,20 +565,21 @@ CloseBtn.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
 
+-- TAB CONTAINER
 local TabContainer = Instance.new("Frame")
-TabContainer.Size = UDim2.new(1, -14, 0, 30)
-TabContainer.Position = UDim2.new(0, 7, 0, 48)
+TabContainer.Size = UDim2.new(1, -10, 0, 34)
+TabContainer.Position = UDim2.new(0, 5, 0, 46)
 TabContainer.BackgroundTransparency = 1
 TabContainer.Parent = Main
 
 local TabMain = Instance.new("TextButton")
-TabMain.Size = UDim2.new(0.25, -3, 1, 0)
+TabMain.Size = UDim2.new(0.23, -2, 1, 0)
 TabMain.Position = UDim2.new(0, 0, 0, 0)
-TabMain.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+TabMain.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
 TabMain.BackgroundTransparency = 0.2
 TabMain.BorderSizePixel = 2
-TabMain.BorderColor3 = Color3.fromRGB(60, 200, 80)
-TabMain.Text = "[ MAIN ]"
+TabMain.BorderColor3 = Color3.fromRGB(0, 100, 255)
+TabMain.Text = "MAIN"
 TabMain.TextColor3 = Color3.fromRGB(255, 255, 255)
 TabMain.Font = Enum.Font.GothamBold
 TabMain.TextSize = 11
@@ -588,16 +591,16 @@ TabMainCorner.CornerRadius = UDim.new(0, 6)
 TabMainCorner.Parent = TabMain
 
 local TabUpgrade = Instance.new("TextButton")
-TabUpgrade.Size = UDim2.new(0.25, -3, 1, 0)
-TabUpgrade.Position = UDim2.new(0.25, 4, 0, 0)
+TabUpgrade.Size = UDim2.new(0.23, -2, 1, 0)
+TabUpgrade.Position = UDim2.new(0.23, 4, 0, 0)
 TabUpgrade.BackgroundColor3 = Color3.fromRGB(40, 35, 60)
 TabUpgrade.BackgroundTransparency = 0.2
 TabUpgrade.BorderSizePixel = 2
 TabUpgrade.BorderColor3 = Color3.fromRGB(60, 60, 80)
-TabUpgrade.Text = "[ UPGRADE ]"
+TabUpgrade.Text = "UPGRADE"
 TabUpgrade.TextColor3 = Color3.fromRGB(200, 200, 210)
 TabUpgrade.Font = Enum.Font.GothamBold
-TabUpgrade.TextSize = 11
+TabUpgrade.TextSize = 10
 TabUpgrade.ZIndex = 20
 TabUpgrade.Parent = TabContainer
 
@@ -606,13 +609,13 @@ TabUpgradeCorner.CornerRadius = UDim.new(0, 6)
 TabUpgradeCorner.Parent = TabUpgrade
 
 local TabTrade = Instance.new("TextButton")
-TabTrade.Size = UDim2.new(0.25, -3, 1, 0)
-TabTrade.Position = UDim2.new(0.25, 8, 0, 0)
+TabTrade.Size = UDim2.new(0.23, -2, 1, 0)
+TabTrade.Position = UDim2.new(0.46, 8, 0, 0)
 TabTrade.BackgroundColor3 = Color3.fromRGB(40, 35, 60)
 TabTrade.BackgroundTransparency = 0.2
 TabTrade.BorderSizePixel = 2
 TabTrade.BorderColor3 = Color3.fromRGB(60, 60, 80)
-TabTrade.Text = "[ TRADE ]"
+TabTrade.Text = "TRADE"
 TabTrade.TextColor3 = Color3.fromRGB(200, 200, 210)
 TabTrade.Font = Enum.Font.GothamBold
 TabTrade.TextSize = 11
@@ -624,13 +627,13 @@ TabTradeCorner.CornerRadius = UDim.new(0, 6)
 TabTradeCorner.Parent = TabTrade
 
 local TabMisc = Instance.new("TextButton")
-TabMisc.Size = UDim2.new(0.25, -3, 1, 0)
-TabMisc.Position = UDim2.new(0.75, 12, 0, 0)
+TabMisc.Size = UDim2.new(0.23, -2, 1, 0)
+TabMisc.Position = UDim2.new(0.69, 12, 0, 0)
 TabMisc.BackgroundColor3 = Color3.fromRGB(40, 35, 60)
 TabMisc.BackgroundTransparency = 0.2
 TabMisc.BorderSizePixel = 2
 TabMisc.BorderColor3 = Color3.fromRGB(60, 60, 80)
-TabMisc.Text = "[ MISC ]"
+TabMisc.Text = "MISC"
 TabMisc.TextColor3 = Color3.fromRGB(200, 200, 210)
 TabMisc.Font = Enum.Font.GothamBold
 TabMisc.TextSize = 11
@@ -642,8 +645,8 @@ TabMiscCorner.CornerRadius = UDim.new(0, 6)
 TabMiscCorner.Parent = TabMisc
 
 local Content = Instance.new("Frame")
-Content.Size = UDim2.new(1, -14, 0, 225)
-Content.Position = UDim2.new(0, 7, 0, 83)
+Content.Size = UDim2.new(1, -14, 0, 255)
+Content.Position = UDim2.new(0, 7, 0, 88)
 Content.BackgroundTransparency = 1
 Content.Parent = Main
 
@@ -684,7 +687,7 @@ coinTypeBox.Position = UDim2.new(0, 90, 0.5, -13)
 coinTypeBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
 coinTypeBox.BackgroundTransparency = 0.3
 coinTypeBox.BorderSizePixel = 2
-coinTypeBox.BorderColor3 = Color3.fromRGB(255, 200, 50)
+coinTypeBox.BorderColor3 = Color3.fromRGB(0, 150, 255)
 coinTypeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 coinTypeBox.Font = Enum.Font.GothamBold
 coinTypeBox.TextSize = 13
@@ -731,10 +734,10 @@ coinLabel.Parent = coinFrame
 local coinSwitchBg = Instance.new("Frame")
 coinSwitchBg.Size = UDim2.new(0, 60, 0, 28)
 coinSwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
-coinSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+coinSwitchBg.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
 coinSwitchBg.BackgroundTransparency = 0.1
 coinSwitchBg.BorderSizePixel = 2
-coinSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
+coinSwitchBg.BorderColor3 = Color3.fromRGB(0, 150, 255)
 coinSwitchBg.Parent = coinFrame
 
 local coinSwitchCorner = Instance.new("UICorner")
@@ -934,7 +937,7 @@ autoUpgradeSwitchBtnCorner.CornerRadius = UDim.new(0, 11)
 autoUpgradeSwitchBtnCorner.Parent = autoUpgradeSwitchBtn
 
 local upgradeListFrame = Instance.new("Frame")
-upgradeListFrame.Size = UDim2.new(1, 0, 0, 130)
+upgradeListFrame.Size = UDim2.new(1, 0, 0, 150)
 upgradeListFrame.Position = UDim2.new(0, 0, 0, 46)
 upgradeListFrame.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
 upgradeListFrame.BackgroundTransparency = 0.1
@@ -1040,8 +1043,8 @@ local function CreateUpgradeToggle(upgradeName, y)
         if isOn then
             switchBtn.Position = UDim2.new(1, -24, 0.5, -10)
             switchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
-            switchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-            switchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+            switchBg.BorderColor3 = Color3.fromRGB(0, 150, 255)
+            switchBg.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
             offLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
             onLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
         else
@@ -1118,10 +1121,10 @@ acceptLabel.Parent = acceptFrame
 local acceptSwitchBg = Instance.new("Frame")
 acceptSwitchBg.Size = UDim2.new(0, 60, 0, 28)
 acceptSwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
-acceptSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+acceptSwitchBg.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
 acceptSwitchBg.BackgroundTransparency = 0.1
 acceptSwitchBg.BorderSizePixel = 2
-acceptSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
+acceptSwitchBg.BorderColor3 = Color3.fromRGB(0, 150, 255)
 acceptSwitchBg.Parent = acceptFrame
 
 local acceptSwitchCorner = Instance.new("UICorner")
@@ -1192,10 +1195,10 @@ acceptRemoteLabel.Parent = acceptRemoteFrame
 local acceptRemoteSwitchBg = Instance.new("Frame")
 acceptRemoteSwitchBg.Size = UDim2.new(0, 60, 0, 28)
 acceptRemoteSwitchBg.Position = UDim2.new(1, -72, 0.5, -14)
-acceptRemoteSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+acceptRemoteSwitchBg.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
 acceptRemoteSwitchBg.BackgroundTransparency = 0.1
 acceptRemoteSwitchBg.BorderSizePixel = 2
-acceptRemoteSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
+acceptRemoteSwitchBg.BorderColor3 = Color3.fromRGB(0, 150, 255)
 acceptRemoteSwitchBg.Parent = acceptRemoteFrame
 
 local acceptRemoteSwitchCorner = Instance.new("UICorner")
@@ -1350,7 +1353,7 @@ userBox.Position = UDim2.new(0, 10, 0, 24)
 userBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
 userBox.BackgroundTransparency = 0.3
 userBox.BorderSizePixel = 2
-userBox.BorderColor3 = Color3.fromRGB(255, 200, 50)
+userBox.BorderColor3 = Color3.fromRGB(0, 150, 255)
 userBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 userBox.Font = Enum.Font.GothamBold
 userBox.TextSize = 12
@@ -1371,7 +1374,7 @@ colorDropdown.Position = UDim2.new(1, -190, 0, 24)
 colorDropdown.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
 colorDropdown.BackgroundTransparency = 0.3
 colorDropdown.BorderSizePixel = 2
-colorDropdown.BorderColor3 = Color3.fromRGB(60, 200, 80)
+colorDropdown.BorderColor3 = Color3.fromRGB(0, 150, 255)
 colorDropdown.Text = "🎨 Pilih Warna"
 colorDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
 colorDropdown.Font = Enum.Font.GothamBold
@@ -1390,7 +1393,7 @@ dropdownList.Position = UDim2.new(1, -190, 0, 52)
 dropdownList.BackgroundColor3 = Color3.fromRGB(10, 8, 20)
 dropdownList.BackgroundTransparency = 0.1
 dropdownList.BorderSizePixel = 2
-dropdownList.BorderColor3 = Color3.fromRGB(60, 200, 80)
+dropdownList.BorderColor3 = Color3.fromRGB(0, 150, 255)
 dropdownList.Visible = false
 dropdownList.ZIndex = 25
 dropdownList.Parent = userFrame
@@ -1498,10 +1501,10 @@ end)
 local userApplyBtn = Instance.new("TextButton")
 userApplyBtn.Size = UDim2.new(0, 70, 0, 26)
 userApplyBtn.Position = UDim2.new(1, -80, 0, 24)
-userApplyBtn.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+userApplyBtn.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
 userApplyBtn.BackgroundTransparency = 0.2
 userApplyBtn.BorderSizePixel = 2
-userApplyBtn.BorderColor3 = Color3.fromRGB(60, 200, 80)
+userApplyBtn.BorderColor3 = Color3.fromRGB(0, 100, 255)
 userApplyBtn.Text = "APPLY"
 userApplyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 userApplyBtn.Font = Enum.Font.GothamBold
@@ -1577,10 +1580,10 @@ antiAFKLabel.Parent = antiAFKFrame
 local antiAFKSwitchBg = Instance.new("Frame")
 antiAFKSwitchBg.Size = UDim2.new(0, 60, 0, 30)
 antiAFKSwitchBg.Position = UDim2.new(1, -72, 0.5, -15)
-antiAFKSwitchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+antiAFKSwitchBg.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
 antiAFKSwitchBg.BackgroundTransparency = 0.1
 antiAFKSwitchBg.BorderSizePixel = 2
-antiAFKSwitchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
+antiAFKSwitchBg.BorderColor3 = Color3.fromRGB(0, 150, 255)
 antiAFKSwitchBg.Parent = antiAFKFrame
 
 local antiAFKSwitchCorner = Instance.new("UICorner")
@@ -1629,7 +1632,7 @@ statusLabel.Size = UDim2.new(1, -10, 0, 16)
 statusLabel.Position = UDim2.new(0, 5, 1, -18)
 statusLabel.BackgroundTransparency = 1
 statusLabel.Text = "🟢 SEMUA ON"
-statusLabel.TextColor3 = Color3.fromRGB(60, 200, 80)
+statusLabel.TextColor3 = Color3.fromRGB(0, 150, 255)
 statusLabel.Font = Enum.Font.FredokaOne
 statusLabel.TextSize = 10
 statusLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -1640,8 +1643,8 @@ local function SetToggleState(switchBtn, isOn, switchBg, offLabel, onLabel)
     if isOn then
         switchBtn.Position = UDim2.new(1, -27, 0.5, -11)
         switchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
-        switchBg.BorderColor3 = Color3.fromRGB(60, 200, 80)
-        switchBg.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+        switchBg.BorderColor3 = Color3.fromRGB(0, 150, 255)
+        switchBg.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
         offLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
         onLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     else
@@ -1666,7 +1669,7 @@ local function UpdateStatus()
     
     if count == 7 then
         statusLabel.Text = "🟢 SEMUA ON"
-        statusLabel.TextColor3 = Color3.fromRGB(60, 200, 80)
+        statusLabel.TextColor3 = Color3.fromRGB(0, 200, 255)
     elseif count >= 4 then
         statusLabel.Text = "🟡 " .. count .. " ON"
         statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
@@ -1711,27 +1714,27 @@ local function SwitchTab(tab)
     MiscContent.Visible = false
     
     if tab == "MAIN" then
-        TabMain.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+        TabMain.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
         TabMain.BackgroundTransparency = 0.2
-        TabMain.BorderColor3 = Color3.fromRGB(60, 200, 80)
+        TabMain.BorderColor3 = Color3.fromRGB(0, 100, 255)
         TabMain.TextColor3 = Color3.fromRGB(255, 255, 255)
         MainContent.Visible = true
     elseif tab == "UPGRADE" then
-        TabUpgrade.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+        TabUpgrade.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
         TabUpgrade.BackgroundTransparency = 0.2
-        TabUpgrade.BorderColor3 = Color3.fromRGB(60, 200, 80)
+        TabUpgrade.BorderColor3 = Color3.fromRGB(0, 100, 255)
         TabUpgrade.TextColor3 = Color3.fromRGB(255, 255, 255)
         UpgradeContent.Visible = true
     elseif tab == "TRADE" then
-        TabTrade.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+        TabTrade.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
         TabTrade.BackgroundTransparency = 0.2
-        TabTrade.BorderColor3 = Color3.fromRGB(60, 200, 80)
+        TabTrade.BorderColor3 = Color3.fromRGB(0, 100, 255)
         TabTrade.TextColor3 = Color3.fromRGB(255, 255, 255)
         TradeContent.Visible = true
     elseif tab == "MISC" then
-        TabMisc.BackgroundColor3 = Color3.fromRGB(60, 200, 80)
+        TabMisc.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
         TabMisc.BackgroundTransparency = 0.2
-        TabMisc.BorderColor3 = Color3.fromRGB(60, 200, 80)
+        TabMisc.BorderColor3 = Color3.fromRGB(0, 100, 255)
         TabMisc.TextColor3 = Color3.fromRGB(255, 255, 255)
         MiscContent.Visible = true
     end
