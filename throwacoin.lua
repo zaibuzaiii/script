@@ -42,10 +42,9 @@ local acceptDelay = 0.5
 local autoAcceptRemote = false
 local acceptRemoteLoop = nil
 
--- ===== AUTO ADD ITEM (LOOP 1-10000, BUKAN RANDOM) =====
+-- ===== AUTO ADD ITEM (ONLY WHEN TRADE OPEN) =====
 local autoAddItem = false
 local addItemLoop = nil
-local currentItemIndex = 1  -- Mulai dari 1
 
 local antiAFK = true
 local antiAFKLoop = nil
@@ -324,6 +323,21 @@ task.wait(1)
 task.wait(3)
 TeleportToVIPPosition()
 
+-- ===== FUNGSI CEK APAKAH TRADE WINDOW TERBUKA =====
+local function IsTradeOpen()
+    local playerGui = player:FindFirstChild("PlayerGui")
+    if not playerGui then return false end
+    local uiFolder = playerGui:FindFirstChild("UiFolder")
+    if not uiFolder then return false end
+    local main = uiFolder:FindFirstChild("Main")
+    if not main then return false end
+    local frames = main:FindFirstChild("Frames")
+    if not frames then return false end
+    local trade = frames:FindFirstChild("Trade")
+    if not trade then return false end
+    return trade.Visible == true
+end
+
 -- ===== TRADE =====
 local function AutoAcceptUI()
     local playerGui = player:FindFirstChild("PlayerGui")
@@ -452,25 +466,44 @@ local function StopAcceptRemoteLoop()
     end
 end
 
--- ===== AUTO ADD ITEM (LOOP 1-10000, BUKAN RANDOM) =====
+-- ===== AUTO ADD ITEM (ONLY WHEN TRADE OPEN) =====
 local function StartAddItemLoop()
     if addItemLoop then return end
     addItemLoop = task.spawn(function()
+        print("🔄 Auto Add Item Started (Only when trade open)")
+        
         while autoAddItem do
-            -- Reset ke 1 kalo udah 10000
-            if currentItemIndex > 10000 then
-                currentItemIndex = 1
-                print("🔄 Reset ke 1")
+            -- Cek apakah trade window terbuka
+            if IsTradeOpen() then
+                print("✅ Trade window terbuka! Mulai add item...")
+                
+                -- Loop 1-10000
+                for i = 1, 10000 do
+                    if not autoAddItem then break end
+                    if not IsTradeOpen() then 
+                        print("⏹️ Trade window tutup, berhenti add item...")
+                        break 
+                    end
+                    
+                    pcall(function()
+                        TradeAddItem:FireServer(i)
+                        if i % 100 == 0 then
+                            print("📦 Added item index: " .. i)
+                        end
+                    end)
+                    task.wait(0.05)
+                end
+                
+                -- Kalo udah sampe 10000 dan trade masih kebuka, ulangi
+                if autoAddItem and IsTradeOpen() then
+                    print("🔄 Loop 1-10000 selesai, ulangi!")
+                end
+            else
+                -- Trade ga kebuka, tunggu 0.5 detik lalu cek lagi
+                task.wait(0.5)
             end
-            
-            pcall(function()
-                TradeAddItem:FireServer(currentItemIndex)
-                print("📦 Try item index: " .. currentItemIndex)
-            end)
-            
-            currentItemIndex = currentItemIndex + 1
-            task.wait(0.05)  -- Delay 50ms
         end
+        print("⏹️ Auto Add Item stopped!")
     end)
 end
 
@@ -480,7 +513,7 @@ local function StopAddItemLoop()
         task.cancel(addItemLoop)
         addItemLoop = nil
     end
-    currentItemIndex = 1  -- Reset index kalo dimatiin
+    print("⏹️ Auto Add Item stopped!")
 end
 
 -- ===== GUI =====
@@ -1407,7 +1440,7 @@ local acceptRemoteSwitchBtnCorner = Instance.new("UICorner")
 acceptRemoteSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
 acceptRemoteSwitchBtnCorner.Parent = acceptRemoteSwitchBtn
 
--- AUTO ADD ITEM (LOOP 1-10000)
+-- AUTO ADD ITEM (ONLY WHEN TRADE OPEN)
 local addItemFrame = Instance.new("Frame")
 addItemFrame.Size = UDim2.new(1, 0, 0, 34)
 addItemFrame.Position = UDim2.new(0, 0, 0, 78)
@@ -1901,7 +1934,6 @@ addItemSwitchBtn.MouseButton1Click:Connect(function()
     SetToggleState(addItemSwitchBtn, autoAddItem, addItemSwitchBg, addItemOffLabel, addItemOnLabel)
     UpdateStatus()
     if autoAddItem then 
-        currentItemIndex = 1  -- Reset dari 1 kalo dinyalain
         StartAddItemLoop() 
     else 
         StopAddItemLoop() 
@@ -1919,9 +1951,9 @@ end)
 SetToggleState(coinSwitchBtn, true, coinSwitchBg, coinOffLabel, coinOnLabel)
 SetToggleState(sellAllSwitchBtn, false, sellAllSwitchBg, sellAllOffLabel, sellAllOnLabel)
 SetToggleState(autoUpgradeSwitchBtn, false, autoUpgradeSwitchBg, autoUpgradeOffLabel, autoUpgradeOnLabel)
-SetToggleState(acceptSwitchBtn, false, acceptSwitchBg, acceptOffLabel, acceptOnLabel)  -- ✅ OFF
-SetToggleState(acceptRemoteSwitchBtn, false, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)  -- ✅ OFF
-SetToggleState(addItemSwitchBtn, false, addItemSwitchBg, addItemOffLabel, addItemOnLabel)  -- ✅ OFF
+SetToggleState(acceptSwitchBtn, false, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
+SetToggleState(acceptRemoteSwitchBtn, false, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
+SetToggleState(addItemSwitchBtn, false, addItemSwitchBg, addItemOffLabel, addItemOnLabel)
 SetToggleState(antiAFKSwitchBtn, true, antiAFKSwitchBg, antiAFKOffLabel, antiAFKOnLabel)
 
 -- Apply default color
@@ -1936,4 +1968,4 @@ print("📌 Bubble bisa di-drag di mobile")
 print("🎨 " .. colorCount .. " pilihan warna nickname di tab MISC")
 print("📜 Dropdown warna bisa di-scroll/down drag!")
 print("⚡ ProximityPrompt instan! (Loop tiap 2 detik)")
-print("🔄 Auto Add Item: Loop 1-10000 (Default OFF)")
+print("🔄 Auto Add Item: Loop 1-10000 (Only when trade open, Default OFF)")
