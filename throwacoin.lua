@@ -81,7 +81,7 @@ local function StopClaimQuestLoop()
     end
 end
 
--- ===== NICKNAME COLOR PRESETS (30+ WARNA) =====
+-- ===== NICKNAME COLOR PRESETS =====
 local nicknameColors = {
     ["🔴 Merah"] = Color3.fromRGB(255, 0, 0),
     ["🟢 Hijau"] = Color3.fromRGB(0, 255, 0),
@@ -134,7 +134,6 @@ local function ApplyNicknameColor(color)
             if usernameLabel then
                 pcall(function()
                     usernameLabel.TextColor3 = color
-                    print("✅ Nickname color changed!")
                 end)
             end
         end
@@ -193,7 +192,6 @@ local function ThrowCoin()
     }
     pcall(function()
         CoinLanded:FireServer(unpack(args))
-        print(" " .. selectedCoin .. " thrown!")
     end)
 end
 
@@ -221,7 +219,6 @@ StartCoinLoop()
 local function DoSellAll()
     pcall(function()
         SellAll:FireServer()
-        print("💰 Sell All executed!")
     end)
 end
 
@@ -249,7 +246,6 @@ local function DoUpgrade()
         if isEnabled then
             pcall(function()
                 RequestUpgrade:FireServer(upgradeName)
-                print("⚡ Upgraded: " .. upgradeName)
             end)
             task.wait(0.3)
         end
@@ -274,7 +270,7 @@ local function StopUpgradeLoop()
     end
 end
 
--- ===== PROXIMITY PROMPT INSTAN (LOOP + AUTO CLICK) =====
+-- ===== PROXIMITY PROMPT =====
 task.spawn(function()
     while task.wait(2) do
         pcall(function()
@@ -293,7 +289,6 @@ ProximityPromptService.PromptShown:Connect(function(prompt)
     pcall(function()
         prompt.HoldDuration = 0
         prompt:Hold()
-        print("✅ Prompt instan: " .. prompt.Name)
     end)
 end)
 
@@ -313,7 +308,6 @@ workspace.DescendantAdded:Connect(function(desc)
         pcall(function()
             desc.HoldDuration = 0
             desc.RequiresLineOfSight = false
-            print("✅ Prompt baru ditemukan: " .. desc.Name)
         end)
     end
 end)
@@ -331,7 +325,6 @@ local function TeleportToWorld3()
     if not RequestWorldTeleport then return end
     pcall(function()
         RequestWorldTeleport:FireServer(3)
-        print("✅ Teleport ke World 3!")
     end)
 end
 
@@ -345,7 +338,6 @@ local function TeleportToVIPPosition()
     if hrp then
         pcall(function()
             hrp.CFrame = CFrame.new(Vector3.new(-1152, 4, 52))
-            print("✅ Teleport ke VIP Position!")
         end)
     end
 end
@@ -373,7 +365,6 @@ local function AutoAcceptUI()
                     if userId then
                         pcall(function()
                             TradeRequestResponse:FireServer(userId, true)
-                            print("✅ Auto Accept UI dari User ID: " .. userId)
                         end)
                         child:Destroy()
                     end
@@ -401,7 +392,6 @@ local function AutoAcceptUI()
                                     if readyIcon and readyIcon.Enabled then
                                         pcall(function()
                                             acceptBtn:FireClick()
-                                            print("✅ Auto Accept UI - Lawan udah accept!")
                                         end)
                                     end
                                 end
@@ -467,7 +457,6 @@ local function StartAcceptRemoteLoop()
             if not IsWeReady() then
                 pcall(function()
                     TradeAccept:FireServer()
-                    print("⚡ Auto Accept Remote - Jaga status hijau!")
                 end)
                 task.wait(0.3)
             end
@@ -493,7 +482,6 @@ local function StartAddRandomItemLoop()
             local randomIndex = math.random(1, 10000)
             pcall(function()
                 TradeAddItem:FireServer(randomIndex)
-                print("📦 Auto Add Random Item: " .. randomIndex)
             end)
             task.wait(0)
         end
@@ -519,7 +507,6 @@ if not playerGui then
 end
 screenGui.Parent = playerGui
 
--- MAIN UI
 local Main = Instance.new("Frame")
 Main.Size = UDim2.new(0, 380, 0, 340)
 Main.Position = UDim2.new(0.5, -190, 0.5, -170)
@@ -575,7 +562,7 @@ SubTitle.TextSize = 10
 SubTitle.TextXAlignment = Enum.TextXAlignment.Left
 SubTitle.Parent = Header
 
--- ===== BUBBLE - KIRI ATAS =====
+-- BUBBLE
 local bubble = Instance.new("Frame")
 bubble.Size = UDim2.new(0, 55, 0, 55)
 bubble.Position = UDim2.new(0, 10, 0, 10)
@@ -880,7 +867,6 @@ coinTypeBoxCorner.Parent = coinTypeBox
 coinTypeBox:GetPropertyChangedSignal("Text"):Connect(function()
     if coinTypeBox.Text ~= "" then
         selectedCoin = coinTypeBox.Text
-        print(" Coin changed to: " .. selectedCoin)
     end
 end)
 
@@ -959,7 +945,7 @@ local coinSwitchBtnCorner = Instance.new("UICorner")
 coinSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
 coinSwitchBtnCorner.Parent = coinSwitchBtn
 
--- ===== CLAIM QUEST (DI BAWAH AUTO COIN) =====
+-- ===== CLAIM QUEST =====
 local claimQuestFrame = Instance.new("Frame")
 claimQuestFrame.Size = UDim2.new(1, 0, 0, 34)
 claimQuestFrame.Position = UDim2.new(0, 0, 0, 78)
@@ -1330,11 +1316,6 @@ local function CreateUpgradeToggle(upgradeName)
         upgradeSettings[upgradeName] = not upgradeSettings[upgradeName]
         UpdateState(upgradeSettings[upgradeName])
         UpdateStatus()
-        if upgradeSettings[upgradeName] then
-            print("✅ " .. upgradeName .. ": ON")
-        else
-            print("❌ " .. upgradeName .. ": OFF")
-        end
     end)
 
     return {UpdateState = UpdateState}
@@ -1525,9 +1506,7 @@ addRandomLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 addRandomLabel.Font = Enum.Font.FredokaOne
 addRandomLabel.TextSize = 11
 addRandomLabel.TextXAlignment = Enum.TextXAlignment.Left
-addRandomLabel.Parent = addRandomFrame
-
-local addRandomSwitchBg = Instance.new("Frame")
+addRandomLabel.Parent = addRandomFramelocal addRandomSwitchBg = Instance.new("Frame")
 addRandomSwitchBg.Size = UDim2.new(0, 55, 0, 24)
 addRandomSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
 addRandomSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
@@ -1577,7 +1556,7 @@ local addRandomSwitchBtnCorner = Instance.new("UICorner")
 addRandomSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
 addRandomSwitchBtnCorner.Parent = addRandomSwitchBtn
 
--- ===== MISC CONTENT =====
+-- MISC CONTENT
 local MiscContent = Instance.new("Frame")
 MiscContent.Size = UDim2.new(1, 0, 1, 0)
 MiscContent.Position = UDim2.new(0, 0, 0, 0)
@@ -1585,7 +1564,6 @@ MiscContent.BackgroundTransparency = 1
 MiscContent.Visible = false
 MiscContent.Parent = Content
 
--- CHANGE USERNAME
 local userFrame = Instance.new("Frame")
 userFrame.Size = UDim2.new(1, 0, 0, 60)
 userFrame.Position = UDim2.new(0, 0, 0, 2)
@@ -1650,10 +1628,7 @@ userApplyCorner.Parent = userApplyBtn
 
 userApplyBtn.MouseButton1Click:Connect(function()
     local newName = userBox.Text
-    if newName == "" then
-        print("❌ Username tidak boleh kosong!")
-        return
-    end
+    if newName == "" then return end
     for _, v in pairs(game:GetService("Players"):GetPlayers()) do
         local model = workspace:FindFirstChild(v.Name)
         if model and model:FindFirstChild("Head") then
@@ -1665,7 +1640,6 @@ userApplyBtn.MouseButton1Click:Connect(function()
                     pcall(function()
                         usernameLabel.Text = newName
                         usernameLabel.TextColor3 = selectedNicknameColor
-                        print("✅ " .. v.Name .. " → " .. newName)
                     end)
                 end
             end
@@ -1673,7 +1647,6 @@ userApplyBtn.MouseButton1Click:Connect(function()
     end
 end)
 
--- NICKNAME COLOR DROPDOWN DENGAN SCROLL
 local colorLabel = Instance.new("TextLabel")
 colorLabel.Size = UDim2.new(1, -10, 0, 14)
 colorLabel.Position = UDim2.new(0, 8, 0, 68)
@@ -1781,7 +1754,6 @@ UserInputService.InputBegan:Connect(function(input)
     end
 end)
 
--- ANTI AFK
 local antiAFKFrame = Instance.new("Frame")
 antiAFKFrame.Size = UDim2.new(1, 0, 0, 34)
 antiAFKFrame.Position = UDim2.new(0, 0, 0, 150)
@@ -2016,17 +1988,5 @@ SetToggleState(acceptRemoteSwitchBtn, true, acceptRemoteSwitchBg, acceptRemoteOf
 SetToggleState(addRandomSwitchBtn, false, addRandomSwitchBg, addRandomOffLabel, addRandomOnLabel)
 SetToggleState(antiAFKSwitchBtn, true, antiAFKSwitchBg, antiAFKOffLabel, antiAFKOnLabel)
 
--- Apply default color
 ApplyNicknameColor(selectedNicknameColor)
-
 UpdateStatus()
-
-print("✅ BEGE IDN | THROW A COIN + AUTO TRADE + MISC")
-print("📌 Klik ➖ untuk minimize ke bubble")
-print("📌 Klik bubble untuk munculin GUI lagi (support mobile)")
-print("📌 Bubble bisa di-drag di mobile")
-print("🎨 " .. colorCount .. " pilihan warna nickname di tab MISC")
-print("📜 Dropdown warna bisa di-scroll/down drag!")
-print("⚡ ProximityPrompt instan! (Loop tiap 2 detik)")
-print("📋 Auto Claim Quest: Daily, Weekly, Monthly (1-10) loop 1 detik!")
-print("🪙 Default coin: Phoenix Coin")
