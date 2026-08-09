@@ -1,2 +1,2034 @@
--- This script was generated using MoonVeil 2.0.18-beta [https://moonveil.cc]
-return({H=function(a,b,c,d)a.F[d]=a.a(b,0xff70)-a.a(c,0x917d)return a.F[d]end,x=function(a)local t,j,o,s,f,i,n,x,y,q,z,u,r,m,w,d,h,v,e,g,p,k,l d=a d={[0b10]=0b11,[0b11]=d}d[1]=d e=type e={[0b10]=0b11,[0b11]=e}e[1]=e f=pcall f={[0b10]=0b11,[0b11]=f}f[1]=f g=error g={[0b10]=0b11,[0b11]=g}g[1]=g i,h=select,tonumber i={[0b10]=0b11,[0b11]=i}i[1]=i j=setmetatable j={[0b10]=0b11,[0b11]=j}j[1]=j k=getmetatable k={[0b10]=0b11,[0b11]=k}k[1]=k m,n={},"vs"m.__mode=n l=m l={[0b10]=0b11,[0b11]=l}l[1]=l n=string m=n.unpack m={[0b10]=0b11,[0b11]=m}m[1]=m o=string n,p=o.byte,string o,q=p.char,table p=q.move p={[0b10]=0b11,[0b11]=p}p[1]=p r=table q=r.pack q={[0b10]=0b11,[0b11]=q}q[1]=q s=table r=s.create r={[0b10]=0b11,[0b11]=r}r[1]=r t=table s=t.insert s={[0b10]=0b11,[0b11]=s}s[1]=s t=getfenv t={[0b10]=0b11,[0b11]=t}t[1]=t v=bit32 u=v.bor u={[0b10]=0b11,[0b11]=u}u[1]=u w=bit32 v,x=w.bxor,bit32 w=x.band w={[0b10]=0b11,[0b11]=w}w[1]=w y=bit32 x=y.btest x={[0b10]=0b11,[0b11]=x}x[1]=x z=bit32 y=z.lshift y={[0b10]=0b11,[0b11]=y}y[1]=y z=a:y{m,u,y,w,x,r,s,d,t,i,j,l,p,e,k,q,f,g}return z end,y=function(a,c)return function(d,e)local i,f,g,b,j,h b=0xc0 repeat if b>0b11000000 then if b>0b11001111 then b,f=0xb1e4/b,c[0b1001][1][c[0b1001][0b10]]else f=f()f={[0b10]=0b11,[0b11]=f}f[1]=f b,g[1][g[0b10]]=0x44,{[0b10]=0b11,[0b11]=g[1][g[0b10]]}g[1][g[0b10]][1]=g[1][g[0b10]]g[1][g[0b10]]=a:A{c[0b1010],c[0b1011],c[0b1100],c[0b1101],c[0b110],g,c[0b1110],c[0b1111],f,c[0x10],c[0x11],c[0b10010]}i[1][i[0b10]],h[1][h[0b10]],j=d,g[1][g[0b10]],e end elseif b>=0b1000100 then if b<=0x44 then h[1][h[0b10]]=h[1][h[0b10]](i[1][i[0b10]],j)return h[1][h[0b10]]else f=d g=f g={[0b10]=0b11,[0b11]=g}g[1]=g h=1 h={[0b10]=0b11,[0b11]=h}h[1]=h i=nil i={[0b10]=0b11,[0b11]=i}i[1]=i b,i[1][i[0b10]]=0x32,a:z{c[1],g,h,c[0b10],c[0b11],c[0b100],c[0b101],c[0b110],c[0b111],c[0b1000],i}j=i[1][i[0b10]]end else b,j=0xdc,j()d=j end until false end end,c=function(...)return{[1]={...},[0b10]=select("#",...)}end,F={},a=bit32 .bxor,A=function(a,c)return function(d,e)local f,i,h,g d={[0b10]=0b11,[0b11]=d}d[1]=d e={[0b10]=0b11,[0b11]=e}e[1]=e f={[0b10]=0b11,[0b11]=f}f[1]=f f[1][f[0b10]]=a:D{c[1]}g={[0b10]=0b11,[0b11]=g}g[1]=g g[1][g[0b10]]=a:B{g}h={[0b10]=0b11,[0b11]=h}h[1]=h h[1][h[0b10]]=a:E{c[0b10],c[0b11],f,c[0b100],c[0b101],c[0b110],e,c[0b111],c[0b1000],g,c[0b1001]}i=a:C{c[0b1010],c[0b101],d,c[0b100],f,c[0b1011],h,g,c[0b111],c[0b1100]}return i end end,i=function(a)local h,f,g,d,e f=string d,f=f.char,string e=f.gsub d={[0b10]=0b11,[0b11]=d}d[1]=d e={[0b10]=0b11,[0b11]=e}e[1]=e h=bit32 f,h=h.rshift,bit32 g=h.band f={[0b10]=0b11,[0b11]=f}f[1]=f g={[0b10]=0b11,[0b11]=g}g[1]=g h=a:j{e,d,f,g}return h end,b=function(n,o,p)if type(n)~="function"then local k=getmetatable(n)if k~=nil and k.__iter~=nil then return k.__iter(n)elseif(k and k.__call)==nil and type(n)=="table"then return pairs(n)end end return n,o,p end,K=function(a,...)a.i,a.x,a.l,a.g=a:i(),a:x(),a:l(),a:g()return a:f()(...)end,G=function(a,b,c,d)a.F[d]=a.a(b,0x918)/a.a(c,0x3d05)return a.F[d]end,d=(function()local function m(i,j,k)if j>k then return end return i[j],m(i,j+1,k)end return function(o)return m(o[1],1,o[0b10])end end)(),f=function(a,b)return a.x(a.l(a.i"{{g}Q005gK-v1f_04oz10s#Lj5*Gsi-WdV^0C*7u05vExzXbrF3PL0U!FazC1^_iFGy(t%`T_tO1RxU!05vMrH3T3G0stHW02BzX05vN%0ssvJART@LAQcG!H7qv-ApZ_RBzP7I05!iYHVXis4*`J;`T>AA0fZL~05vZ90f7($AQ%n+H81)Bfe{4284mz8FscI~5(oeq2mmn%0Tavtfd~LGJPDuyf)D^zH35bj1i&&3;S>bG%^M8hGCc&q0fG?#RW$*I90{N^1i=*vpv@c+z%xDszyX310R1%qh3QUs9TNcmcpel0cpnu2|9Bu40C*u60RMO*7yx)9836xyBpLvCB^v<$cqSYGcqbhI|9B`K0C*`M0RMO@AOLtPAprk)EFu8PP9qktA9x)j2!JFAfF-I3fF=llCkTKj2!JW72!JXGfGY@qEC_%t>Ii@?2!JmK0TVA^{~;iF94`PyDgO>6C`Ky{Br5+#Ee#|r=~hO6F%3*4FfafB<NYxJ<T3zYDJVw&Fb*UyMlud0|1m~14J0#0HvbMJHFzvD0O|i=-a0e@D>FF%H2@(t8v!9V{~Q1zI2-_<Dt|*HOfEV$00XE}10Xj9AOoj21Ff<LU`rbT2V^)0X$v9q3n@)G3n}CP4&w)AItOi34&ei)I|Hr37HK>OZB>ODAkZ2mJp-wy4&>?`<~|PTtOKA50U@h6tRba81F6Xap!7;5U;-WGKo)T+CP5l4Rj4fKLLKeWFreKqrDa0{shlNX0AM(rG-atoFs(Q$MI~wWEZ~f)JK*v=<wiU4n?I#Tsx0Z$G+?4bU?)RmNK!DV7Dpfwp^g%zNi=O$FiPOB7G+8nai<z3WlIC8Y(ro};5d{W<yA~LEn!w5FCnE(3n^7+JLH}vWlmChPf~3alwn{_Eagy6trH*;r)5zCsXirOOJF!YG-Xv%2Wg`zAnI(O2W2HGQ#<WADpWLS0(2k%V5>M5Y^7BiEt_}XY?4D|R!1>XW>-fsO6FLy4(U2Spa5VvI!>iozW`t}GTu3dKr)p#hd?!h05*I8hrplzDMKV`LN_H^{{aDNLpcXp0skIa0UcTa0&4d}I4}Vs9$+{$|DP>DBi=k(0Pku>Hy8x~pDjV&0mV960R;iUYDNDz99jVnS^)_EYDPH=S^*JS{{awM0VQfjIQ=OBA`xIaH=i*7KqG2MHzryE{|RbIITcy~6aQKP5?TQ$YD)V!Gyx(LYD+jM|5^bSS^)}bO!+wjpaftPS^+C+-%U6mS^)td72f|wTL3FRL|g#>YEL#dpEf}w|0_QmT>xrOHvb4UR9{{IpEmnKBLqZW03kvhbOHbsAVn7dPc{t&!B^f!U<cu020<zYM!R@D(x6l}Vh7<QuaI610K0%b(_mHoUjjfkLL^{8K;MvFM*txXpf@eQS^+L<P&XYQ0bAZl5r9HR4Io7gAh|grU;+mp0G|Q?VDCghpE(|YQ8*X=Ccs(&3u;n1BJ)}SC}08LF=|sd_cK}n0U#J)M?<@xJR^WqHzY9ORsT98S^*kb0U7&R0V4nmYF0QnegT3SU`j@xKPZ6TS2-+N0WIJgTK@qJYFIcuS^@q6AROLNV*o2k|4(E9ct>RbpZ`HYBzQ+=08D>IQfB~0Qw;#%|7ZYsNofEzVEr;30760}{Y-W5kZTeE)_^{00DUzbX!+s)cuEBT>tQnPU_&3kO-%W{APE6$0Nzs!Kuq;f3_wX%phH0<-v3l>04q&WWB~giP|g5Rm;oVD{?7nYNCBTjL?qu#NK|eB1SWV&|8D>xQC|OeOuujdAybC`1SD~+1Rzr2O;XxGP>#S+|1JO_Qa=EnL~hzZNK|qbU~>Qo0AF+fAx|Cw0d)oG##rD{P6gn8zy;%W09Qs;4i4aV0OWW8<W+eA<az<*dkH{M8Q?io8Q>SecuIT@KpEh_Reb;}PE#4+QU2%vQYZkQMM5P1Oi5LK08B|!as}X3AK(MQcuRi+Kw1UhR%&2RRPn%4YGBn<5nxo1Kt}PvN>=}X0C-D*08C1AR)QYj7hp<Og8`sg2%%Oepifja08A*LwMGu0S16!RRVbiSuN?p(RQEtt`v6vNKmeadD4<JMD4;+DC;mVLCWC+kBPgI(5g<!YRePXQf4~wURS_WVM-d=PS16!NgaAiOOIIkMGvEOLbpfDq8R1ts;12<KO@$4BS{dM2Ip9%NIp9<gAm3Hs{~=a7;8!d+0G~)X;7nLK-~=aD6yYWS1S1{<C2>1|{~Z8KOjvXPczaET0Re{q-dH4{t5H^uAXJYaRga)n?;8Q1NF<<4Scv}s-dTwND^gd#iU2E7R*MHAimC`eD+oc117(c^VU8*ap^XbbRyP1xQ2-R-t9VWq07w@ASy2E|RaYoLRTltO7XVim05w=R07(}BO<7R@1SdEvffoP-A}|1-1S1y!?jB%FO<5NJPLBXI0RR^OSv$Z|SEfJ~f}el@Ay<F};1>W*wOJPcS{DFQSQh|NGgpuX0T%#NCIJB#0Bi$e7XVUM7XVFJ7XW2V7XevlAQa(vPiP=DNf!WG7XVXOKVU5)?^6IFSS}!0Qve&EN<UyuS{DEWD=r|?1R^E`C1@a8P@q#-(7PZtq8|aqz)CCNPFj9HU{8?%Oio&8AOlq&0Rd<r1?RyaB?1NJ_Glnm4F$k^07hG#4hFz@03k^L0RWOD0ssR6cL{)JL0T{%7U8RSP-j3&830>nKvZQ}Sb$eBAQ*t3OJ_h^Pg`d|Pg#dRTQ(q81HpJvXFy9fAY5lat5sUjz*y11S!Y06+ExHeLV!?QXFyStuK-L?TxUR6e!x)GTxUQ~2%%g);8j|_oM2Lv0G~`g;9d4U;8t6bAXAk9A^%z&0C-iF03kJ8=Aca{z)@X3-~=b7mjoo31Svk?SXKa0{asc7QkeiuQC)AE0N!0b;8t6bKvh}gKw1D`TUG!~6JWnlU7G;jURD5Ce_WgZD^^>b1_70vHh@?MA(98c9biWPUJc$}o&YOXe_Uh$pH4s|65-q4U=;vaUIGA6K>s90Vhu)P4Ql^uISE<;N?HN`J6ZujYHU0*|5^b>S^-H~0e?nX0Y_Q^NCKfpZ9E?V;sXN$Km-M0%WgaLz(EDY1z<}n|6o?10AOTYHM@0y;NVw6BLV=RssaFB0tul6AYTL~-tA{-U|?k@KwY8$YoAwWU}z~|VP=rPePn)sWi|jIW`BU+XEp$zSW!S+Xt-!#1Sf;QW$gb1BO(3-C2;_FU84X@Yg}l4U}$GRVP?9Zzhp!JA!R=afLLq^08(IFXp!Juqy)jIbO7E2$1NabEud!7Eg)C~!fYUEEg)iN&TJrIW~BxJgFs^}z6T+U03l->0wHx$0RTD!K`&rjgCS^xAXXTGcwV|dSc4#GQsAp%XKVmv8K7nrU|IH3;9Y6DKwW2R0RJmuWTpUWb2oo3S^-ZrcY-H?U0El9Vq~WRff53Y->3j!W?TfO-f66mfD0jbUnl@s4M1vUQGjD;d0;05A!rUjHEAdST6thzYLI{gCl0INX955OBNBiFBPamBU#S30UTUU*YW9y{V`wM<X3zj3eP<|uXhZ;?T6%yRUTV4kU#bMbC;$Y<id8^oRlsOfKm@~-Kx?+EU}R~OKx1eq0A4j}t6*iTU|wn{03qPC4In50Whek%YFB_>vM2#+t3VimcwpjST3RRoYkL4>X_O#mC;+u+C;(e~0AFk3U|;QNC;((;C;)XgFTYv=Q8jslC;(e_C;((;C;)Xg5CV+<r~qnpJ_cF=|0h}jDp~<8TK@qvS^+j%0XV-}0VG-hIS0nxS!=t%4ncTf<RDu(fURtNz-4NrplH(IY3~vMA!<2*YdQcMpIp1ZU~E%B1Sc+Gp&<k$CO`xuyTE7C;9y^DbO20X-$881AXW+?cw#qzTtwh)i6Gl%Yl$FZs|&yy0IMNu4M1#(AYI5HVHs^-padl$X-Oau0!kpX1ShcoZN=bbYhHk9Y=+<jB%fV2U}0_WfInia08C+R@PHVA_yGX100sDV0C-|E5C!2uKm^N@Kx<@x3d7LAZEieZXKd%-W@}`CYhi6<fN0RbVQpl9vuH35L6YEMYv!PBsOF#?Lt|iFJ3wx>U}w>6&wv@CV_;skU}A2TJ3wM=1>kP%paa2p)nr@%UO_-_t)OUazOA5TtpFixBw%f7Sio*1U|;N@V{e2YdITq~1Rx*)A#HA;v;-$4U~lSRXl;W4YpR0)Y=Z!8g8*Mz;A8!7THs`_08C?Vnj~OqvVdc6Bwz*SSi}k-0AOuGU<KnOU}Uh!1>t4D3diIR003ZZ?$ZFD3d1B|aA4qRZnh*~Xl;oAV{as2YH1}6A&CHLBw%B2U%*9UBw=sNARI%7;9p<B&2ZY_X>RlYL0}<m+9Y6L+TdhxU%+H;vMOM3(jWuDcxHfrVA^HCanc}aZ_*%Vu~z^gZX{rDBw%nz;7wuDAZ2l=padtf1R#$j03mOaAOt5!;Bi*Z;A(HDfNdmTZl{2?Z>NA^e_&;Ce_&=`vj9wGaY*27*8rnsaU@^`=Of^5Bw%kCX5a<mNZ@9)1>q!M3df2hU~T|lZzNy}!${zAwuNA8a7f^4Z>@l3wQ)$`Y)If`ajk%CRwQ6$afCo+Na1ntpwt{gBw%5LKyv?JYjCV2U_oFZZ%E)`|6pb<a)dx;a8BTI_Mij7t9WRo0Ah+jbM~NYeR1}nX|(_$a7f_QaU@`JZD3>epl5UR%^(CPwgez303mT`x1a<kZD4aGU~F;B099|y0C3Czam)Z?qu~2zb0lDBw*X9MHFIrXZhoL=b8TP+=ZZ*Ra7f^Bi(m!gBw%QvxCP-z-~`7cU~nYhacD^33d3z+bgAHNa&2H+Y;n>6XLD^}ZX{r9XLHg3Zb;x~bEv>YXKi6~i{KnXNZ@0rz|C~f;B9h9;5{HAaoTNQWNlz*bf~~+a<X$^bdlf#!FXyCz+{@Pz;$h4ZgWoHBVrEs03mbN;B?ghpN(b7fN6CkU<4;4VI%ScBxVF9@t|tC08DFXb;O``N&s$i@t{9(D*z#KDFr~MV4Y>jfN6Dd1VEwzb*!QQ4dHle5CCPq;C2>$fNyjV0CHFW4}w_$HFcr@X4#->b~JzlC&24K6T<931ShUwI^axdzjky0Mt2SX;Cn9sOlowH;C8QI3n8m`Y#m@`%s_XF;BeJ-9bj{1U~~wBA$D&*0H0^)0Bd(a;79}~AfW^$9t0(?V0UI<^Kf;qU>w18GXNpAb>-k^<=|^~W?*a|x&TaTcduX>fB^s~uV4k|iePk#;B_wm1>===1z>fh;CIAe62W-YZGm8C;XrudKyh}wGGG*9A^@LgrQmEWc;P^7cB|lc1>gh0r+99K13>3Mc^cqy`FA*AB7h-wQve~=cY$Dd%3x{AU~PGbT;K#NfnawiKm;e&z;yoBz-@VS0C;Y@uK-MKd7VIcgP?L%cg&!5Q^0mqKzCF?t!W(~ZF#}Kdj3Fjop`~(a(9ph0l~m@zEnVMd5i$w17nR}04s8LjtPN{3Lx?q0eKw&6ybPpyZ~#TY5rh(G5~XUPk_C45x{qz03i}UA>Vm20H12%fNpyHbN~b^S^#)*y#S{nc@YF9;edLWfOA!N;ed8dV0TVnc=h1zYBB(BdYFK3z5q8&ZhA5Rbshl$;ead!=jVWTP7YvB4d4ahA$Au)38n*~0AP6FU<sqz;9z^Z;B<N5U~_o3yWnnm;9zwp3gL_o0C;aN3<1PI1cM)-yK{ISpl*7NL|`kF1c931ZXm&WJ>VXpc-3&fU}_-1d%s|Gd1!E8GNN{1YvbT=dp+RyZ+UATK!*S|iSLrX0G|TDYK1ue9a;flS^*C=cZrl<0zo6*dq?1^2f=uaL2D|&d|cplReE}0c*0<LJs^4jU^RPO;B4pMaD1NN1Sg;apadpaAOs^Sz<k4Cbt!r(z$-y{T;O^Gp(?=paD2mHalimfaDjYW;7uR_0G{9l=jUK~O6TBup5SZ+;#}ZxT;W-KT;LMHcyiugY(Kz_eIDR;dyilgVqD;DwjSVdeO%yidt%^ytYY8;!FY3A;B7^~e&%=JcYKv#8RC=xA=P}|V13?TZn@xceuTN;1S=*4ARnLvCtTop_O$?Veq7*l!2nEaa(?<ie&C>Yd`JM_dIA9<djMd347UNFZb$%fe$~K#w)#MLefmImd|cpiHGW*+c|JgLeq7)KW42u2cYIvna(-Oka<UfzetG~D;dpc)U~XDm;D3(*czvvZdoh4%d~^U3Kp_s`pKlic<8yz}00bxaz<k^P|9E%803m)50JH=oT;PB8fOvge;Crf4pnO)~eOBOaT;Oy4fAxTL!vIWke;SVfdR*Xhf6)L1_%Z-xa}?o!j{p+Ecy;UmwQq6YfKdQ>e!+lz-X_5)0H1I&0Ca$sj{tOjl>mU100Y5z)pm~naChK=ssMU_yvKkU;xGUqe=-1onlb=!G5~df>;MESAm9WbQNRQzj{rDeOm%@yG5~hO0097K0D&DKn|gnGAbqkRU;to$T7|%IdLVUyj{t&?0NZ<j<6wG!j{tRnhB5$rBnKgn00Uz(0D4n@#R-9r0Cg7ufvg}_6ybPxrXX>T0D>0)t9yWMAbw+@e-{9NYDpl0Ng#4bAa;V@pu7YpOkjTm03jN{A+!W1rXYR(Kz4#jAa`HJ08Dm*7XX460IPd|kwAWj0Dp&ofLe!ua*;rGf~FvYrXbyX6~HTdfTkdJf*MI6eHQ?Bf)@Y-V@V)edw>@Jc7moLb{7Hpg2O-*;dpqW0H3vTrXYhZAbf#^K!5ls;VvK+fFXh~0H2L>7XWvI^}qxtF<}J%0C;=H03m`BGz2B4AcHI5e1WDQ6hvzwffT@VrXY8NrXas~$N)@tgV;cR=B6NbgV;a?_;vtzD|pET;fGbAFaZIafMs_sL4(?W6#;m8+JH54y<mi#fPI3TfGGlRCIFvweSmm`+JH-Vg5ZFJ;D7_cc!uG%bi-hUOJIJ3qJV*_7~q1KfP<L;gqVPJhBQEVh1!4wC!9b8CTi0Fp9CYrV1-E_euGrQU>%`?^?-x*fOW%Q`+0@KV0y{`OnHHY^?*Ns0RSB!1?Tkuf}#LmgP4E?<7Qxan1O|?^?(w=czgALb=Y8rMz?@}gtveYBA9@7n1EY)hV_7Yg!_Po`+!yh!FYU_fOg(shh|`-fQ7w)8RD3Lg*4!X8km50Pe6Nz8sG#gn1IoRxIhFa^?-u)fP062n1FoC08D#_W?-#{W?+DY;Glz;fP`w90EL)<ci^CVhfhFlh)+O)hV_7eg_wYAdxw~Sg4W=BhnRqD17lA>fQ9vddxw~SWqTI^hsvN7;dp(y0JV4ZfQWs7friwegwo0&g_wXAfFTaxpLj-QV0?%&00bvbK!uoqAArmNA%~cN1S9o;t%!R-frj;fgnGb*YI{J2dq8;gfP9ED0Ka|B08D&{%AkWr^?-bcPe29uG5~xm0a=I?;1a=jelh@fEC7v(>7as#>7XXUn1Fe<%AkFT>7adwO#q3k8sG!Lcz?>Ec`^WsMwozui0_~o;%Y#MX8<*c%Ak6IV19~C00b+-n1G1tU<4;J061Vwezl6qpnsTveu|iYidL9_gNWzghJj#*f#9`>fna)pV19~$V2ieaV1$V>0E39ipnf%q%AkdqfPRWH00U#TG5~{!n1FtY%AkI-7XgYg02JYPfZ@P;T1g;_ub_m97XXL+KvjsZpoxAUis8U}n1CaHi)0`KCxKvyn1C9<X(0qB7XXGyAb*SDz^#CofPagxpo_1dgjI?E0EaX{hyY-TG(fF;n1Fwan1GC!fQ4=qz$=7_;lO{3;lPcC7XW{YNgxAbNg#x+iLao4i{Ze3E+LDoNgx#Ac!8LJdtg9}hQ`2!iY_21;>N%dKp{1Yn1Fn*pn!~fKm;rQAOLuT&Hy2cXqbQmBjLb|#DIm0E8tct;30{v;EJtae63*nfQ)-UfzJR;fHjPmfQRA0fQ*=c1?NN>K>%Qi8o&kPn1F$pfNOw^n1F|vfPjpcfMtLeA&eIw6#;mHeSkH5cYuxL0EUYfASnXcn1Frc0D+B5V1bLWn1GEPAOpd8gUsN4T77_y<N$|^9UzLafc6*QA&j=bjVb`2jegAFf{vJg1SbO^i*F$SA&j=bjSK`O+)H3OpiF{}G(dyUX#fEL<N%K30EdiAU^9w<BB0G+jDQ8;%;0N+j?CbX%;1QPeSq7CjLhJIj!R&PC9nq}eSiaFeSn9I<N$&{j*S2zi6H}Fw!q7RbQmCxHDDG2c!X+xpnjFWkNiN0jWu9Vi^;$jqRPOIW1xTKAOnMsu)qW-8(;(?9AE?|{9~XWfJ}prbO1(skPQIfdjL#>4MACtLcj|lc!i7rf1@Cckn(_ujzYj7LI{H)HIKd^fbxKZkiH-UC!8q31SK8-p9CX9z>uaRK#7iSz$3wpz95d;z94|`K!lLKAcfHn08E6CLcke-0RY=z6b0wLAdLWEjuC(b<GvuvgpN9ZkXOJG!FYyhz94|OAd$WxijP;oX^kBLz950VAcc{P0Lz7sK!A~5zyrZ}hiX88fxaM;z95T`UBFf%fFX~*AdvGQk&FP1g7#pBlGz{xE50C*XdB=JCyW4%bl`@PK!Cr8(f~|`lD;64RzQG@kc<G1z95gjptX>`Ac7qrhLUvPleUZijFG+|i;%t`hBcCm0FAyNhLXM@17o(nAd8T`Acm53;D)jn0g`m!6ybP?G5~^F)j*TgK#Y-e;Eyf9X^_4k7JwlR;Gcu=K%<9~@IVA7i~x|nAd8RF03njTAOs_H;FDHWV2qKV;E!%#kZ$0$k%_>AG608@@IZ)P)BsF}lXT#Yz96HAlkh+V`0zl76ycMsiQp2!c!}^pgX%z(M({w5l8N9Z!oDDcG5}kMl)fN{l5(JwkKk4V!FY;tpo9hBmGD5Lj+2kz8REVmlcT_t8onTfT40Hl@IVABz98X~P5=Zaz92YYOo^3Ra-fR7Ac>VS0F`o}tB#YtAdzw)l5(JvT9P1zPe6&4rvR3|Alr|W@Ia1}G60E{8onTqrvQnS@IV7&@IYIRlfEE{l`;T{7Xew7rvMb;c#Da^g&hE`mZt!Zl&1iaU*MCf)j*WG;FZ-thH-$3k(L(#1Sh^AlfEDpfFZO5C)Gfaz95R0iNK52z95R0Ng$Sqz>k!w)j*P>z>}jul)fN_R%T#|mcAgD)j*IHz_%-plu00pmeoL!#=anmmeoK5V;2CAlvdS1ik3+riWdQvz93c<;dqR`Aciy`mlpuTkd?k5DB|p37Jwm^8onTh7XXWwE+7Oez91iu)c_%uz90l6z97w)o}iGG>L4oMA(U#Kpq0KLhkHPamwQ0JjMe~5i<iD2l7_w@i<iD21?L(;z95xo*#HIOz95XgAd8p2Agz+VAd8p2Ad4<Rm#o!b6#;mSz95H7V3<a}Ad!~UU?~E=Ac#v~Ta1`XV2qZ&Aeh@=ssq7zhT(`&V3{;Pl2w=6V3qDbmXyGkl|bK^djOw_9UzUFfJ<NmCzyZ)CX~PgBimq^*1O=6m+(N9B_NhA&j2BpKL_BLfQ^}cn1GJg08EXU9U!1TfB^v8U<K!xfR>p6m-?z8i3Q?z07jY)k_4c424I<ineku~!Fbh=+8~K%V454?lbC4nU=?DSfQn~ej+$p+%Z`{E;F|Yf1HpKZuh;;eifv$<P(YORnfG9q)ZmyB03p?x)!>@*Ad5L5kDJhEU<4;0A=)6BwSbx-(*U0YBTzt=nShU*95rAg;7pI37$62~yMSm0Vp{+TquD_~AOHnG$=U#b62Y4oz!0H$k!jls;DA7!G{BXbl|a3i2Z0~}pNxP&kl&o#0N$P9z?Pf;-2f|<n%)3R_mG_30Dzin0O|k4V3(F^r8pV?S^<Ju0T$k!|K9-V$at490RMQHF#vd(G64U|$ejrvV49l$pN>H$|C$*T{{RgDV4jv>pZ}YmlR+fC!odHh#L1(%E1aR<-~dLY4FX^z`EN@F-kx*-mz<^`)tb}*o78}u)c~D__W+-cBcYzz0Nz=iFaQK0c$D6tj+cNfpL$@JoveVH{{RKTYV81?dSH)ZK$D-5fS?2?3I*Sw1Sfi6n!})zeV^<ApbboupX>l-lk5SX4L}Pac$Mq`wU4CWpohSjp1I(hTKQm|2!kP?>;RB(paYbkp5O#07U2XX>;MEKTDjn$g@Bo!&cK`iVAY-M0G{jskn8}Ipng+emEizPl%Q~+pc#Mx08?NE=j;HT?0}wF{h$Tox!{zZXkefsKvojLc$QLNkh$QYIe?>@pU&VEVp3p{x!{#8p;BO#pKf5GC_n?jt9X~W;E})JqN2c?S)kP5Ccq(|>;RzApf#bQz><rgmZG`f1S_KK0HAXq1Scp!o$LUX{i5sum*N0SmZDmsz@nnSo1h&ap6meCpX`93>;RID;FhA=qQIl<0Gy%h0GpuJqQI7-qQIT(0G6WIqQC=Vx!{|i>;RUc%IpA^7XhL_U=-nam});@lGgyEx!|0k>;R>og#e)J02Y8D4&a}SlcK<vqtO5aCmKMYKI{OS;{YL|>;MEKTI>L$6u_LJG60{VK>wgl03o4H0H5uXqQIA<g@Bmk0M|^HqoTl`qQIA<D20Fp_%Z;OECHibU=qQzc$tKNU7+5iYoMLcqDKHG!t4N)>;RagmV|(qqM(4JT3`dgc-5LR0F?3orPSb_qo_>)8REUbqcQ-b)Zmpyy}+5J>;MES>;R*sK)3`aT3|R}Oqr!J0Gih90GXxK;H5GEo};QyK%vxNqSWA{)ZmrYzyO)0)ZnHv0H36`>;Rsl)Zm$=)Zn1T)Zm$=)ZhbS>;RslR_p+orPSb=7XhVlfL0XYc$-NemA#;*>;S8uq+}qXw;-d`;G}9vAf@a8mek;yrtAPD1Sd>jqwD}0z##-Dae%F%Ng$f0Ng$i-0GhR?>;R@oAfKdWV4|wlprh9yq}L#p*C3kJrtAQxNg$vVz$>4vr0f8irtAQr>;RgvrtAO%W9$H*q!$31m8KT}nl2%xh@ceVc-5Tj0G8Cir_R8jrLY$ODB|n@5<nrQ>;RX>>;Rjmh@b=~F<}G%KX{+z03oLA00bkN&cLT$0HCFNKomqFwWaI;m+SzWr_R8fU*-Tzo2TpmqU->po2Sme1^Da$oa_LbwWsU=qU->hr|bZmvPEI1pWqb%c%9Gymm2H<sJ9@YrWYV70_*^7n9u;6sL%kMrtAQzsHNZo!FYz@nDPLrR_p+xryU@re1N9x0M)1LfT);&na}{8sem0I1Sjvn1SXWg1S9MKsiu2CqNkXE9igU}fT!#Oq2>Ucsq6rr=Ku#xovG{qKY#%M>;MJlD(irz>;R{?fSCp2n1E%Sn1QLf;1a=jpX&fMnP6b5(jcR#G9VOU+Uo$C8sMI)>j0jpvYvpdz~BSHc%Yboni^(ctLp%ysW>1R;#?rrshEJOz~Gzf0H3RfI3NTon1HFw00bw%;HLJNfS;>RK%nRVOlzO3W?-wBfTXFlz*VQ10H^?9shEJ97a(h&t4~0zPe7%rW?);Ssb*lGt4~0tn1ExStC)ZTW0-)XshEH(pQ~nIpBDkE*Z>sat9YRxV4Hn_tlnUym8wrbs1d-an1B*MAvO-+pPb%cpsY_o1Sk5k;Hj8^r0D=5t7w>j1S2v4tgT?Bs>+~MsAM3in1HI7fSfD<`=G2c0HNvtOrSNan1H94fS|0(pauBK%AlYu0j%u+62W+)YRaITl7Owspr)&2K(r>pn1G#40HLjzfT3lp(4ejJ00Y5zqspK)otS{G8sMj_YCsv{s)1mv%Al<>0G|0^q7klYKm;q8fUGhA1Sj(Vt~g*!qOO5pqnLoAwXT?euF9aNtQ{b#sysleJix4&fSyS}qP4DpV6TB-sI4*pr>(4*fTFH}V5xy%qOq>ZpaWwv0H>^hV4{_-n1G@e0j^{q6ybQ)q~XAxub{6o0I031fncjc;H(z_t>M6~8c86ZfncMrfnWqD<p4>nn1B|5Ap|F{psL}(Yoo82fTWm!qpz=^t*_z0sI4?WtC)bSYMB77gP@;aV56@W0CljKfT<P0E2yonplhSAn1HI7fTOSBz-$9!7XYZOn1G|Nub^e4E+MabKosG4rI>&<pT@wjNg%1Nn1CqatS%rDKq0S~fS{Owq~WlbfCMKoVVHoZ>j0x6ub6-YBYQxw_MoX*u1O#iL?N!2fS`3i`=qc*Af@a8Or$liNg%7?z@)HAAO-kZn1H32fTXaPfUB5*E2OZPfTTrXu#$ik0jqeX<N%=F0I^G8s?o2nz$pTlfT5UxrLmUe0Hv?w0I`^W1HpJ|hT);)0J3IatFX1eRj$aOuXw<)c|ft4fDNLxz^1abzyv3JfCMI|Y5<=EBbb1)n1HLPux4N#p|6;Lu$(}m_L6|6vSwhX?Ep*zrm|*WKY#%MW?%*9m;gnun1HaDfCb}bV5XRXS+cEw62W+={{W)-0FAR6;H<IAz!YMbfTOmvfTyz>;HR+~;Ipi=fCIsJspsIM{{Xb+fncq&(7+kuyZ|B9vgDw%n1H0vz^Jr{(7*&Mn1HgFfCMK`K(F@a;Hb3c;HmBaOlzpL{{XbLz^$@_pjEJ#fU%hXvY3FRufS`lv}Rzn=isihn1EZYvi|_6wCCWjn1ExbwEqADV`gBjvY3D?sI>n8s22gW%AgeCt9Yup0Ho*OwU~gem9yvIv8rIQn1B|5AvO-+pQY#EskP_e1Sk6c0J4~Xt?vLKv}l-s1S86zwaTEbvzUNYvA3YI0ARCwK&8Z>`>C~<fU58SOsO@sn1HZPK&iEufCc!<G61P80kst162W+@YBB(&6yUZp0I#(C;It;fn1H6`psKb_0IFrQO#rqU-~+*UtTF&KrW)Y4vw*O*%AgtIs%k*B|Dd+Ypr?Ugs}Z;5pad(JfVIk?1Sf%Dt~g*!tG9t*teAkSwYM?=x98xnwY9*rs<pthwm`LPfT!W$tF^b7fVj$_v9`*fu&uQ+0IRpkpt6BrtFgB-00Uz(0I;=~fUA|afnci_0k<*$6ybQ)tw|uKG61;Bps}{9;lQ-qfVF{Ow&B3H8sWgGn1HOf7XSn&10YGYn1C9<Ap|FwfU`*;Ypl4KfUTH-thh-at+@XHv9`?Mv@}4qYBa#Mub`;;0IayLpmn(y0J0UpE3vjoAZx6+;lQ()fULMlAZ!C;Ng%Pd7XYldn1E%h7Xi3QAQa(vu9$!|s7WBX;lQ%D_~0nwteAinfFZb;fT<S%t@*hwAOtHQ0C=(SM*tzXn1BQ$;lR0=fU~l<;lL{3A-3W`x7wJ1sl<S-x#7UB@~;3)t-0aAw3vXcA-Une1?L(;PoTHTfCb}Pn1HUBfUUWhfV7x^E3LVhfUPb;xnN)w0jqegeSoQ8V7h&Pv(dPcfGGl)fU13fuDX_(fUdZhfVyU21HpJ|hT*DaV7vbSw7HmoRkt%hxZgmz0N}dh01c}&K(D(?U<4=Q00biN<NyRG%-}kpOs~6i?*K-;4FKSK08GoTbPYhebHEEBc(H1fK&x}WymP>{x~1UtxD7zL2!kQJSO6QJtU;i#yjZ{lClLYC1SK8>CBq=R!yvV~s&l}&bU?YK;JT&YtoH99u)L+<vGV{-1F*cM;2D4c0K*^!=cVAqxu#&crQikQrQoo-vLZmdh`<uTc(SG7tQv^Gy(mDoySm^MVx{11t)<|xy};nHyC^_ey^g>G!FaQ!;H{3pt-g-Hx4gjMx+p-q?-BqZyceLoDgYawu3Vt9zH`6?CmP^`yCei88sG#Y^*}D5Ogpl^^+2=q0097{;H|zLAh*1c0J=v&yJh4CU``4kbHK8`rQmJ9bHKR0bHKN}T%a4WzH`92CI=y<-~(f}rQo-`rQou@T%fYD7XiMd;1uC_v`YZ4TBYE>7XY}u*Z{i{z~8){03p2-z`im!0H3dOz_Y)K-~=n67XSnzVBiEJG626a0JyEa6u`SH8o((CU^?sv;E15Jzt{k@^#IpQv%lB?y7fS_znC%r1?OTQyiNt+8o;kk1>$x9-UF)yAie(p)B~d)fWVSqxg9_&xYNC*3gI4ry2OC9zrTzCE4UVC0zrrG0C=?a17Y_7-s}a##^AWU#^AHRjZXj}x+@XkXMnRgAz8o303YFawdEkM$N<g2XMnlB`XD$WApqN-u;n1Mz~vyczOrY4z|H^z!FaZWz_6Om0Kq>Xy1#_LCjwnp03p9S;J_#Vv76xIwZXFh1Sf02zSIBE1S5$61S47?!CD}?zsx+~9Y7(zL*NKtpRx9^z_r270Jiu5Ol!5lC;+_90JXtdAPfcgguu4>1>x<$1j{X8(Z7$N3d2Xh!n>fmz_z=fy1ywPwZTWgyv|3!wZV)yfQ$gO!ODyPwOygX?0_6Wc(-cTfU)d=!i)gBz@tF46=Eb{vLs-(!q<Sd|G;YiE4#g@0RL*tI2&34rdt02AvMt3UI3q;vO*)?!u5a#!FbiU!(g)YfWu~>yuqrhK);Uwz-FMqV_?D>W}vgfV7J5CfCMKhp`1^E1R`Jnp9CYrV7~UlV7J3&pt$+~Ol!Bp+JM7@;Jm?RpjI8gA;4y!!Aroi+JI}f!)Bnw+JL>n9>80?!NXv;!)BnqW}suY!`grYW7>ec!9}1ex5L9=w}ZjM@t_ppt9ZFSfU|?Z#C^cMRl>tyz<GedwBW*efZxM70H3tlfVjkv@t_1NW}pNjas(xqz{FOVz`eqIfWUkJ!I;3c!kECc?_jvZK7hGj`v6S1#Acws!(hX>#6Exp=VqW9Kq0~yW}pS*!(h2N1>yQY1k0jq0Kz_i3d4qA#ri<LZXRGOy~1a}xWtBFt-pp~xWqnyzdnGtmBc=PxE^7|T>u<Gc-6YfptPbu#mb<*!)P90G=gIQwPOIe#mb<|xx>n!#bW>i!Fao`*Z`lks6fV|K)=z%Bw!yR*<i$<0L7j+0H3!10J_Fw00b+fJAectkOU<pV8*>bzxBkR0K)I!!!7_Jv&26K;QYY4#$y1xU;F?}y2gtj!9ZZ6y2fJw1?RlL!vJ8!`n^E51>$x9M#l~61;Bd%;0^%bcK{))!8!-wk^ulB2?5$<37{V##(Y2*0eHM0Ahou^fXC_Jz{MFL!)muc#DYM#f<U{+>EO$|#p&S3f<Oboc)hRN0H3$VfXMIQ!O_MaARZ#TK)8rNyvXm|0N%-NV8X}U{{Sn&#@+x-ywk|t0DuTUAqxQB$p8HSV8t<?xk3LX|HT*;00;p89Kt=;`T_eP|H&Ny@8I6b`THaQ1Zo)-089Y?9PK;<04M<7{mzoW$IN5^c*JUwz`oc3&(Z+M%`c$U%lcr<(g4lQz|J-|0H445V8hRnzyv2A(g4gM03ie-{-6XS+EgIV?EuKl&%nz%PXHmzI0PWH;J?qn`@_$Yz{LIlOv5$Ly5Pz$pu^9Szy;@uFQCjYAkFOn1>@}i!>i1P1^~_10ML&h$!*S$Ajr+QV8hSX0By?G0K?BvfXY7#p~_Hz!z)40t)Lj8c*SZ^fWPwK(2pR=&PsrN%;=!aAON4hD?r=C&@n*7&W|9;%kGaL+B`dsz*+&d|5^d7S^>0L0e`Jp0U|Zt>5!oRz(OPWBLaNUTi(g_;KIjKfW`5k^~Ulb$MT@bH~>=r>ASlj$tD2r-{s@VpSe{5$=UA!E5g7Ez|%Jx?g>CO*Ww7^xk4lVE5aC`0BX}YWjPDt0}WsUM&8N9fL05kc)uV3xnW?+h2TrW$YEf{od69%$PK}7J^-J(?4Z8N#DGWyClQ1MBC-S}h2YA>fUCpEVPM7pV8?~v$l8VAy5^w1%EW-b|E~Z{zRK*N#bIE+QOd-C1?OR4$6?^eF`$$M<1wJVn&HaXfD*xY)xdmUx^`g8y8y(=ymnv|Vj=*ayH_B;Ez4aXzsX%7%in+l!K-+|xB$Ba;LM=l#ktCSU>V|+03ktOAvMcLV7%Xez|7x(1S_E?1R#K*1Shxv$9I6heayH3!2khFz(j!C-pt{^#mXHZ$O88PA;|z>$_xRYt-PZkz|6P+%}1cdZOhi+#mcw<z|6P+hsP%X2Ozir17o-V#jVQyz`)G70KgXk%&hjH6ybQnAYi;50L|980LIIcfXNZS%2Txf7J(rS;GezrpuzFY_MikO(_qTm|9F4J0RbV*5C8-uTDSns_MpbgG62czK-0=j2w<`Ry|@6u&3^Wv!U6$I!OixdjmY+(!Oixd1^6-m!Llp?%@p7g!Fa>2fW5LZ0M0T1df_3;Cc!AT0H3~zK*G*40K$RHk3fFM>L7m0dV!{Z%@XS%&U%J^&LDozIAMDNhj_%qabe0}fd}0{%m&@S&Af>KfdYBUG5~qQ;UsvW>L7hX>LAF?#RPi+>L9}x0ec4*0DA)JAXIw?7XZ#>AkP;7z%l^K#L!6~&;%xEV9f-J03jN{Ap|E$Ae}%=JH*gQAjQT20RR^Ot<cBd$<AhA%;sRtYUbe1;efz2K*Z1&0Cmxj;L4AnE6L7DAZx_XNg&G?0L0K20Bi$e7XZo57XZZ27XW3%7Xi>oAdmrg#;pJ~z-B<v7XZr7+`y;8{1*TgfFaN@0H49e7XZc4U_b;XF<}G%e|X6Q0U^*51SOh#K+)X5%Fla16htAl&-P%!Ng&11+`z_P1OZIN(R)D5Ng(sZ(cHiV_;vtz#>>e71>lFaK>7g1(aNb{#TOybU|<yic*kn`0Kt8L(tUu-(DVS_DFP+{pTg9@#?t<MfX2{k0BYJc|2%5jJ|S8G5dT^M5?TQiS^@tTS^*ha0UKKX0UcTab!yx{|1nwtA6fxaTK@r7S^-#E0b2iB0bN=Fc3J^{hFSrlE6!=LK>y!2HCh3@HRHAJuVBTdV9sj-f-9;5i){jeHUf)p1tJRC1uK6C!9OPwV!B%Y0cu(SW?BJg|5^cQS^>LS0k0-n0VfS;hy{WU{1>7HfOA>_Z(0HGaasX#1%fGB0hKBRh?50^5gg(RAb$T^0eV^id|Cm$eG4KiS^+H!D5LTVA`BuT1%QrP0gAs`0gPG!jS#{zS6Trx3n;7*!WJiD{sn-SS^<+<0hOm(0hR@VBj7d=$hGnXf<7#w3m~9c0i3^D0iId`p9>;47g_;01&GZHA~OIn;CcmsxZQ%bS^>8Z!tWzm0VE41V9?9|V9|R<*bZRR|94>2d0^FgpZCQ@BLbp?M%WGiVAFtL)Pi8u^@9SYj{>5LVAPG*VAYNVW}gTmn_yqmonY0T2qvfs;(w%I)TUt7rvj$^u?pg?VAQW*)%CCiX2}p@#bDIO_h8k?2qQCK(K7d+#X%9E%%8<T|0CYi1p#==2B`r8K>=e20cZ#U=n4J=XbJ&%%?knUf8@v7?&H<j2WRNVAPYbU;|&U8d>-)sCpvu59PK^7|NSWbjRFJ&Xa8YsWdsLMY+?U-WpZ-_3ruhKV_|FoqXY|9Y5#I`bzy8(b7lW>1PVuGbW>%2a&~EBWdslcA@50UaCHJE3{-dbWo2#y<q=Y4aQ|#+V_|e<WK;iiZ*pO0Wds)gP;zg0X>DnA?RfzJZEy)j20?TGb7gdM1PoVU|7mnaZ*oIuY5#0w1O`QRWp4fgpbA58X>Lqm|88VuWCRCOW&dn!L2PUU4pRSRadl;LbX9QwXL4a=Wdsyd`~blMgi>X5aBpt!b7cez0-`}<W8Y<PbOa0mgJfj?Npxjx1PVf7?{jHmAPZpx3q#*;aByXE0fPxf_i1uv0Yp}BY;@iPL_uYAXaq$LQ-5?}a%^d5Xaj}6M`3JXczFhfY5ime;|xP+a&K<?Z*u{pMPqDfaGi4tWD8AcB4G^!4gXJKb7^F0VQ!uV<WyyCa2tRSq*J$Vb!-C!P+=XQZ`pVR#0WuSY!!qGPWNSabqz!bL2zY$1cVJqZf0q2E<nBwBML`yVPhM_4cA0(Z394W4x|l5-)(Sta%B*O3PJaDY+)Bf4oY=o=VxVYF~Ak%NM&;GV|8q08zc)zWxH%?9K{Guc@yLccT{O~8bt|OWfO(}4@`AqYamT^=WKLoL;y;l5LRKgY;|P<DGO950C(>oQ*dQIU<6G;|4B{+219RbZ~t;L1P5kvZ*BilM?wS&@Sl`_v>;7oa$#rzVgH|^AV_IyVRici2?F4?AVO(!{sBUtp&&(VVRL>0p`W85Rc>bl0RQ5esvuBxbZP%+1Pkz=pP(SWPjX>yd1VAajQ_YGP-$*!1Q5UCouu!$j|-z9|5SBh1P}0^jrorZBNYH-VFV8F$Dfj!48j592|$vYe;`YBZfS033gNG(p&&{DKxYLbm;4Ii2O|vdpQMc-e?ek(En#AH7{R-iq!&PRVQmUxocI)i1tT0llA0h?Z(nn3VFV2g;F}p@_z~g_zziT$VQg)0Ep8Kml9mi3Lm}c5h|f%6b#xrz2>@DQZ*6jQWFCQ}j!xk3Yiwb3BH@ypAn#6TY+(UHn;=b3VPtg#6hI50OHF{cZDni}L6VmP0C)Rgas+~!AVgtx?QRN!nILljXK8dh1Pvx7VRCO0AQho$oC9EZAY_K&@Sh3b`9px938R`IPi$#<b}m9FfKFj{c@LrfAmBt{a%%(yaDI=#Yy<>!VRHe1&vS5LcMX7sBxrB`0e}ZXZ*Fd7WAAhX1b2o21POQNZ*pq{z><IuL}mYTV`Xk+VQzH$L1cyj4n}EiWcGR>b99P>2uW^p{8E6I-~(=DcLWLdQ)6<LU`KUn1pf#^MMp(nNkp$s1O!f@!3>C?WiND3Zc`8938RAr0sRz@L|1QeY-CjbWo%_|Z*p`5c?NSpmB0iAMsf$C{{>Y<X>BqD1piZMdSwFu008y?K;S<C1_TIDZ|`$ybZI3Z5JF-9V{2z}Z*^{D{#+vinwgoInVC<yKLi#7N0{JlAprk!Wo~161P?-UZ*nT23qeq6cr*Z+3<3jWBoIT4!6658Ujzn0V{|RTM2<jzXJKM&WdsVT0DLGQ0b&PMX>(};fmaAsNi<+?y#NFk!TSUZ0i#l3WNCH#a|8pRQ*?4~YiDHy1r;I{1j#?EBK{M{2~=olV{2~rWpi@`B&k0H34c^&cyvr*Vo9JbLqL?JAT5C)ErJ6f^8^Y2p?o9+MQ(LJZ3F~HZ*Errg<*YZyx>Q5c?1Xqfwmr@1P%qkSV6ErZoZO%1O!ZFX1oDN|58s^AVDBQPyU7g3Py5eWN&N#VNY&l12Z!-egHtzKLiF^Nyy+Gcmf9sNo~_06Cwnp)9XJ01_C6r0wuFQzXTj|Vt8TIp=tkQIxjCVGc-5fHaR#mFaW?eH8(W`1qq@A3krf6#Qsb`VQghod2nU71OrB8AO}`gAaCz-G6V|ef<k3y?_q8P3;|+8Xkn9XXWXCzBSqdKBO*fgb#!!UpabHbmi{iM3P*2rXkl&pLT}|@3QccybI)Z(Zgg#d0b)#LrD1FU5dz`|!!bhOW8Z581LB+rhXZlHJqp*OaLpVg)A>IFCj(9d2USo<uTnuoMFef#2gd~a1ylqp6s||%dixaS1SkYeNmE1CLqzF6NT&rh!8!z;2RmUxZ+K>>H>Mb8M`d(?;PpUsc_n1OQ)y>zVQdJ82@gS4R8K$xZl`JkRN#*TPew+`0Cd34paPRmP6SO=000r^m|?L0AX7z5Odvr_;Y<n72e4aU(BM-=P3KiXAPc|`1`y(!1EC-jA}A$-MiYe*Z)@kB4wRs8Y;4OQi-QWkLt$=qVRK<Z67B<ILSb@l#smyiZ%IsPb8X;xZ@+-w2T);TWYVDtQ+kyEPlrJS3rt}HVg3Pw25E3%X>xP_1PfJgWMOn=^HX#HfDeZc;+%zk7h^#~Lq$+jAs^+bI*1k@CI_P+Qbo^APgF%IzX*vG@b{mSrVwOAL?BY1K~6+ZO)?({Op*VjAVWw&PDe%mAXQUEQcgil{Y8Ms3srMva&Er204^>r1P{GnW1D4YYT#vZjR90hLH|%tOj!gI@SlH<s31;BLrVyuPEDXpPf|6eo`(f0!u+}BIp+}YpPQlY|G1AJK~7XjAm>3wOBsKtU<Gh;<!PcoFEQb##UOkj4OE_pAS)!JaAE;~Z6W&vCMTebAWLj%`)eSF;2?Ewbaj7gAZ=-GX>HSBe;{jRAYyf5zoGFt1m^-H1x0mkV|D&dfFMUzNg!-te`jeRD06ji-huxhZEs>}Y-K6y1R@7QLI~m@VrhSKVIX8_Eo9Ar>;T{dgaid9f&?QV?{H~sX`KKdcVWgZARunVVdfwOA#`EuVjvbmEj|F8AViOHZ*XM&-~}WK<#Wqpa$$fk10oDzAp~hJOo4*{cp5--d4wR}ZE$oTY5f8rApa;#Z*OoQbZP%#a3C@uWMy>!X=^C}IROFy{|FN2Jp`W#K(8a`Jp};61^~kcssW=217isULka-H3;#7IG64Xe2|<4&@FzL}1PAP({^CG+0003400aFC3ILEX4FDnl{sVyC836z*5*Pmh0BRyQ23i2`0$KnA2EZip4gDJjAOZvgbYXM%YXk-QV0Uf+0lo*I0uA{f00;ys-2exsAr(mt!rmBV0|_8E2_X-m`4tRd-2({31b1P}00nUGV_|G;34jFv0r3zKKov$3z}_1I0RJl#83O>H3qVyO0{{dVU_T!q1OpBE1p@*bfCU5*Lt#H~bairNL-7DEA^fIb*JcB5Wp@M&)XD<WV=@7%F(Lp20q+0`-Wni)6Bq*b0C*4&Kng)4-rpGn0BR!`zySd*p8>#p9t|J_7^!Ee`WeR!D<B~i8~{w|4hjGpLjoekcn<{c0Ovpi8^8qs?)N7d9W$f_1Pn-ictAvTa$$67=YW+20igtFgcF*9MG894AOr+XP~bU36z88l1pN{{HK00VDBd$*1x6bU5F`dhn;Q-hg83%{0|BGw;XMNY1Y<d%L_=0-b9rfNz#<?5009I}U_*EhNGRcgN8d-^3rELj6=GJwNT?oGg83IyL3mH4M#2){1^@{a9q9iB=ROAKKLqE0KnLeR2<Jjz0I5YqAYcRpTmd9i01H-P0r?{$zzhK*AYOs~+Modl000r*7<~a)Kmq_YC^J6d|016WKPLYb8UGXj2mp8$1OWFnEH+I54nic5Z#E79CuPAQ89Si=5*`KsMjs7K?-Cvd0AZjUJw2ZQ044wjHh|OO3Ga7ra%*NFV`T*I4o78lZ(w6(Zr@~KZgg|DKyq)sf2jlmNpnF!3={uSWpQ<Ba%FS>OlfXqPi9kTw`XW{AHSaoAHO3!J%b;i1ONdYDPVsfe*pmf6FiVIfx+L9G7tbRZ{QXJ-U47g`5XW%z$+8@dLSd<aUcpoBw!TZ6W$sH00Mvp0M8*79ROp2ARu@VjRz=TG6(_SC143)CVv3l8VLYuBxoUT0-p;(4<URXb-@1#1PMcEVRB*nV{~-D22f#gW%|WH4gy9&WMpMz#{>jdgyD}vhGP&&|8;F)Zf|L1Qul9fbOxYw1P(_3X>MdjX>xOPpF?PAY-DBtilheT009q)A$mpL8w37|K>`3F7o7VczZf6@AsJAMz(e06p9()DbpqZP&jbK?4~ikB!UY5`217=2Y(NBuqKRbnGjc^8+Tm1XY-Rk*BGSNCNl+kAZ;NwjccCG2!e_<{zykbPBJ)QULSbWTXa90<b#7!-a$yN>s{kNCW3wS!-&@~22Y~~4hY-IIsKfum{CpaC!4Iq8(x7|;!s@Cdxj$fCe_em&z#&QAUkO3pSi+WkAC`Z#WtM-IdJh0Q0&lY+5CH(@pvysXLL_&l;edD%190Jb&R_}y02DotGyJ4mcoLa_DKi5A3kD$X6+VzO0|gTW0GBl?GzK6HoS*`rCI0|;6b1k_D>ZrufDHmbH4y+I0zk5R;41{70zwi1{~#Uz2mm!LHVFWq-w#0|pAM$L8X12X0Q>)V6$+-o<Pbon!V(9d69F0v0Dm<xI}8Ay6AZw+I}r!~coq!^05|#-U=I%<HxmFD0RJl-9}WO`8V{xgKs*oyLaU&V1)x3u0C*P>05vW+dKdr@6yP`)01gGG*LWKe1|bs*fI}qz-XjzMU?3cy?G%-O9vugPEdY4G7!?3DFF7Be5&j&2IT!#i0Nx}276583I0sq)?*du@3k9GfH8N*A7XSePx*&Wgy21ZKJ>dWJ|9Ba%7yvae4<QmHAUgdIA;5el`R@OC;~E(nK`KBRLJa^L{{VO!8UQsiJo+r46a_#$4FDGae|Q`l05vl`0zm&2LL^`z9*{o&4FDqmD<2{pyvHE{p$`DwB@tjR?xjHqpBAM+2>=}b1PM@VVR>b8_eXVUoh}GfX-4;NY-Fe41WjRS|84{WNL54x4YrAZWM#)8Wpm8n28x&hbJ8UX(7>d^t-u6L1qDI`1)OBi0S*VEPeX5RbP50q0ZyO6y$A`!UjzhZt$+mo2SRmpbZ>5R{{#R81ZQ(~V!H$g0ibnlVg>*VKS5(-WpH!^1F>ZL1P9+BbaHQb1pf+DXk}?~PiFmQ3qS`@a&Km7|7>Lh2vu`sa{X=$;RSMKVPtv#1P4WKVPb4$|6~9H0RjL42XtKETwnofV%``6v>@DvL&$&w1PQ+&WkauQX=7`$#V4}CLGN{RZy*svAXQ2KAT1zFVRvC}e;{>aVQ3&>6e8ZV0R#X73uvI{KW_y_9S#g+Ln91jJ_5k*Cm9`|l%Nely$TIMQ)O~?BH#traB^wY;2{lgWMTJmX&@RwAW1|z=^&V3>>v;9C3p}5_;vvp0Z3pm4FDzp8+Z|NASf~dKy^Usz;}=_4rN0%C^FGNeG2A48~_Cb4M5{xQ)6;za5~@z0R?{F%??3sbZJW=;P?asFJ`HL4gmt80`1=6#dr`7K|v(mdm9Ae#T@`47<Ayj85{s18aU%XME@jA4;uvl-Wyd01R)3K05t?4Gv@&LMCSnmp$GtY5D9$%1i%UaAr>700c8sX=~xBe0ALwx1?6810Ovmh3ZM-Hpq&8@<9HDc@W2rO9A6IrD-{~^;2019?-?NgpOGL;5FB3+089`X1>hV7;7$X<coGo<Kn36(7Xb4X8wKDN0=xhr8@?C-92@|j4Hp0r2^|*z1S=#2AR9mgCmmq@7#3g=9SQ(U5#JdT0Nx!P02Uj*9RL{u0U;UyU>pAo0iO*+Buo+i9TWiG9u)v9{}&t<04o+77gh!U9Tp*gCIJB$17(#N17R8iVHpD87J(hC7Jw9CcoRNg4IF?T))s&l92S5YET9`s`v4&p03jVP0H2Kx7Jw2S7JvjN8NeI=;{SLS8vr34WfBA>5)l9~;1?Vez%v@M9)JK~9J~Xd6u|ou9x>n(8~{ubO&&4e86E)vG2k8r_sI+dKosE~D}WNgcob?efDSQ$A2EO!9V>wK8zw;}yP!fOOcO01F@O^tF@PT$-~+*{coi{#4+Y>LF@PC)9yfp);w}Io9x;G5A2EOsF@O{xF@OXs!5{=6ARq)MF@QJVOcdWB3IKQ&GN2S7+A;tjPaqi{9UvSV_W>at0AL;)0iUf99Uv4SG5{em02*x{G5{GKG5{1HG607gBLE0MG5`Z(G5{H^9w5LJATj_H7XcuwG5{3ecor7`5FG#^R!E>4A5NehG5{VI0M#Ezpdc3j5lEmFAy7!51Sd=2DPSQQz##-D+S?!;NT3xV7XTI?uK-LHAxR)1W<VNMA4wn`Gr%4+Kp!+ftq~Uh6(JV@B1s?{ZWX{Q8Xrj@6(JV@jT{#M6(LC=17k@b8m%8U;1wYk02MAFA^b@o6ybOmAON2cS~MUcU%(q6WxyUN;ruQj7JwlkE&!hrreDAoB45A+D<JA1A)^2x6QBenNgyJ7ARAdAUH~fKAs;K?AS>YQ5){A|B6}bgA^_J+79x8f9Z4V-B9MC^1?L(;Paq&qAO+(LT=PH}U=|`1RiH2j0m&o>phaOKU|<yico=GZ01``JBTHZ$Ar~OJDFP+@0!$YpOJEoOAq@a(D>?^Se*p<v0R>tC0RaC9D;*vs0BSDlIR^AX0ra3XGClrM02D$a=}b%-|05>=U>_cQ9{=z%J0}DPNpAmhbYX5|WdsBFZe@4dMFmwvY5#391O!uQdS(9v219RbZ*nvL1P5kvZ*5XX|3U;1LSbWTXWw#fb#7z>Lj#)snVFfHnaMu{c@_gl>cDPuaAD@)e`9$B4?=Hp?%@6j;ZSLKWo!fttO5fIL<Ud<;dI*|NzX%Xa&GA15FrE%{sE&>VPt7_a|HhhRAqQ{OkraF2fzqWZ*ysMX%BC11Ox(s<lqB9355RyMQ(L%1O!I@@?ZoCMsj6jZ;xwXPj2SG2f-R54*m%NSV3%QXKro%WzwJoOl4+t1GfMG002PXKN+V3$4^E^AHW1a`yc{Ou}%!b^+N^CsXzOG2LD<~Ze(S61QB0NZ*_BJ`eQNegZ~FZZ*Fd7V|4!n3srDrVRU8lQ*;1;_5cR}10(+GK|TfNK?LVQ{{_TBBsKjMKYzVHI3MRd2H?Qn?SRBTAu{Tr-Wc}!fj}byq&^`skoMvrDFE;WKm~XbzXSm8C>tN~1^Hbl1Ed82=L4Yz1FJhA0QDdS1Pl^qEZ}<eWCZnL1Oz%D9{_&@;+>2j1O)+Ldqzg%00#jCW)DHzQvehI-W$^7As2Sx;RXP=K_MCw;pLSC1cL?Ufd=A0l7JYhlK>f$01JEI568ggcRmH)=HM$783YBEyx<v5=4A&6AOso+QVc)_2q<je7yw`yyr9YqLkSRI2MkOQY6$>S`BE8-gn$@;Koj)<02!AJE){JA9tbWOjV10GjT#-W`8xs%1bGB|VO!<_1ZRhPPIAkA4s7XV=0V_Z1pomCSb;zUI6(ga0R0m_Ob#0T0ZU;41P4}WbMI+lY-I$%3;+WCHCiAm5*Gmgc>fOq04*&ZJ^=qh0Nxn`0C*6;1OT53K_imDC)YaO8Q-89NdOWD-vBi!GzdW8LL~YD00}|>K_Z_DKYu3w78w)(3i|;63IHn_8w&t6_boUK?jm3t7?8g>5CA9ud<jE%-xm!4H7)~z5JLSVBA}2s4FD<t-zym$4FId5H81@+2H+7wB#=1`{{STbco`1>H7hVW2|yA8Ksx#$2;l!5K0WgP8UWt^A`k#-EII~S-vJ6*0RgK*2A}s6K_d!)d?)!7TL2J|L;wV5<RE5Y|5bBka&BR5W&a>_X=Gt*AY%V-Y-MO5Yj1P!Z*FHH1pr}ba_@5l1ZM;Q1P4&>Y+-q20l*4JWj}ONWpZ|DvVZ|$J_6+lcW-iQsvrWu`vgt~Ar3}qZe;yN2q1JrXlZO@{{#d`Wnp9l1&?%TbZniV4<!tsWB*}nYybfP2mqr55sgDLqK={lH2?zihyXAk4|M=R2P+l(8U=VD1_0+n1rP2j9U+N{g<`G`h3kG3LIoh=hLRvdApZ#f0vqW;Ar|i*0Nxygz!e$-_W*bjJ-`zL0C;~C1puE6LnNNyTizasKo=YXU=%)}-xUV{cosf@4nzMW%0U(iA0Zn59RN%Z9|-_p{}dD6843VuBNp3600BmZ3QZuZ;MF0%UB#e<Dw4od;b8A%JLf-E0YHOSyH-F~At2Ba15ALk?HdC_z`z(lCZ`6M00RysK;Bv4s34#J3qc|^Co%#6zn=*|Bi<M$#6ZsmcoGGxDkVS#1kVO_ZgAy5(4c8@@nt$e$iO9p0U!hj{~&Z|a&LETA>L>J1ONgKV<~GZ&nOuHDW?Htg7OVb91Uha1-oXqq6ALu{}LcWZ)t8IWB+JjZf9j=Aawh0IxztU0R<>4{}dJh0Nxz}0Q)NzwqX?-0{|@lDk3+KG7SJCKLC(2696r=U<6F<1O!6)8MuLX5Cz&X02@PKKLvbXkTN+AW?({q=RXDkz-ytn2_Vh@x*(qnKsx{j|4|haA9xW60I$ylEgl2pB*DN4_n!(tX8}eV4f6XA8~~yn`3nFD`veVT;Yn_Ab#&iUd2nR}`9lR%zi)M8Xao%Ei39gDGcy1{(?0|j{X#52XL4_KZe;INa$#;{0CHt+|6_Rs1axU*Ydi$TEMN`+22&tEAUL-x6&C2AK?E9sEBg}|)j$?H0FE~AG&KM`=)p!D4%hMz8~~yn1xel=Ee9?E2mot92`|8wK>Ze$K<7mVD;XZY3;-(_9SxEI82=0a?>03YAsYQ0lb{(403jSx{{T@M7bBkyL-!=!9-P1z918${=SBxB8Xpdq;Qby3U>X<>0Pi>NHXR`w24ET)4)*{d9R^?<7$l$eXCU4mm!KFO5CG?R6%m(UK42Rl685El9}@wk6aXt5`yUmiphG0-NZ$J*76HH@5C9<_e;fc{9~L1X0Koqt7oQSDBup0nA_V|o8ye?D{|M(t31A->VE-T)H7`0B0H5~}L?or47yzFVuAso+{}?yg4L8C~e{XhWZDnqB(1`yDO<`wlX>@h>WMu@LNDV`Ea`rg@bVH|ra$y7v|5j;bcW`fVboWzfdP3lBVRUH!1O;PkVQp{({{dJ822W;YbN^*@1OZtD2~_`gWo2$jZf0-&1m2>WnVFfHng6Lj1PeuBb7|jhXH#@}qo4*%e`#)IVR8fy0)zcTbKqliX>V=>?*mVDbmpZ7LvqJuVRQ|kupxAS0|5U53`QCa@(mlm=RF0GF%8V1-rX6O01_7hT3`jAp9w)DBp7u-?}GyVP#|G*YXk;kVef8ZWo&$a2LK4qVIdS8dZBJXBmn;*6&(QYF)tRb$Ux^l1p;se1n>u{0&oZda0vwP3Ic8+>lGvL!%1?$3wRKD0ek@&!3*9S1A(Cb83X_!7k~gEzZe?<AsK-207L&IOb;6c0Qn;R7oZ>jC_Wn?0DUuGq31pecoFtMe-j4)?kX4{#=-an00}J!pcv!;AsJat2`Elr6&w(X2oRB?2SH8;OceqS-xm(i^Zoyg!0?}+q99X$MNL&fAWu&C1n&kzZ*0h+2WE2rZ*5XXLIes_*JXHg0)zzyAfX`p1Oo-Z4Dg?nwErMMOiUn8Mn)z>;sXonfI}f7f&oK@|7s#Q23i0DT8jV!L|`OG;OPKE#RaC80C#Tlpi7_&K><B^1WQ9qV4n#<BTOczcn<^4fNcO5je!F`OQZyMVQF;SLDry~;6D(81Pl<A=A!^F16lwC5c&gB0ubZ<C0im2KqUPVJ@b$;k02WY7y$rk!y-2tU>X4wK#QOf7Z~AVV4)bm-WdXB{GekXqPxHa>Vy|cxa9+N1Iax<AwU8E0S6dh?BG2C9zxz20stSy&A|Nw>JcmAnxP;;|8;b4AVFheW&dz=AW~&*Z*>1<AT1zDVP|3gAaitKbaite-)L!SVRh~S3;^Q+OeDZw0r|v2B>meHJaXY90MY>PD1SS65d#1<DE&eG3IkviJ&-dE0R97D91ZX(J9rX51OPQDGXi1&17PnJK9Dp6VjT_e|0+9p69oV@D)lr2U<?M}7C(?R{s!V64e%>Fcobg-05vN$17HmUVDA?|kTwcp9}V#TEIW7=2LLrJ^)?3J4g+8qL6A584dNgT@GU!d7GDSeH7z#-U=If1?-@dnI1yqY4e<XiJ9rlf05vZ4I0oPl3Sb&TkU9Po;vx<3FFSY`UkU&<FF6We5e?w)8$^&g7-Az0@INp+co_=-x4;eH{}MtZU>+NgJ3brXD;ysT0Qo@yqW?xD4)8HMMkL)00H6#6384XHa{otlX#@^NX>R{yMrm?$bVF$WX>4Q!2vuoD|8Hz$WpV@rO@Co&ZUhEKa<>4da|8wQV7mYg0K!A(Z*Fu0fCPXES#R@oa<+g4;0I80Z>wf$vS0}RVQvPX1pNiB;AD9O2Ssk*VPb4$WT!y^0q-E^KLqZe0Ra8}F+(B%kTVbfCj9E4ufY8jKlvO0+k75t0C*BMz$r5s1T#W5VI=@EBmzJ(ARmx44*($rL@}cR;Pf$|G{GnHzy|<oC;oN70R>tC0iO>3+W;T{d?NW00RIOB2}5XMa$&n;bR2*NP+`-71m6TmWnp9?js<l4X>=M3aARR?Z1{YGTOqxmOb!|W0Nh&-jY)8FY2^SL;(wflAWmsxYa>DXAY+qZAY*7@Zf9p@WLW`aU<KZB=7|As!61MEZA59GX_6QJ@Sl>fAX8;*_iP|R0AOW!Wn=qwbPeMM00|Z6b3O!tz~JNOJ_a)Y|K~sl=RpYPLjMV$2}L94Jqmo6A&{gb0OvgmnIS9rBLN@`0U{unL6#sN0SEvB6BnThAd*1;CjS)~6aWPP|By8g04)G~A<h{9-W>ul<EOv@1okoE-X7B67aRlt^LP}CAT$Ia96dcR{Qn;Sj6q>ipp7}+B47jn0t%#n=ReH_jATM1jAa5~?kCe39Vq0DQVxwlRdD}ja$#g;WI7-|zajz*Mj8zwBe%o&zlQrDqG2Q$@(mpPqX55124i7vV`Y782jBz&01w_l;PhMIogfgs0181Pc#RQ^U??&ifREsl0VaO{-Wdh}Y9p@zkW)YeAgthCLI$cTsROz9KLihJAb4qQY5R0}0RU}qbOZzUNpnF%2L%8D4T8lWA@6`uf&pNk08-!r{8He#gXcg5D-;=f1pp!_1q2L8eE|PNb#h^JX>V@-1QSwaadl~O|7CMbX>MgtW*<{&XJ~X!fLBKkWB(vxVRCgKWNH6&Wo>n9VQxB)AOr+XeLyE*SO5g_u^|t=V^@L)RZvHdQb9yT>YwVIJpdGX>W48X0096i5{3Z(Ar&0}Ar>qrf1e3LB;FYVDxkddLn{N`8Uz51U<K|3KpX&{Eg*az`TY*=!36{aZDDl(XaojwVQyq^@om}=OTSCJ8}Of#y{6eDWMm*x4FVvUNhbhJL;(qJ<4oZqyz$F_&;tMg2t1({(;om`Zd{odj=@xA|7>M&Z*p`XYyV{+S8sA`WFUbv=Ya}fHbq6kT4DF(ssBF&7D8cTYiHkbZ*^{DzMyV%EpVklV|ir40S5mD@_cLGYuO6{3AO>1!2jt&=RgJLK?eWlLI>wV2+Bgg7YZL>6%=m)VE-2rp9?`I{}=v`;2Z$nAOZj@{TYnlAsj>iAszoe03jY&0G|-QLnKTTAOr)cSgZq}0AL<$1EmE6spM<}pa5VV?gwQC0Q_P82!IFx`7QwGKmQ3v9Suwn90{rcKnejz3js$A0;PEW5DEY-EgwGs|6KqaKRx9C9_|OA1>PJKz!e$;{{SHv8v!9199IA#8dabS6u=Opz~q~N1Q`VgFbJR;8v*s72qOjzL3j}h0O}MV2o-}46@vL90OxoR3=ze3;O9RE;1OK}8WBMVEfG!zco9(z5k)0{5kvqHKn^1z7d`-772pRD{RA2i;XDW}B2EW*5f36oH6XqsMBo2-5D*aK`Var-KL{cH1R5dX2rV8nP6&7r5fJ4>z!2nrzW)&f25E5MLjMLsZ)|UJGX(z!W^!+BQb$7b1Q2rv14Il$Z*uo!WpV`s3RGoyy>teH12Z!-06^3JdA0-xR%vr-V*hMq1O!b%Nlq|-q|Si1MFJ-URJlO`=br>kNmD}u#^<01{{aRbD-;$10M7k^D;68HKw6<JD*GZg-oYXOkTMgu05<>xP6Pl1LHWBG0M@|r4jTZX9RDj576kzE4jumGL7xghB=Qa({A~cag7OX@=ROI4cn}8wOb;7yK>Z-PAqWHwRdZ$ka!GD*b#zpD-EbM;MQ(Mw090@Pbz^7*3{7u!|8r$Rb#!!ZZhtWZ2vBcxY2KnA1axU*YaB<OS(jf1mstY<pI-<0>#;T>?=);RgSBD+3+Eu-8RiD-9stGQB+j8F0N&jg=0GAg2FM}#7yjcR0|W$gVRLIg1O#_sX>{V`;b6ZA000r*7&|~2zXAX?C^G};p(4MZ2|p(P6|F!B{-OW`05vQ&1pxn_4nic5HVy#!CkcU>flLw}1^~B49}NKD2LSkB9DhAM001Tc2Mb`nTfzx<Z*ptPfMfq<1P(`KbVOzUb7N(0WMOV}|8oQnP;zg0Y42@mba?>)ZE$q|1OrKPK?Dp)e{XDLM0IjuI3oWOQe|;<X>w)%b4+P&Wlv^Pk7;LUbRNRZUp4s+hXDgjP(U64vx8Y+6#p3m04**bJ^;T&0Nxq|08v7Cdk_X8AtUEM1XDoW2V5Wy03j&B=RWlXB)|v*fh6ZZ1otZx8N;AK1S=JP8VUd_7#9oD;Qts40E90fE|AkU4JCjAV;TZrD;xhA3jpspHy+WaMKMD+AOqng24M`+24M^aVgke`0>l~^?gL;O84L!={T4z0kTnee0RZPh`37-d51>N^D;FHv51<+kp&J?xpfMt+FpxM8q5@(Z0$?lq9UBjzIyoTGM`JTZ51|9#51<+s3?V@p51<BM0>lrX0>T^u!1xBh51<Ce{TM@#H~$R)<^ShH1V(cq4ej7RVBr4@bd!*Ct54{W$dttpL|}P>O#5$RKqC-AVsme=Y;|;HdZr8lB~$-tdSwIwSOfw6S(CsC009)~LH~FV0RVUr0s#Mb5(5CrK^6)BA7B&{-Wdb{|6mppp9(=H|M?bKz$JkMU>p}U>n%8101sLKHx2;ZC1asAE;v2_5JCMTSphyh0RSif{{{pRL2h(uOa6%fQe|UrZf<4&V{`-xQ)P5P|3*twVP<6n49`<^VR8Ycx}^?A|7mVyMrm?$bbmu=X>4Q!2VVg1baHQbc0vXW=l?wg@(mm3JqEw$J_k$=8aTi``3R%H0YCx(=RFBHOTczP_J9He1iity=H3V33IzaKt^rK|>)sx)U>8^*AsQY303jO$0C*My?*Jhk5_F(MBuuvs9s~p+1pq?82G;-~8q+`<)4&`XuK}M9Lj$1)1FcTa03jSs2VeuB5FW|{y9ftqvJYSYU>v-z2V)T)2@d!Y1EBd;OczNU2f!c~KnfRD0t^fe6N?Yb7fb`L7fK?G@E1%AEEhu2q6!2BRsTe3Z88J{Ze`zh0{{R306^eB0M7{ej`&ObPx^@o<(&Vz;r%3>`33+973V(h1pN{{O~M7|KK%xnVCO&w=RpYn=Ryge2}L94Up)$+2|xhA1jb>tBu~H#0pa;0Q2-180V41M9AE"),b)end,h=function(a,c)return function(d,e)local f,i,n,j,p,g,o,b,l,k,m,h b=0xfa while true do if b>=0b1111001 then if b>0b11000011 then if b>=0b11011010 then if b>0xda then f,k,g,j="",1,0,#d h,i=j-k,1 b=h~=h and 0xd1 or 0x9b else b=g<h and b+-0b1001 or 0x5dac/b end elseif b<=0b11010001 then return f else b=i~=i and 0xc3 or 0b1111111 end elseif b<0b10011011 then if b>0b1111001 then b=i<=0 and 0b11000011 or 0x3e else b,k=0b1110,a.c(k(l,a.d(m)))end elseif b<=0xa0 then if b<=0b10011011 then b=i>0 and b+0b101 or 0b11010101 else b=g>h and 0xd1 or 0b11010101 end else b=g<h and 0xd1 or 0x101-b end elseif b>0x43 then if b>0b1011111 then b=i~=i and 0x59ce/b or 0x1aa4/b elseif b>0x5d then g=g+i b=i>0 and 0b10100010-b or b+-0b111100 else b,m=b+0b11100,a.c(m(n,o))end elseif b>=0b111001 then if b<0b111110 then l=l(m,n)m,p,n=c[0b11][1][c[0b11][0b10]],#e,e p,o=1,g%p b,o=0x5d,o+p elseif b<=0b111110 then m,j,n,l,b,k=d,c[1][1][c[1][0b10]],1,c[0b11][1][c[0b11][0b10]],b+-0b101,c[0b10][1][c[0b10][0b10]]n=g+n else b=g>h and 0b11010001 or b+-0b100000 end elseif b>0b1110 then b=i<=0 and 0xfd-b or 0x91-b else j=j(a.d(k))b,f=0x5f,f..j end end end end,J=function(a,b,c,d)a.F[d]=a.g(b,c)return a.F[d]end,z=function(a,c)return function()local h,e,y,C,A,r,l,s,v,k,f,j,w,p,i,g,m,x,B,b,u,d,q,t,z,n,o b=a.F[0x84e]or a:H(0xd406,0xba09,0x84e)repeat if b>=0x196 then if b<=0x2b1 then if b>0x21e then if b<0x267 then if b>0x23e then if b<=0x251 then if b<=0x247 then if b<=0x245 then if b<0x244 then b,p=0x5ca-b,a.c(p(q,r))elseif b<=0x244 then b,w=0x620-b,w(x,a.d(y))y,r,x,z=v,w,c[0b111][1][c[0b111][0b10]],0x80 else b=p<=0 and 0x3d8-b or b+0b10111100 end else b=p~=p and b+-0b101110010 or b+-0x17 end elseif b<0x250 then b=n~=n and(a.F[-0x35b5]or a:H(0xd22e,0xbc7d,-0x35b5))or b+-0x21e elseif b>0x250 then b,s,r,t,q=a.F[0x4ae4]or a:H(0xd905,0xb42c,0x4ae4),c[0b10][1][c[0b10][0b10]],"B",c[0b11][1][c[0b11][0b10]],c[1][1][c[1][0b10]]else n=n+p b=p>0 and b+-0x9c or a.F[-0x7201]or a:H(0xdcec,0xb02a,-0x7201)end elseif b<0x25a then if b>0x256 then b,o[0xfdc5]=a.F[0x50d2]or a:G(0x879e1c,0x759b,0x50d2),p elseif b>0x255 then b=s>t and(a.F[-0x1052]or a:G(0x578510,0x6d0e,-0x1052))or a.F[0x5b96]or a:G(0x7b3f2c,0xfb3,0x5b96)else b=n>o and(a.F[-0x3d2e]or a:H(0xcf3d,0xbe17,-0x3d2e))or b+-0b1110 end elseif b>0x25e then z=z(A,B)b,A=b+0b100010101,0b111 A=s*A elseif b>0x25a then b=k>0 and(a.F[0x538f]or a:H(0xd4f4,0xb937,0x538f))or a.F[-0x3cf6]or a:H(0xa23d,0xcd4d,-0x3cf6)else b,r=0x3de-b,a.c(r(s,t))end elseif b>=0x22d then if b>0x232 then if b<0x236 then b=k~=k and 0x2cf-b or a.F[0x79d8]or a:G(0xd32c4,0x32fe,0x79d8)elseif b<=0x236 then q,r,s,b,t=c[1][1][c[1][0b10]],"B",c[0b10][1][c[0b10][0b10]],b+-0xe3,c[0b11][1][c[0b11][0b10]]else r=r(s,a.d(t))s,m,b,u,t=c[0b111][1][c[0b111][0b10]],r,0x335-b,0b10000000,q end elseif b>0x231 then b=i~=i and 0x6a790/b or a.F[-0x29b4]or a:H(0xbb4a,0xd0db,-0x29b4)elseif b>0x230 then b,o[0xf399]=0x40f-b,p elseif b<=0x22d then x=x(y,z,A)z,y=1,c[0b11][1][c[0b11][0b10]]y=y+z b,w,c[0b11][1][c[0b11][0b10]]=0x6c619/b,x,y else b=p<=0 and b+-0b101011011 or 0x11e90/b end elseif b>0x226 then if b>=0x228 then if b>0x228 then w=w(x,y)b,x=0x2a1f8/b,0b111 x=p*x else b=r<=0 and(a.F[0x4be0]or a:H(0x9596,0xf82c,0x4be0))or a.F[-0x2260]or a:G(0x1347883,0x554a,-0x2260)end else b=n>o and(a.F[-0x3102]or a:H(0xb4bb,0xdaeb,-0x3102))or b+0b10111010 end elseif b>0x224 then n=n+p b=p>0 and(a.F[-0x8d6]or a:G(0xc33b58,0x4335,-0x8d6))or 0x2e3-b elseif b>0x222 then t,r,s,b,u=c[0b10][1][c[0b10][0b10]],c[1][1][c[1][0b10]],"B",a.F[0x7837]or a:H(0xfcb5,0x931e,0x7837),c[0b11][1][c[0b11][0b10]]elseif b>0x220 then b=l~=l and(a.F[-0x2b0a]or a:G(0x91fec,0x5829,-0x2b0a))or b+-0x1dd else o[0xcb21]=p q,b,r,s,t=c[1][1][c[1][0b10]],b+-0xf1,a.F[-0x4b25]or a:J(a.i"HDEg",a.i"2>",-0x4b25),c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]]end elseif b>=0x28a then if b<0x29c then if b<=0x293 then if b<0x28d then if b>0x28a then m=m(n)p,o,n=1,l,1 b=o~=o and(a.F[-0x3102]or a:H(0xb0bf,0xdee7,-0x3102))or 0x665-b else b,k=0xa2576/b,k(l,a.d(m))l,n,f,m=c[0b111][1][c[0b111][0b10]],0b10000000,k,j end elseif b>0x28d then b=r~=r and 0x428-b or a.F[-0x1208]or a:G(0x2a45a8,0x2e9b,-0x1208)else e=e(f,g,h)f,b,g=c[0b11][1][c[0b11][0b10]],0x22e9f/b,1 f=f+g c[0b11][1][c[0b11][0b10]],d=f,e end elseif b>0x298 then u=u(v,w)t=not u b=t and(a.F[0x312e]or a:I(0x9f14,0x155b,0x312e))or a.F[-0x7c46]or a:H(0xb6c6,0xd69f,-0x7c46)elseif b<=0x294 then b=i<=0 and b+0x74 or 0x4074/b else b=n~=n and 0x146d0/b or 0x23aa0/b end elseif b>=0x2a6 then if b<=0x2af then if b>=0x2ae then if b<=0x2ae then b=l>m and b+-0x250 or a.F[0x6ccf]or a:I(0x9c62,0x148a,0x6ccf)else b=p>q and(a.F[0x7f7a]or a:G(0x336b08,0x2376,0x7f7a))or a.F[0x467d]or a:G(0x412ffe,0x7de3,0x467d)end else h=h(i,j,k)b,i,j=a.F[-0x2377]or a:H(0xcfe2,0xa12d,-0x2377),c[0b11][1][c[0b11][0b10]],1 i=i+j g,c[0b11][1][c[0b11][0b10]]=h,i end else b,o=a.F[0x64dc]or a:G(0x173a284,0x4af9,0x64dc),a.c(o(p,q))end elseif b<0x29f then o[0x535b]=p b,t,r,q,s=a.F[0x14f8]or a:G(0x3ed0e8,0x5ef5,0x14f8),c[0b11][1][c[0b11][0b10]],"B",c[1][1][c[1][0b10]],c[0b10][1][c[0b10][0b10]]elseif b>0x29f then b,n=b+-0b101101110,a.c(n(o,p))else b=j<=0 and(a.F[-0x6b07]or a:H(0xabf7,0xc0ed,-0x6b07))or b+-0x9e end elseif b>0x27a then if b>=0x281 then if b<=0x284 then if b>0x281 then q=q(r,s)p=not q b=p and b+-0x226 or a.F[-0x23ef]or a:H(0xbd73,0xd09d,-0x23ef)else o[0xa19f]=p s,t,q,b,r=c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]],c[1][1][c[1][0b10]],a.F[-0x6a5a]or a:G(0xc2005b,0x4f34,-0x6a5a),"B"end else t,u,v,b,x,y,w=c[0b100][1][c[0b100][0b10]],o,c[0b101][1][c[0b101][0b10]],0x4b2-b,s,0x7f,c[0b110][1][c[0b110][0b10]]end elseif b<=0x27d then if b>0x27b then b=t>u and(a.F[0x1d67]or a:G(0x144998,0x6c07,0x1d67))or a.F[-0x67e]or a:G(0x737c23,0xf2,-0x67e)else b,x=a.F[0x7426]or a:G(0x82fff1,0x6902,0x7426),x(y,a.d(z))y,s,A,z=c[0b111][1][c[0b111][0b10]],x,0x80,w end else n=n(o,p,q)o,p=c[0b11][1][c[0b11][0b10]],1 o=o+p b,c[0b11][1][c[0b11][0b10]],m=b+-0x22b,o,n end elseif b>0x26c then if b<=0x272 then if b<=0x26e then b=u<=0 and 0x45a-b or 0x3d2-b else n=n(o,p)o=0b111 b,o=0x296ae/b,g*o end else o=o(p)r,p,q=1,1,n b=q~=q and(a.F[0x7f7a]or a:G(0xce55f8,0x474f,0x7f7a))or 0x8c3c4/b end elseif b>=0x26b then if b>0x26b then p=0x92 b=n<=p and(a.F[0x1981]or a:G(0x352dcc,0x1a57,0x1981))or a.F[-0x3f49]or a:H(0x8ca2,0xe3c6,-0x3f49)else q,t,s,b,r=c[1][1][c[1][0b10]],c[0b11][1][c[0b11][0b10]],c[0b10][1][c[0b10][0b10]],b+0b1101101,"B"end elseif b<=0x267 then b,n=a.F[-0x5108]or a:H(0xafe3,0xc119,-0x5108),0xd9 else b,p=0x47f-b,0/0 end elseif b<0b111011010 then if b<0x1b3 then if b>0x1a3 then if b<0x1ad then if b<0x1a7 then q=q(r,s,t)b,s,r=b+0x119,1,c[0b11][1][c[0b11][0b10]]r=r+s p,c[0b11][1][c[0b11][0b10]]=q,r elseif b<=0x1a7 then q=q(r,s,t)s,b,r=1,b+0x248,c[0b11][1][c[0b11][0b10]]r=r+s c[0b11][1][c[0b11][0b10]],p=r,q else p=0b11111 b=n>p and 0x28dd8/b or 0x3b012/b end elseif b>=0b110101111 then if b<=0b110101111 then b=r~=r and(a.F[0x312e]or a:H(0xcd74,0xa10f,0x312e))or 0x4fa7b/b else q={}q[0xf3af]=e q[0x9275]=f q[0x9207]=g q[0xaa03]=i q[0xb6a8]=o q[0x7d11]=m r=0 q[0x3485]=r r=0 q[0x7cae]=r p=q return p end else s=q[0xfdc5]r=k[s]b,q[0xfdc5]=a.F[0x2049]or a:G(0x18362dc,0x40b1,0x2049),r end elseif b>0x1a0 then if b<0x1a2 then p,b,o=n,0x41b-b,c[0b1000][1][c[0b1000][0b10]]elseif b<=0b110100010 then r=r(s,t,u)s,t=c[0b11][1][c[0b11][0b10]],1 b,s=a.F[0x5984]or a:G(0x2ec60,0x2ddf,0x5984),s+t q,c[0b11][1][c[0b11][0b10]]=r,s else b=t<u and 0x1e3-b or a.F[0x69d8]or a:G(0x585a5,0x348c,0x69d8)end elseif b<0b110011100 then if b<=0b110010110 then b,o[0x6b6]=a.F[0x50d2]or a:H(0xcb3a,0xa311,0x50d2),p else b=u<=0 and(a.F[0x5bfc]or a:H(0xb011,0xdd74,0x5bfc))or a.F[-0x6998]or a:H(0xad3b,0xde52,-0x6998)end elseif b<=0x19c then b=l~=l and b+-0b1100 or a.F[0x5cfe]or a:H(0xae41,0xdea1,0x5cfe)else b=p~=p and 0x170e0/b or 0xd4e0/b end elseif b>0b111001011 then if b>0b111010100 then if b<=0x1d5 then b=n>0 and b+0x17f or 0x330-b else p=0b11011001 b=n>p and(a.F[0x69f3]or a:G(0x75fdb,0x3e0c,0x69f3))or b+0b111100110 end elseif b<=0b111010010 then if b>0x1cf then b=r~=r and(a.F[0x7f7a]or a:G(0xb341b8,0x573b,0x7f7a))or 0x32b-b elseif b<=0b111001101 then p=p+r b=r>0 and(a.F[-0x69c6]or a:H(0xcd21,0xbedf,-0x69c6))or a.F[0x467d]or a:H(0xcb81,0xa28d,0x467d)else b=n<=0 and 0x5aa-b or a.F[0x4c33]or a:H(0xb22c,0xdbb9,0x4c33)end else p=p+r b=r>0 and 0x53c04/b or 0x2fe-b end elseif b<=0b110111000 then if b>0x1b5 then if b<=0x1b7 then b=p<=0 and b+0x1c2 or 0x259-b else t="c"t,s=c[1][1][c[1][0b10]],t..r w,b,v,u=c[0b11][1][c[0b11][0b10]],0x5d3e0/b,c[0b10][1][c[0b10][0b10]],s end elseif b>0x1b4 then q=q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],1 b,r=0x3be-b,r+s c[0b11][1][c[0b11][0b10]],p=r,q elseif b>0x1b3 then b=n>o and(a.F[-0x3102]or a:G(0x1682a,0x3baf,-0x3102))or 0x3dd84/b else q=q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],1 b,r=0x50f-b,r+s p,c[0b11][1][c[0b11][0b10]]=q,r end elseif b>=0b111000000 then if b<=0b111000000 then b,s=b+0b10011010,s(t,u)t=0b111 t=l*t else b=l<=0 and(a.F[-0x4ecb]or a:G(0x15881d0,0x5d4f,-0x4ecb))or a.F[0x5d33]or a:H(0xb8ff,0xd5f2,0x5d33)end else b=l~=l and 0x3b3-b or 0x5960d/b end elseif b<=0b111111000 then if b>0x1e7 then if b>=0b111110100 then if b>0b111110110 then b,o[0x76bd]=b+-0x1a,p elseif b>0b111110101 then b=v~=v and(a.F[0x1d67]or a:G(0x59d98,0x2b57,0x1d67))or a.F[0x69d8]or a:G(0xa2a5f,0x2c6e,0x69d8)elseif b<=0b111110100 then b=j<k and 0x2cec/b or a.F[-0x675a]or a:H(0xa6a4,0xc8f2,-0x675a)else b,o[0xcb21]=0x4c0-b,p s,q,t,r=c[0b10][1][c[0b10][0b10]],c[1][1][c[1][0b10]],c[0b11][1][c[0b11][0b10]],a.F[-0x4b25]or a:J(a.i"16B<",a.i"KL",-0x4b25)end elseif b<0b111101100 then b,u=a.F[0x7b3d]or a:G(0x6badf8,0x22e0,0x7b3d),u(v,w)v=0b111 v=n*v elseif b<=0x1ec then b=s<t and b+-0xd4 or a.F[-0x692a]or a:G(0x62ed4c,0x7a18,-0x692a)else b=p<q and 0x34a10/b or a.F[0x2cc7]or a:G(0x9d0ed0,0x6b41,0x2cc7)end elseif b<=0x1df then if b>=0b111011101 then if b<=0x1de then if b<=0x1dd then b=v~=v and 0x380-b or a.F[-0x3fd5]or a:H(0xe299,0x8dd8,-0x3fd5)else j=j+l b=l>0 and 0x3ef-b or a.F[0x7f58]or a:H(0xb7e0,0xd652,0x7f58)end else s=0 b=r==s and(a.F[-0x19a0]or a:H(0x93c7,0xfbc0,-0x19a0))or a.F[0x2303]or a:G(0x3631b8,0x2289,0x2303)end elseif b<=0b111011010 then b,o[0x76bd]=a.F[0x50d2]or a:H(0xb74d,0xd722,0x50d2),p else b=g>h and(a.F[0x5865]or a:G(0x409520,0x404b,0x5865))or 0x414f8/b end elseif b>0b111100110 then b,t=0x481-b,t(u,a.d(v))u,o,v,w=c[0b111][1][c[0b111][0b10]],t,s,0x80 elseif b>0b111100000 then b=t<u and(a.F[0x1d67]or a:H(0x8692,0xe8df,0x1d67))or b+0b10000 else b=p<q and(a.F[0x7f7a]or a:G(0xc5e228,0x484c,0x7f7a))or b+-0b10000111 end elseif b>0x211 then if b<0x218 then if b>0x214 then b,k[l]=a.F[0x6ee5]or a:G(0xf15b4e,0x731f,0x6ee5),p elseif b>0x212 then p(q,r)p=0b10100001 b=n<p and(a.F[-0x5f68]or a:G(0x24c641,0x70e4,-0x5f68))or a.F[-0x2bc9]or a:H(0xfa7f,0x95bf,-0x2bc9)else q=q(r,s,t)b,r,s=a.F[-0x8ef]or a:H(0xa535,0xc6d4,-0x8ef),c[0b11][1][c[0b11][0b10]],1 r=r+s p,c[0b11][1][c[0b11][0b10]]=q,r end elseif b<=0x219 then if b<=0x218 then b=t>u and b+-0b111011000 or b+0x1bc else b=i<j and(a.F[0x7ffc]or a:H(0xb479,0xdb13,0x7ffc))or 0x49f14/b end else b=j>k and(a.F[-0x2b0a]or a:H(0x8273,0xed91,-0x2b0a))or a.F[-0xd5f]or a:G(0xd4b70,0x3a9d,-0xd5f)end elseif b>=0x201 then if b<0x20e then if b>0x201 then b,o[0xa19f]=0x42e7e/b,p t,r,q,s=c[0b11][1][c[0b11][0b10]],"B",c[1][1][c[1][0b10]],c[0b10][1][c[0b10][0b10]]else b=j~=j and 0xaa55/b or a.F[-0x3620]or a:H(0xa643,0xc998,-0x3620)end elseif b<=0x20e then q=q(r,s,t)r,b,s=c[0b11][1][c[0b11][0b10]],b+0x23,1 r=r+s c[0b11][1][c[0b11][0b10]],p=r,q else b=j>k and(a.F[-0x2b0a]or a:H(0xac02,0xc226,-0x2b0a))or a.F[0x7f58]or a:H(0x9f19,0xce75,0x7f58)end elseif b>=0x1fc then if b>0x1fc then t=t(u,v,w)u,v=c[0b11][1][c[0b11][0b10]],1 b,u=a.F[0x3143]or a:G(0x86e499,0x83c,0x3143),u+v c[0b11][1][c[0b11][0b10]],s=u,t else o[0x535b]=p r,q,b,s,t="B",c[1][1][c[1][0b10]],a.F[0x69d4]or a:G(0x314667,0x21e6,0x69d4),c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]]end else b,q=b+0x150,""end elseif b>=0x359 then if b<0x3b3 then if b>0x37a then if b<=0x394 then if b<=0x38b then if b<=0x38a then if b>0x387 then b=r>0 and(a.F[-0x4f30]or a:G(0x5ad0f1,0x6996,-0x4f30))or 0x64a-b elseif b<=0x386 then b=n~=n and b+-0x2af or 0x6f7-b else b,o[0xfdc5]=0x69612/b,p end else n=n(o,a.d(p))b,i,q,o,p=a.F[-0x7734]or a:G(0x8aa5d0,0x14c1,-0x7734),n,0x80,c[0b111][1][c[0b111][0b10]],m end elseif b<=0x38d then if b>0x38c then b=g>h and(a.F[0x5865]or a:H(0xca7a,0xa5fb,0x5865))or a.F[0x65ca]or a:G(0x316e90,0x2f1d,0x65ca)else b=j<=0 and b+-0x2a7 or a.F[-0x3620]or a:G(0x1ac082,0x6aee,-0x3620)end else b=j<k and(a.F[-0x16bf]or a:H(0xb3a4,0xdd5b,-0x16bf))or b+-0b10010100 end elseif b<=0x3ab then if b>=0x3a7 then if b>0x3a7 then o=o(p,q)b,p=0x9b337/b,0b111 p=h*p else b,n=b+-0x378,0b10110011 end elseif b<=0x3a1 then b=j>k and b+-0x2f3 or 0x5d71c/b else b,n=a.F[-0x5108]or a:H(0xcedf,0xa0fd,-0x5108),0xa8 end elseif b>0x3ae then r,q,t,b,s="B",c[1][1][c[1][0b10]],c[0b11][1][c[0b11][0b10]],a.F[0x47ed]or a:G(0x81d440,0x43e1,0x47ed),c[0b10][1][c[0b10][0b10]]else b=j>0 and 0x77e-b or 0x48c-b end elseif b>0x36a then if b>0x371 then if b>0x379 then b,y=0x5be-b,a.c(y(z,A))else b=n<o and(a.F[0xce9]or a:H(0xb5e7,0xdb4a,0xce9))or a.F[0x1aed]or a:G(0x419148,0x5aad,0x1aed)end elseif b>0x370 then b=n<=0 and 0x448-b or 0x39c-b elseif b<=0x36d then if b<=0x36b then r=0 b=q==r and(a.F[-0x6252]or a:G(0x15b6fe,0x2a60,-0x6252))or a.F[0x5a7c]or a:G(0x4d2eb8,0x264d,0x5a7c)else b,p=0x747a/b,p(q,r,s)q,r=c[0b11][1][c[0b11][0b10]],1 q=q+r o,c[0b11][1][c[0b11][0b10]]=p,q end else q=q(r,s,t)r,b,s=c[0b11][1][c[0b11][0b10]],0x72f10/b,0b1000 r=r+s p,c[0b11][1][c[0b11][0b10]]=q,r end elseif b>0x363 then if b<0x367 then t=t(u,v,w)b,u=b+-0x1a,c[0b11][1][c[0b11][0b10]]u=u+r q,c[0b11][1][c[0b11][0b10]]=t,u elseif b>0x367 then b,n=0xa076/b,0b10110011 else b,q=0x5bf-b,q(r,s,t)s,r=0b10,c[0b11][1][c[0b11][0b10]]r=r+s p,c[0b11][1][c[0b11][0b10]]=q,r end elseif b<=0x35f then if b<=0x35c then if b>0x359 then b,o[0xf03]=a.F[0x50d2]or a:H(0x90e8,0xfcc7,0x50d2),p else b=n<o and 0xb16d/b or b+-0x31b end else b=n>o and b+-0x2ff or 0x47a2c/b end elseif b>0x360 then w,y,z,x,b,A,B=c[0b100][1][c[0b100][0b10]],c[0b101][1][c[0b101][0b10]],c[0b110][1][c[0b110][0b10]],r,0x5c8-b,v,0b1111111 else b,t=a.F[0x4a93]or a:H(0xa5fb,0xc930,0x4a93),a.c(t(u,v))end elseif b<0x3db then if b<0x3cd then if b>0x3bf then if b>0x3c5 then b=r>0 and b+0x13 or a.F[0xdc0]or a:G(0x2c9a9b,0x2c54,0xdc0)else b=l>0 and(a.F[-0x7383]or a:H(0xd257,0xb8fb,-0x7383))or 0x6110c/b end elseif b<=0x3b8 then if b>0x3b5 then k=k(l,m,n)l,b,m=c[0b11][1][c[0b11][0b10]],a.F[0x17f3]or a:G(0xd16c8,0x1b2b,0x17f3),1 l=l+m j,c[0b11][1][c[0b11][0b10]]=k,l elseif b>0x3b3 then b=p>0 and b+-0x56 or 0x509-b else s=s(t,u,v)b,t=a.F[-0xb5]or a:G(0x4f5fd,0x3f66,-0b10110101),c[0b11][1][c[0b11][0b10]]t=t+q c[0b11][1][c[0b11][0b10]],p=t,s end else b,s,t,q,r=a.F[-0b110100011]or a:H(0x8a77,0xe388,-0b110100011),c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]],c[1][1][c[1][0b10]],"B"end elseif b<0x3d1 then if b<=0x3cf then if b<=0x3cd then b,z=a.F[-0x3a94]or a:G(0x108ba0,0x3bad,-0x3a94),a.c(z(A,B))else n=n(o,p)m=not n b=m and(a.F[0x7ffc]or a:G(0x42e86a,0x5373,0x7ffc))or b+-0x33c end else b=h>i and b+-0x37b or a.F[-0x7490]or a:G(0x37ce04,0x7d57,-0x7490)end elseif b<=0x3d7 then if b>0x3d4 then b=n<o and(a.F[0xce9]or a:H(0xe7a7,0x890a,0xce9))or 0x7d4-b elseif b>0x3d1 then b=v<=0 and(a.F[0x4c5f]or a:H(0xda3c,0xb21b,0x4c5f))or b+-0b111011110 else b=n<=0 and(a.F[0x46ab]or a:H(0xc36c,0xa989,0x46ab))or 0x61a-b end else b=p>0 and 0x8480f/b or a.F[-0x7bb3]or a:H(0x7f7b,0xec57,-0x7bb3)end elseif b>0x3eb then if b<0x3f6 then if b>=0x3f0 then if b>0x3f0 then p=0xa8 b=n>=p and(a.F[-0x1a95]or a:G(0x277518,0x1025,-0x1a95))or a.F[0x352d]or a:H(0xa565,0xc6b9,0x352d)else m=m(n,o)l=not m b=l and(a.F[0x3381]or a:H(0xf3a9,0x9df9,0x3381))or a.F[0x7929]or a:G(0x12ad4,0x759,0x7929)end else o[0xa19f]=p t,s,q,b,r=c[0b11][1][c[0b11][0b10]],c[0b10][1][c[0b10][0b10]],c[1][1][c[1][0b10]],0x5c708/b,"B"end elseif b>0x3fd then l=l(m,n)k=not l b=k and(a.F[0x5865]or a:G(0x36f8a4,0x578a,0x5865))or 0x1af94/b elseif b>0x3f6 then b=p~=p and(a.F[0xce9]or a:H(0xb58f,0xdbe2,0xce9))or a.F[0x1aed]or a:G(0x26a36c,0b11111,0x1aed)else b,o[0xa19f]=b+-0x218,p end elseif b<0x3e2 then if b<0x3df then if b<=0x3db then b=l<m and(a.F[-0x160b]or a:H(0xb807,0xd784,-0x160b))or a.F[0x4c33]or a:G(0xcb7660,0x7370,0x4c33)else x=x(y,z)w=not x b=w and b+-0x2c4 or 0xefc38/b end elseif b>0x3df then p=p(q,r,s)q,r=c[0b11][1][c[0b11][0b10]],1 b,q=0x122eb/b,q+r c[0b11][1][c[0b11][0b10]],o=q,p else b=p>q and b+-0x24d or 0x9f70d/b end elseif b<=0x3ea then if b<0x3e3 then s=s+u b=u>0 and(a.F[-0x32b9]or a:H(0x90a9,0xfcfe,-0x32b9))or a.F[0x5b96]or a:G(0x86bfe4,0xa77,0x5b96)elseif b>0x3e3 then i=i(j,k,l)b,j=a.F[0x562e]or a:G(0xffb48,0x2ab9,0x562e),c[0b11][1][c[0b11][0b10]]j=j+g f,c[0b11][1][c[0b11][0b10]]=i,j else o[0x535b]=p s,b,r,t,q=c[0b10][1][c[0b10][0b10]],0x2f206/b,a.F[-0x4b25]or a:J(a.i"<*@4",a.i"*#",-0x4b25),c[0b11][1][c[0b11][0b10]],c[1][1][c[1][0b10]]end else n=n(o,p,q)o,p=c[0b11][1][c[0b11][0b10]],1 o=o+p m,b,c[0b11][1][c[0b11][0b10]]=n,0x45f-b,o end elseif b<0x301 then if b>=0x2d8 then if b>=0x2e6 then if b<0x2f5 then if b>=0x2e9 then if b>0x2e9 then b=p<=0 and(a.F[0x46cc]or a:G(0x162218b,0x54ce,0x46cc))or a.F[-0x45fa]or a:H(0xc86f,0xa79c,-0x45fa)else q=q(r,s,t)b,s,r=a.F[-0x3ef5]or a:G(0x17571bf,0x54e4,-0x3ef5),0b10,c[0b11][1][c[0b11][0b10]]r=r+s c[0b11][1][c[0b11][0b10]],p=r,q end else n=n+p b=p>0 and 0x5c9-b or b+0b11111 end elseif b<=0x2fe then if b<0x2f7 then t,u,b,w,v=c[1][1][c[1][0b10]],"B",0x4f4-b,c[0b11][1][c[0b11][0b10]],c[0b10][1][c[0b10][0b10]]elseif b<=0x2f7 then b=h<i and 0x34c-b or a.F[0xca2]or a:H(0xd41f,0xb813,0xca2)else b=l<m and b+-0x280 or b+-0x222 end else b=l~=l and(a.F[-0x16bf]or a:G(0x2780f0,0x729,-0x16bf))or a.F[-0x431f]or a:G(0x2bc52a,0x4633,-0x431f)end elseif b>0x2e1 then if b<=0x2e2 then b=i>j and b+-0x247 or a.F[0x53fe]or a:G(0x4f03d0,0xb4,0x53fe)else b=n>o and 0x28f49/b or a.F[-0x4ee7]or a:G(0x8130e4,0x17c9,-0x4ee7)end elseif b>=0x2de then if b>0x2de then b=p~=p and(a.F[0x46cc]or a:G(0x1967394,0x4469,0x46cc))or 0x5d5-b else b=l>m and(a.F[-0x35b5]or a:H(0xc50a,0xab61,-0x35b5))or a.F[0x2e3d]or a:H(0xc456,0xa6dd,0x2e3d)end elseif b>0x2d8 then b=p>q and(a.F[0x312e]or a:H(0x9052,0xfced,0x312e))or a.F[-0x33f8]or a:H(0xb5e5,0xd816,-0x33f8)else q=q(r,s,t)s,b,r=1,0x20e18/b,c[0b11][1][c[0b11][0b10]]r=r+s c[0b11][1][c[0b11][0b10]],p=r,q end elseif b<=0x2c1 then if b>=0x2bd then if b>=0x2c0 then if b<=0x2c0 then b=r~=r and(a.F[0x13e8]or a:G(0xed78b8,0x43a6,0x13e8))or a.F[-0x3b81]or a:H(0xd4fb,0xbb99,-0x3b81)else b,q=a.F[0x4529]or a:H(0x9284,0xfa0e,0x4529),q(r,s,t)s,r=1,c[0b11][1][c[0b11][0b10]]r=r+s p,c[0b11][1][c[0b11][0b10]]=q,r end elseif b<=0x2bd then o[0xa19f]=p q,b,s,t,r=c[1][1][c[1][0b10]],0x3be66/b,c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]],a.F[-0x4b25]or a:J(a.i"+=<c",a.i"-~",-0x4b25)else b=p>0 and(a.F[-0x4a4f]or a:G(0x3b7bce,0x247b,-0x4a4f))or a.F[-0x7de]or a:G(0x4db913,0x1f18,-0x7de)end elseif b>=0x2bb then if b<=0x2bb then b=i<=0 and 0x43689/b or a.F[-0x6ecc]or a:H(0xcadf,0xa587,-0x6ecc)else q=q(r,s,t)s,r=0b10,c[0b11][1][c[0b11][0b10]]r=r+s b,c[0b11][1][c[0b11][0b10]],p=0x452-b,r,q end else t=t+v b=v>0 and 0x4ce-b or a.F[0x12ee]or a:I(0x9c59,0x14ee,0x12ee)end elseif b>0x2cf then if b>0x2d3 then b,s=a.F[-0x7405]or a:G(0x4923f8,0x1215,-0x7405),"c"r,s=s..q,c[1][1][c[1][0b10]]u,v,t=c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]],r else A=A(B,C)b,B=b+0b11111010,0b111 B=t*B end elseif b>0x2cb then b,q=a.F[-0x53ba]or a:G(0xcccd48,0x7cf5,-0x53ba),q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],0b10 r=r+s c[0b11][1][c[0b11][0b10]],p=r,q elseif b>=0x2c9 then if b>0x2c9 then q=q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],0b10 b,r=a.F[-0x3483]or a:H(0xbc85,0xd366,-0x3483),r+s c[0b11][1][c[0b11][0b10]],p=r,q else q=q(r,s,t)b,r,s=0x8a36a/b,c[0b11][1][c[0b11][0b10]],1 r=r+s p,c[0b11][1][c[0b11][0b10]]=q,r end else b,o[0x535b]=b+0b100011,p q,r,t,s=c[1][1][c[1][0b10]],a.F[-0x6f48]or a:J(a.i"^nv;",a.i"$N",-0x6f48),c[0b11][1][c[0b11][0b10]],c[0b10][1][c[0b10][0b10]]end elseif b>=0x31c then if b>0x34e then if b>=0x354 then if b>=0x355 then if b>0x355 then b=s<t and b+-0x240 or 0xa65a0/b else b,s=a.F[0x270e]or a:H(0xf52c,0x97d4,0x270e),a.F[-0x2dd]or a:J(a.i"toZ",a.i"kN",-0x2dd)r,s=s..q,c[1][1][c[1][0b10]]t,u,v=r,c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]]end else b=l>m and 0x1a358/b or a.F[0x7d78]or a:G(0x98af32,0x4d9b,0x7d78)end elseif b>0x352 then b=s>t and(a.F[-0x1052]or a:G(0x5dd4a8,0x68d7,-0x1052))or b+-0x238 elseif b>0x351 then o=o(p,q)n=not o b=n and b+-0x2a4 or b+-0x27c else b=j<k and(a.F[-0x2b0a]or a:G(0x9286f,0x58a4,-0x2b0a))or 0x712c2/b end elseif b<=0x33a then if b<=0x328 then if b<0x31d then z,y,b,w,x=c[0b11][1][c[0b11][0b10]],c[0b10][1][c[0b10][0b10]],0x4d26c/b,c[1][1][c[1][0b10]],"B"elseif b>0x31d then b=l<m and(a.F[-0x35b5]or a:H(0xabe5,0xc54a,-0x35b5))or a.F[0x6ae7]or a:G(0xef67a7,0x55c2,0x6ae7)else A,y,C,b,B,x,z=c[0b110][1][c[0b110][0b10]],s,0b1111111,a.F[-0x256d]or a:H(0x8196,0xed6e,-0x256d),w,c[0b100][1][c[0b100][0b10]],c[0b101][1][c[0b101][0b10]]end elseif b<=0x333 then b=l<=0 and b+-0x13f or a.F[-0x675a]or a:G(0x1890d,0x3894,-0x675a)else b=i>j and 0x3d5-b or a.F[-0x3cf6]or a:H(0xc4ab,0xabc3,-0x3cf6)end elseif b<0x34a then t,b,s,r,q=c[0b11][1][c[0b11][0b10]],a.F[-0x4757]or a:G(0x4a1bb0,0x252d,-0x4757),c[0b10][1][c[0b10][0b10]],"B",c[1][1][c[1][0b10]]elseif b>0x34a then b=j>k and 0x23f04/b or a.F[0x2562]or a:G(0xc8d3da,0x4d03,0x2562)else s=c[0b1010][1][c[0b1010][0b10]]b,r=a.F[0x35e7]or a:H(0x876f,0xe4b2,0x35e7),s[q]m[n]=r end elseif b>0x30d then if b<=0x319 then if b>=0x317 then if b<=0x317 then l=l+n b=n>0 and(a.F[0x603b]or a:H(0xefe7,0x9ef6,0x603b))or 0x4e6-b else m=m(n,a.d(o))o,b,n,p,h=l,b+0xb6,c[0b111][1][c[0b111][0b10]],0b10000000,m end elseif b<=0x311 then q=q(r,s,t)r,b,s=c[0b11][1][c[0b11][0b10]],a.F[-0x5538]or a:G(0xf49e12,0x3eb,-0x5538),1 r=r+s c[0b11][1][c[0b11][0b10]],p=r,q else s,r=0,q[0xc441]b=r~=s and b+-0x1f0 or a.F[-0x4404]or a:G(0x2e5706,0x2890,-0x4404)end elseif b<=0x31a then b,o[0x535b]=a.F[0xc9b]or a:G(0x15c44e2,0x437f,0xc9b),p s,r,t,q=c[0b10][1][c[0b10][0b10]],"B",c[0b11][1][c[0b11][0b10]],c[1][1][c[1][0b10]]else b,o[0xb94c]=a.F[0x50d2]or a:H(0xc493,0xab78,0x50d2),p end elseif b<0x308 then if b<=0x305 then if b<=0x301 then b=p~=p and b+-0x2cc or 0x33f-b else b=p<=0 and(a.F[-0x78e6]or a:G(0x2027e8,0xb95,-0x78e6))or a.F[-0x686c]or a:H(0xbad6,0xd57b,-0x686c)end else r,b,q,t,s="B",a.F[-0x2b81]or a:G(0xa6514a,0x5737,-0x2b81),c[1][1][c[1][0b10]],c[0b11][1][c[0b11][0b10]],c[0b10][1][c[0b10][0b10]]end elseif b<0x30b then if b>0x308 then i=i(j)k,j,l=h,1,1 b=k~=k and b+-0x2f3 or a.F[-0x339f]or a:G(0x54c160,0x7f91,-0x339f)else b=g<h and(a.F[0x5865]or a:G(0x13c390,0x1b67,0x5865))or 0x321-b end elseif b<=0x30b then b,o[0xa19f]=a.F[-0x37b1]or a:H(0xd8c0,0xb534,-0x37b1),p s,t,r,q=c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]],a.F[-0x6f48]or a:J(a.i"lINT",a.i"t^",-0x6f48),c[1][1][c[1][0b10]]else s=s()b,o[p]=0x4da-b,s end elseif b>0xb9 then if b<0b100010111 then if b<=0b11011111 then if b>0b11001110 then if b<=0b11011000 then if b>0xd5 then if b>=0b11010111 then if b<=0xd7 then b=l<m and(a.F[-0x35b5]or a:G(0x9b612,0x278e,-0x35b5))or b+-0xac else o=0xf9 b=m<o and b+-0b11000111 or b+-0x5d end else j=j+l b=l>0 and 0x2c334/b or 0x2a1-b end elseif b>=0xd4 then if b>0b11010100 then b=n<o and b+0b1110 or a.F[0x2e29]or a:H(0xf141,0x9cd3,0x2e29)else o,b,m,n,p=c[0b10][1][c[0b10][0b10]],0b110110011-b,c[1][1][c[1][0b10]],"B",c[0b11][1][c[0b11][0b10]]end elseif b<=0b11001111 then b,n=0x2601/b,0b10011000 else b=u>0 and(a.F[-0x496e]or a:H(0x974b,0xf595,-0x496e))or 0x1ee-b end elseif b>=0b11011101 then if b>0b11011110 then m=m(n,o,p)b,n,o=0x13c-b,c[0b11][1][c[0b11][0b10]],1 n=n+o l,c[0b11][1][c[0b11][0b10]]=m,n elseif b<=0b11011101 then h,i,b,j,g="B",c[0b10][1][c[0b10][0b10]],b+0x96,c[0b11][1][c[0b11][0b10]],c[1][1][c[1][0b10]]else b=j~=j and(a.F[0x1f49]or a:G(0x53088f,0x61ce,0x1f49))or a.F[0b1010110]or a:G(0x14f9848,0x6399,0b1010110)end elseif b<=0xdb then if b<=0xda then q,p,l,n,b,o,m=0b1111111,k,c[0b100][1][c[0b100][0b10]],c[0b101][1][c[0b101][0b10]],a.F[0x16ef]or a:G(0x1bf55e5,0x44f2,0x16ef),c[0b110][1][c[0b110][0b10]],g else e=1 b=d==e and b+-0b11010000 or a.F[-0x2565]or a:H(0xa2f1,0xcc0e,-0x2565)end else p,b,r,s,q=c[1][1][c[1][0b10]],0x2f1ac/b,c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]],"B"end elseif b>=0b11000010 then if b<0xc6 then if b<0b11000011 then b,q=0x19c40/b,q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],0b10 r=r+s p,c[0b11][1][c[0b11][0b10]]=q,r elseif b<=0b11000011 then o=0xef b=m>o and(a.F[0x6a6b]or a:G(0x16debf,0x4a52,0x6a6b))or a.F[-0xc33]or a:H(0xec02,0x8254,-0xc33)else b,n=a.F[-0x5108]or a:G(0x13f51e,0x51df,-0x5108),0b1011001 end elseif b<=0xc8 then if b>0xc7 then o=0b10111101 b=m<=o and 0x41a0/b or b+-0x9e elseif b<=0xc6 then b,n=a.F[-0x5108]or a:G(0x92fb0,0xcdd,-0x5108),0b10010010 else i="c"b,i,h=a.F[-0x74b2]or a:G(0x11b0854,0x754b,-0x74b2),c[1][1][c[1][0b10]],i..g k,j,l=c[0b10][1][c[0b10][0b10]],h,c[0b11][1][c[0b11][0b10]]end else o=0x4c b=m<=o and 0x15f-b or a.F[-0x33ee]or a:H(0xdd3a,0xb084,-0x33ee)end elseif b<0b10111110 then if b<=0xbc then if b>0xba then o=0x60 b=m<=o and(a.F[0x7180]or a:G(0x31d54,0x38e7,0x7180))or b+-0xb5 else o=0xcf b=m<=o and 0b11111101-b or 0x424-b end else b=p<=0 and(a.F[0x6282]or a:H(0xa51e,0xc7ea,0x6282))or a.F[0x1a3d]or a:G(0x9e083e,0x1a9b,0x1a3d)end elseif b>=0b11000000 then if b<=0b11000000 then h,i,k,b,j=c[1][1][c[1][0b10]],"B",c[0b11][1][c[0b11][0b10]],a.F[0b10100]or a:G(0xb0353a,0x7f8e,0x14),c[0b10][1][c[0b10][0b10]]else b,n=a.F[-0x5108]or a:H(0xe80d,0x8633,-0x5108),0b11011001 end elseif b<=0xbe then j,b,i=h,b+0x24c,c[0b1000][1][c[0b1000][0b10]]else o=0b1111100 b=m<=o and(a.F[-0x4c0e]or a:H(0xf4c3,0x9a58,-0x4c0e))or a.F[-0x34c4]or a:H(0xb404,0xdbba,-0x34c4)end elseif b<=0xf4 then if b<=0xea then if b<=0b11100101 then if b<=0b11100011 then if b>=0b11100001 then if b>0b11100001 then b,l=a.F[0x711b]or a:H(0x8e0b,0xe059,0x711b),m else b,n=b+-0xb2,0x1f end else p=0xa8 b=n<=p and(a.F[-0x483a]or a:H(0x8c99,0xe3ec,-0x483a))or a.F[0x7c0f]or a:H(0xe890,0x85a4,0x7c0f)end elseif b>0b11100100 then b=h<i and 0b100111010-b or 0x45c6/b else o=0b101100 b=m<=o and 0b110000000-b or a.F[-0xcd3]or a:H(0xa83e,0xc71f,-0xcd3)end elseif b>0xe7 then b,n=a.F[-0x5108]or a:G(0xd344b,0x7518,-0x5108),0b11011000 elseif b>0b11100110 then g=0 b=f==g and b+0b10110 or a.F[-0x16f6]or a:G(0x10aca0,0x1f1d,-0x16f6)else b,f=0b110010010-b,""end elseif b<=0b11110000 then if b>0b11101110 then q=q(r,s)r=0b111 b,r=a.F[-0x4871]or a:G(0x1ac28a,0x36eb,-0x4871),j*r elseif b>=0xec then if b>0xec then b,p=a.F[-0b10110101]or a:H(0x8898,0xe4ac,-0xb5),""else o=0x46 b=m<o and(a.F[0x6f8e]or a:H(0xc623,0xa83d,0x6f8e))or 0xbde8/b end else o=0xd1 b=m<=o and(a.F[0x187]or a:H(0xcddb,0xa08c,0x187))or b+-0b11100 end elseif b>0xf3 then b,n=a.F[-0x5108]or a:H(0x9491,0xfacf,-0x5108),0x92 else b,n=a.F[-0x5108]or a:H(0xd7a5,0xb9db,-0x5108),0b11100111 end elseif b>=0x106 then if b>=0x10f then if b<=0x110 then if b<=0x10f then b,m=a.F[0x62d0]or a:H(0xdf77,0x8c00,0x62d0),a.c(m(n,o))else b,o[0x535b]=0x2b4-b,p r,s,q,t="B",c[0b10][1][c[0b10][0b10]],c[1][1][c[1][0b10]],c[0b11][1][c[0b11][0b10]]end else b=p>q and b+0b10011101 or 0x2f440/b end elseif b<=0x10b then if b>0x106 then b=n<=0 and 0x31eea/b or 0xe574/b else b,q=0xaf02/b,q(r,s,t)s,r=1,c[0b11][1][c[0b11][0b10]]r=r+s p,c[0b11][1][c[0b11][0b10]]=q,r end else b=l>m and(a.F[-0x160b]or a:G(0x226a5c,0x78db,-0x160b))or a.F[0x4878]or a:H(0xb70a,0xd7d6,0x4878)end elseif b>=0xfa then if b<0b11111101 then b,n=a.F[-0x5108]or a:G(0xdc922,0x77e3,-0x5108),0b11011001 elseif b<=0xfd then b,e=b+-0xe7,""else b=r<=0 and 0x1f4f3/b or 0x1d3d2/b end elseif b>=0xf7 then if b<=0xf7 then s=s(t,u)r=not s b=r and b+-0b10100 or 0x3dd-b else b=n>0 and(a.F[-0b11011100]or a:G(0x69b406,0x19e4,-0xdc))or a.F[0x2e3d]or a:G(0x190cfe2,0x4cba,0x2e3d)end else b,n=a.F[-0x5108]or a:G(0xf5a10,0x6e7d,-0x5108),0b10110011 end elseif b<0x15e then if b<=0x144 then if b>=0x12e then if b>0x134 then if b<0b100111000 then l=l(m,a.d(n))b,o,n,m,g=a.F[0x1201]or a:H(0x7d48,0xef35,0x1201),0x80,k,c[0b111][1][c[0b111][0b10]],l elseif b>0b100111000 then b=v<=0 and(a.F[-0x170a]or a:G(0x43aeda,0x1453,-0x170a))or a.F[0x69d8]or a:H(0xa406,0xcb9c,0x69d8)else b,v=b+0b10101111,a.c(v(w,x))end elseif b<0b100110010 then if b<=0x12e then b,o[0xf03]=a.F[0x50d2]or a:G(0x4d4de4,0x1467,0x50d2),p else q=q(r,s,t)r,b,s=c[0b11][1][c[0b11][0b10]],a.F[0x19e2]or a:H(0xe5ef,0x89da,0x19e2),0b10 r=r+s p,c[0b11][1][c[0b11][0b10]]=q,r end elseif b<=0x132 then p=0xb3 b=n<=p and b+0x2c0 or b+0x280 else b=v>0 and 0x3b1-b or a.F[-0x67e]or a:H(0x9798,0xf676,-0x67e)end elseif b>=0b100011101 then if b>=0b100100101 then if b>0b100100101 then b=r<=0 and(a.F[0x3774]or a:G(0xc4d30,0x3403,0x3774))or 0x2d9-b else b,s=a.F[-0x4404]or a:H(0xd503,0xb930,-0x4404),q[0xc441]r=k[s]q[0xc441]=r end elseif b>0x11d then b,q=b+0b1001100,q(r,s,t)s,r=1,c[0b11][1][c[0b11][0b10]]r=r+s c[0b11][1][c[0b11][0b10]],p=r,q else b=k~=k and(a.F[0x5f6a]or a:H(0xd9a8,0xb42e,0x5f6a))or 0x286-b end elseif b<0b100011000 then r,t,b,s,q="B",c[0b11][1][c[0b11][0b10]],a.F[0x6c66]or a:H(0xdf39,0x8ec4,0x6c66),c[0b10][1][c[0b10][0b10]],c[1][1][c[1][0b10]]elseif b<=0x118 then b,q=b+0x253,r else b=u~=u and(a.F[0x5bfc]or a:G(0x1322098,0x6695,0x5bfc))or a.F[0x246a]or a:H(0xcfec,0xbe7c,0x246a)end elseif b>0b101010101 then if b>=0b101011011 then if b>0x15c then p=0b10010010 b=n>=p and 0x3c9-b or a.F[-0x50ab]or a:G(0x1911198,0x466f,-0x50ab)elseif b<=0b101011011 then b=n~=n and(a.F[0x5b46]or a:H(0xcbb6,0xa0b5,0x5b46))or 0x266-b else b=p<q and(a.F[0x312e]or a:H(0x96f8,0xf68b,0x312e))or a.F[-0x1a06]or a:G(0x1cb89d,0x2c0e,-0x1a06)end elseif b>0b101011001 then s,b,q,t,r=c[0b10][1][c[0b10][0b10]],a.F[-0x576]or a:H(0xa69c,0xc835,-0x576),c[1][1][c[1][0b10]],c[0b11][1][c[0b11][0b10]],"B"elseif b>0x158 then b,s=a.F[-0x419d]or a:H(0x8376,0xe984,-0x419d),c[0b1011][1][c[0b1011][0b10]]else b,t,r,q,s=a.F[0x6044]or a:G(0xfb8390,0x66fb,0x6044),c[0b11][1][c[0b11][0b10]],a.F[-0x4b25]or a:J(a.i"8%`A",a.i"Cj",-0x4b25),c[1][1][c[1][0b10]],c[0b10][1][c[0b10][0b10]]end elseif b<0x14d then if b<0x147 then b=l>0 and(a.F[0x3426]or a:H(0x9d84,0xf1ab,0x3426))or a.F[-0xd5f]or a:H(0x8e22,0xfeee,-0xd5f)elseif b>0x147 then b=k<=0 and 0x361-b or 0x2d2a0/b else b=h>i and(a.F[0x3381]or a:G(0x285a37,0x4476,0x3381))or a.F[-0x2cd0]or a:H(0xf64f,0x97dd,-0x2cd0)end elseif b<0b101010100 then if b>0x14d then b,q=b+0b1101,q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],1 r=r+s c[0b11][1][c[0b11][0b10]],p=r,q else p=p(q,r)b,q=0x3fe-b,0b111 q=i*q end elseif b<=0x154 then b=p~=p and 0x4cd-b or a.F[-0x53da]or a:G(0xb5f06a,0x571b,-0x53da)else b=l<=0 and 0x2e5-b or 0x1b0-b end elseif b>=0x184 then if b>=0x18e then if b>=0x191 then if b<0b110010011 then if b>0b110010001 then b,n=a.F[-0x2bba]or a:G(0xb26cbd,0x5080,-0x2bba),o else q=q(r,s,t)s,r=1,c[0b11][1][c[0b11][0b10]]r=r+s c[0b11][1][c[0b11][0b10]],b,p=r,a.F[-0x5621]or a:H(0xe261,0x8a68,-0x5621),q end elseif b>0b110010011 then b=p<q and b+-0b11 or a.F[-0x2260]or a:G(0x6a0094,0x1ed9,-0x2260)else b=n<o and 0x1c8-b or a.F[-0x4c43]or a:H(0xcedd,0xbfd1,-0x4c43)end elseif b>0x18f then b=j<k and 0x10fe0/b or a.F[-0x431f]or a:H(0x919a,0xfff2,-0x431f)elseif b<=0b110001110 then s=s(t,u,v)t=c[0b11][1][c[0b11][0b10]]b,t=b+0b10001001,t+q p,c[0b11][1][c[0b11][0b10]]=s,t else y=y(z,A)x=not y b=x and(a.F[0x1d67]or a:G(0x1105d8,0x7936,0x1d67))or a.F[0x543c]or a:G(0x73ed98,0x17c5,0x543c)end elseif b<=0x18a then if b<0b110001000 then if b<=0b110000100 then p=p(q,a.d(r))b,q,s,r,k=0x408-b,c[0b111][1][c[0b111][0b10]],0x80,o,p else b=i<j and 0x220-b or a.F[0x79d8]or a:H(0x8577,0xe84e,0x79d8)end elseif b<=0b110001000 then t,b,q,r,s=c[0b11][1][c[0b11][0b10]],b+0b101000001,c[1][1][c[1][0b10]],"B",c[0b10][1][c[0b10][0b10]]else q=1 b=o==q and 0x3b410/b or 0x33766/b end elseif b>0b110001100 then w=w(x,y,z)x,y=c[0b11][1][c[0b11][0b10]],1 b,x=a.F[0x7e88]or a:G(0x5a7430,0x27bd,0x7e88),x+y v,c[0b11][1][c[0b11][0b10]]=w,x elseif b>0b110001011 then b=n>o and(a.F[0xce9]or a:H(0xd705,0xb968,0xce9))or 0x249-b else b=g<h and b+-0b100000111 or 0x11747/b end elseif b>=0x169 then if b<0b101110000 then if b>=0b101101011 then if b<=0x16b then o[0xf399]=p b,r,s,t,q=b+-0b11000011,"B",c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]],c[1][1][c[1][0b10]]else h=h(i,j,k)i=c[0b11][1][c[0b11][0b10]]b,i=a.F[0x7916]or a:H(0xd1e3,0xbf00,0x7916),i+f e,c[0b11][1][c[0b11][0b10]]=h,i end else b=k<=0 and 0x2248d/b or b+-0x95 end elseif b<0b101110111 then if b<=0x170 then b,o[0x535b]=0x26010/b,p q,r,s,t=c[1][1][c[1][0b10]],"B",c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]]else g=g(h,i,j)i,h=1,c[0b11][1][c[0b11][0b10]]h=h+i f,b,c[0b11][1][c[0b11][0b10]]=g,0x233-b,h end elseif b<=0b101110111 then b=i>0 and 0x353-b or a.F[0x73fb]or a:G(0x5b913a,0x14bc,0x73fb)else q=q(r,s,t)s,r=1,c[0b11][1][c[0b11][0b10]]r=r+s p,b,c[0b11][1][c[0b11][0b10]]=q,a.F[-0x76b4]or a:H(0x94c4,0xfb34,-0x76b4),r end elseif b>0b101100001 then if b>0x162 then b=u~=u and(a.F[-0x1052]or a:H(0xade6,0xc003,-0x1052))or b+0b110111000 else r=r(s,t,u)s,t=c[0b11][1][c[0b11][0b10]],1 s=s+t b,q,c[0b11][1][c[0b11][0b10]]=a.F[0x476b]or a:G(0x75e1c7,0x1e66,0x476b),r,s end elseif b<0x160 then if b<=0b101011110 then b,q=a.F[0x5649]or a:G(0x3703b8,0x2125,0x5649),q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],0b10 r=r+s c[0b11][1][c[0b11][0b10]],p=r,q else k=k(l)m,l,n=j,1,1 b=m~=m and b+-0xe1 or a.F[0x3c18]or a:G(0x7e3cac,0x79e1,0x3c18)end elseif b<=0b101100000 then o[0x535b]=p q,s,r,b,t=c[1][1][c[1][0b10]],c[0b10][1][c[0b10][0b10]],"B",a.F[-0x6db]or a:G(0x3590e9,0x592c,-0x6db),c[0b11][1][c[0b11][0b10]]else b=l<=0 and 0x492b1/b or b+0b11000001 end elseif b>0x60 then if b>0b10010101 then if b>0xab then if b>=0xb3 then if b>0xb7 then if b<=0b10111000 then b,n=0x21c8/b,0xd9 else o[0x535b]=p s,b,r,t,q=c[0b10][1][c[0b10][0b10]],0x20797/b,a.F[-0x4b25]or a:J(a.i"LKjQ",a.i"eg",-0x4b25),c[0b11][1][c[0b11][0b10]],c[1][1][c[1][0b10]]end elseif b<0xb5 then if b<=0xb3 then o=0xf9 b=m<=o and 0x456-b or 0x1ae05/b else o=0x1c b=m<=o and(a.F[-0x658b]or a:G(0x14606,0x3fef,-0x658b))or a.F[-0x3c90]or a:H(0x9807,0xf7f9,-0x3c90)end elseif b>0xb5 then b,n=a.F[-0x5108]or a:G(0xd9871,0x74e2,-0x5108),0b11011000 else b=i~=i and(a.F[0x5865]or a:G(0x1a68b0,0xe2f,0x5865))or 0xce-b end elseif b<=0b10110000 then if b>=0b10101110 then if b<=0b10101110 then b,h=b+0b10000,i else b,n=a.F[-0x5108]or a:G(0x484ca,0x25cb,-0x5108),0xd9 end elseif b<=0xac then i,h=0,{}h[0xf3af]=i i=0 h[0x9275]=i i=0 h[0x9207]=i j={}i=j h[0xaa03]=i j={}i=j h[0xb6a8]=i j={}i=j h[0x7d11]=i h[0x3485]=e h[0x7cae]=f g=h return g else o=0x84 b=m<=o and(a.F[0x7863]or a:H(0x952a,0xf895,0x7863))or a.F[0x45cb]or a:H(0xf8ce,0x9632,0x45cb)end elseif b<=0xb1 then l=l(m,n,o)b,m,n=a.F[0x2146]or a:G(0x2129ae,0x1be2,0x2146),c[0b11][1][c[0b11][0b10]],1 m=m+n k,c[0b11][1][c[0b11][0b10]]=l,m else b,n=a.F[-0x5108]or a:H(0x83ff,0xed1d,-0x5108),0xd8 end elseif b>0xa1 then if b<=0b10100111 then if b<0xa6 then if b<=0b10100010 then q=i[n]r,s=q[0xfdc5],0 b=r~=s and b+0b100001011 or 0x1f34a/b else q=q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],1 r=r+s c[0b11][1][c[0b11][0b10]],b,p=r,a.F[-0x5ef0]or a:G(0x73ad68,0x51d2,-0x5ef0),q end elseif b<=0b10100110 then t,u,s,r=0b100,1,0,0 b=t~=t and(a.F[-0x1052]or a:G(0x59c7b8,0x6f19,-0x1052))or a.F[-0x38b0]or a:H(0xaf6c,0xde34,-0x38b0)else b=r<=0 and(a.F[0x13e8]or a:H(0xca5d,0xa230,0x13e8))or b+0xb2 end elseif b>0b10101000 then b,o[0x535b]=a.F[0x50d2]or a:H(0xf72b,0x9700,0x50d2),p else q=q(r,s,t)b,s,r=a.F[-0x680d]or a:G(0x881c42,0x4e5e,-0x680d),1,c[0b11][1][c[0b11][0b10]]r=r+s c[0b11][1][c[0b11][0b10]],p=r,q end elseif b<0b10011011 then if b>0b10011000 then o=0b10011111 b=m<=o and b+-0b1010010 or b+-0x36 elseif b<=0x97 then if b<=0x96 then b,n=b+-0x67,0b10010010 else b=n<o and(a.F[-0x3d2e]or a:H(0xf9d7,0x94b9,-0x3d2e))or a.F[-0x686c]or a:H(0xd049,0xbce4,-0x686c)end else h=0 b=g==h and 0x8890/b or a.F[-0x24a7]or a:G(0x6b763,0x35a8,-0x24a7)end elseif b>=0b10011110 then if b>0b10011110 then q=q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],1 b,r=a.F[0x5439]or a:G(0xf9bc8a,0x20e,0x5439),r+s p,c[0b11][1][c[0b11][0b10]]=q,r else b,n=a.F[-0x5108]or a:H(0xe1f6,0x8f2a,-0x5108),0xb3 end elseif b>0x9b then o=0x28 b=m>=o and(a.F[-0x3410]or a:G(0x9417c,0x69da,-0x3410))or a.F[0x2e50]or a:G(0x96ef0,0x6e0d,0x2e50)else b,g=a.F[0x69b6]or a:H(0xca4f,0xa5da,0x69b6),h end elseif b<0x7e then if b>0x72 then if b<=0x79 then if b>=0x75 then if b<=0x75 then b,n=b+-0x46,0x1f else p=0b1011001 b=n<p and 0x224-b or 0b111010110-b end elseif b<=0x73 then b,n=0xa2-b,0b10010010 else p,n,s,q,b,r,o=c[0b101][1][c[0b101][0b10]],c[0b100][1][c[0b100][0b10]],0x7f,c[0b110][1][c[0b110][0b10]],a.F[-0x620e]or a:G(0x6cbfb8,0x4ef3,-0x620e),m,i end elseif b>0b1111011 then h="c"g,h=h..f,c[1][1][c[1][0b10]]k,b,j,i=c[0b11][1][c[0b11][0b10]],0xb2b6/b,c[0b10][1][c[0b10][0b10]],g else o=0xfd b=m>o and(a.F[0x5925]or a:G(0x2c200c,0x765b,0x5925))or a.F[0x480b]or a:G(0x401d47,0x66a0,0x480b)end elseif b<0x6c then if b<=0x69 then if b<=0x64 then b,n=0x125c/b,0b10110011 else o=0xee b=m>o and 0b101011110-b or a.F[0x265]or a:G(0x536aeb,0x2bd0,0x265)end else q=0b10 b=o==q and(a.F[-0x6b68]or a:H(0x9118,0xfd39,-0x6b68))or b+0x120 end elseif b>=0x6f then if b>0b1101111 then b,n=a.F[-0x5108]or a:H(0xbc91,0xd2cf,-0x5108),0xb3 else b,n=a.F[-0x5108]or a:G(0xd6160,0x740d,-0x5108),0b10010010 end elseif b>0b1101100 then b,n=0x9c-b,0xd9 else g=g+i b=i>0 and(a.F[0x4d17]or a:H(0xb077,0xda07,0x4d17))or 0x327-b end elseif b<0b10001001 then if b<0x83 then if b<0x80 then o,n,m,p=0b100,0,0,1 b=o~=o and b+0x65 or a.F[0x5ccb]or a:G(0x1b3efe,0x34e8,0x5ccb)elseif b<=0x80 then o=0xe9 b=m<o and 0xa1-b or a.F[0x4b17]or a:G(0x918,0x5176,0x4b17)else o=0x52 b=m<=o and(a.F[0x2f92]or a:G(0x19e28e,0x1076,0x2f92))or 0x58b0/b end elseif b<=0b10000101 then if b>=0b10000100 then if b>0b10000100 then b,n=0xb4-b,0b11111 else b,e=a.F[0x3791]or a:G(0x6b204,0x3ac9,0x3791),f end else t,b,r,s,u=c[0b10][1][c[0b10][0b10]],0x225-b,c[1][1][c[1][0b10]],"B",c[0b11][1][c[0b11][0b10]]end else o=0x5a b=m>o and(a.F[0x2ef2]or a:H(0xcc42,0xa3b8,0x2ef2))or 0x4386/b end elseif b<=0b10010001 then if b<=0x90 then if b>0x8e then q=q(r,s,t)r,s=c[0b11][1][c[0b11][0b10]],1 b,r=a.F[-0x7b5b]or a:G(0x552d6a,0x23b6,-0x7b5b),r+s p,c[0b11][1][c[0b11][0b10]]=q,r elseif b>0b10001001 then o=0x78 b=m>=o and(a.F[0x4da6]or a:H(0xeecc,0x801f,0x4da6))or a.F[-0x3476]or a:G(0x98e5f,0x1882,-0x3476)else q=q(r,s,t)s,r=1,c[0b11][1][c[0b11][0b10]]r=r+s b,p,c[0b11][1][c[0b11][0b10]]=b+0x282,q,r end else o=0x46 b=m>o and(a.F[0x56de]or a:G(0x3816a9,0x47c8,0x56de))or a.F[0x166f]or a:H(0xd520,0xb8f2,0x166f)end elseif b>0b10010011 then x,z,y,b,A=c[1][1][c[1][0b10]],c[0b10][1][c[0b10][0b10]],"B",0x14431/b,c[0b11][1][c[0b11][0b10]]elseif b>0b10010010 then i=i+k b=k>0 and b+0x24f or a.F[0x53fe]or a:G(0x2a50e8,0x1c0b,0x53fe)else b,n=a.F[-0x5108]or a:H(0xcc3e,0xa262,-0x5108),0xb3 end elseif b>0b110101 then if b>=0b1001100 then if b<=0b1010111 then if b<=0b1010011 then if b<=0x4e then if b>=0b1001101 then if b<=0b1001101 then p=0b11011000 b=n>p and(a.F[0x73c0]or a:I(0x9eaa,0x145a,0x73c0))or 0x5c0a/b else n,o,m,b,l=c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]],"B",b+0x63,c[1][1][c[1][0b10]]end else l,b,k=j,0x6834/b,c[0b1000][1][c[0b1000][0b10]]end elseif b>0b1010001 then o=0x8e b=m<=o and(a.F[-0x58d4]or a:H(0x982f,0xf62d,-0x58d4))or 0x2980/b else b,n=a.F[-0x5108]or a:G(0x39397,0x2ea4,-0x5108),0b10110011 end elseif b>=0b1010101 then if b>0b1010101 then b,m,n=a.F[0x4ff5]or a:H(0x91a2,0xfd3b,0x4ff5),c[0b1000][1][c[0b1000][0b10]],l else b,f=a.F[-0x74b3]or a:H(0x8e24,0xe110,-0x74b3),g end else o=0b10011111 b=m>=o and(a.F[0x3c8e]or a:H(0xb00b,0xdf9c,0x3c8e))or a.F[0x3957]or a:G(0x58aed1,0x4e30,0x3957)end elseif b>0x5d then if b>0b1011110 then q,o,r,p=0b100,0,1,0 b=q~=q and 0x1f2-b or a.F[-0x7cbf]or a:G(0x5f7164,0x2420,-0x7cbf)else b,j=0xaa-b,k end elseif b>=0x5b then if b<=0b1011011 then b,q,n,p,o=0x446-b,c[0b11][1][c[0b11][0b10]],c[1][1][c[1][0b10]],c[0b10][1][c[0b10][0b10]],"B"else n,r,b,p,o,q,m=h,0b1111111,b+0xf0,c[0b110][1][c[0b110][0b10]],c[0b101][1][c[0b101][0b10]],l,c[0b100][1][c[0b100][0b10]]end elseif b>0b1011000 then o=0b1111000 b=m>o and(a.F[-0x22a]or a:G(0x461cc0,0x59c9,-0x22a))or a.F[0x5ed2]or a:H(0x8e10,0xe035,0x5ed2)else k,o,b,p,l,m,n=c[0b100][1][c[0b100][0b10]],j,0xd730/b,0x7f,f,c[0b101][1][c[0b101][0b10]],c[0b110][1][c[0b110][0b10]]end elseif b<0x43 then if b<=0x40 then if b<0b111110 then if b>0x3b then b,n=0b1101011-b,0b10100001 else q=0b100 b=o==q and 0b11100001-b or a.F[-0x7bf8]or a:G(0x22a328,0x6ebd,-0x7bf8)end elseif b>0x3e then b,r=0x21f-b,s else u,s,v,t=0b100,0,1,0 b=u~=u and(a.F[0x1d67]or a:G(0x19eb98,0x5a8f,0x1d67))or b+0xf6 end elseif b>0x41 then l,j,k,i=1,0,0b100,0 b=k~=k and(a.F[-0x16bf]or a:H(0xbbc3,0xd578,-0x16bf))or b+0x383 else b,n=b+-0x12,0b10010010 end elseif b<=0b1000111 then if b>=0x45 then if b<=0b1000101 then q,o,n,b,p=c[0b11][1][c[0b11][0b10]],"B",c[1][1][c[1][0b10]],a.F[0x106a]or a:H(0xac0f,0xc07c,0x106a),c[0b10][1][c[0b10][0b10]]else b,n=b+-0b11000,0b11011000 end elseif b>0b1000011 then o=0b101000 b=m<=o and(a.F[0x1a3a]or a:G(0x441eac,0x7a74,0x1a3a))or a.F[0x2a3e]or a:G(0x1c00c0,0x8fd,0x2a3e)else b,n=a.F[-0x5108]or a:H(0xf2a1,0x9cdf,-0x5108),0b10110011 end elseif b<=0b1001001 then if b>0b1001000 then o=0b11101110 b=m>=o and(a.F[0x72f6]or a:H(0xb47b,0xdbdf,0x72f6))or a.F[0x3fdb]or a:G(0x8f484,0x34d3,0x3fdb)else b,n=a.F[-0x5108]or a:H(0xa9c9,0xc7f7,-0x5108),0xb3 end else q,s,t,p,b,r,u=k,c[0b110][1][c[0b110][0b10]],o,c[0b100][1][c[0b100][0b10]],0x8340/b,c[0b101][1][c[0b101][0b10]],0x7f end elseif b<=0b11100 then if b>0b10000 then if b>=0b10111 then if b<0x19 then if b>0b10111 then b,n=a.F[-0x5108]or a:H(0xe7ad,0x89d3,-0x5108),0b10011000 else k,l,n,m=0,0,1,0b100 b=m~=m and(a.F[-0x35b5]or a:G(0x20ab58,0x65e5,-0x35b5))or 0x165f/b end elseif b<=0b11001 then n,b,k,l,m=c[0b11][1][c[0b11][0b10]],a.F[-0x4af6]or a:H(0xc4b2,0xa977,-0x4af6),c[1][1][c[1][0b10]],"B",c[0b10][1][c[0b10][0b10]]else o=0x2b b=m>o and 0xba-b or b+0x28 end elseif b>=0x13 then if b<=0x13 then o=0b101101 b=m<=o and b+0b10110011 or 0xf4-b else h,k,i,j=0,1,0,0b100 b=j~=j and(a.F[0x7ffc]or a:G(0x2b32e0,0x7a6d,0x7ffc))or 0x274-b end else o=0b11110010 b=m<=o and(a.F[-0x4ba9]or a:H(0xb3fe,0xdaab,-0x4ba9))or 0xc27/b end elseif b>0b1011 then if b>0b1111 then b,n=0x3f-b,0xb3 elseif b>0b1110 then o=0b1010001 b=m<=o and b+0xd5 or b+0x19 else i,j,g,h=0b100,1,0,0 b=i~=i and(a.F[0x3381]or a:G(0xba251,0x1e20,0x3381))or a.F[-0x405e]or a:G(0x6a8f32,0x21f6,-0x405e)end elseif b<0b101 then if b>0 then b,f,h,g,e=a.F[0xb73]or a:G(0xa57834,0x7dd9,0xb73),"B",c[0b11][1][c[0b11][0b10]],c[0b10][1][c[0b10][0b10]],c[1][1][c[1][0b10]]else o=0xf2 b=m>=o and b+0b11011000 or a.F[-0x4d38]or a:H(0xa5ce,0xc886,-0x4d38)end elseif b<=0b111 then if b>0b101 then b,n=a.F[-0x5108]or a:G(0x8b916,0x1257,-0x5108),0b111100 else h=h+j b=j>0 and(a.F[0x24]or a:H(0xf7d5,0x9623,0b100100))or a.F[-0x2cd0]or a:H(0xe09d,0x8c33,-0x2cd0)end else f,h,g,i=0,0b100,0,1 b=h~=h and b+0b1111001 or a.F[0x349c]or a:G(0x42d6b9,0x10a2,0x349c)end elseif b>=0b101000 then if b<0b101100 then if b<=0x2a then if b>0b101000 then o=0xc4 b=m<=o and 0x2a0/b or b+0x12 else o=0b1101011 b=m<o and(a.F[-0x2658]or a:H(0xd764,0xb625,-0x2658))or b+0b10010111 end else q,s,b,p,r="B",c[0b11][1][c[0b11][0b10]],a.F[-0x607f]or a:H(0x8fcd,0xfda1,-0x607f),c[1][1][c[1][0b10]],c[0b10][1][c[0b10][0b10]]end elseif b>0x31 then n,p,o=1,1,h b=o~=o and 0b10010101-b or a.F[-0x49d4]or a:H(0xa64c,0xc4fa,-0x49d4)elseif b<0x2f then t,r,u,b,s,v,w=c[0b101][1][c[0b101][0b10]],c[0b100][1][c[0b100][0b10]],c[0b110][1][c[0b110][0b10]],a.F[-0x3218]or a:G(0x55a2e1,0x11ae,-0x3218),m,q,0x7f elseif b>0b101111 then b,n=a.F[-0x5108]or a:G(0x13eb3b,0x5148,-0x5108),0b11011001 else p={}p[0xccf0]=m q=0 p[0x535b]=q q=0 p[0xa19f]=q q=0 p[0xf399]=q q=0 p[0xf03]=q q=0 p[0xfdc5]=q q=0 p[0xc441]=q q=0 p[0xb94c]=q b,q=b+0b111100101,0 p[0xcb21]=q q=0 p[0x76bd]=q q=0 p[0x6b6]=q q,p,o=i,c[0b1001][1][c[0b1001][0b10]],p r=o end elseif b<=0b100010 then if b>0x21 then p,q=nil,0b11 b=o==q and 0x41e/b or 0x5d-b elseif b>=0x1f then if b>0x1f then o=0xca b=m<=o and(a.F[0x7ed9]or a:H(0xc735,0xa600,0x7ed9))or b+0b100 else r,s,b,q,t=a.F[0x1fc1]or a:J(a.i"kjM",a.i"tN",0x1fc1),c[0b10][1][c[0b10][0b10]],a.F[-0x3969]or a:H(0x9a06,0xf37b,-0x3969),c[1][1][c[1][0b10]],c[0b11][1][c[0b11][0b10]]end else o=0b100001 b=m>o and(a.F[0x770b]or a:H(0xfdc5,0x9313,0x770b))or a.F[-0x1cf6]or a:G(0x3d6d58,0x6a55,-0x1cf6)end elseif b<=0b100011 then l=l+n b=n>0 and(a.F[0x6767]or a:H(0x9919,0xf2c6,0x6767))or a.F[0x6ccf]or a:H(0xf88b,0x9557,0x6ccf)else o=0xde b=m>o and b+0b11010101 or a.F[-0x4d18]or a:G(0x66be2f,0x52e0,-0x4d18)end until false end end,k=function(a,c)return function(d)local k,j,f,h,n,i,l,m,g,o,b,e,p b=0b10001101 repeat if b>=0b10100111 then if b>0xa7 then f=f+h b=(h>0 and f>g or h<=0 and f<g or h~=h)and 0b10100111 or b+-0b1001111 else f,h,i,g=c[1][1][c[1][0b10]],e,0x18,c[0b10][1][c[0b10][0b10]]g=g(h,i)k,i,h,j=0x10,c[0b10][1][c[0b10][0b10]],c[0b11][1][c[0b11][0b10]],e i=i(j,k)j=0xff h=h(i,j)k,j,l,i=e,c[0b10][1][c[0b10][0b10]],0b1000,c[0b11][1][c[0b11][0b10]]j=j(k,l)k=0b11111111 i=i(j,k)j,l,k=c[0b11][1][c[0b11][0b10]],0b11111111,e j=a.c(j(k,l))f=a.c(f(g,h,i,a.d(j)))return a.d(f)end elseif b>0x73 then f,h,e,g=1,1,0,0b101 b=(g~=g or h>0 and f>g or(h<=0 or h~=h)and f<g)and 0b10100111 or 0x73 else k=0b1010101 m,n,p,k,b,o,j=d.sub,d,f,"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~",0x135-b,f,e*k m=m(n,o,p)l,k,n,o=k,k.find,1,true k=k(l,m,n,o)j,i=1,j+k e=i-j end until false end end,l=function(a)local k,e,f,g,d,j,h,i k=string d,k=k.unpack,string k,e=string,k.sub k,f=bit32,k.byte g,k=k.rshift,bit32 k,h=table,k.band k,i={},k.concat j=k d={[0b10]=0b11,[0b11]=d}d[1]=d e={[0b10]=0b11,[0b11]=e}e[1]=e f={[0b10]=0b11,[0b11]=f}f[1]=f g={[0b10]=0b11,[0b11]=g}g[1]=g h={[0b10]=0b11,[0b11]=h}h[1]=h i={[0b10]=0b11,[0b11]=i}i[1]=i j={[0b10]=0b11,[0b11]=j}j[1]=j k=a:m{j,f,h,e,d,g,i}return k end,B=function(_,a)return function(i,j,k)if j>k then return end return i[j],a[1][1][a[1][0b10]](i,j+1,k)end end,D=function(_,a)return function(...)return{...},a[1][1][a[1][0b10]]("#",...)end end,I=function(a,b,c,d)a.F[d]=a.a(b,0x9e68)+a.a(c,0x154d)return a.F[d]end,g=function(a)local e,f,g,d g=string g,d=string,g.char g,e=bit32,g.byte f=g.bxor d={[0b10]=0b11,[0b11]=d}d[1]=d e={[0b10]=0b11,[0b11]=e}e[1]=e f={[0b10]=0b11,[0b11]=f}f[1]=f g=a:h{d,f,e}return g end,C=function(a,c)return function(...)local k,g,h,b,m,n,f,e,d,j,i,l b=0b100110 while true do if b>0b10001100 then if b>=0b11101011 then if b>0xf4 then b=0b1111 i(j,k,l,m,n)elseif b<0xf0 then b,j,i=b+-0b10010010,c[0b1001][1][c[0b1001][0b10]],g[0b10]k=i elseif b>0xf0 then e=e(f)b,i,g=0xa9,{},{}h=i g[0x6971]=h h=0 g[0x2e93]=h f,k,i,g,h=g,c[0b11][1][c[0b11][0b10]],1,c[0b100][1][c[0b100][0b10]],d l,j,k=e,k[0x9275],1 else b,h=0x6ea0/b,a.c(h(i,j,k,l,m,n))end elseif b<=0xa9 then if b<0x9f then j,b,k=c[0b1001][1][c[0b1001][0b10]],0b10011111,i elseif b>0b10011111 then g(h,i,j,k,l)h=c[0b11][1][c[0b11][0b10]]g,i=h[0x9275],d.n b=g<i and 0x4551/b or b+-0b10011010 else b,j=0b10001010,j(k)i=j end else j=a.c(j(k,l))return a.d(j)end elseif b>0b1101001 then if b<0x8a then if b>0b1101100 then g,h=g(a.d(h))i=g[1]b=i and 0b100101 or 0x6c52/b else d=d(a.d(e))f,e=c[0b11][1][c[0b11][0b10]],c[0b10][1][c[0b10][0b10]]b,f=0x160-b,f[0xf3af]end elseif b>0b10001010 then i=a.c(i(j,k,l))return a.d(i)else b,l,j,k=0b11000001,0,c[0b1010][1][c[0b1010][0b10]],i end elseif b<0b100110 then if b<=0b1111 then h,g,j,l,i=c[0b110][1][c[0b110][0b10]],c[0b101][1][c[0b101][0b10]],e,c[0b11][1][c[0b11][0b10]],c[0b111][1][c[0b111][0b10]]b,k,m=0b11110000,l[0xb6a8],c[0b11][1][c[0b11][0b10]]n,l=c[0b11][1][c[0b11][0b10]],m[0x7d11]n,m=f,n[0xaa03]else j,b,i,l,k=g,0x143c/b,c[0b1000][1][c[0b1000][0b10]],h,0b10 end elseif b>=0x59 then if b>0b1011001 then i=c[0b11][1][c[0b11][0b10]]j,h=1,i[0x9275]k,i,g=c[0b11][1][c[0b11][0b10]],d.n,h+j b,j=0xf6,k[0x9275]h=i-j f[0x2e93]=h n,j,m,k,i=1,d,g+h,g,c[0b100][1][c[0b100][0b10]]n,l,m=f[0x6971],m-n,1 else j=j(k)k="string"b=j~=k and 0x347f/b or 0x2ffa/b end else d,b,e=c[1][1][c[1][0b10]],0x6c,a.c(...)end end end end,m=function(a,c)return function(d)local i,m,g,u,l,j,p,f,s,n,o,k,e,r,t,h,b,q b=0x48 while true do if b<=0b10001000 then if b<=0x24 then if b>=0x1a then if b>=0x1d then if b>0b11101 then i=#d b=f<=i and b+0b1101110 or 0x414/b else i,j=c[0b111][1][c[0b111][0b10]],g i=i(j)j=c[1][1][c[1][0b10]]j[d]=i return i end else p,m,n,o=1,nil,c[0b11][1][c[0b11][0b10]],i n=n(o,p)o=0 b=n~=o and 0b101 or b+0x26 end elseif b>0b101 then o,n,p=i,c[0b110][1][c[0b110][0b10]],1 n=n(o,p)i=n b=m and 0b11101101-b or 0x88 else n=#d b=f<=n and b+0b11011110 or 0b1011-b end elseif b>=0x48 then if b<=0x48 then f=c[1][1][c[1][0b10]]e=f[d]b=e and 0b10001100 or 0b10101111 else j=j+l b=(l>0 and j>k or l<=0 and j<k or l~=l)and 0x1320/b or 0xdd0/b end else o=1 o,n=#d,f+o b=n<=o and 0x2800/b or b+-0x3a end elseif b<=0xaf then if b>=0b10100000 then if b<=0xa0 then o,n,q,p=">I2",c[0b101][1][c[0b101][0b10]],f,d n=n(o,p,q)o=0b10 r,b,f,q,s,p=n,0x3c0/b,f+o,c[0b110][1][c[0b110][0b10]],0b101,#h q=q(r,s)r,s,q,o=n,0x1f,c[0b11][1][c[0b11][0b10]],p-q q=q(r,s)r=0b11 s,r,p,q=o,h,q+r,c[0b100][1][c[0b100][0b10]]t,u=o+p,1 t=t-u q=q(r,s,t)m=q else f,h=1,{}b,g,h=0x189c/b,h,""end elseif b>0x8c then j,i,k=d,c[0b10][1][c[0b10][0b10]],f i=i(j,k)j=1 l,j,k,f=1,1,0b1000,f+j b=(k~=k or l>0 and j>k or(l<=0 or l~=l)and j<k)and 0x1488/b or 0b11010 else return e end elseif b>0b11100011 then p,o=1,#g n=o+p g[n]=m n,p,o=c[0b100][1][c[0b100][0b10]],-0x800,h..m b,n=0b101101111-b,n(o,p)h=n else n,p,q,o=c[0b100][1][c[0b100][0b10]],f,f,d b,n=0b110,n(o,p,q)n,m=1,n f=f+n end end end end,E=function(a,c)return function(d,e,f,g,h)local q,i,m,y,v,s,t,l,o,j,z,b,r,w,x,k,A,u,p,n b=0b11101100 repeat if b<0b10000110 then if b<=0x44 then if b<0x23 then if b>0x13 then if b>0b11100 then if b<=0x20 then if b<0b11111 then n=0b10011111 b=m<=n and 0b1010011 or 0b11011111 elseif b<=0x1f then b,o,p=0xa4,l[0x535b],0b111111 n,p=o-p,{}o=p d[n]=o else n=0b1111100 b=m>=n and b+0b1010001 or 0x580/b end else n=0x6a b=m>n and 0b1000010-b or 0x8f end elseif b>=0x16 then if b>0x18 then b,r=0b10101100,1 q=o-r elseif b>0x16 then x,b,y=c[0b1001][1][c[0b1001][0b10]],0b10100011,u else o,q,r=c[0b111][1][c[0b111][0b10]],l[0xa19f],0b11 b,p=0b10100100,q-r p,n,q=l[0x535b],o[p],0x3c r,o,q=n[0b10],p-q,n[1]p=q[r]d[o]=p end elseif b<=0b10100 then n=0b11001010 b=m>n and 0b100011 or 0x57 else s,t=l[0xcb21],0b1011 r=s-t b,j=0b10111001-b,j+r end elseif b<0b1100 then if b>=0b1001 then if b>=0b1010 then if b<=0b1010 then A=nil y=z==A b=y and b+0x28 or 0b1001001 else p,b,q=l[0xf03],0x5b-b,0b101 o=p-q p,q,n=l[0xa19f],0b110110,e[o]p,o=c[0b101][1][c[0b101][0b10]],p-q q=o end else n=0x21 b=m<=n and 0b11011110 or b+0xde end elseif b<=0b100 then n=0xbd b=m>n and b+0b1000110 or 0x22-b else p,o=0x25,l[0x535b]n,b,r,s=o-p,0x334/b,l[0xa19f],0b10111 q=r-s t,s,p=0x1a,l[0xf399],d[q]r=s-t q=d[r]o=p..q d[n]=o end elseif b>0b1110 then if b>0x10 then v=t[0xa19f]w,x=k[v],nil b=w==x and 0x2e5/b or b+0xc6 else p,o=0x1d,l[0x535b]o,n,q,p=k,o-p,nil,nil o,p,q=a.b(o,p,q)r,s=o(p,q)q=r b=q==nil and 0xa40/b or 0b10101001 end elseif b<=0b1101 then if b>0b1100 then o,p=l[0x535b],0x3d q,n,p=0x19,o-p,l[0xa19f]r,q,o=0b11111,l[0xcb21],p-q r,s,p=l[0x76bd],0x23,q-r s,r,q=d[o],d[n],r-s b=r>=s and 0b111110 or 0b11010011-b else p,o=0b10001,l[0x535b]r,n,s=l[0xa19f],o-p,0x3b b,q=b+0x98,r-s p=d[q]o=not p d[n]=o end else b,j=0xa4,j+p end elseif b>0x32 then if b>=0x3a then if b>0x3e then if b<=0x42 then n=0b11111101 b=m>n and 0xe8-b or 0x33d2/b else r,s,t,w,v=c[0b100][1][c[0b100][0b10]],d,o,1,o+p v,b,u,w=q,0x2a8,v-w,d[n]end elseif b<=0b111011 then if b>0b111010 then n=0xf0 b=m<=n and 0b1000111 or 0b10111001-b else u,t=1,g[j]u,v,j=t[0x535b],1,j+u b=u==v and 0x13 or 0b11111111 end else b,j=0xe2-b,j+p end elseif b<=0b110101 then if b>=0x34 then if b<=0b110100 then r=r(s,t)d[q]=r q,r,s=1,o,1 b=r~=r and 0b10100100 or 0x1df else p,o=0x30,l[0x535b]n,r,s=o-p,l[0xa19f],0b101110 q=r-s s,p,t=l[0xf399],d[q],0b10100 r=s-t q=d[r]b,o=0b10100100,p+q d[n]=o end else n=0x21 b=m>=n and 0b1001 or 0x1122/b end else b,p,o=0x2298/b,0b10001,l[0x535b]n,s,r=o-p,0b10101,l[0xa19f]q=r-s p,q=d[q],l[0xfdc5]o=p[q]d[n]=o end elseif b>0x2a then if b<0b110001 then if b>0x2c then o,p=l[0x535b],0x29 s,n,r=0b11001,o-p,l[0xa19f]q=r-s t,s,p=0x26,l[0xf399],d[q]r=s-t q=d[r]b,o=0b11010010-b,p>=q d[n]=o else n=0x6b b=m>n and 0x20a8/b or 0b10011010 end elseif b<=0b110001 then p,o=0b101100,l[0x535b]p,n,q=l[0xa19f],o-p,0x1c r,q,o=0b111110,l[0xcb21],p-q r,s,p=l[0x76bd],0b111101,q-r s,q,r=d[o],r-s,d[n]b=r==s and 0x2c68/b or 0xdd else A,b,z=u,0x310-b,c[0b1000][1][c[0b1000][0b10]]end elseif b<0b100111 then if b>0x25 then n=0x35 b=m>n and 0b10010000 or 0b10000111 elseif b<=0x23 then p,b,o=0b11,0xa4,l[0x535b]r,s,n=l[0xa19f],0b101010,o-p q=r-s s,p,t=l[0xf399],d[q],0b11010 r=s-t q=d[r]o=p<q d[n]=o else n=0x51 b=m<n and 0x12a5/b or 0x100b/b end elseif b<=0x29 then if b<=0x27 then x={}x[0b10]=v x[1]=d w=x b,k[v]=0xd9,w else p,q=p(a.d(q))s,w,r,u,t=p,0b11,c[0b100][1][c[0b100][0b10]],o,1 w,b,v=d,0x280a/b,n+w end else n=0x2b b=m<n and b+0b10101010 or 0b1110111 end elseif b<=0x67 then if b<=0b1010110 then if b<=0x4c then if b<0x49 then if b<=0x47 then if b<=0x45 then p,o=0b10010,l[0x535b]b,r,s,n=0xa4,l[0xa19f],0b1111,o-p q=r-s p,t,s=d[q],0x1a,l[0xf399]r=s-t q=d[r]o=p-q d[n]=o else n=0b11101111 b=m>n and 0b11101001 or 0b110101 end else b,z=0x2d0/b,x.__call end elseif b>=0x4a then if b>0b1001010 then n=0xef b=m<n and 0x86 or 0x3b else p,b,o=0b111101,0b11101110-b,l[0x535b]n,r,s=o-p,l[0xa19f],0x1f q=r-s t,p,s=0x2f,d[q],l[0xf399]r=s-t q=d[r]o=p[q]d[n]=o end else b=y and 0b100101111-b or 0x350a/b end elseif b<0x54 then if b>0x50 then q,r=l[0x535b],0b1000 r,n,q=0x3f,q-r,l[0xa19f]q,r,o=l[0xf399],0b100010,q-r p,r=q-r,0 q=o==r b=q and 0x5e or 0b10110011 else b,p=0x1040/b,p(q)s,r=0b100000,l[0x535b]s,t,q,r=n,p,r-s,c[0b110][1][c[0b110][0b10]]end elseif b<=0x54 then u,v=n+t,1 b,i=0xf5,u-v else o,p=l[0x535b],0b111100 p,n,q=l[0xa19f],o-p,0b111011 o,t,q,p=p-q,1,d[n],c[0b11][1][c[0b11][0b10]]s=n+t t,b,r=0b10,b+0x4f,d[s]s=n+t s=d[s]end elseif b>0x60 then if b>=0b1100101 then if b>0x65 then n=0b11010001 b=m<=n and 0x2707/b or 0x2f13/b else b=y and 0b101010011-b or 0b11101101-b end elseif b<=0x61 then b,o,p=0b10100100,l[0x535b],0x3f s,r,n=0x2a,l[0xa19f],o-p q=r-s t,p,s=0x3b,d[q],l[0xf399]r=s-t q=d[r]o=p<=q d[n]=o else n=0b10011111 b=m<n and 0x2c68/b or 0b100 end elseif b<0x5e then if b>0x57 then b,j=0b10100100,j+q else p,o=0x3f,l[0x535b]p,q,n=l[0xa19f],0b10011,o-p s,o,r=0b101,p-q,l[0xf399]r,q=1,r-s p,s,r=q-r,0x1e,l[0xf03]q,r=r-s,-1 b=p==r and 0b10111001 or 0b1000100 end elseif b>=0x5f then if b<=0x5f then n=0b1100000 b=m<=n and 0b11011011 or 0x6a-b else b,j=0b10100100,j+p end else b,q=0x41ba/b,i-n end elseif b<0b1110111 then if b>0x6f then if b<0b1110100 then if b>0x70 then n=0b1111100 b=m>n and 0x144e/b or 0x10 else n=0xd1 b=m<n and 0x8c0/b or 0b1100111 end elseif b<=0b1110100 then n=0x8e b=m<=n and 0x115-b or 0b101000011-b else p,b,o=0b10111,b+0b101111,l[0x535b]p,n,q=c[0b1011][1][c[0b1011][0b10]],o-p,l[0xfdc5]o=p[q]d[n]=o end elseif b<=0b1101101 then if b>=0b1101011 then if b>0b1101011 then r,b,s=i-n,0x58fd/b,1 q=r+s else n=0x4c b=m<n and 0b10010101-b or b+-0x49 end else x=x(y)y="function"b=x~=y and b+-0b1010000 or 0xba end elseif b<=0b1101110 then b,u=0xf5,1 t=p-u else n=0b1010001 b=m>n and 0x165-b or 0b10110100-b end elseif b<=0x7e then if b<=0x79 then if b>0x78 then n=0b11111001 b=m>n and 0b1100 or 0x7d elseif b<=0b1110111 then n=0x2d b=m>=n and 0x26 or 0x7f else n=0b11100111 b=m>n and 0x1f or b+-0b1100010 end elseif b<=0b1111101 then o,p=l[0x6b6],0b100000 n=o-p b,j=0xa4,j+n else o,q,r=c[0b111][1][c[0b111][0b10]],l[0xa19f],0x1a b,p=b+0x26,q-r n=o[p]o,s,p,t=n[1],l[0x535b],n[0b10],0b1100 r=s-t q=d[r]o[p]=q end elseif b>=0x83 then if b<=0b10000011 then o,p=l[0x535b],0b101000 n,r,s=o-p,l[0xa19f],0x1f q=r-s p,s,t=d[q],l[0xf399],0x33 r=s-t q=d[r]b,o=0b100100111-b,p==q d[n]=o else r,s=o(p,q)q=r b=q==nil and 0x129-b or b+0b100100 end elseif b>0b1111111 then p,q=l[0x535b],0b1101 b,o=0xa4,p-q n,r,s,o=d[o],l[0xa19f],0b11000,l[0xfdc5]q=r-s p=d[q]n[o]=p else n=0x2b b=m>n and 0b10000011 or 0x36 end elseif b>0xdb then if b>0x13e then if b>=0x2a8 then if b>0x332 then if b<=0x3c8 then if b>=0x39d then if b<=0x39d then b=s~=s and 0x215 or 0xb0d33/b else b=s<=0 and 0b100111110 or 0x205 end else b,t=0xce171/b,a.c(t(a.d(u)))end else s,t=s(a.d(t))u=0 b=p==u and 0x54 or 0x1a73e/b end elseif b<=0x2de then if b>=0x2c5 then if b>0x2c5 then z=z(A)A="table"b,y=0b1001001,z==A else b=0b10111101 y,z,A=y(z)s,t,r=z,A,y end else b=0x34c-b r(s,t,u,v,w)end elseif b>0x30f then b=q>r and 0xa4 or 0x39d else b=s<=0 and 0x215 or b+-0x2d5 end elseif b<=0x1e5 then if b<0b111010010 then if b>0x1a9 then p,q=p(a.d(q))w,s,u,t,r=0b11,p,o,1,c[0b100][1][c[0b100][0b10]]b,w,v=0x3aa-b,d,n+w else r=a.c(r(s,t,u))return a.d(r)end elseif b>0b111011111 then r(s,t,u,v,w)s=0b10 r,u=n+s,0b11 t=n+u s=d[t]d[r]=s t=0b10 s=n+t r,s=d[s],nil b=r==s and 0xfd or 0xcb elseif b<=0x1d2 then b,q=b+-0b1101,a.c(q(r,s))else b=s>0 and 0x511-b or 0x39d end elseif b<=0x24c then if b<=0x215 then if b<=0x205 then b=s~=s and 0b10100100 or b+-0b111001011 else b=q<r and 0xa4 or 0x3a end else b,u=0x359,a.c(u(v,w,x))end else b=0xbd y,z,A=y(z)r,t,s=y,A,z end elseif b>0xec then if b>0b11111010 then if b<=0xff then if b<0xfd then n=0b11110010 b=m>n and b+-0b10111001 or 0x147-b elseif b>0b11111101 then x,w=t[0xa19f],c[0b111][1][c[0b111][0b10]]v=w[x]b,p[q]=0xd3,v else t,s=0b100,l[0x76bd]r=s-t b,j=0xa4,j+r end else b=q<r and 0b10100100 or 0x205 end elseif b>0b11110101 then if b>0b11110110 then r(s,t,u,v,w)s=0b10 r,u=n+s,0b11 t=n+u s=d[t]d[r]=s t=0b10 s=n+t r,s=d[s],nil b=r==s and b+-0x43 or b+-0xe5 else o,p=l[0x535b],0b110100 n,r,s=o-p,l[0xa19f],0b1011 q=r-s t,p,s=0b101,d[q],l[0xf399]b,r=0x9d98/b,s-t q=d[r]o=p*q d[n]=o end elseif b<0b11110000 then y,b,z=x.__iter,0x28b,u elseif b>0b11110000 then u,y,b,x,v,w,z=c[0b100][1][c[0b100][0b10]],n,0x19f-b,t,s,1,d else z,A=x.__iter,nil b,y=0b1100101,z~=A end elseif b<=0b11100111 then if b>0xe0 then if b>0b11100110 then o,p=l[0x535b],0x17 n,o=o-p,nil b,d[n]=0x93fc/b,o else z,b,y=u,0x2c5,pairs end elseif b>0b11011111 then b,j=0xa4,j+q elseif b<=0xde then if b>0b11011101 then o,p=l[0x535b],0x13 p,q,n=l[0xb94c],0x1c,o-p b,o=0xa4,p-q d[n]=o else b,j=b+-0x39,j+q end else p,q=l[0x535b],0x3e o=p-q n,r,q=d[o],0b110110,l[0xa19f]b,p=b+-0b111011,q-r r,s,o=l[0xf399],0b11100,d[p]q=r-s p=d[q]n[o]=p end elseif b<=0xeb then if b<=0b11101001 then if b<=0b11101000 then b,j=0xa4,j+p else o,p=l[0x535b],0b100110 p,n,q=l[0xa19f],o-p,0x39 o,q=p-q,1 q,p,r=nil,o-q,-1 b=p==r and 0x156-b or 0xa5a6/b end else b,j=0x968c/b,j+o end else b,j,i,m,k=0x94,1,-1,{},c[1][1][c[1][0b10]]m,l=c[0b10][1][c[0b10][0b10]],m end elseif b>0xb4 then if b<0xc9 then if b>0xba then if b>=0xc6 then if b>0xc6 then n=0b1100000 b=m>=n and 0x5f or b+-0b100011 else b,j=0x7ed8/b,j+q end elseif b<=0b10111101 then d[n]=r d[p]=s d[q]=t t,q,p=1,d[n],c[0b11][1][c[0b11][0b10]]s=n+t r,t=d[s],0b10 b,s=0x28f-b,n+t s=d[s]else p,o=0b1101,l[0x535b]b,o,n=0b10100100,l[0xfdc5],o-p d[n]=o end elseif b>=0xb7 then if b>=0xb9 then if b>0b10111001 then r,b,t,s=u,0b10111101,w,v else s,r=1,i-o b,p=0x44,r+s end else t,b,s=0b101101,0xa4,l[0x76bd]r=s-t j=j+r end elseif b>0b10110101 then r=1 b,q=0xd1,o-r else n=0b11000100 b=m>n and 0x4f30/b or 0x454a/b end elseif b>=0b11010001 then if b>0b11010100 then if b>0xd9 then b,p,o=0x8c4c/b,0b10011,l[0x535b]q,r,n=l[0xa19f],0b10001,o-p p=q-r o=d[p]d[n]=o else b,p[q]=0b110101100-b,w end elseif b>0b11010011 then n=0b100100 b=m>n and 0b1101 or b+-0xa1 elseif b>0xd1 then q=q+s b=s>0 and b+-0b1001000 or 0x3c8 else s,b,u,t,v,r=d,0b110101001,n+q,n,1,c[0b1010][1][c[0b1010][0b10]]u=u-v end elseif b<0xcc then if b<=0xc9 then n=0xf9 b=m>=n and b+-0x50 or 0b10100100 else t,s=0x14,l[0xcb21]r=s-t b,j=0xa4,j+r end elseif b>0xcc then p,o=0x30,l[0x535b]n,q,p=o-p,0b1101,l[0xcb21]q,r,o=l[0x76bd],0b100001,p-q p,q=q-r,d[n]b=q and 0b11101011 or b+-0b11000001 else p,o=0x26,l[0x535b]n,q,p=o-p,0x31,l[0xa19f]p,o=l[0xfdc5],p-q q,s=d[o],1 r=n+s b,d[r]=0b10100100,q r=q[p]d[n]=r end elseif b<0xa3 then if b>=0x90 then if b<0b10010100 then if b>0x90 then b,j=0b10100100,j+p else o,p=l[0x535b],0b11001 r,n,q=0b1101,o-p,l[0xa19f]p,q=q-r,1 b,o=b+0x14,p==q d[n]=o end elseif b<=0x9a then if b<=0x94 then k=k(l,m)m,b,l=nil,b+0b10000,nil else o,p=l[0x535b],0b101010 q,p,n=0b100110,l[0xa19f],o-p r,o,q=0x19,p-q,l[0xcb21]s,p,r=0b100000,q-r,l[0x76bd]q,r,s=r-s,d[n],d[o]b=r~=s and 0x60 or 0b11100000 end else p,o=0b110100,l[0x535b]n,p,q=o-p,l[0xa19f],0x31 r,q,o=0b110100,l[0xcb21],p-q p,s,r=q-r,0b111100,l[0x76bd]q,s,r=r-s,d[o],d[n]b=r>s and b+-0b1111 or b+-0x46 end elseif b<=0x88 then if b<0x87 then n=0xe9 b=m>n and 0x29e/b or 0x78 elseif b>0b10000111 then z=x b=z and b+-0b1000000 or 0b10010010-b else n=0x2d b=m<=n and 0x31 or 0x153-b end elseif b<=0b10001011 then b=q>r and 0xa4 or 0x453-b else n=0b1011010 b=m>=n and 0xc7 or 0x14ab/b end elseif b<0b10101010 then if b<=0xa5 then if b>=0xa4 then if b>0b10100100 then b,q=0xce-b,a.c(q(r,s))else l=g[j]n,m=1,l[0xccf0]n,j=0b10001110,j+n b=m<n and 0x448c/b or 0xb2 end else x=x(y)z=nil y=x~=z b=y and 0xf0 or 0b100001000-b end elseif b<=0b10100110 then p,o=0b10100,l[0x535b]n,q,p=o-p,0b10111,l[0xa19f]o,q=p-q,1 p,r=n+q,0b10 x,q,u=1,n+r,d[n]w=n+x b,v,y=0x68,d[w],0b10 x=n+y y,x,w=u,c[0b1000][1][c[0b1000][0b10]],d[x]else t=s[0b10]b=t>=n and 0x76d4/b or 0x85 end elseif b>0b10110010 then if b<=0b10110011 then b=q and 0xac or 0b11100 else v,u=s[0b10],s[1]t=u[v]s[0b11]=t s[1]=s t=0b11 b,s[0b10]=b+-0b101111,t t=nil k[r]=t end elseif b>=0b10101100 then if b<=0b10101100 then r,s=d[n],c[0b11][1][c[0b11][0b10]]t,b,u,v,x=r,0x18b10/b,c[0b1010][1][c[0b1010][0b10]],d,1 w,x=n+x,n+q else n=0xe7 b=m>=n and 0b11111011 or 0xb5 end else b=b+-0b110 u(v,w,x,y,z)end until false end end,j=function(a,c)return function(d)local k,f,e,g,i,j,b,h b=0b110001 while true do if b>=0b10100001 then if b<0b11010101 then if b<=0xa1 then b=i and 0xc5 or 0b11111000 else g,f=f,f.sub f=a.c(f(g,h,i))return a.d(f)end elseif b>0b11010101 then b,i=0xc5,-1 else f,h="~",0b101 f,h,g=f.rep,h-e,f f=f(g,h)b,d=0x43,d..f end elseif b<=0x43 then if b>0x31 then h,f,g,i=".....",c[1][1][c[1][0b10]],d,a:k{c[0b10],c[0b11],c[0b100]}f=f(g,h,i)h,i=1,0 i=e>i b=i and b+0b111 or 0b10100001 else g,f=0b101,#d f,e=0,f%g b=e>f and 0b11010101 or 0x43 end else k=0b101 j=k-e j,i=1,-j b,i=b+0b1010111,i-j end end end end}):K(...)
+local player = game.Players.LocalPlayer
+local VirtualUser = game:GetService("VirtualUser")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ProximityPromptService = game:GetService("ProximityPromptService")
+
+local Events = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events")
+local CoinLanded = Events:WaitForChild("CoinLanded")
+local SellAll = Events:WaitForChild("SellAll")
+local RequestUpgrade = Events:WaitForChild("RequestUpgrade")
+local TradeRequestResponse = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeRequestResponse")
+local TradeAccept = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAccept")
+local TradeAddItem = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAddItem")
+local ClaimQuest = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("ClaimQuest")
+
+local coinList = {
+    "Basic Coin", "Copper Coin", "Fire Coin", "Volt Coin", "Aether Coin",
+    "Starlight Coin", "Galaxy Coin", "Void Coin", "Chronos Coin", "Eclipse Coin",
+    "Mirage Coin", "Obsidian Coin", "Tempest Coin", "Soul Coin", "Paradox Coin",
+    "Miracle Coin", "Nexus Coin", "Apex Coin", "Infinity Coin", "Grace Coin",
+    "Dominion Coin", "Empyrean Coin", "Atlas Coin", "Judgement Coin", "Hercules Coin",
+    "Helios Coin", "Nyx Coin", "Titan Coin", "Zeus Coin", "Phoenix Coin"
+}
+
+local selectedCoin = "Phoenix Coin" -- DEFAULT COIN
+local autoCoin = true
+local coinLoop = nil
+local autoSellAll = false
+local sellAllLoop = nil
+local autoUpgrade = false
+local upgradeLoop = nil
+local upgradeSettings = {
+    ["Luck Multiplier"] = false,
+    ["Value Multiplier"] = false,
+    ["Throw Speed"] = false
+}
+local autoAccept = true
+local acceptLoop = nil
+local acceptDelay = 0.5
+local autoAcceptRemote = true
+local acceptRemoteLoop = nil
+local autoAddRandomItem = false
+local addRandomItemLoop = nil
+local antiAFK = true
+local antiAFKLoop = nil
+local currentTab = "MAIN"
+
+-- ===== CLAIM QUEST =====
+local autoClaimQuest = false
+local claimQuestLoop = nil
+local questTypes = {"Daily", "Weekly", "Monthly"}
+
+local function ClaimAllQuests()
+    for _, questType in ipairs(questTypes) do
+        for questNumber = 1, 10 do
+            pcall(function()
+                local args = {questType, questNumber}
+                ClaimQuest:FireServer(unpack(args))
+                print("✅ Claim " .. questType .. " " .. questNumber)
+            end)
+            task.wait(0.05)
+        end
+    end
+end
+
+local function StartClaimQuestLoop()
+    if claimQuestLoop then return end
+    claimQuestLoop = task.spawn(function()
+        while autoClaimQuest do
+            ClaimAllQuests()
+            task.wait(1)
+        end
+    end)
+end
+
+local function StopClaimQuestLoop()
+    autoClaimQuest = false
+    if claimQuestLoop then
+        task.cancel(claimQuestLoop)
+        claimQuestLoop = nil
+    end
+end
+
+-- ===== NICKNAME COLOR PRESETS (30+ WARNA) =====
+local nicknameColors = {
+    ["🔴 Merah"] = Color3.fromRGB(255, 0, 0),
+    ["🟢 Hijau"] = Color3.fromRGB(0, 255, 0),
+    ["🔵 Biru"] = Color3.fromRGB(0, 150, 255),
+    ["🟡 Emas"] = Color3.fromRGB(255, 215, 0),
+    ["🟣 Ungu"] = Color3.fromRGB(200, 0, 255),
+    ["⚪ Putih"] = Color3.fromRGB(255, 255, 255),
+    ["🟠 Oranye"] = Color3.fromRGB(255, 165, 0),
+    ["🌸 Pink"] = Color3.fromRGB(255, 105, 180),
+    ["❤️ Merah Tua"] = Color3.fromRGB(139, 0, 0),
+    ["🍏 Hijau Muda"] = Color3.fromRGB(144, 238, 144),
+    ["💙 Biru Muda"] = Color3.fromRGB(173, 216, 230),
+    ["💛 Kuning"] = Color3.fromRGB(255, 255, 0),
+    ["🧡 Jingga"] = Color3.fromRGB(255, 140, 0),
+    ["💗 Pink Muda"] = Color3.fromRGB(255, 182, 193),
+    ["🤍 Abu-abu"] = Color3.fromRGB(128, 128, 128),
+    ["🖤 Hitam"] = Color3.fromRGB(0, 0, 0),
+    ["💜 Ungu Muda"] = Color3.fromRGB(218, 112, 214),
+    ["💚 Toska"] = Color3.fromRGB(0, 255, 127),
+    ["💛 Emas Tua"] = Color3.fromRGB(184, 134, 11),
+    ["🧡 Salmon"] = Color3.fromRGB(250, 128, 114),
+    ["💖 Pink Cerah"] = Color3.fromRGB(255, 20, 147),
+    ["💙 Biru Laut"] = Color3.fromRGB(0, 0, 139),
+    ["💚 Zamrud"] = Color3.fromRGB(80, 200, 120),
+    ["🤎 Coklat"] = Color3.fromRGB(139, 69, 19),
+    ["💜 Nila"] = Color3.fromRGB(75, 0, 130),
+    ["💛 Madu"] = Color3.fromRGB(255, 215, 0),
+    ["🧡 Karamel"] = Color3.fromRGB(200, 120, 50),
+    ["💗 Mawar"] = Color3.fromRGB(255, 80, 120),
+    ["💚 Daun"] = Color3.fromRGB(34, 139, 34),
+    ["💙 Langit"] = Color3.fromRGB(135, 206, 235),
+    ["❤️ Maroon"] = Color3.fromRGB(128, 0, 0),
+    ["💜 Lavender"] = Color3.fromRGB(230, 230, 250),
+    ["🧡 Coral"] = Color3.fromRGB(255, 127, 80),
+    ["💚 Olive"] = Color3.fromRGB(128, 128, 0),
+    ["💙 Navy"] = Color3.fromRGB(0, 0, 128),
+    ["🖤 Dark"] = Color3.fromRGB(30, 30, 30),
+}
+
+local selectedNicknameColor = Color3.fromRGB(255, 215, 0)
+
+local function ApplyNicknameColor(color)
+    local character = player.Character
+    if not character or not character.Parent then return end
+    local head = character:FindFirstChild("Head")
+    if head then
+        local title = head:FindFirstChild("title")
+        if title then
+            local usernameLabel = title:FindFirstChild("Username")
+            if usernameLabel then
+                pcall(function()
+                    usernameLabel.TextColor3 = color
+                    print("✅ Nickname color changed!")
+                end)
+            end
+        end
+    end
+end
+
+-- ===== ANTI AFK =====
+local function StartAntiAFK()
+    if antiAFKLoop then return end
+    antiAFKLoop = task.spawn(function()
+        while antiAFK do
+            task.wait(45)
+            pcall(function()
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton2(Vector2.new())
+                VirtualUser:ClickButton1(Vector2.new())
+            end)
+        end
+    end)
+end
+
+local function StopAntiAFK()
+    antiAFK = false
+    if antiAFKLoop then
+        task.cancel(antiAFKLoop)
+        antiAFKLoop = nil
+    end
+end
+
+StartAntiAFK()
+
+pcall(function()
+    local antiKick = player.PlayerScripts:FindFirstChild("Scripts")
+    if antiKick then
+        antiKick = antiKick:FindFirstChild("AntiKickScript")
+        if antiKick then antiKick:Destroy() end
+    end
+end)
+
+pcall(function()
+    local remotes = {"AntiKickReconnect", "SetAFKSafe", "StartAFKSafe"}
+    for _, name in ipairs(remotes) do
+        local remote = ReplicatedStorage:FindFirstChild(name)
+        if remote then remote:Destroy() end
+    end
+end)
+
+-- ===== COIN =====
+local function ThrowCoin()
+    local args = {
+        2.0,
+        Vector3.new(-1162.6304931640625, 0.7260000109672546, 89.36738586425781),
+        selectedCoin,
+        Vector3.new(-1156.7032470703125, 0.7260000109672546, 88.43637084960938),
+        [6] = 1
+    }
+    pcall(function()
+        CoinLanded:FireServer(unpack(args))
+        print(" " .. selectedCoin .. " thrown!")
+    end)
+end
+
+local function StartCoinLoop()
+    if coinLoop then return end
+    coinLoop = task.spawn(function()
+        while autoCoin do
+            ThrowCoin()
+            task.wait(2)
+        end
+    end)
+end
+
+local function StopCoinLoop()
+    autoCoin = false
+    if coinLoop then
+        task.cancel(coinLoop)
+        coinLoop = nil
+    end
+end
+
+StartCoinLoop()
+
+-- ===== SELL ALL =====
+local function DoSellAll()
+    pcall(function()
+        SellAll:FireServer()
+        print("💰 Sell All executed!")
+    end)
+end
+
+local function StartSellAllLoop()
+    if sellAllLoop then return end
+    sellAllLoop = task.spawn(function()
+        while autoSellAll do
+            DoSellAll()
+            task.wait(3)
+        end
+    end)
+end
+
+local function StopSellAllLoop()
+    autoSellAll = false
+    if sellAllLoop then
+        task.cancel(sellAllLoop)
+        sellAllLoop = nil
+    end
+end
+
+-- ===== UPGRADE =====
+local function DoUpgrade()
+    for upgradeName, isEnabled in pairs(upgradeSettings) do
+        if isEnabled then
+            pcall(function()
+                RequestUpgrade:FireServer(upgradeName)
+                print("⚡ Upgraded: " .. upgradeName)
+            end)
+            task.wait(0.3)
+        end
+    end
+end
+
+local function StartUpgradeLoop()
+    if upgradeLoop then return end
+    upgradeLoop = task.spawn(function()
+        while autoUpgrade do
+            DoUpgrade()
+            task.wait(0.1)
+        end
+    end)
+end
+
+local function StopUpgradeLoop()
+    autoUpgrade = false
+    if upgradeLoop then
+        task.cancel(upgradeLoop)
+        upgradeLoop = nil
+    end
+end
+
+-- ===== PROXIMITY PROMPT INSTAN (LOOP + AUTO CLICK) =====
+task.spawn(function()
+    while task.wait(2) do
+        pcall(function()
+            for _, prompt in pairs(workspace:GetDescendants()) do
+                if prompt:IsA("ProximityPrompt") then
+                    prompt.HoldDuration = 0
+                    prompt.RequiresLineOfSight = false
+                end
+            end
+        end)
+    end
+end)
+
+ProximityPromptService.PromptShown:Connect(function(prompt)
+    task.wait(0.05)
+    pcall(function()
+        prompt.HoldDuration = 0
+        prompt:Hold()
+        print("✅ Prompt instan: " .. prompt.Name)
+    end)
+end)
+
+task.wait(1)
+pcall(function()
+    for _, prompt in pairs(workspace:GetDescendants()) do
+        if prompt:IsA("ProximityPrompt") then
+            prompt.HoldDuration = 0
+            prompt.RequiresLineOfSight = false
+        end
+    end
+end)
+
+workspace.DescendantAdded:Connect(function(desc)
+    task.wait(0.1)
+    if desc:IsA("ProximityPrompt") then
+        pcall(function()
+            desc.HoldDuration = 0
+            desc.RequiresLineOfSight = false
+            print("✅ Prompt baru ditemukan: " .. desc.Name)
+        end)
+    end
+end)
+
+-- ===== TELEPORT =====
+local RequestWorldTeleport = ReplicatedStorage:FindFirstChild("Assets")
+if RequestWorldTeleport then
+    RequestWorldTeleport = RequestWorldTeleport:FindFirstChild("Events")
+    if RequestWorldTeleport then
+        RequestWorldTeleport = RequestWorldTeleport:FindFirstChild("RequestWorldTeleport")
+    end
+end
+
+local function TeleportToWorld3()
+    if not RequestWorldTeleport then return end
+    pcall(function()
+        RequestWorldTeleport:FireServer(3)
+        print("✅ Teleport ke World 3!")
+    end)
+end
+
+local function TeleportToVIPPosition()
+    local character = player.Character
+    if not character or not character.Parent then
+        character = player.CharacterAdded:Wait()
+        task.wait(1)
+    end
+    local hrp = character:FindFirstChild("HumanoidRootPart")
+    if hrp then
+        pcall(function()
+            hrp.CFrame = CFrame.new(Vector3.new(-1152, 4, 52))
+            print("✅ Teleport ke VIP Position!")
+        end)
+    end
+end
+
+task.wait(1)
+task.wait(3)
+TeleportToVIPPosition()
+
+-- ===== TRADE =====
+local function AutoAcceptUI()
+    local playerGui = player:FindFirstChild("PlayerGui")
+    if not playerGui then return end
+    local uiFolder = playerGui:FindFirstChild("UiFolder")
+    if not uiFolder then return end
+    local main = uiFolder:FindFirstChild("Main")
+    if not main then return end
+    local hud = main:FindFirstChild("HUD")
+    if hud then
+        local tradeRequests = hud:FindFirstChild("TradeRequests")
+        if tradeRequests then
+            for _, child in pairs(tradeRequests:GetChildren()) do
+                if child:IsA("Frame") and child.Name:find("Request_") then
+                    local userId = child.Name:gsub("Request_", "")
+                    userId = tonumber(userId)
+                    if userId then
+                        pcall(function()
+                            TradeRequestResponse:FireServer(userId, true)
+                            print("✅ Auto Accept UI dari User ID: " .. userId)
+                        end)
+                        child:Destroy()
+                    end
+                end
+            end
+        end
+    end
+    local frames = main:FindFirstChild("Frames")
+    if frames then
+        local trade = frames:FindFirstChild("Trade")
+        if trade then
+            local tradeContainer = trade:FindFirstChild("TradeContainer")
+            if tradeContainer then
+                local buttons = tradeContainer:FindFirstChild("Buttons")
+                if buttons then
+                    local acceptBtn = buttons:FindFirstChild("AcceptButton")
+                    if acceptBtn then
+                        local theirProfile = tradeContainer:FindFirstChild("TheirOffer")
+                        if theirProfile then
+                            local profile = theirProfile:FindFirstChild("Profile")
+                            if profile then
+                                local username = profile:FindFirstChild("Username")
+                                if username then
+                                    local readyIcon = username:FindFirstChild("ready")
+                                    if readyIcon and readyIcon.Enabled then
+                                        pcall(function()
+                                            acceptBtn:FireClick()
+                                            print("✅ Auto Accept UI - Lawan udah accept!")
+                                        end)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+local function StartAcceptLoop()
+    if acceptLoop then return end
+    acceptLoop = task.spawn(function()
+        while autoAccept do
+            AutoAcceptUI()
+            task.wait(acceptDelay)
+        end
+    end)
+end
+
+local function StopAcceptLoop()
+    autoAccept = false
+    if acceptLoop then
+        task.cancel(acceptLoop)
+        acceptLoop = nil
+    end
+end
+
+StartAcceptLoop()
+
+local function IsWeReady()
+    local playerGui = player:FindFirstChild("PlayerGui")
+    if not playerGui then return false end
+    local uiFolder = playerGui:FindFirstChild("UiFolder")
+    if not uiFolder then return false end
+    local main = uiFolder:FindFirstChild("Main")
+    if not main then return false end
+    local frames = main:FindFirstChild("Frames")
+    if not frames then return false end
+    local trade = frames:FindFirstChild("Trade")
+    if not trade then return false end
+    local tradeContainer = trade:FindFirstChild("TradeContainer")
+    if not tradeContainer then return false end
+    local yourOffer = tradeContainer:FindFirstChild("YourOffer")
+    if not yourOffer then return false end
+    local profile = yourOffer:FindFirstChild("Profile")
+    if not profile then return false end
+    local username = profile:FindFirstChild("Username")
+    if not username then return false end
+    local readyIcon = username:FindFirstChild("ready")
+    if readyIcon and readyIcon.Enabled then
+        return true
+    end
+    return false
+end
+
+local function StartAcceptRemoteLoop()
+    if acceptRemoteLoop then return end
+    acceptRemoteLoop = task.spawn(function()
+        while autoAcceptRemote do
+            if not IsWeReady() then
+                pcall(function()
+                    TradeAccept:FireServer()
+                    print("⚡ Auto Accept Remote - Jaga status hijau!")
+                end)
+                task.wait(0.3)
+            end
+            task.wait(0.2)
+        end
+    end)
+end
+
+local function StopAcceptRemoteLoop()
+    autoAcceptRemote = false
+    if acceptRemoteLoop then
+        task.cancel(acceptRemoteLoop)
+        acceptRemoteLoop = nil
+    end
+end
+
+StartAcceptRemoteLoop()
+
+local function StartAddRandomItemLoop()
+    if addRandomItemLoop then return end
+    addRandomItemLoop = task.spawn(function()
+        while autoAddRandomItem do
+            local randomIndex = math.random(1, 10000)
+            pcall(function()
+                TradeAddItem:FireServer(randomIndex)
+                print("📦 Auto Add Random Item: " .. randomIndex)
+            end)
+            task.wait(0)
+        end
+    end)
+end
+
+local function StopAddRandomItemLoop()
+    autoAddRandomItem = false
+    if addRandomItemLoop then
+        task.cancel(addRandomItemLoop)
+        addRandomItemLoop = nil
+    end
+end
+
+-- ===== GUI =====
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "BEGE_IDN"
+screenGui.ResetOnSpawn = false
+
+local playerGui = player:FindFirstChild("PlayerGui")
+if not playerGui then
+    playerGui = player:WaitForChild("PlayerGui")
+end
+screenGui.Parent = playerGui
+
+-- MAIN UI
+local Main = Instance.new("Frame")
+Main.Size = UDim2.new(0, 380, 0, 340) -- DITAMBAH TINGGI JADI 340
+Main.Position = UDim2.new(0.5, -190, 0.5, -170)
+Main.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
+Main.BackgroundTransparency = 0.1
+Main.BorderSizePixel = 2
+Main.BorderColor3 = Color3.fromRGB(255, 50, 50)
+Main.ClipsDescendants = true
+Main.Active = true
+Main.Draggable = true
+Main.Selectable = true
+Main.Visible = true
+Main.Parent = screenGui
+
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 12)
+MainCorner.Parent = Main
+
+local Glow = Instance.new("UIStroke")
+Glow.Color = Color3.fromRGB(255, 50, 50)
+Glow.Transparency = 0.2
+Glow.Thickness = 2
+Glow.Parent = Main
+
+-- HEADER
+local Header = Instance.new("Frame")
+Header.Size = UDim2.new(1, 0, 0, 36)
+Header.Position = UDim2.new(0, 0, 0, 0)
+Header.BackgroundColor3 = Color3.fromRGB(30, 25, 50)
+Header.BackgroundTransparency = 0.05
+Header.BorderSizePixel = 0
+Header.Parent = Main
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -60, 0, 16)
+Title.Position = UDim2.new(0, 10, 0, 2)
+Title.BackgroundTransparency = 1
+Title.Text = "🔥 BEGE IDN"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.LuckiestGuy
+Title.TextSize = 15
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Parent = Header
+
+local SubTitle = Instance.new("TextLabel")
+SubTitle.Size = UDim2.new(1, -60, 0, 12)
+SubTitle.Position = UDim2.new(0, 10, 0, 20)
+SubTitle.BackgroundTransparency = 1
+SubTitle.Text = "THROW A COIN"
+SubTitle.TextColor3 = Color3.fromRGB(255, 100, 100)
+SubTitle.Font = Enum.Font.FredokaOne
+SubTitle.TextSize = 10
+SubTitle.TextXAlignment = Enum.TextXAlignment.Left
+SubTitle.Parent = Header
+
+-- ===== BUBBLE - KIRI ATAS =====
+local bubble = Instance.new("Frame")
+bubble.Size = UDim2.new(0, 55, 0, 55)
+bubble.Position = UDim2.new(0, 10, 0, 10)
+bubble.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+bubble.BackgroundTransparency = 0.3
+bubble.BorderSizePixel = 3
+bubble.BorderColor3 = Color3.fromRGB(255, 0, 0)
+bubble.Visible = false
+bubble.Active = true
+bubble.ZIndex = 50
+bubble.ClipsDescendants = false
+bubble.Parent = screenGui
+
+local bubbleCorner = Instance.new("UICorner")
+bubbleCorner.CornerRadius = UDim.new(1, 0)
+bubbleCorner.Parent = bubble
+
+local bubbleGlow = Instance.new("UIStroke")
+bubbleGlow.Color = Color3.fromRGB(255, 50, 50)
+bubbleGlow.Transparency = 0.3
+bubbleGlow.Thickness = 2
+bubbleGlow.Parent = bubble
+
+local bubbleIcon = Instance.new("ImageLabel")
+bubbleIcon.Size = UDim2.new(0.85, 0, 0.85, 0)
+bubbleIcon.Position = UDim2.new(0.075, 0, 0.075, 0)
+bubbleIcon.BackgroundTransparency = 1
+bubbleIcon.Image = "rbxassetid://134769830476755"
+bubbleIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
+bubbleIcon.ScaleType = Enum.ScaleType.Fit
+bubbleIcon.ZIndex = 60
+bubbleIcon.Parent = bubble
+
+-- VARIABLES UNTUK DRAG + CLICK
+local isDraggingBubble = false
+local dragStartPos = Vector2.new()
+local dragStartTime = 0
+local bubbleStartPos = UDim2.new()
+local hasMoved = false
+
+local isMinimized = false
+local function ToggleMinimize()
+    isMinimized = not isMinimized
+    if isMinimized then
+        Main.Visible = false
+        bubble.Visible = true
+    else
+        Main.Visible = true
+        bubble.Visible = false
+    end
+end
+
+local function OnBubbleInputBegan(input)
+    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+        isDraggingBubble = false
+        hasMoved = false
+        dragStartPos = input.Position
+        dragStartTime = tick()
+        bubbleStartPos = bubble.Position
+        bubble.BackgroundTransparency = 0.1
+    end
+end
+
+local function OnBubbleInputChanged(input)
+    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement then
+        local distance = (input.Position - dragStartPos).Magnitude
+        
+        if distance > 30 then
+            isDraggingBubble = true
+            hasMoved = true
+            local delta = input.Position - dragStartPos
+            local screenSize = workspace.CurrentCamera.ViewportSize
+            
+            local targetX = math.clamp(bubbleStartPos.X.Offset + delta.X, 0, screenSize.X - 55)
+            local targetY = math.clamp(bubbleStartPos.Y.Offset + delta.Y, 0, screenSize.Y - 55)
+            
+            local tweenInfo = TweenInfo.new(0.05, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+            local goal = {Position = UDim2.new(0, targetX, 0, targetY)}
+            local tween = TweenService:Create(bubble, tweenInfo, goal)
+            tween:Play()
+        end
+    end
+end
+
+local function OnBubbleInputEnded(input)
+    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+        bubble.BackgroundTransparency = 0.3
+        
+        if not isDraggingBubble and not hasMoved and (tick() - dragStartTime) < 0.3 then
+            ToggleMinimize()
+        end
+        
+        isDraggingBubble = false
+        hasMoved = false
+    end
+end
+
+bubble.InputBegan:Connect(OnBubbleInputBegan)
+bubble.InputChanged:Connect(OnBubbleInputChanged)
+bubble.InputEnded:Connect(OnBubbleInputEnded)
+
+-- TOMBOL MINIMIZE
+local MinBtn = Instance.new("TextButton")
+MinBtn.Size = UDim2.new(0, 26, 0, 26)
+MinBtn.Position = UDim2.new(1, -48, 0, 5)
+MinBtn.Text = "➖"
+MinBtn.BackgroundColor3 = Color3.fromRGB(40, 35, 60)
+MinBtn.BackgroundTransparency = 0.2
+MinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinBtn.Font = Enum.Font.GothamBold
+MinBtn.TextSize = 16
+MinBtn.BorderSizePixel = 0
+MinBtn.ZIndex = 30
+MinBtn.Parent = Header
+
+local MinCorner = Instance.new("UICorner")
+MinCorner.CornerRadius = UDim.new(0, 5)
+MinCorner.Parent = MinBtn
+
+MinBtn.MouseEnter:Connect(function()
+    MinBtn.BackgroundTransparency = 0.05
+end)
+MinBtn.MouseLeave:Connect(function()
+    MinBtn.BackgroundTransparency = 0.2
+end)
+MinBtn.MouseButton1Click:Connect(ToggleMinimize)
+
+-- TOMBOL CLOSE
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 26, 0, 26)
+CloseBtn.Position = UDim2.new(1, -26, 0, 5)
+CloseBtn.Text = "✖"
+CloseBtn.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
+CloseBtn.BackgroundTransparency = 0.2
+CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.TextSize = 15
+CloseBtn.BorderSizePixel = 0
+CloseBtn.ZIndex = 30
+CloseBtn.Parent = Header
+
+local CloseCorner = Instance.new("UICorner")
+CloseCorner.CornerRadius = UDim.new(0, 5)
+CloseCorner.Parent = CloseBtn
+
+CloseBtn.MouseEnter:Connect(function()
+    CloseBtn.BackgroundTransparency = 0.05
+end)
+CloseBtn.MouseLeave:Connect(function()
+    CloseBtn.BackgroundTransparency = 0.2
+end)
+CloseBtn.MouseButton1Click:Connect(function()
+    StopCoinLoop()
+    StopSellAllLoop()
+    StopUpgradeLoop()
+    StopAcceptLoop()
+    StopAcceptRemoteLoop()
+    StopAddRandomItemLoop()
+    StopAntiAFK()
+    StopClaimQuestLoop()
+    screenGui:Destroy()
+end)
+
+-- TAB
+local TabContainer = Instance.new("Frame")
+TabContainer.Size = UDim2.new(1, -10, 0, 30)
+TabContainer.Position = UDim2.new(0, 5, 0, 40)
+TabContainer.BackgroundTransparency = 1
+TabContainer.Parent = Main
+
+local TabMain = Instance.new("TextButton")
+TabMain.Size = UDim2.new(0.23, -2, 1, 0)
+TabMain.Position = UDim2.new(0, 0, 0, 0)
+TabMain.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+TabMain.BackgroundTransparency = 0.3
+TabMain.BorderSizePixel = 1
+TabMain.BorderColor3 = Color3.fromRGB(255, 0, 0)
+TabMain.Text = "MAIN"
+TabMain.TextColor3 = Color3.fromRGB(255, 255, 255)
+TabMain.Font = Enum.Font.GothamBold
+TabMain.TextSize = 10
+TabMain.ZIndex = 20
+TabMain.Parent = TabContainer
+
+local TabMainCorner = Instance.new("UICorner")
+TabMainCorner.CornerRadius = UDim.new(0, 5)
+TabMainCorner.Parent = TabMain
+
+local TabUpgrade = Instance.new("TextButton")
+TabUpgrade.Size = UDim2.new(0.23, -2, 1, 0)
+TabUpgrade.Position = UDim2.new(0.23, 4, 0, 0)
+TabUpgrade.BackgroundColor3 = Color3.fromRGB(40, 35, 60)
+TabUpgrade.BackgroundTransparency = 0.3
+TabUpgrade.BorderSizePixel = 1
+TabUpgrade.BorderColor3 = Color3.fromRGB(60, 60, 80)
+TabUpgrade.Text = "UPGRADE"
+TabUpgrade.TextColor3 = Color3.fromRGB(200, 200, 210)
+TabUpgrade.Font = Enum.Font.GothamBold
+TabUpgrade.TextSize = 9
+TabUpgrade.ZIndex = 20
+TabUpgrade.Parent = TabContainer
+
+local TabUpgradeCorner = Instance.new("UICorner")
+TabUpgradeCorner.CornerRadius = UDim.new(0, 5)
+TabUpgradeCorner.Parent = TabUpgrade
+
+local TabTrade = Instance.new("TextButton")
+TabTrade.Size = UDim2.new(0.23, -2, 1, 0)
+TabTrade.Position = UDim2.new(0.46, 8, 0, 0)
+TabTrade.BackgroundColor3 = Color3.fromRGB(40, 35, 60)
+TabTrade.BackgroundTransparency = 0.3
+TabTrade.BorderSizePixel = 1
+TabTrade.BorderColor3 = Color3.fromRGB(60, 60, 80)
+TabTrade.Text = "TRADE"
+TabTrade.TextColor3 = Color3.fromRGB(200, 200, 210)
+TabTrade.Font = Enum.Font.GothamBold
+TabTrade.TextSize = 10
+TabTrade.ZIndex = 20
+TabTrade.Parent = TabContainer
+
+local TabTradeCorner = Instance.new("UICorner")
+TabTradeCorner.CornerRadius = UDim.new(0, 5)
+TabTradeCorner.Parent = TabTrade
+
+local TabMisc = Instance.new("TextButton")
+TabMisc.Size = UDim2.new(0.23, -2, 1, 0)
+TabMisc.Position = UDim2.new(0.69, 12, 0, 0)
+TabMisc.BackgroundColor3 = Color3.fromRGB(40, 35, 60)
+TabMisc.BackgroundTransparency = 0.3
+TabMisc.BorderSizePixel = 1
+TabMisc.BorderColor3 = Color3.fromRGB(60, 60, 80)
+TabMisc.Text = "MISC"
+TabMisc.TextColor3 = Color3.fromRGB(200, 200, 210)
+TabMisc.Font = Enum.Font.GothamBold
+TabMisc.TextSize = 10
+TabMisc.ZIndex = 20
+TabMisc.Parent = TabContainer
+
+local TabMiscCorner = Instance.new("UICorner")
+TabMiscCorner.CornerRadius = UDim.new(0, 5)
+TabMiscCorner.Parent = TabMisc
+
+-- CONTENT
+local Content = Instance.new("Frame")
+Content.Size = UDim2.new(1, -14, 0, 225) -- DITAMBAH TINGGI JADI 225
+Content.Position = UDim2.new(0, 7, 0, 74)
+Content.BackgroundTransparency = 0.8
+Content.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
+Content.Parent = Main
+
+-- MAIN CONTENT
+local MainContent = Instance.new("Frame")
+MainContent.Size = UDim2.new(1, 0, 1, 0)
+MainContent.Position = UDim2.new(0, 0, 0, 0)
+MainContent.BackgroundTransparency = 1
+MainContent.Visible = true
+MainContent.Parent = Content
+
+-- COIN TYPE
+local coinTypeFrame = Instance.new("Frame")
+coinTypeFrame.Size = UDim2.new(1, 0, 0, 34)
+coinTypeFrame.Position = UDim2.new(0, 0, 0, 2)
+coinTypeFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+coinTypeFrame.BackgroundTransparency = 0.2
+coinTypeFrame.BorderSizePixel = 1
+coinTypeFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+coinTypeFrame.Parent = MainContent
+
+local coinTypeCorner = Instance.new("UICorner")
+coinTypeCorner.CornerRadius = UDim.new(0, 6)
+coinTypeCorner.Parent = coinTypeFrame
+
+local coinTypeLabel = Instance.new("TextLabel")
+coinTypeLabel.Size = UDim2.new(0, 55, 1, 0)
+coinTypeLabel.Position = UDim2.new(0, 8, 0, 0)
+coinTypeLabel.BackgroundTransparency = 1
+coinTypeLabel.Text = "COIN:"
+coinTypeLabel.TextColor3 = Color3.fromRGB(200, 200, 210)
+coinTypeLabel.Font = Enum.Font.FredokaOne
+coinTypeLabel.TextSize = 10
+coinTypeLabel.TextXAlignment = Enum.TextXAlignment.Left
+coinTypeLabel.Parent = coinTypeFrame
+
+local coinTypeBox = Instance.new("TextBox")
+coinTypeBox.Size = UDim2.new(0, 130, 0, 22)
+coinTypeBox.Position = UDim2.new(0, 62, 0.5, -11)
+coinTypeBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
+coinTypeBox.BackgroundTransparency = 0.3
+coinTypeBox.BorderSizePixel = 2
+coinTypeBox.BorderColor3 = Color3.fromRGB(255, 50, 50)
+coinTypeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+coinTypeBox.Font = Enum.Font.GothamBold
+coinTypeBox.TextSize = 11
+coinTypeBox.Text = "Phoenix Coin"
+coinTypeBox.TextXAlignment = Enum.TextXAlignment.Left
+coinTypeBox.ZIndex = 15
+coinTypeBox.Parent = coinTypeFrame
+
+local coinTypeBoxCorner = Instance.new("UICorner")
+coinTypeBoxCorner.CornerRadius = UDim.new(0, 5)
+coinTypeBoxCorner.Parent = coinTypeBox
+
+coinTypeBox:GetPropertyChangedSignal("Text"):Connect(function()
+    if coinTypeBox.Text ~= "" then
+        selectedCoin = coinTypeBox.Text
+        print(" Coin changed to: " .. selectedCoin)
+    end
+end)
+
+-- AUTO COIN
+local coinFrame = Instance.new("Frame")
+coinFrame.Size = UDim2.new(1, 0, 0, 34)
+coinFrame.Position = UDim2.new(0, 0, 0, 40)
+coinFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+coinFrame.BackgroundTransparency = 0.2
+coinFrame.BorderSizePixel = 1
+coinFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+coinFrame.Parent = MainContent
+
+local coinCorner = Instance.new("UICorner")
+coinCorner.CornerRadius = UDim.new(0, 6)
+coinCorner.Parent = coinFrame
+
+local coinLabel = Instance.new("TextLabel")
+coinLabel.Size = UDim2.new(0, 120, 1, 0)
+coinLabel.Position = UDim2.new(0, 10, 0, 0)
+coinLabel.BackgroundTransparency = 1
+coinLabel.Text = "AUTO COIN"
+coinLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+coinLabel.Font = Enum.Font.FredokaOne
+coinLabel.TextSize = 11
+coinLabel.TextXAlignment = Enum.TextXAlignment.Left
+coinLabel.Parent = coinFrame
+
+local coinSwitchBg = Instance.new("Frame")
+coinSwitchBg.Size = UDim2.new(0, 55, 0, 24)
+coinSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
+coinSwitchBg.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+coinSwitchBg.BackgroundTransparency = 0.2
+coinSwitchBg.BorderSizePixel = 2
+coinSwitchBg.BorderColor3 = Color3.fromRGB(255, 50, 50)
+coinSwitchBg.Parent = coinFrame
+
+local coinSwitchCorner = Instance.new("UICorner")
+coinSwitchCorner.CornerRadius = UDim.new(0, 12)
+coinSwitchCorner.Parent = coinSwitchBg
+
+local coinOffLabel = Instance.new("TextLabel")
+coinOffLabel.Size = UDim2.new(0, 20, 1, 0)
+coinOffLabel.Position = UDim2.new(0, 4, 0, 0)
+coinOffLabel.BackgroundTransparency = 1
+coinOffLabel.Text = "OFF"
+coinOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+coinOffLabel.Font = Enum.Font.FredokaOne
+coinOffLabel.TextSize = 8
+coinOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+coinOffLabel.Parent = coinSwitchBg
+
+local coinOnLabel = Instance.new("TextLabel")
+coinOnLabel.Size = UDim2.new(0, 20, 1, 0)
+coinOnLabel.Position = UDim2.new(1, -24, 0, 0)
+coinOnLabel.BackgroundTransparency = 1
+coinOnLabel.Text = "ON"
+coinOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+coinOnLabel.Font = Enum.Font.FredokaOne
+coinOnLabel.TextSize = 8
+coinOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+coinOnLabel.Parent = coinSwitchBg
+
+local coinSwitchBtn = Instance.new("TextButton")
+coinSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
+coinSwitchBtn.Position = UDim2.new(1, -24, 0.5, -10)
+coinSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+coinSwitchBtn.BackgroundTransparency = 0.05
+coinSwitchBtn.BorderSizePixel = 2
+coinSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+coinSwitchBtn.Text = ""
+coinSwitchBtn.ZIndex = 20
+coinSwitchBtn.Parent = coinSwitchBg
+
+local coinSwitchBtnCorner = Instance.new("UICorner")
+coinSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
+coinSwitchBtnCorner.Parent = coinSwitchBtn
+
+-- ===== CLAIM QUEST (DI BAWAH AUTO COIN) =====
+local claimQuestFrame = Instance.new("Frame")
+claimQuestFrame.Size = UDim2.new(1, 0, 0, 34)
+claimQuestFrame.Position = UDim2.new(0, 0, 0, 78)
+claimQuestFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+claimQuestFrame.BackgroundTransparency = 0.2
+claimQuestFrame.BorderSizePixel = 1
+claimQuestFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+claimQuestFrame.Parent = MainContent
+
+local claimQuestCorner = Instance.new("UICorner")
+claimQuestCorner.CornerRadius = UDim.new(0, 6)
+claimQuestCorner.Parent = claimQuestFrame
+
+local claimQuestLabel = Instance.new("TextLabel")
+claimQuestLabel.Size = UDim2.new(0, 150, 1, 0)
+claimQuestLabel.Position = UDim2.new(0, 10, 0, 0)
+claimQuestLabel.BackgroundTransparency = 1
+claimQuestLabel.Text = "📋 AUTO CLAIM QUEST"
+claimQuestLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+claimQuestLabel.Font = Enum.Font.FredokaOne
+claimQuestLabel.TextSize = 10
+claimQuestLabel.TextXAlignment = Enum.TextXAlignment.Left
+claimQuestLabel.Parent = claimQuestFrame
+
+local claimQuestSwitchBg = Instance.new("Frame")
+claimQuestSwitchBg.Size = UDim2.new(0, 55, 0, 24)
+claimQuestSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
+claimQuestSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
+claimQuestSwitchBg.BackgroundTransparency = 0.2
+claimQuestSwitchBg.BorderSizePixel = 2
+claimQuestSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
+claimQuestSwitchBg.Parent = claimQuestFrame
+
+local claimQuestSwitchCorner = Instance.new("UICorner")
+claimQuestSwitchCorner.CornerRadius = UDim.new(0, 12)
+claimQuestSwitchCorner.Parent = claimQuestSwitchBg
+
+local claimQuestOffLabel = Instance.new("TextLabel")
+claimQuestOffLabel.Size = UDim2.new(0, 20, 1, 0)
+claimQuestOffLabel.Position = UDim2.new(0, 4, 0, 0)
+claimQuestOffLabel.BackgroundTransparency = 1
+claimQuestOffLabel.Text = "OFF"
+claimQuestOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+claimQuestOffLabel.Font = Enum.Font.FredokaOne
+claimQuestOffLabel.TextSize = 8
+claimQuestOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+claimQuestOffLabel.Parent = claimQuestSwitchBg
+
+local claimQuestOnLabel = Instance.new("TextLabel")
+claimQuestOnLabel.Size = UDim2.new(0, 20, 1, 0)
+claimQuestOnLabel.Position = UDim2.new(1, -24, 0, 0)
+claimQuestOnLabel.BackgroundTransparency = 1
+claimQuestOnLabel.Text = "ON"
+claimQuestOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+claimQuestOnLabel.Font = Enum.Font.FredokaOne
+claimQuestOnLabel.TextSize = 8
+claimQuestOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+claimQuestOnLabel.Parent = claimQuestSwitchBg
+
+local claimQuestSwitchBtn = Instance.new("TextButton")
+claimQuestSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
+claimQuestSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
+claimQuestSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+claimQuestSwitchBtn.BackgroundTransparency = 0.05
+claimQuestSwitchBtn.BorderSizePixel = 2
+claimQuestSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
+claimQuestSwitchBtn.Text = ""
+claimQuestSwitchBtn.ZIndex = 20
+claimQuestSwitchBtn.Parent = claimQuestSwitchBg
+
+local claimQuestSwitchBtnCorner = Instance.new("UICorner")
+claimQuestSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
+claimQuestSwitchBtnCorner.Parent = claimQuestSwitchBtn
+
+-- SELL ALL
+local sellAllFrame = Instance.new("Frame")
+sellAllFrame.Size = UDim2.new(1, 0, 0, 34)
+sellAllFrame.Position = UDim2.new(0, 0, 0, 116)
+sellAllFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+sellAllFrame.BackgroundTransparency = 0.2
+sellAllFrame.BorderSizePixel = 1
+sellAllFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+sellAllFrame.Parent = MainContent
+
+local sellAllCorner = Instance.new("UICorner")
+sellAllCorner.CornerRadius = UDim.new(0, 6)
+sellAllCorner.Parent = sellAllFrame
+
+local sellAllLabel = Instance.new("TextLabel")
+sellAllLabel.Size = UDim2.new(0, 120, 1, 0)
+sellAllLabel.Position = UDim2.new(0, 10, 0, 0)
+sellAllLabel.BackgroundTransparency = 1
+sellAllLabel.Text = "💰 SELL ALL"
+sellAllLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+sellAllLabel.Font = Enum.Font.FredokaOne
+sellAllLabel.TextSize = 11
+sellAllLabel.TextXAlignment = Enum.TextXAlignment.Left
+sellAllLabel.Parent = sellAllFrame
+
+local sellAllSwitchBg = Instance.new("Frame")
+sellAllSwitchBg.Size = UDim2.new(0, 55, 0, 24)
+sellAllSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
+sellAllSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
+sellAllSwitchBg.BackgroundTransparency = 0.2
+sellAllSwitchBg.BorderSizePixel = 2
+sellAllSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
+sellAllSwitchBg.Parent = sellAllFrame
+
+local sellAllSwitchCorner = Instance.new("UICorner")
+sellAllSwitchCorner.CornerRadius = UDim.new(0, 12)
+sellAllSwitchCorner.Parent = sellAllSwitchBg
+
+local sellAllOffLabel = Instance.new("TextLabel")
+sellAllOffLabel.Size = UDim2.new(0, 20, 1, 0)
+sellAllOffLabel.Position = UDim2.new(0, 4, 0, 0)
+sellAllOffLabel.BackgroundTransparency = 1
+sellAllOffLabel.Text = "OFF"
+sellAllOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+sellAllOffLabel.Font = Enum.Font.FredokaOne
+sellAllOffLabel.TextSize = 8
+sellAllOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+sellAllOffLabel.Parent = sellAllSwitchBg
+
+local sellAllOnLabel = Instance.new("TextLabel")
+sellAllOnLabel.Size = UDim2.new(0, 20, 1, 0)
+sellAllOnLabel.Position = UDim2.new(1, -24, 0, 0)
+sellAllOnLabel.BackgroundTransparency = 1
+sellAllOnLabel.Text = "ON"
+sellAllOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+sellAllOnLabel.Font = Enum.Font.FredokaOne
+sellAllOnLabel.TextSize = 8
+sellAllOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+sellAllOnLabel.Parent = sellAllSwitchBg
+
+local sellAllSwitchBtn = Instance.new("TextButton")
+sellAllSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
+sellAllSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
+sellAllSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+sellAllSwitchBtn.BackgroundTransparency = 0.05
+sellAllSwitchBtn.BorderSizePixel = 2
+sellAllSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
+sellAllSwitchBtn.Text = ""
+sellAllSwitchBtn.ZIndex = 20
+sellAllSwitchBtn.Parent = sellAllSwitchBg
+
+local sellAllSwitchBtnCorner = Instance.new("UICorner")
+sellAllSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
+sellAllSwitchBtnCorner.Parent = sellAllSwitchBtn
+
+-- STATUS LABEL
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Size = UDim2.new(1, -10, 0, 14)
+statusLabel.Position = UDim2.new(0, 5, 1, -16)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Text = "🟢 SEMUA ON"
+statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+statusLabel.Font = Enum.Font.FredokaOne
+statusLabel.TextSize = 9
+statusLabel.TextXAlignment = Enum.TextXAlignment.Center
+statusLabel.ZIndex = 5
+statusLabel.Parent = Content
+
+-- UPGRADE CONTENT
+local UpgradeContent = Instance.new("Frame")
+UpgradeContent.Size = UDim2.new(1, 0, 1, 0)
+UpgradeContent.Position = UDim2.new(0, 0, 0, 0)
+UpgradeContent.BackgroundTransparency = 1
+UpgradeContent.Visible = false
+UpgradeContent.Parent = Content
+
+local autoUpgradeFrame = Instance.new("Frame")
+autoUpgradeFrame.Size = UDim2.new(1, 0, 0, 34)
+autoUpgradeFrame.Position = UDim2.new(0, 0, 0, 2)
+autoUpgradeFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+autoUpgradeFrame.BackgroundTransparency = 0.2
+autoUpgradeFrame.BorderSizePixel = 1
+autoUpgradeFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+autoUpgradeFrame.Parent = UpgradeContent
+
+local autoUpgradeCorner = Instance.new("UICorner")
+autoUpgradeCorner.CornerRadius = UDim.new(0, 6)
+autoUpgradeCorner.Parent = autoUpgradeFrame
+
+local autoUpgradeLabel = Instance.new("TextLabel")
+autoUpgradeLabel.Size = UDim2.new(0, 120, 1, 0)
+autoUpgradeLabel.Position = UDim2.new(0, 10, 0, 0)
+autoUpgradeLabel.BackgroundTransparency = 1
+autoUpgradeLabel.Text = "⚡ AUTO UPGRADE"
+autoUpgradeLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+autoUpgradeLabel.Font = Enum.Font.FredokaOne
+autoUpgradeLabel.TextSize = 11
+autoUpgradeLabel.TextXAlignment = Enum.TextXAlignment.Left
+autoUpgradeLabel.Parent = autoUpgradeFrame
+
+local autoUpgradeSwitchBg = Instance.new("Frame")
+autoUpgradeSwitchBg.Size = UDim2.new(0, 55, 0, 24)
+autoUpgradeSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
+autoUpgradeSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
+autoUpgradeSwitchBg.BackgroundTransparency = 0.2
+autoUpgradeSwitchBg.BorderSizePixel = 2
+autoUpgradeSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
+autoUpgradeSwitchBg.Parent = autoUpgradeFrame
+
+local autoUpgradeSwitchCorner = Instance.new("UICorner")
+autoUpgradeSwitchCorner.CornerRadius = UDim.new(0, 12)
+autoUpgradeSwitchCorner.Parent = autoUpgradeSwitchBg
+
+local autoUpgradeOffLabel = Instance.new("TextLabel")
+autoUpgradeOffLabel.Size = UDim2.new(0, 20, 1, 0)
+autoUpgradeOffLabel.Position = UDim2.new(0, 4, 0, 0)
+autoUpgradeOffLabel.BackgroundTransparency = 1
+autoUpgradeOffLabel.Text = "OFF"
+autoUpgradeOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoUpgradeOffLabel.Font = Enum.Font.FredokaOne
+autoUpgradeOffLabel.TextSize = 8
+autoUpgradeOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+autoUpgradeOffLabel.Parent = autoUpgradeSwitchBg
+
+local autoUpgradeOnLabel = Instance.new("TextLabel")
+autoUpgradeOnLabel.Size = UDim2.new(0, 20, 1, 0)
+autoUpgradeOnLabel.Position = UDim2.new(1, -24, 0, 0)
+autoUpgradeOnLabel.BackgroundTransparency = 1
+autoUpgradeOnLabel.Text = "ON"
+autoUpgradeOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+autoUpgradeOnLabel.Font = Enum.Font.FredokaOne
+autoUpgradeOnLabel.TextSize = 8
+autoUpgradeOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+autoUpgradeOnLabel.Parent = autoUpgradeSwitchBg
+
+local autoUpgradeSwitchBtn = Instance.new("TextButton")
+autoUpgradeSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
+autoUpgradeSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
+autoUpgradeSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+autoUpgradeSwitchBtn.BackgroundTransparency = 0.05
+autoUpgradeSwitchBtn.BorderSizePixel = 2
+autoUpgradeSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
+autoUpgradeSwitchBtn.Text = ""
+autoUpgradeSwitchBtn.ZIndex = 20
+autoUpgradeSwitchBtn.Parent = autoUpgradeSwitchBg
+
+local autoUpgradeSwitchBtnCorner = Instance.new("UICorner")
+autoUpgradeSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
+autoUpgradeSwitchBtnCorner.Parent = autoUpgradeSwitchBtn
+
+local upgradeListFrame = Instance.new("Frame")
+upgradeListFrame.Size = UDim2.new(1, 0, 0, 95)
+upgradeListFrame.Position = UDim2.new(0, 0, 0, 40)
+upgradeListFrame.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
+upgradeListFrame.BackgroundTransparency = 0.2
+upgradeListFrame.BorderSizePixel = 1
+upgradeListFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+upgradeListFrame.ClipsDescendants = true
+upgradeListFrame.Parent = UpgradeContent
+
+local upgradeListCorner = Instance.new("UICorner")
+upgradeListCorner.CornerRadius = UDim.new(0, 6)
+upgradeListCorner.Parent = upgradeListFrame
+
+local upgradeScroller = Instance.new("ScrollingFrame")
+upgradeScroller.Size = UDim2.new(1, -10, 1, -10)
+upgradeScroller.Position = UDim2.new(0, 5, 0, 5)
+upgradeScroller.BackgroundTransparency = 1
+upgradeScroller.BorderSizePixel = 0
+upgradeScroller.CanvasSize = UDim2.new(0, 0, 0, 0)
+upgradeScroller.ScrollBarThickness = 4
+upgradeScroller.Parent = upgradeListFrame
+
+local upgradeLayout = Instance.new("UIListLayout")
+upgradeLayout.Padding = UDim.new(0, 4)
+upgradeLayout.SortOrder = Enum.SortOrder.LayoutOrder
+upgradeLayout.Parent = upgradeScroller
+
+local upgradeToggles = {}
+
+local function CreateUpgradeToggle(upgradeName)
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(1, -10, 0, 28)
+    frame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+    frame.BackgroundTransparency = 0.2
+    frame.BorderSizePixel = 1
+    frame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+    frame.Parent = upgradeScroller
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 5)
+    corner.Parent = frame
+
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(0, 160, 1, 0)
+    label.Position = UDim2.new(0, 8, 0, 0)
+    label.BackgroundTransparency = 1
+    label.Text = upgradeName
+    label.TextColor3 = Color3.fromRGB(230, 230, 240)
+    label.Font = Enum.Font.FredokaOne
+    label.TextSize = 10
+    label.TextXAlignment = Enum.TextXAlignment.Left
+    label.Parent = frame
+
+    local switchBg = Instance.new("Frame")
+    switchBg.Size = UDim2.new(0, 50, 0, 20)
+    switchBg.Position = UDim2.new(1, -58, 0.5, -10)
+    switchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
+    switchBg.BackgroundTransparency = 0.2
+    switchBg.BorderSizePixel = 2
+    switchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
+    switchBg.Parent = frame
+
+    local switchCorner = Instance.new("UICorner")
+    switchCorner.CornerRadius = UDim.new(0, 10)
+    switchCorner.Parent = switchBg
+
+    local offLabel = Instance.new("TextLabel")
+    offLabel.Size = UDim2.new(0, 18, 1, 0)
+    offLabel.Position = UDim2.new(0, 4, 0, 0)
+    offLabel.BackgroundTransparency = 1
+    offLabel.Text = "OFF"
+    offLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    offLabel.Font = Enum.Font.FredokaOne
+    offLabel.TextSize = 7
+    offLabel.TextXAlignment = Enum.TextXAlignment.Center
+    offLabel.Parent = switchBg
+
+    local onLabel = Instance.new("TextLabel")
+    onLabel.Size = UDim2.new(0, 18, 1, 0)
+    onLabel.Position = UDim2.new(1, -22, 0, 0)
+    onLabel.BackgroundTransparency = 1
+    onLabel.Text = "ON"
+    onLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+    onLabel.Font = Enum.Font.FredokaOne
+    onLabel.TextSize = 7
+    onLabel.TextXAlignment = Enum.TextXAlignment.Center
+    onLabel.Parent = switchBg
+
+    local switchBtn = Instance.new("TextButton")
+    switchBtn.Size = UDim2.new(0, 18, 0, 18)
+    switchBtn.Position = UDim2.new(0, 4, 0.5, -9)
+    switchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    switchBtn.BackgroundTransparency = 0.05
+    switchBtn.BorderSizePixel = 2
+    switchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
+    switchBtn.Text = ""
+    switchBtn.ZIndex = 20
+    switchBtn.Parent = switchBg
+
+    local switchBtnCorner = Instance.new("UICorner")
+    switchBtnCorner.CornerRadius = UDim.new(0, 9)
+    switchBtnCorner.Parent = switchBtn
+
+    local function UpdateState(isOn)
+        if isOn then
+            switchBtn.Position = UDim2.new(1, -22, 0.5, -9)
+            switchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+            switchBg.BorderColor3 = Color3.fromRGB(255, 50, 50)
+            switchBg.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+            offLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+            onLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        else
+            switchBtn.Position = UDim2.new(0, 4, 0.5, -9)
+            switchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
+            switchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
+            switchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
+            offLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            onLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+        end
+    end
+
+    switchBtn.MouseButton1Click:Connect(function()
+        upgradeSettings[upgradeName] = not upgradeSettings[upgradeName]
+        UpdateState(upgradeSettings[upgradeName])
+        UpdateStatus()
+        if upgradeSettings[upgradeName] then
+            print("✅ " .. upgradeName .. ": ON")
+        else
+            print("❌ " .. upgradeName .. ": OFF")
+        end
+    end)
+
+    return {UpdateState = UpdateState}
+end
+
+for _, name in ipairs({"Luck Multiplier", "Value Multiplier", "Throw Speed"}) do
+    upgradeToggles[name] = CreateUpgradeToggle(name)
+    upgradeToggles[name].UpdateState(false)
+end
+
+upgradeScroller.CanvasSize = UDim2.new(0, 0, 0, (3 * 32) + 10)
+
+-- TRADE CONTENT
+local TradeContent = Instance.new("Frame")
+TradeContent.Size = UDim2.new(1, 0, 1, 0)
+TradeContent.Position = UDim2.new(0, 0, 0, 0)
+TradeContent.BackgroundTransparency = 1
+TradeContent.Visible = false
+TradeContent.Parent = Content
+
+local acceptFrame = Instance.new("Frame")
+acceptFrame.Size = UDim2.new(1, 0, 0, 34)
+acceptFrame.Position = UDim2.new(0, 0, 0, 2)
+acceptFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+acceptFrame.BackgroundTransparency = 0.2
+acceptFrame.BorderSizePixel = 1
+acceptFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+acceptFrame.Parent = TradeContent
+
+local acceptCorner = Instance.new("UICorner")
+acceptCorner.CornerRadius = UDim.new(0, 6)
+acceptCorner.Parent = acceptFrame
+
+local acceptLabel = Instance.new("TextLabel")
+acceptLabel.Size = UDim2.new(0, 120, 1, 0)
+acceptLabel.Position = UDim2.new(0, 10, 0, 0)
+acceptLabel.BackgroundTransparency = 1
+acceptLabel.Text = "✅ AUTO ACCEPT"
+acceptLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+acceptLabel.Font = Enum.Font.FredokaOne
+acceptLabel.TextSize = 11
+acceptLabel.TextXAlignment = Enum.TextXAlignment.Left
+acceptLabel.Parent = acceptFrame
+
+local acceptSwitchBg = Instance.new("Frame")
+acceptSwitchBg.Size = UDim2.new(0, 55, 0, 24)
+acceptSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
+acceptSwitchBg.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+acceptSwitchBg.BackgroundTransparency = 0.2
+acceptSwitchBg.BorderSizePixel = 2
+acceptSwitchBg.BorderColor3 = Color3.fromRGB(255, 50, 50)
+acceptSwitchBg.Parent = acceptFrame
+
+local acceptSwitchCorner = Instance.new("UICorner")
+acceptSwitchCorner.CornerRadius = UDim.new(0, 12)
+acceptSwitchCorner.Parent = acceptSwitchBg
+
+local acceptOffLabel = Instance.new("TextLabel")
+acceptOffLabel.Size = UDim2.new(0, 20, 1, 0)
+acceptOffLabel.Position = UDim2.new(0, 4, 0, 0)
+acceptOffLabel.BackgroundTransparency = 1
+acceptOffLabel.Text = "OFF"
+acceptOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+acceptOffLabel.Font = Enum.Font.FredokaOne
+acceptOffLabel.TextSize = 8
+acceptOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+acceptOffLabel.Parent = acceptSwitchBg
+
+local acceptOnLabel = Instance.new("TextLabel")
+acceptOnLabel.Size = UDim2.new(0, 20, 1, 0)
+acceptOnLabel.Position = UDim2.new(1, -24, 0, 0)
+acceptOnLabel.BackgroundTransparency = 1
+acceptOnLabel.Text = "ON"
+acceptOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+acceptOnLabel.Font = Enum.Font.FredokaOne
+acceptOnLabel.TextSize = 8
+acceptOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+acceptOnLabel.Parent = acceptSwitchBg
+
+local acceptSwitchBtn = Instance.new("TextButton")
+acceptSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
+acceptSwitchBtn.Position = UDim2.new(1, -24, 0.5, -10)
+acceptSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+acceptSwitchBtn.BackgroundTransparency = 0.05
+acceptSwitchBtn.BorderSizePixel = 2
+acceptSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+acceptSwitchBtn.Text = ""
+acceptSwitchBtn.ZIndex = 20
+acceptSwitchBtn.Parent = acceptSwitchBg
+
+local acceptSwitchBtnCorner = Instance.new("UICorner")
+acceptSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
+acceptSwitchBtnCorner.Parent = acceptSwitchBtn
+
+local acceptRemoteFrame = Instance.new("Frame")
+acceptRemoteFrame.Size = UDim2.new(1, 0, 0, 34)
+acceptRemoteFrame.Position = UDim2.new(0, 0, 0, 40)
+acceptRemoteFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+acceptRemoteFrame.BackgroundTransparency = 0.2
+acceptRemoteFrame.BorderSizePixel = 1
+acceptRemoteFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+acceptRemoteFrame.Parent = TradeContent
+
+local acceptRemoteCorner = Instance.new("UICorner")
+acceptRemoteCorner.CornerRadius = UDim.new(0, 6)
+acceptRemoteCorner.Parent = acceptRemoteFrame
+
+local acceptRemoteLabel = Instance.new("TextLabel")
+acceptRemoteLabel.Size = UDim2.new(0, 150, 1, 0)
+acceptRemoteLabel.Position = UDim2.new(0, 10, 0, 0)
+acceptRemoteLabel.BackgroundTransparency = 1
+acceptRemoteLabel.Text = "⚡ AUTO ACCEPT REMOTE"
+acceptRemoteLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+acceptRemoteLabel.Font = Enum.Font.FredokaOne
+acceptRemoteLabel.TextSize = 11
+acceptRemoteLabel.TextXAlignment = Enum.TextXAlignment.Left
+acceptRemoteLabel.Parent = acceptRemoteFrame
+
+local acceptRemoteSwitchBg = Instance.new("Frame")
+acceptRemoteSwitchBg.Size = UDim2.new(0, 55, 0, 24)
+acceptRemoteSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
+acceptRemoteSwitchBg.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+acceptRemoteSwitchBg.BackgroundTransparency = 0.2
+acceptRemoteSwitchBg.BorderSizePixel = 2
+acceptRemoteSwitchBg.BorderColor3 = Color3.fromRGB(255, 50, 50)
+acceptRemoteSwitchBg.Parent = acceptRemoteFrame
+
+local acceptRemoteSwitchCorner = Instance.new("UICorner")
+acceptRemoteSwitchCorner.CornerRadius = UDim.new(0, 12)
+acceptRemoteSwitchCorner.Parent = acceptRemoteSwitchBg
+
+local acceptRemoteOffLabel = Instance.new("TextLabel")
+acceptRemoteOffLabel.Size = UDim2.new(0, 20, 1, 0)
+acceptRemoteOffLabel.Position = UDim2.new(0, 4, 0, 0)
+acceptRemoteOffLabel.BackgroundTransparency = 1
+acceptRemoteOffLabel.Text = "OFF"
+acceptRemoteOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+acceptRemoteOffLabel.Font = Enum.Font.FredokaOne
+acceptRemoteOffLabel.TextSize = 8
+acceptRemoteOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+acceptRemoteOffLabel.Parent = acceptRemoteSwitchBg
+
+local acceptRemoteOnLabel = Instance.new("TextLabel")
+acceptRemoteOnLabel.Size = UDim2.new(0, 20, 1, 0)
+acceptRemoteOnLabel.Position = UDim2.new(1, -24, 0, 0)
+acceptRemoteOnLabel.BackgroundTransparency = 1
+acceptRemoteOnLabel.Text = "ON"
+acceptRemoteOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+acceptRemoteOnLabel.Font = Enum.Font.FredokaOne
+acceptRemoteOnLabel.TextSize = 8
+acceptRemoteOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+acceptRemoteOnLabel.Parent = acceptRemoteSwitchBg
+
+local acceptRemoteSwitchBtn = Instance.new("TextButton")
+acceptRemoteSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
+acceptRemoteSwitchBtn.Position = UDim2.new(1, -24, 0.5, -10)
+acceptRemoteSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+acceptRemoteSwitchBtn.BackgroundTransparency = 0.05
+acceptRemoteSwitchBtn.BorderSizePixel = 2
+acceptRemoteSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+acceptRemoteSwitchBtn.Text = ""
+acceptRemoteSwitchBtn.ZIndex = 20
+acceptRemoteSwitchBtn.Parent = acceptRemoteSwitchBg
+
+local acceptRemoteSwitchBtnCorner = Instance.new("UICorner")
+acceptRemoteSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
+acceptRemoteSwitchBtnCorner.Parent = acceptRemoteSwitchBtn
+
+local addRandomFrame = Instance.new("Frame")
+addRandomFrame.Size = UDim2.new(1, 0, 0, 34)
+addRandomFrame.Position = UDim2.new(0, 0, 0, 78)
+addRandomFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+addRandomFrame.BackgroundTransparency = 0.2
+addRandomFrame.BorderSizePixel = 1
+addRandomFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+addRandomFrame.Parent = TradeContent
+
+local addRandomCorner = Instance.new("UICorner")
+addRandomCorner.CornerRadius = UDim.new(0, 6)
+addRandomCorner.Parent = addRandomFrame
+
+local addRandomLabel = Instance.new("TextLabel")
+addRandomLabel.Size = UDim2.new(0, 160, 1, 0)
+addRandomLabel.Position = UDim2.new(0, 10, 0, 0)
+addRandomLabel.BackgroundTransparency = 1
+addRandomLabel.Text = "📦 AUTO ADD RANDOM"
+addRandomLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+addRandomLabel.Font = Enum.Font.FredokaOne
+addRandomLabel.TextSize = 11
+addRandomLabel.TextXAlignment = Enum.TextXAlignment.Left
+addRandomLabel.Parent = addRandomFrame
+
+local addRandomSwitchBg = Instance.new("Frame")
+addRandomSwitchBg.Size = UDim2.new(0, 55, 0, 24)
+addRandomSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
+addRandomSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
+addRandomSwitchBg.BackgroundTransparency = 0.2
+addRandomSwitchBg.BorderSizePixel = 2
+addRandomSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
+addRandomSwitchBg.Parent = addRandomFrame
+
+local addRandomSwitchCorner = Instance.new("UICorner")
+addRandomSwitchCorner.CornerRadius = UDim.new(0, 12)
+addRandomSwitchCorner.Parent = addRandomSwitchBg
+
+local addRandomOffLabel = Instance.new("TextLabel")
+addRandomOffLabel.Size = UDim2.new(0, 20, 1, 0)
+addRandomOffLabel.Position = UDim2.new(0, 4, 0, 0)
+addRandomOffLabel.BackgroundTransparency = 1
+addRandomOffLabel.Text = "OFF"
+addRandomOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+addRandomOffLabel.Font = Enum.Font.FredokaOne
+addRandomOffLabel.TextSize = 8
+addRandomOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+addRandomOffLabel.Parent = addRandomSwitchBg
+
+local addRandomOnLabel = Instance.new("TextLabel")
+addRandomOnLabel.Size = UDim2.new(0, 20, 1, 0)
+addRandomOnLabel.Position = UDim2.new(1, -24, 0, 0)
+addRandomOnLabel.BackgroundTransparency = 1
+addRandomOnLabel.Text = "ON"
+addRandomOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+addRandomOnLabel.Font = Enum.Font.FredokaOne
+addRandomOnLabel.TextSize = 8
+addRandomOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+addRandomOnLabel.Parent = addRandomSwitchBg
+
+local addRandomSwitchBtn = Instance.new("TextButton")
+addRandomSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
+addRandomSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
+addRandomSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+addRandomSwitchBtn.BackgroundTransparency = 0.05
+addRandomSwitchBtn.BorderSizePixel = 2
+addRandomSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
+addRandomSwitchBtn.Text = ""
+addRandomSwitchBtn.ZIndex = 20
+addRandomSwitchBtn.Parent = addRandomSwitchBg
+
+local addRandomSwitchBtnCorner = Instance.new("UICorner")
+addRandomSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
+addRandomSwitchBtnCorner.Parent = addRandomSwitchBtn
+
+-- ===== MISC CONTENT =====
+local MiscContent = Instance.new("Frame")
+MiscContent.Size = UDim2.new(1, 0, 1, 0)
+MiscContent.Position = UDim2.new(0, 0, 0, 0)
+MiscContent.BackgroundTransparency = 1
+MiscContent.Visible = false
+MiscContent.Parent = Content
+
+-- CHANGE USERNAME
+local userFrame = Instance.new("Frame")
+userFrame.Size = UDim2.new(1, 0, 0, 60)
+userFrame.Position = UDim2.new(0, 0, 0, 2)
+userFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+userFrame.BackgroundTransparency = 0.2
+userFrame.BorderSizePixel = 1
+userFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+userFrame.Parent = MiscContent
+
+local userCorner = Instance.new("UICorner")
+userCorner.CornerRadius = UDim.new(0, 6)
+userCorner.Parent = userFrame
+
+local userLabel = Instance.new("TextLabel")
+userLabel.Size = UDim2.new(1, -10, 0, 14)
+userLabel.Position = UDim2.new(0, 8, 0, 2)
+userLabel.BackgroundTransparency = 1
+userLabel.Text = "👤 CHANGE USERNAME"
+userLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
+userLabel.Font = Enum.Font.FredokaOne
+userLabel.TextSize = 10
+userLabel.TextXAlignment = Enum.TextXAlignment.Left
+userLabel.Parent = userFrame
+
+local userBox = Instance.new("TextBox")
+userBox.Size = UDim2.new(0, 130, 0, 22)
+userBox.Position = UDim2.new(0, 8, 0, 20)
+userBox.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
+userBox.BackgroundTransparency = 0.3
+userBox.BorderSizePixel = 2
+userBox.BorderColor3 = Color3.fromRGB(255, 50, 50)
+userBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+userBox.Font = Enum.Font.GothamBold
+userBox.TextSize = 11
+userBox.Text = player.Name
+userBox.PlaceholderText = "Username..."
+userBox.TextXAlignment = Enum.TextXAlignment.Left
+userBox.ZIndex = 15
+userBox.Parent = userFrame
+
+local userBoxCorner = Instance.new("UICorner")
+userBoxCorner.CornerRadius = UDim.new(0, 5)
+userBoxCorner.Parent = userBox
+
+local userApplyBtn = Instance.new("TextButton")
+userApplyBtn.Size = UDim2.new(0, 65, 0, 22)
+userApplyBtn.Position = UDim2.new(1, -73, 0, 20)
+userApplyBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+userApplyBtn.BackgroundTransparency = 0.2
+userApplyBtn.BorderSizePixel = 2
+userApplyBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+userApplyBtn.Text = "APPLY"
+userApplyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+userApplyBtn.Font = Enum.Font.GothamBold
+userApplyBtn.TextSize = 10
+userApplyBtn.ZIndex = 20
+userApplyBtn.Parent = userFrame
+
+local userApplyCorner = Instance.new("UICorner")
+userApplyCorner.CornerRadius = UDim.new(0, 5)
+userApplyCorner.Parent = userApplyBtn
+
+userApplyBtn.MouseButton1Click:Connect(function()
+    local newName = userBox.Text
+    if newName == "" then
+        print("❌ Username tidak boleh kosong!")
+        return
+    end
+    for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+        local model = workspace:FindFirstChild(v.Name)
+        if model and model:FindFirstChild("Head") then
+            local head = model.Head
+            local title = head:FindFirstChild("title")
+            if title then
+                local usernameLabel = title:FindFirstChild("Username")
+                if usernameLabel then
+                    pcall(function()
+                        usernameLabel.Text = newName
+                        usernameLabel.TextColor3 = selectedNicknameColor
+                        print("✅ " .. v.Name .. " → " .. newName)
+                    end)
+                end
+            end
+        end
+    end
+end)
+
+-- NICKNAME COLOR DROPDOWN DENGAN SCROLL
+local colorLabel = Instance.new("TextLabel")
+colorLabel.Size = UDim2.new(1, -10, 0, 14)
+colorLabel.Position = UDim2.new(0, 8, 0, 68)
+colorLabel.BackgroundTransparency = 1
+colorLabel.Text = "🎨 NICKNAME COLOR"
+colorLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
+colorLabel.Font = Enum.Font.FredokaOne
+colorLabel.TextSize = 10
+colorLabel.TextXAlignment = Enum.TextXAlignment.Left
+colorLabel.Parent = MiscContent
+
+local colorDropdown = Instance.new("TextButton")
+colorDropdown.Size = UDim2.new(0, 150, 0, 28)
+colorDropdown.Position = UDim2.new(0, 8, 0, 86)
+colorDropdown.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+colorDropdown.BackgroundTransparency = 0.2
+colorDropdown.BorderSizePixel = 2
+colorDropdown.BorderColor3 = Color3.fromRGB(255, 50, 50)
+colorDropdown.Text = "🟡 Emas"
+colorDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
+colorDropdown.Font = Enum.Font.GothamBold
+colorDropdown.TextSize = 10
+colorDropdown.ZIndex = 20
+colorDropdown.Parent = MiscContent
+
+local colorCorner = Instance.new("UICorner")
+colorCorner.CornerRadius = UDim.new(0, 5)
+colorCorner.Parent = colorDropdown
+
+local colorList = Instance.new("ScrollingFrame")
+colorList.Size = UDim2.new(0, 150, 0, 130)
+colorList.Position = UDim2.new(0, 8, 0, 116)
+colorList.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
+colorList.BackgroundTransparency = 0.05
+colorList.BorderSizePixel = 1
+colorList.BorderColor3 = Color3.fromRGB(60, 60, 80)
+colorList.Visible = false
+colorList.ClipsDescendants = true
+colorList.ZIndex = 30
+colorList.ScrollBarThickness = 6
+colorList.Parent = MiscContent
+
+local colorListCorner = Instance.new("UICorner")
+colorListCorner.CornerRadius = UDim.new(0, 5)
+colorListCorner.Parent = colorList
+
+local colorLayout = Instance.new("UIListLayout")
+colorLayout.Padding = UDim.new(0, 2)
+colorLayout.SortOrder = Enum.SortOrder.LayoutOrder
+colorLayout.Parent = colorList
+
+local colorCount = 0
+for _ in pairs(nicknameColors) do colorCount = colorCount + 1 end
+
+for name, color in pairs(nicknameColors) do
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, -10, 0, 26)
+    btn.Position = UDim2.new(0, 5, 0, 0)
+    btn.BackgroundColor3 = Color3.fromRGB(30, 28, 50)
+    btn.BackgroundTransparency = 0.1
+    btn.BorderSizePixel = 1
+    btn.BorderColor3 = Color3.fromRGB(60, 60, 80)
+    btn.Text = name
+    btn.TextColor3 = color
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 10
+    btn.ZIndex = 35
+    btn.Parent = colorList
+    
+    local btnCorner = Instance.new("UICorner")
+    btnCorner.CornerRadius = UDim.new(0, 4)
+    btnCorner.Parent = btn
+    
+    btn.MouseButton1Click:Connect(function()
+        selectedNicknameColor = color
+        colorDropdown.Text = name
+        colorList.Visible = false
+        ApplyNicknameColor(color)
+    end)
+end
+
+colorList.CanvasSize = UDim2.new(0, 0, 0, (colorCount * 28) + 10)
+
+colorDropdown.MouseButton1Click:Connect(function()
+    colorList.Visible = not colorList.Visible
+end)
+
+UserInputService.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        task.wait(0.1)
+        if colorList.Visible then
+            local mousePos = UserInputService:GetMouseLocation()
+            local absPos = colorList.AbsolutePosition
+            local absSize = colorList.AbsoluteSize
+            if not (mousePos.X >= absPos.X and mousePos.X <= absPos.X + absSize.X and
+                    mousePos.Y >= absPos.Y and mousePos.Y <= absPos.Y + absSize.Y) then
+                local dropPos = colorDropdown.AbsolutePosition
+                local dropSize = colorDropdown.AbsoluteSize
+                if not (mousePos.X >= dropPos.X and mousePos.X <= dropPos.X + dropSize.X and
+                        mousePos.Y >= dropPos.Y and mousePos.Y <= dropPos.Y + dropSize.Y) then
+                    colorList.Visible = false
+                end
+            end
+        end
+    end
+end)
+
+-- ANTI AFK
+local antiAFKFrame = Instance.new("Frame")
+antiAFKFrame.Size = UDim2.new(1, 0, 0, 34)
+antiAFKFrame.Position = UDim2.new(0, 0, 0, 150)
+antiAFKFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+antiAFKFrame.BackgroundTransparency = 0.2
+antiAFKFrame.BorderSizePixel = 1
+antiAFKFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+antiAFKFrame.Parent = MiscContent
+
+local antiAFKCorner = Instance.new("UICorner")
+antiAFKCorner.CornerRadius = UDim.new(0, 6)
+antiAFKCorner.Parent = antiAFKFrame
+
+local antiAFKLabel = Instance.new("TextLabel")
+antiAFKLabel.Size = UDim2.new(0, 120, 1, 0)
+antiAFKLabel.Position = UDim2.new(0, 10, 0, 0)
+antiAFKLabel.BackgroundTransparency = 1
+antiAFKLabel.Text = "🛡️ ANTI AFK"
+antiAFKLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+antiAFKLabel.Font = Enum.Font.FredokaOne
+antiAFKLabel.TextSize = 11
+antiAFKLabel.TextXAlignment = Enum.TextXAlignment.Left
+antiAFKLabel.Parent = antiAFKFrame
+
+local antiAFKSwitchBg = Instance.new("Frame")
+antiAFKSwitchBg.Size = UDim2.new(0, 55, 0, 24)
+antiAFKSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
+antiAFKSwitchBg.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+antiAFKSwitchBg.BackgroundTransparency = 0.2
+antiAFKSwitchBg.BorderSizePixel = 2
+antiAFKSwitchBg.BorderColor3 = Color3.fromRGB(255, 50, 50)
+antiAFKSwitchBg.Parent = antiAFKFrame
+
+local antiAFKSwitchCorner = Instance.new("UICorner")
+antiAFKSwitchCorner.CornerRadius = UDim.new(0, 12)
+antiAFKSwitchCorner.Parent = antiAFKSwitchBg
+
+local antiAFKOffLabel = Instance.new("TextLabel")
+antiAFKOffLabel.Size = UDim2.new(0, 20, 1, 0)
+antiAFKOffLabel.Position = UDim2.new(0, 4, 0, 0)
+antiAFKOffLabel.BackgroundTransparency = 1
+antiAFKOffLabel.Text = "OFF"
+antiAFKOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+antiAFKOffLabel.Font = Enum.Font.FredokaOne
+antiAFKOffLabel.TextSize = 8
+antiAFKOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+antiAFKOffLabel.Parent = antiAFKSwitchBg
+
+local antiAFKOnLabel = Instance.new("TextLabel")
+antiAFKOnLabel.Size = UDim2.new(0, 20, 1, 0)
+antiAFKOnLabel.Position = UDim2.new(1, -24, 0, 0)
+antiAFKOnLabel.BackgroundTransparency = 1
+antiAFKOnLabel.Text = "ON"
+antiAFKOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+antiAFKOnLabel.Font = Enum.Font.FredokaOne
+antiAFKOnLabel.TextSize = 8
+antiAFKOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+antiAFKOnLabel.Parent = antiAFKSwitchBg
+
+local antiAFKSwitchBtn = Instance.new("TextButton")
+antiAFKSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
+antiAFKSwitchBtn.Position = UDim2.new(1, -24, 0.5, -10)
+antiAFKSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+antiAFKSwitchBtn.BackgroundTransparency = 0.05
+antiAFKSwitchBtn.BorderSizePixel = 2
+antiAFKSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+antiAFKSwitchBtn.Text = ""
+antiAFKSwitchBtn.ZIndex = 20
+antiAFKSwitchBtn.Parent = antiAFKSwitchBg
+
+local antiAFKSwitchBtnCorner = Instance.new("UICorner")
+antiAFKSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
+antiAFKSwitchBtnCorner.Parent = antiAFKSwitchBtn
+
+-- ===== FUNCTIONS =====
+local function SetToggleState(switchBtn, isOn, switchBg, offLabel, onLabel)
+    if isOn then
+        switchBtn.Position = UDim2.new(1, -24, 0.5, -10)
+        switchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+        switchBg.BorderColor3 = Color3.fromRGB(255, 50, 50)
+        switchBg.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+        offLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+        onLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    else
+        switchBtn.Position = UDim2.new(0, 4, 0.5, -10)
+        switchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
+        switchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
+        switchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
+        offLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        onLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+    end
+end
+
+local function UpdateStatus()
+    local count = 0
+    if autoCoin then count = count + 1 end
+    if autoSellAll then count = count + 1 end
+    if autoUpgrade then count = count + 1 end
+    if autoAccept then count = count + 1 end
+    if autoAcceptRemote then count = count + 1 end
+    if autoAddRandomItem then count = count + 1 end
+    if antiAFK then count = count + 1 end
+    if autoClaimQuest then count = count + 1 end
+    
+    if count == 8 then
+        statusLabel.Text = "🟢 SEMUA ON"
+        statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+    elseif count >= 4 then
+        statusLabel.Text = "🟡 " .. count .. " ON"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
+    elseif count == 0 then
+        statusLabel.Text = "🔴 ALL OFF"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
+    else
+        statusLabel.Text = "🟡 " .. count .. " ON"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 50)
+    end
+end
+
+local function SwitchTab(tab)
+    currentTab = tab
+    local tabs = {TabMain, TabUpgrade, TabTrade, TabMisc}
+    for _, t in ipairs(tabs) do
+        t.BackgroundColor3 = Color3.fromRGB(40, 35, 60)
+        t.BorderColor3 = Color3.fromRGB(60, 60, 80)
+        t.TextColor3 = Color3.fromRGB(200, 200, 210)
+        t.BackgroundTransparency = 0.3
+    end
+    
+    MainContent.Visible = false
+    UpgradeContent.Visible = false
+    TradeContent.Visible = false
+    MiscContent.Visible = false
+    
+    if tab == "MAIN" then
+        TabMain.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+        TabMain.BorderColor3 = Color3.fromRGB(255, 0, 0)
+        TabMain.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TabMain.BackgroundTransparency = 0.1
+        MainContent.Visible = true
+    elseif tab == "UPGRADE" then
+        TabUpgrade.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+        TabUpgrade.BorderColor3 = Color3.fromRGB(255, 0, 0)
+        TabUpgrade.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TabUpgrade.BackgroundTransparency = 0.1
+        UpgradeContent.Visible = true
+    elseif tab == "TRADE" then
+        TabTrade.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+        TabTrade.BorderColor3 = Color3.fromRGB(255, 0, 0)
+        TabTrade.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TabTrade.BackgroundTransparency = 0.1
+        TradeContent.Visible = true
+    elseif tab == "MISC" then
+        TabMisc.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+        TabMisc.BorderColor3 = Color3.fromRGB(255, 0, 0)
+        TabMisc.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TabMisc.BackgroundTransparency = 0.1
+        MiscContent.Visible = true
+    end
+end
+
+-- TAB BUTTONS
+TabMain.MouseButton1Click:Connect(function() SwitchTab("MAIN") end)
+TabUpgrade.MouseButton1Click:Connect(function() SwitchTab("UPGRADE") end)
+TabTrade.MouseButton1Click:Connect(function() SwitchTab("TRADE") end)
+TabMisc.MouseButton1Click:Connect(function() SwitchTab("MISC") end)
+
+-- TOGGLE BUTTONS
+coinSwitchBtn.MouseButton1Click:Connect(function()
+    autoCoin = not autoCoin
+    SetToggleState(coinSwitchBtn, autoCoin, coinSwitchBg, coinOffLabel, coinOnLabel)
+    UpdateStatus()
+    if autoCoin then StartCoinLoop() else StopCoinLoop() end
+end)
+
+claimQuestSwitchBtn.MouseButton1Click:Connect(function()
+    autoClaimQuest = not autoClaimQuest
+    SetToggleState(claimQuestSwitchBtn, autoClaimQuest, claimQuestSwitchBg, claimQuestOffLabel, claimQuestOnLabel)
+    UpdateStatus()
+    if autoClaimQuest then StartClaimQuestLoop() else StopClaimQuestLoop() end
+end)
+
+sellAllSwitchBtn.MouseButton1Click:Connect(function()
+    autoSellAll = not autoSellAll
+    SetToggleState(sellAllSwitchBtn, autoSellAll, sellAllSwitchBg, sellAllOffLabel, sellAllOnLabel)
+    UpdateStatus()
+    if autoSellAll then StartSellAllLoop() else StopSellAllLoop() end
+end)
+
+autoUpgradeSwitchBtn.MouseButton1Click:Connect(function()
+    autoUpgrade = not autoUpgrade
+    SetToggleState(autoUpgradeSwitchBtn, autoUpgrade, autoUpgradeSwitchBg, autoUpgradeOffLabel, autoUpgradeOnLabel)
+    UpdateStatus()
+    if autoUpgrade then StartUpgradeLoop() else StopUpgradeLoop() end
+end)
+
+acceptSwitchBtn.MouseButton1Click:Connect(function()
+    autoAccept = not autoAccept
+    SetToggleState(acceptSwitchBtn, autoAccept, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
+    UpdateStatus()
+    if autoAccept then StartAcceptLoop() else StopAcceptLoop() end
+end)
+
+acceptRemoteSwitchBtn.MouseButton1Click:Connect(function()
+    autoAcceptRemote = not autoAcceptRemote
+    SetToggleState(acceptRemoteSwitchBtn, autoAcceptRemote, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
+    UpdateStatus()
+    if autoAcceptRemote then StartAcceptRemoteLoop() else StopAcceptRemoteLoop() end
+end)
+
+addRandomSwitchBtn.MouseButton1Click:Connect(function()
+    autoAddRandomItem = not autoAddRandomItem
+    SetToggleState(addRandomSwitchBtn, autoAddRandomItem, addRandomSwitchBg, addRandomOffLabel, addRandomOnLabel)
+    UpdateStatus()
+    if autoAddRandomItem then StartAddRandomItemLoop() else StopAddRandomItemLoop() end
+end)
+
+antiAFKSwitchBtn.MouseButton1Click:Connect(function()
+    antiAFK = not antiAFK
+    SetToggleState(antiAFKSwitchBtn, antiAFK, antiAFKSwitchBg, antiAFKOffLabel, antiAFKOnLabel)
+    UpdateStatus()
+    if antiAFK then StartAntiAFK() else StopAntiAFK() end
+end)
+
+-- SET DEFAULT STATES
+SetToggleState(coinSwitchBtn, true, coinSwitchBg, coinOffLabel, coinOnLabel)
+SetToggleState(claimQuestSwitchBtn, false, claimQuestSwitchBg, claimQuestOffLabel, claimQuestOnLabel)
+SetToggleState(sellAllSwitchBtn, false, sellAllSwitchBg, sellAllOffLabel, sellAllOnLabel)
+SetToggleState(autoUpgradeSwitchBtn, false, autoUpgradeSwitchBg, autoUpgradeOffLabel, autoUpgradeOnLabel)
+SetToggleState(acceptSwitchBtn, true, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
+SetToggleState(acceptRemoteSwitchBtn, true, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
+SetToggleState(addRandomSwitchBtn, false, addRandomSwitchBg, addRandomOffLabel, addRandomOnLabel)
+SetToggleState(antiAFKSwitchBtn, true, antiAFKSwitchBg, antiAFKOffLabel, antiAFKOnLabel)
+
+-- Apply default color
+ApplyNicknameColor(selectedNicknameColor)
+
+UpdateStatus()
+
+print("✅ BEGE IDN | THROW A COIN + AUTO TRADE + MISC")
+print("📌 Klik ➖ untuk minimize ke bubble")
+print("📌 Klik bubble untuk munculin GUI lagi (support mobile)")
+print("📌 Bubble bisa di-drag di mobile")
+print("🎨 " .. colorCount .. " pilihan warna nickname di tab MISC")
+print("📜 Dropdown warna bisa di-scroll/down drag!")
+print("⚡ ProximityPrompt instan! (Loop tiap 2 detik)")
+print("📋 Auto Claim Quest: Daily, Weekly, Monthly (1-10) loop 1 detik!")
+print("🪙 Default coin: Phoenix Coin")
