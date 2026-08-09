@@ -9,10 +9,9 @@ local Events = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events")
 local CoinLanded = Events:WaitForChild("CoinLanded")
 local SellAll = Events:WaitForChild("SellAll")
 local RequestUpgrade = Events:WaitForChild("RequestUpgrade")
-local TradeRequestResponse = Events:WaitForChild("TradeRequestResponse")
-local TradeAccept = Events:WaitForChild("TradeAccept")
-local TradeAddItem = Events:WaitForChild("TradeAddItem")
-local ClaimQuest = Events:WaitForChild("ClaimQuest")
+local TradeRequestResponse = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeRequestResponse")
+local TradeAccept = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAccept")
+local TradeAddItem = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAddItem")
 
 local coinList = {
     "Basic Coin", "Copper Coin", "Fire Coin", "Volt Coin", "Aether Coin",
@@ -35,53 +34,23 @@ local upgradeSettings = {
     ["Value Multiplier"] = false,
     ["Throw Speed"] = false
 }
-local autoAccept = true
+
+-- ===== TRADE SETTINGS (SEMUA DEFAULT OFF) =====
+local autoAccept = false
 local acceptLoop = nil
 local acceptDelay = 0.5
-local autoAcceptRemote = true
+local autoAcceptRemote = false
 local acceptRemoteLoop = nil
-local autoAddRandomItem = false
-local addRandomItemLoop = nil
+
+-- ===== AUTO ADD ITEM (LOOP 1-3000 + RANDOM, CD 0) =====
+local autoAddItem = false
+local addItemLoop = nil
+
 local antiAFK = true
 local antiAFKLoop = nil
 local currentTab = "MAIN"
 
--- ===== CLAIM QUEST =====
-local autoClaimQuest = false
-local claimQuestLoop = nil
-local questTypes = {"Daily", "Weekly", "Monthly"}
-
-local function ClaimAllQuests()
-    for _, questType in ipairs(questTypes) do
-        for questNumber = 1, 10 do
-            pcall(function()
-                local args = {questType, questNumber}
-                ClaimQuest:FireServer(unpack(args))
-            end)
-            task.wait(0.05)
-        end
-    end
-end
-
-local function StartClaimQuestLoop()
-    if claimQuestLoop then return end
-    claimQuestLoop = task.spawn(function()
-        while autoClaimQuest do
-            ClaimAllQuests()
-            task.wait(1)
-        end
-    end)
-end
-
-local function StopClaimQuestLoop()
-    autoClaimQuest = false
-    if claimQuestLoop then
-        task.cancel(claimQuestLoop)
-        claimQuestLoop = nil
-    end
-end
-
--- ===== NICKNAME COLOR PRESETS =====
+-- ===== NICKNAME COLOR PRESETS (30+ WARNA) =====
 local nicknameColors = {
     ["🔴 Merah"] = Color3.fromRGB(255, 0, 0),
     ["🟢 Hijau"] = Color3.fromRGB(0, 255, 0),
@@ -134,6 +103,7 @@ local function ApplyNicknameColor(color)
             if usernameLabel then
                 pcall(function()
                     usernameLabel.TextColor3 = color
+                    print("✅ Nickname color changed!")
                 end)
             end
         end
@@ -184,7 +154,7 @@ end)
 -- ===== COIN =====
 local function ThrowCoin()
     local args = {
-        2.0,
+        3.00,
         Vector3.new(-1162.6304931640625, 0.7260000109672546, 89.36738586425781),
         selectedCoin,
         Vector3.new(-1156.7032470703125, 0.7260000109672546, 88.43637084960938),
@@ -192,6 +162,7 @@ local function ThrowCoin()
     }
     pcall(function()
         CoinLanded:FireServer(unpack(args))
+        print(" " .. selectedCoin .. " thrown!")
     end)
 end
 
@@ -219,6 +190,7 @@ StartCoinLoop()
 local function DoSellAll()
     pcall(function()
         SellAll:FireServer()
+        print("💰 Sell All executed!")
     end)
 end
 
@@ -246,6 +218,7 @@ local function DoUpgrade()
         if isEnabled then
             pcall(function()
                 RequestUpgrade:FireServer(upgradeName)
+                print("⚡ Upgraded: " .. upgradeName)
             end)
             task.wait(0.3)
         end
@@ -270,7 +243,7 @@ local function StopUpgradeLoop()
     end
 end
 
--- ===== PROXIMITY PROMPT =====
+-- ===== PROXIMITY PROMPT INSTAN (LOOP + AUTO CLICK) =====
 task.spawn(function()
     while task.wait(2) do
         pcall(function()
@@ -289,6 +262,7 @@ ProximityPromptService.PromptShown:Connect(function(prompt)
     pcall(function()
         prompt.HoldDuration = 0
         prompt:Hold()
+        print("✅ Prompt instan: " .. prompt.Name)
     end)
 end)
 
@@ -308,6 +282,7 @@ workspace.DescendantAdded:Connect(function(desc)
         pcall(function()
             desc.HoldDuration = 0
             desc.RequiresLineOfSight = false
+            print("✅ Prompt baru ditemukan: " .. desc.Name)
         end)
     end
 end)
@@ -325,6 +300,7 @@ local function TeleportToWorld3()
     if not RequestWorldTeleport then return end
     pcall(function()
         RequestWorldTeleport:FireServer(3)
+        print("✅ Teleport ke World 3!")
     end)
 end
 
@@ -337,7 +313,8 @@ local function TeleportToVIPPosition()
     local hrp = character:FindFirstChild("HumanoidRootPart")
     if hrp then
         pcall(function()
-            hrp.CFrame = CFrame.new(Vector3.new(-1152, 4, 52))
+            hrp.CFrame = CFrame.new(Vector3.new(-1180, 72, 70))
+            print("✅ Teleport ke VIP Position!")
         end)
     end
 end
@@ -345,6 +322,21 @@ end
 task.wait(1)
 task.wait(3)
 TeleportToVIPPosition()
+
+-- ===== FUNGSI CEK APAKAH TRADE WINDOW TERBUKA =====
+local function IsTradeOpen()
+    local playerGui = player:FindFirstChild("PlayerGui")
+    if not playerGui then return false end
+    local uiFolder = playerGui:FindFirstChild("UiFolder")
+    if not uiFolder then return false end
+    local main = uiFolder:FindFirstChild("Main")
+    if not main then return false end
+    local frames = main:FindFirstChild("Frames")
+    if not frames then return false end
+    local trade = frames:FindFirstChild("Trade")
+    if not trade then return false end
+    return trade.Visible == true
+end
 
 -- ===== TRADE =====
 local function AutoAcceptUI()
@@ -365,6 +357,7 @@ local function AutoAcceptUI()
                     if userId then
                         pcall(function()
                             TradeRequestResponse:FireServer(userId, true)
+                            print("✅ Auto Accept UI dari User ID: " .. userId)
                         end)
                         child:Destroy()
                     end
@@ -392,6 +385,7 @@ local function AutoAcceptUI()
                                     if readyIcon and readyIcon.Enabled then
                                         pcall(function()
                                             acceptBtn:FireClick()
+                                            print("✅ Auto Accept UI - Lawan udah accept!")
                                         end)
                                     end
                                 end
@@ -421,8 +415,6 @@ local function StopAcceptLoop()
         acceptLoop = nil
     end
 end
-
-StartAcceptLoop()
 
 local function IsWeReady()
     local playerGui = player:FindFirstChild("PlayerGui")
@@ -457,6 +449,7 @@ local function StartAcceptRemoteLoop()
             if not IsWeReady() then
                 pcall(function()
                     TradeAccept:FireServer()
+                    print("⚡ Auto Accept Remote - Jaga status hijau!")
                 end)
                 task.wait(0.3)
             end
@@ -473,27 +466,65 @@ local function StopAcceptRemoteLoop()
     end
 end
 
-StartAcceptRemoteLoop()
-
-local function StartAddRandomItemLoop()
-    if addRandomItemLoop then return end
-    addRandomItemLoop = task.spawn(function()
-        while autoAddRandomItem do
-            local randomIndex = math.random(1, 10000)
-            pcall(function()
-                TradeAddItem:FireServer(randomIndex)
-            end)
-            task.wait(0)
+-- ===== AUTO ADD ITEM (LOOP 1-3000 + RANDOM, CD 0) =====
+local function StartAddItemLoop()
+    if addItemLoop then return end
+    addItemLoop = task.spawn(function()
+        print("🔄 Auto Add Item Started (Loop 1-3000 + Random, CD 0)")
+        
+        while autoAddItem do
+            -- Cek apakah trade window terbuka
+            if IsTradeOpen() then
+                print("✅ Trade window terbuka! Mulai add item...")
+                
+                -- Loop 1-3000
+                for i = 1, 3000 do
+                    if not autoAddItem then break end
+                    if not IsTradeOpen() then 
+                        print("⏹️ Trade window tutup, berhenti add item...")
+                        break 
+                    end
+                    
+                    -- 70% pake loop, 30% random
+                    local index
+                    if math.random() < 0.3 then  -- 30% chance random
+                        index = math.random(1, 3000)
+                        if i % 50 == 0 then
+                            print("🎲 Random index: " .. index)
+                        end
+                    else
+                        index = i
+                        if i % 100 == 0 then
+                            print("📦 Loop index: " .. i)
+                        end
+                    end
+                    
+                    pcall(function()
+                        TradeAddItem:FireServer(index)
+                    end)
+                    task.wait(0)  -- ✅ CD 0
+                end
+                
+                -- Kalo udah sampe 3000 dan trade masih kebuka, ulangi
+                if autoAddItem and IsTradeOpen() then
+                    print("🔄 Loop 1-3000 selesai, ulangi!")
+                end
+            else
+                -- Trade ga kebuka, tunggu 0.5 detik lalu cek lagi
+                task.wait(0.5)
+            end
         end
+        print("⏹️ Auto Add Item stopped!")
     end)
 end
 
-local function StopAddRandomItemLoop()
-    autoAddRandomItem = false
-    if addRandomItemLoop then
-        task.cancel(addRandomItemLoop)
-        addRandomItemLoop = nil
+local function StopAddItemLoop()
+    autoAddItem = false
+    if addItemLoop then
+        task.cancel(addItemLoop)
+        addItemLoop = nil
     end
+    print("⏹️ Auto Add Item stopped!")
 end
 
 -- ===== GUI =====
@@ -507,9 +538,10 @@ if not playerGui then
 end
 screenGui.Parent = playerGui
 
+-- MAIN UI
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 380, 0, 340)
-Main.Position = UDim2.new(0.5, -190, 0.5, -170)
+Main.Size = UDim2.new(0, 380, 0, 300)
+Main.Position = UDim2.new(0.5, -190, 0.5, -150)
 Main.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
 Main.BackgroundTransparency = 0.1
 Main.BorderSizePixel = 2
@@ -562,7 +594,7 @@ SubTitle.TextSize = 10
 SubTitle.TextXAlignment = Enum.TextXAlignment.Left
 SubTitle.Parent = Header
 
--- BUBBLE
+-- ===== BUBBLE - KIRI ATAS =====
 local bubble = Instance.new("Frame")
 bubble.Size = UDim2.new(0, 55, 0, 55)
 bubble.Position = UDim2.new(0, 10, 0, 10)
@@ -596,12 +628,14 @@ bubbleIcon.ScaleType = Enum.ScaleType.Fit
 bubbleIcon.ZIndex = 60
 bubbleIcon.Parent = bubble
 
+-- VARIABLES UNTUK DRAG + CLICK
 local isDraggingBubble = false
 local dragStartPos = Vector2.new()
 local dragStartTime = 0
 local bubbleStartPos = UDim2.new()
 local hasMoved = false
 
+-- FUNGSI TOGGLE MINIMIZE
 local isMinimized = false
 local function ToggleMinimize()
     isMinimized = not isMinimized
@@ -614,6 +648,7 @@ local function ToggleMinimize()
     end
 end
 
+-- EVENT LISTENER BUBBLE
 local function OnBubbleInputBegan(input)
     if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
         isDraggingBubble = false
@@ -719,9 +754,8 @@ CloseBtn.MouseButton1Click:Connect(function()
     StopUpgradeLoop()
     StopAcceptLoop()
     StopAcceptRemoteLoop()
-    StopAddRandomItemLoop()
+    StopAddItemLoop()
     StopAntiAFK()
-    StopClaimQuestLoop()
     screenGui:Destroy()
 end)
 
@@ -806,7 +840,7 @@ TabMiscCorner.Parent = TabMisc
 
 -- CONTENT
 local Content = Instance.new("Frame")
-Content.Size = UDim2.new(1, -14, 0, 225)
+Content.Size = UDim2.new(1, -14, 0, 185)
 Content.Position = UDim2.new(0, 7, 0, 74)
 Content.BackgroundTransparency = 0.8
 Content.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
@@ -867,6 +901,7 @@ coinTypeBoxCorner.Parent = coinTypeBox
 coinTypeBox:GetPropertyChangedSignal("Text"):Connect(function()
     if coinTypeBox.Text ~= "" then
         selectedCoin = coinTypeBox.Text
+        print(" Coin changed to: " .. selectedCoin)
     end
 end)
 
@@ -945,85 +980,10 @@ local coinSwitchBtnCorner = Instance.new("UICorner")
 coinSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
 coinSwitchBtnCorner.Parent = coinSwitchBtn
 
--- ===== CLAIM QUEST =====
-local claimQuestFrame = Instance.new("Frame")
-claimQuestFrame.Size = UDim2.new(1, 0, 0, 34)
-claimQuestFrame.Position = UDim2.new(0, 0, 0, 78)
-claimQuestFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-claimQuestFrame.BackgroundTransparency = 0.2
-claimQuestFrame.BorderSizePixel = 1
-claimQuestFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
-claimQuestFrame.Parent = MainContent
-
-local claimQuestCorner = Instance.new("UICorner")
-claimQuestCorner.CornerRadius = UDim.new(0, 6)
-claimQuestCorner.Parent = claimQuestFrame
-
-local claimQuestLabel = Instance.new("TextLabel")
-claimQuestLabel.Size = UDim2.new(0, 150, 1, 0)
-claimQuestLabel.Position = UDim2.new(0, 10, 0, 0)
-claimQuestLabel.BackgroundTransparency = 1
-claimQuestLabel.Text = "📋 AUTO CLAIM QUEST"
-claimQuestLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
-claimQuestLabel.Font = Enum.Font.FredokaOne
-claimQuestLabel.TextSize = 10
-claimQuestLabel.TextXAlignment = Enum.TextXAlignment.Left
-claimQuestLabel.Parent = claimQuestFrame
-
-local claimQuestSwitchBg = Instance.new("Frame")
-claimQuestSwitchBg.Size = UDim2.new(0, 55, 0, 24)
-claimQuestSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
-claimQuestSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
-claimQuestSwitchBg.BackgroundTransparency = 0.2
-claimQuestSwitchBg.BorderSizePixel = 2
-claimQuestSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
-claimQuestSwitchBg.Parent = claimQuestFrame
-
-local claimQuestSwitchCorner = Instance.new("UICorner")
-claimQuestSwitchCorner.CornerRadius = UDim.new(0, 12)
-claimQuestSwitchCorner.Parent = claimQuestSwitchBg
-
-local claimQuestOffLabel = Instance.new("TextLabel")
-claimQuestOffLabel.Size = UDim2.new(0, 20, 1, 0)
-claimQuestOffLabel.Position = UDim2.new(0, 4, 0, 0)
-claimQuestOffLabel.BackgroundTransparency = 1
-claimQuestOffLabel.Text = "OFF"
-claimQuestOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-claimQuestOffLabel.Font = Enum.Font.FredokaOne
-claimQuestOffLabel.TextSize = 8
-claimQuestOffLabel.TextXAlignment = Enum.TextXAlignment.Center
-claimQuestOffLabel.Parent = claimQuestSwitchBg
-
-local claimQuestOnLabel = Instance.new("TextLabel")
-claimQuestOnLabel.Size = UDim2.new(0, 20, 1, 0)
-claimQuestOnLabel.Position = UDim2.new(1, -24, 0, 0)
-claimQuestOnLabel.BackgroundTransparency = 1
-claimQuestOnLabel.Text = "ON"
-claimQuestOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-claimQuestOnLabel.Font = Enum.Font.FredokaOne
-claimQuestOnLabel.TextSize = 8
-claimQuestOnLabel.TextXAlignment = Enum.TextXAlignment.Center
-claimQuestOnLabel.Parent = claimQuestSwitchBg
-
-local claimQuestSwitchBtn = Instance.new("TextButton")
-claimQuestSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
-claimQuestSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
-claimQuestSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-claimQuestSwitchBtn.BackgroundTransparency = 0.05
-claimQuestSwitchBtn.BorderSizePixel = 2
-claimQuestSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
-claimQuestSwitchBtn.Text = ""
-claimQuestSwitchBtn.ZIndex = 20
-claimQuestSwitchBtn.Parent = claimQuestSwitchBg
-
-local claimQuestSwitchBtnCorner = Instance.new("UICorner")
-claimQuestSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
-claimQuestSwitchBtnCorner.Parent = claimQuestSwitchBtn
-
 -- SELL ALL
 local sellAllFrame = Instance.new("Frame")
 sellAllFrame.Size = UDim2.new(1, 0, 0, 34)
-sellAllFrame.Position = UDim2.new(0, 0, 0, 116)
+sellAllFrame.Position = UDim2.new(0, 0, 0, 78)
 sellAllFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
 sellAllFrame.BackgroundTransparency = 0.2
 sellAllFrame.BorderSizePixel = 1
@@ -1316,6 +1276,11 @@ local function CreateUpgradeToggle(upgradeName)
         upgradeSettings[upgradeName] = not upgradeSettings[upgradeName]
         UpdateState(upgradeSettings[upgradeName])
         UpdateStatus()
+        if upgradeSettings[upgradeName] then
+            print("✅ " .. upgradeName .. ": ON")
+        else
+            print("❌ " .. upgradeName .. ": OFF")
+        end
     end)
 
     return {UpdateState = UpdateState}
@@ -1336,6 +1301,7 @@ TradeContent.BackgroundTransparency = 1
 TradeContent.Visible = false
 TradeContent.Parent = Content
 
+-- AUTO ACCEPT
 local acceptFrame = Instance.new("Frame")
 acceptFrame.Size = UDim2.new(1, 0, 0, 34)
 acceptFrame.Position = UDim2.new(0, 0, 0, 2)
@@ -1363,10 +1329,10 @@ acceptLabel.Parent = acceptFrame
 local acceptSwitchBg = Instance.new("Frame")
 acceptSwitchBg.Size = UDim2.new(0, 55, 0, 24)
 acceptSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
-acceptSwitchBg.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+acceptSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
 acceptSwitchBg.BackgroundTransparency = 0.2
 acceptSwitchBg.BorderSizePixel = 2
-acceptSwitchBg.BorderColor3 = Color3.fromRGB(255, 50, 50)
+acceptSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
 acceptSwitchBg.Parent = acceptFrame
 
 local acceptSwitchCorner = Instance.new("UICorner")
@@ -1378,7 +1344,7 @@ acceptOffLabel.Size = UDim2.new(0, 20, 1, 0)
 acceptOffLabel.Position = UDim2.new(0, 4, 0, 0)
 acceptOffLabel.BackgroundTransparency = 1
 acceptOffLabel.Text = "OFF"
-acceptOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+acceptOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 acceptOffLabel.Font = Enum.Font.FredokaOne
 acceptOffLabel.TextSize = 8
 acceptOffLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -1389,7 +1355,7 @@ acceptOnLabel.Size = UDim2.new(0, 20, 1, 0)
 acceptOnLabel.Position = UDim2.new(1, -24, 0, 0)
 acceptOnLabel.BackgroundTransparency = 1
 acceptOnLabel.Text = "ON"
-acceptOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+acceptOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
 acceptOnLabel.Font = Enum.Font.FredokaOne
 acceptOnLabel.TextSize = 8
 acceptOnLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -1397,11 +1363,11 @@ acceptOnLabel.Parent = acceptSwitchBg
 
 local acceptSwitchBtn = Instance.new("TextButton")
 acceptSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
-acceptSwitchBtn.Position = UDim2.new(1, -24, 0.5, -10)
+acceptSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
 acceptSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 acceptSwitchBtn.BackgroundTransparency = 0.05
 acceptSwitchBtn.BorderSizePixel = 2
-acceptSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+acceptSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
 acceptSwitchBtn.Text = ""
 acceptSwitchBtn.ZIndex = 20
 acceptSwitchBtn.Parent = acceptSwitchBg
@@ -1410,6 +1376,7 @@ local acceptSwitchBtnCorner = Instance.new("UICorner")
 acceptSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
 acceptSwitchBtnCorner.Parent = acceptSwitchBtn
 
+-- AUTO ACCEPT REMOTE
 local acceptRemoteFrame = Instance.new("Frame")
 acceptRemoteFrame.Size = UDim2.new(1, 0, 0, 34)
 acceptRemoteFrame.Position = UDim2.new(0, 0, 0, 40)
@@ -1437,10 +1404,10 @@ acceptRemoteLabel.Parent = acceptRemoteFrame
 local acceptRemoteSwitchBg = Instance.new("Frame")
 acceptRemoteSwitchBg.Size = UDim2.new(0, 55, 0, 24)
 acceptRemoteSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
-acceptRemoteSwitchBg.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+acceptRemoteSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
 acceptRemoteSwitchBg.BackgroundTransparency = 0.2
 acceptRemoteSwitchBg.BorderSizePixel = 2
-acceptRemoteSwitchBg.BorderColor3 = Color3.fromRGB(255, 50, 50)
+acceptRemoteSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
 acceptRemoteSwitchBg.Parent = acceptRemoteFrame
 
 local acceptRemoteSwitchCorner = Instance.new("UICorner")
@@ -1452,7 +1419,7 @@ acceptRemoteOffLabel.Size = UDim2.new(0, 20, 1, 0)
 acceptRemoteOffLabel.Position = UDim2.new(0, 4, 0, 0)
 acceptRemoteOffLabel.BackgroundTransparency = 1
 acceptRemoteOffLabel.Text = "OFF"
-acceptRemoteOffLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+acceptRemoteOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 acceptRemoteOffLabel.Font = Enum.Font.FredokaOne
 acceptRemoteOffLabel.TextSize = 8
 acceptRemoteOffLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -1463,7 +1430,7 @@ acceptRemoteOnLabel.Size = UDim2.new(0, 20, 1, 0)
 acceptRemoteOnLabel.Position = UDim2.new(1, -24, 0, 0)
 acceptRemoteOnLabel.BackgroundTransparency = 1
 acceptRemoteOnLabel.Text = "ON"
-acceptRemoteOnLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+acceptRemoteOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
 acceptRemoteOnLabel.Font = Enum.Font.FredokaOne
 acceptRemoteOnLabel.TextSize = 8
 acceptRemoteOnLabel.TextXAlignment = Enum.TextXAlignment.Center
@@ -1471,11 +1438,11 @@ acceptRemoteOnLabel.Parent = acceptRemoteSwitchBg
 
 local acceptRemoteSwitchBtn = Instance.new("TextButton")
 acceptRemoteSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
-acceptRemoteSwitchBtn.Position = UDim2.new(1, -24, 0.5, -10)
+acceptRemoteSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
 acceptRemoteSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 acceptRemoteSwitchBtn.BackgroundTransparency = 0.05
 acceptRemoteSwitchBtn.BorderSizePixel = 2
-acceptRemoteSwitchBtn.BorderColor3 = Color3.fromRGB(255, 255, 255)
+acceptRemoteSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
 acceptRemoteSwitchBtn.Text = ""
 acceptRemoteSwitchBtn.ZIndex = 20
 acceptRemoteSwitchBtn.Parent = acceptRemoteSwitchBg
@@ -1484,79 +1451,82 @@ local acceptRemoteSwitchBtnCorner = Instance.new("UICorner")
 acceptRemoteSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
 acceptRemoteSwitchBtnCorner.Parent = acceptRemoteSwitchBtn
 
-local addRandomFrame = Instance.new("Frame")
-addRandomFrame.Size = UDim2.new(1, 0, 0, 34)
-addRandomFrame.Position = UDim2.new(0, 0, 0, 78)
-addRandomFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-addRandomFrame.BackgroundTransparency = 0.2
-addRandomFrame.BorderSizePixel = 1
-addRandomFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
-addRandomFrame.Parent = TradeContent
+-- AUTO ADD ITEM (LOOP 1-3000 + RANDOM, CD 0)
+local addItemFrame = Instance.new("Frame")
+addItemFrame.Size = UDim2.new(1, 0, 0, 34)
+addItemFrame.Position = UDim2.new(0, 0, 0, 78)
+addItemFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
+addItemFrame.BackgroundTransparency = 0.2
+addItemFrame.BorderSizePixel = 1
+addItemFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
+addItemFrame.Parent = TradeContent
 
-local addRandomCorner = Instance.new("UICorner")
-addRandomCorner.CornerRadius = UDim.new(0, 6)
-addRandomCorner.Parent = addRandomFrame
+local addItemCorner = Instance.new("UICorner")
+addItemCorner.CornerRadius = UDim.new(0, 6)
+addItemCorner.Parent = addItemFrame
 
-local addRandomLabel = Instance.new("TextLabel")
-addRandomLabel.Size = UDim2.new(0, 160, 1, 0)
-addRandomLabel.Position = UDim2.new(0, 10, 0, 0)
-addRandomLabel.BackgroundTransparency = 1
-addRandomLabel.Text = "📦 AUTO ADD RANDOM"
-addRandomLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
-addRandomLabel.Font = Enum.Font.FredokaOne
-addRandomLabel.TextSize = 11
-addRandomLabel.TextXAlignment = Enum.TextXAlignment.Left
-addRandomLabel.Parent = addRandomFramelocal addRandomSwitchBg = Instance.new("Frame")
-addRandomSwitchBg.Size = UDim2.new(0, 55, 0, 24)
-addRandomSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
-addRandomSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
-addRandomSwitchBg.BackgroundTransparency = 0.2
-addRandomSwitchBg.BorderSizePixel = 2
-addRandomSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
-addRandomSwitchBg.Parent = addRandomFrame
+local addItemLabel = Instance.new("TextLabel")
+addItemLabel.Size = UDim2.new(0, 160, 1, 0)
+addItemLabel.Position = UDim2.new(0, 10, 0, 0)
+addItemLabel.BackgroundTransparency = 1
+addItemLabel.Text = "🔄 AUTO ADD (1-3000+RANDOM)"
+addItemLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
+addItemLabel.Font = Enum.Font.FredokaOne
+addItemLabel.TextSize = 10
+addItemLabel.TextXAlignment = Enum.TextXAlignment.Left
+addItemLabel.Parent = addItemFrame
 
-local addRandomSwitchCorner = Instance.new("UICorner")
-addRandomSwitchCorner.CornerRadius = UDim.new(0, 12)
-addRandomSwitchCorner.Parent = addRandomSwitchBg
+local addItemSwitchBg = Instance.new("Frame")
+addItemSwitchBg.Size = UDim2.new(0, 55, 0, 24)
+addItemSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
+addItemSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
+addItemSwitchBg.BackgroundTransparency = 0.2
+addItemSwitchBg.BorderSizePixel = 2
+addItemSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
+addItemSwitchBg.Parent = addItemFrame
 
-local addRandomOffLabel = Instance.new("TextLabel")
-addRandomOffLabel.Size = UDim2.new(0, 20, 1, 0)
-addRandomOffLabel.Position = UDim2.new(0, 4, 0, 0)
-addRandomOffLabel.BackgroundTransparency = 1
-addRandomOffLabel.Text = "OFF"
-addRandomOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-addRandomOffLabel.Font = Enum.Font.FredokaOne
-addRandomOffLabel.TextSize = 8
-addRandomOffLabel.TextXAlignment = Enum.TextXAlignment.Center
-addRandomOffLabel.Parent = addRandomSwitchBg
+local addItemSwitchCorner = Instance.new("UICorner")
+addItemSwitchCorner.CornerRadius = UDim.new(0, 12)
+addItemSwitchCorner.Parent = addItemSwitchBg
 
-local addRandomOnLabel = Instance.new("TextLabel")
-addRandomOnLabel.Size = UDim2.new(0, 20, 1, 0)
-addRandomOnLabel.Position = UDim2.new(1, -24, 0, 0)
-addRandomOnLabel.BackgroundTransparency = 1
-addRandomOnLabel.Text = "ON"
-addRandomOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-addRandomOnLabel.Font = Enum.Font.FredokaOne
-addRandomOnLabel.TextSize = 8
-addRandomOnLabel.TextXAlignment = Enum.TextXAlignment.Center
-addRandomOnLabel.Parent = addRandomSwitchBg
+local addItemOffLabel = Instance.new("TextLabel")
+addItemOffLabel.Size = UDim2.new(0, 20, 1, 0)
+addItemOffLabel.Position = UDim2.new(0, 4, 0, 0)
+addItemOffLabel.BackgroundTransparency = 1
+addItemOffLabel.Text = "OFF"
+addItemOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+addItemOffLabel.Font = Enum.Font.FredokaOne
+addItemOffLabel.TextSize = 8
+addItemOffLabel.TextXAlignment = Enum.TextXAlignment.Center
+addItemOffLabel.Parent = addItemSwitchBg
 
-local addRandomSwitchBtn = Instance.new("TextButton")
-addRandomSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
-addRandomSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
-addRandomSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-addRandomSwitchBtn.BackgroundTransparency = 0.05
-addRandomSwitchBtn.BorderSizePixel = 2
-addRandomSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
-addRandomSwitchBtn.Text = ""
-addRandomSwitchBtn.ZIndex = 20
-addRandomSwitchBtn.Parent = addRandomSwitchBg
+local addItemOnLabel = Instance.new("TextLabel")
+addItemOnLabel.Size = UDim2.new(0, 20, 1, 0)
+addItemOnLabel.Position = UDim2.new(1, -24, 0, 0)
+addItemOnLabel.BackgroundTransparency = 1
+addItemOnLabel.Text = "ON"
+addItemOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
+addItemOnLabel.Font = Enum.Font.FredokaOne
+addItemOnLabel.TextSize = 8
+addItemOnLabel.TextXAlignment = Enum.TextXAlignment.Center
+addItemOnLabel.Parent = addItemSwitchBg
 
-local addRandomSwitchBtnCorner = Instance.new("UICorner")
-addRandomSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
-addRandomSwitchBtnCorner.Parent = addRandomSwitchBtn
+local addItemSwitchBtn = Instance.new("TextButton")
+addItemSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
+addItemSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
+addItemSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+addItemSwitchBtn.BackgroundTransparency = 0.05
+addItemSwitchBtn.BorderSizePixel = 2
+addItemSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
+addItemSwitchBtn.Text = ""
+addItemSwitchBtn.ZIndex = 20
+addItemSwitchBtn.Parent = addItemSwitchBg
 
--- MISC CONTENT
+local addItemSwitchBtnCorner = Instance.new("UICorner")
+addItemSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
+addItemSwitchBtnCorner.Parent = addItemSwitchBtn
+
+-- ===== MISC CONTENT =====
 local MiscContent = Instance.new("Frame")
 MiscContent.Size = UDim2.new(1, 0, 1, 0)
 MiscContent.Position = UDim2.new(0, 0, 0, 0)
@@ -1564,6 +1534,7 @@ MiscContent.BackgroundTransparency = 1
 MiscContent.Visible = false
 MiscContent.Parent = Content
 
+-- CHANGE USERNAME
 local userFrame = Instance.new("Frame")
 userFrame.Size = UDim2.new(1, 0, 0, 60)
 userFrame.Position = UDim2.new(0, 0, 0, 2)
@@ -1628,7 +1599,10 @@ userApplyCorner.Parent = userApplyBtn
 
 userApplyBtn.MouseButton1Click:Connect(function()
     local newName = userBox.Text
-    if newName == "" then return end
+    if newName == "" then
+        print("❌ Username tidak boleh kosong!")
+        return
+    end
     for _, v in pairs(game:GetService("Players"):GetPlayers()) do
         local model = workspace:FindFirstChild(v.Name)
         if model and model:FindFirstChild("Head") then
@@ -1640,6 +1614,7 @@ userApplyBtn.MouseButton1Click:Connect(function()
                     pcall(function()
                         usernameLabel.Text = newName
                         usernameLabel.TextColor3 = selectedNicknameColor
+                        print("✅ " .. v.Name .. " → " .. newName)
                     end)
                 end
             end
@@ -1647,6 +1622,7 @@ userApplyBtn.MouseButton1Click:Connect(function()
     end
 end)
 
+-- NICKNAME COLOR DROPDOWN DENGAN SCROLL
 local colorLabel = Instance.new("TextLabel")
 colorLabel.Size = UDim2.new(1, -10, 0, 14)
 colorLabel.Position = UDim2.new(0, 8, 0, 68)
@@ -1676,6 +1652,7 @@ local colorCorner = Instance.new("UICorner")
 colorCorner.CornerRadius = UDim.new(0, 5)
 colorCorner.Parent = colorDropdown
 
+-- Dropdown Scrolling Frame
 local colorList = Instance.new("ScrollingFrame")
 colorList.Size = UDim2.new(0, 150, 0, 130)
 colorList.Position = UDim2.new(0, 8, 0, 116)
@@ -1754,6 +1731,7 @@ UserInputService.InputBegan:Connect(function(input)
     end
 end)
 
+-- ANTI AFK
 local antiAFKFrame = Instance.new("Frame")
 antiAFKFrame.Size = UDim2.new(1, 0, 0, 34)
 antiAFKFrame.Position = UDim2.new(0, 0, 0, 150)
@@ -1854,11 +1832,10 @@ local function UpdateStatus()
     if autoUpgrade then count = count + 1 end
     if autoAccept then count = count + 1 end
     if autoAcceptRemote then count = count + 1 end
-    if autoAddRandomItem then count = count + 1 end
+    if autoAddItem then count = count + 1 end
     if antiAFK then count = count + 1 end
-    if autoClaimQuest then count = count + 1 end
     
-    if count == 8 then
+    if count == 7 then
         statusLabel.Text = "🟢 SEMUA ON"
         statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
     elseif count >= 4 then
@@ -1929,13 +1906,6 @@ coinSwitchBtn.MouseButton1Click:Connect(function()
     if autoCoin then StartCoinLoop() else StopCoinLoop() end
 end)
 
-claimQuestSwitchBtn.MouseButton1Click:Connect(function()
-    autoClaimQuest = not autoClaimQuest
-    SetToggleState(claimQuestSwitchBtn, autoClaimQuest, claimQuestSwitchBg, claimQuestOffLabel, claimQuestOnLabel)
-    UpdateStatus()
-    if autoClaimQuest then StartClaimQuestLoop() else StopClaimQuestLoop() end
-end)
-
 sellAllSwitchBtn.MouseButton1Click:Connect(function()
     autoSellAll = not autoSellAll
     SetToggleState(sellAllSwitchBtn, autoSellAll, sellAllSwitchBg, sellAllOffLabel, sellAllOnLabel)
@@ -1950,6 +1920,7 @@ autoUpgradeSwitchBtn.MouseButton1Click:Connect(function()
     if autoUpgrade then StartUpgradeLoop() else StopUpgradeLoop() end
 end)
 
+-- TRADE TOGGLES (SEMUA DEFAULT OFF)
 acceptSwitchBtn.MouseButton1Click:Connect(function()
     autoAccept = not autoAccept
     SetToggleState(acceptSwitchBtn, autoAccept, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
@@ -1964,11 +1935,15 @@ acceptRemoteSwitchBtn.MouseButton1Click:Connect(function()
     if autoAcceptRemote then StartAcceptRemoteLoop() else StopAcceptRemoteLoop() end
 end)
 
-addRandomSwitchBtn.MouseButton1Click:Connect(function()
-    autoAddRandomItem = not autoAddRandomItem
-    SetToggleState(addRandomSwitchBtn, autoAddRandomItem, addRandomSwitchBg, addRandomOffLabel, addRandomOnLabel)
+addItemSwitchBtn.MouseButton1Click:Connect(function()
+    autoAddItem = not autoAddItem
+    SetToggleState(addItemSwitchBtn, autoAddItem, addItemSwitchBg, addItemOffLabel, addItemOnLabel)
     UpdateStatus()
-    if autoAddRandomItem then StartAddRandomItemLoop() else StopAddRandomItemLoop() end
+    if autoAddItem then 
+        StartAddItemLoop() 
+    else 
+        StopAddItemLoop() 
+    end
 end)
 
 antiAFKSwitchBtn.MouseButton1Click:Connect(function()
@@ -1980,13 +1955,23 @@ end)
 
 -- SET DEFAULT STATES
 SetToggleState(coinSwitchBtn, true, coinSwitchBg, coinOffLabel, coinOnLabel)
-SetToggleState(claimQuestSwitchBtn, false, claimQuestSwitchBg, claimQuestOffLabel, claimQuestOnLabel)
 SetToggleState(sellAllSwitchBtn, false, sellAllSwitchBg, sellAllOffLabel, sellAllOnLabel)
 SetToggleState(autoUpgradeSwitchBtn, false, autoUpgradeSwitchBg, autoUpgradeOffLabel, autoUpgradeOnLabel)
-SetToggleState(acceptSwitchBtn, true, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
-SetToggleState(acceptRemoteSwitchBtn, true, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
-SetToggleState(addRandomSwitchBtn, false, addRandomSwitchBg, addRandomOffLabel, addRandomOnLabel)
+SetToggleState(acceptSwitchBtn, false, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
+SetToggleState(acceptRemoteSwitchBtn, false, acceptRemoteSwitchBg, acceptRemoteOffLabel, acceptRemoteOnLabel)
+SetToggleState(addItemSwitchBtn, false, addItemSwitchBg, addItemOffLabel, addItemOnLabel)
 SetToggleState(antiAFKSwitchBtn, true, antiAFKSwitchBg, antiAFKOffLabel, antiAFKOnLabel)
 
+-- Apply default color
 ApplyNicknameColor(selectedNicknameColor)
+
 UpdateStatus()
+
+print("✅ BEGE IDN | THROW A COIN + AUTO TRADE + MISC")
+print("📌 Klik ➖ untuk minimize ke bubble")
+print("📌 Klik bubble untuk munculin GUI lagi (support mobile)")
+print("📌 Bubble bisa di-drag di mobile")
+print("🎨 " .. colorCount .. " pilihan warna nickname di tab MISC")
+print("📜 Dropdown warna bisa di-scroll/down drag!")
+print("⚡ ProximityPrompt instan! (Loop tiap 2 detik)")
+print("🔄 Auto Add Item: Loop 1-3000 + Random (CD 0, Only when trade open)")
