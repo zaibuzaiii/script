@@ -34,10 +34,10 @@ local upgradeSettings = {
     ["Value Multiplier"] = false,
     ["Throw Speed"] = false
 }
-local autoAccept = true
+local autoAccept = false
 local acceptLoop = nil
 local acceptDelay = 0.5
-local autoAcceptRemote = true
+local autoAcceptRemote = false
 local acceptRemoteLoop = nil
 local autoAddRandomItem = false
 local addRandomItemLoop = nil
