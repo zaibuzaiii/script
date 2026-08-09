@@ -9,10 +9,10 @@ local Events = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events")
 local CoinLanded = Events:WaitForChild("CoinLanded")
 local SellAll = Events:WaitForChild("SellAll")
 local RequestUpgrade = Events:WaitForChild("RequestUpgrade")
-local TradeRequestResponse = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeRequestResponse")
-local TradeAccept = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAccept")
-local TradeAddItem = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAddItem")
-local ClaimQuest = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("ClaimQuest")
+local TradeRequestResponse = Events:WaitForChild("TradeRequestResponse")
+local TradeAccept = Events:WaitForChild("TradeAccept")
+local TradeAddItem = Events:WaitForChild("TradeAddItem")
+local ClaimQuest = Events:WaitForChild("ClaimQuest")
 
 local coinList = {
     "Basic Coin", "Copper Coin", "Fire Coin", "Volt Coin", "Aether Coin",
@@ -23,7 +23,7 @@ local coinList = {
     "Helios Coin", "Nyx Coin", "Titan Coin", "Zeus Coin", "Phoenix Coin"
 }
 
-local selectedCoin = "Phoenix Coin" -- DEFAULT COIN
+local selectedCoin = "Phoenix Coin"
 local autoCoin = true
 local coinLoop = nil
 local autoSellAll = false
@@ -57,7 +57,6 @@ local function ClaimAllQuests()
             pcall(function()
                 local args = {questType, questNumber}
                 ClaimQuest:FireServer(unpack(args))
-                print("✅ Claim " .. questType .. " " .. questNumber)
             end)
             task.wait(0.05)
         end
@@ -522,7 +521,7 @@ screenGui.Parent = playerGui
 
 -- MAIN UI
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 380, 0, 340) -- DITAMBAH TINGGI JADI 340
+Main.Size = UDim2.new(0, 380, 0, 340)
 Main.Position = UDim2.new(0.5, -190, 0.5, -170)
 Main.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
 Main.BackgroundTransparency = 0.1
@@ -610,7 +609,6 @@ bubbleIcon.ScaleType = Enum.ScaleType.Fit
 bubbleIcon.ZIndex = 60
 bubbleIcon.Parent = bubble
 
--- VARIABLES UNTUK DRAG + CLICK
 local isDraggingBubble = false
 local dragStartPos = Vector2.new()
 local dragStartTime = 0
@@ -821,7 +819,7 @@ TabMiscCorner.Parent = TabMisc
 
 -- CONTENT
 local Content = Instance.new("Frame")
-Content.Size = UDim2.new(1, -14, 0, 225) -- DITAMBAH TINGGI JADI 225
+Content.Size = UDim2.new(1, -14, 0, 225)
 Content.Position = UDim2.new(0, 7, 0, 74)
 Content.BackgroundTransparency = 0.8
 Content.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
