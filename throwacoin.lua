@@ -9,10 +9,9 @@ local Events = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events")
 local CoinLanded = Events:WaitForChild("CoinLanded")
 local SellAll = Events:WaitForChild("SellAll")
 local RequestUpgrade = Events:WaitForChild("RequestUpgrade")
-local TradeRequestResponse = Events:WaitForChild("TradeRequestResponse")
-local TradeAccept = Events:WaitForChild("TradeAccept")
-local TradeAddItem = Events:WaitForChild("TradeAddItem")
-local ClaimQuest = Events:WaitForChild("ClaimQuest")
+local TradeRequestResponse = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeRequestResponse")
+local TradeAccept = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAccept")
+local TradeAddItem = ReplicatedStorage:WaitForChild("Assets"):WaitForChild("Events"):WaitForChild("TradeAddItem")
 
 local coinList = {
     "Basic Coin", "Copper Coin", "Fire Coin", "Volt Coin", "Aether Coin",
@@ -20,7 +19,7 @@ local coinList = {
     "Mirage Coin", "Obsidian Coin", "Tempest Coin", "Soul Coin", "Paradox Coin",
     "Miracle Coin", "Nexus Coin", "Apex Coin", "Infinity Coin", "Grace Coin",
     "Dominion Coin", "Empyrean Coin", "Atlas Coin", "Judgement Coin", "Hercules Coin",
-    "Helios Coin", "Nyx Coin", "Titan Coin", "Zeus Coin", "Phoenix Coin"
+    "Helios Coin", "Nyx Coin", "Titan Coin", "Zeus Coin"
 }
 
 local selectedCoin = "Phoenix Coin"
@@ -46,42 +45,7 @@ local antiAFK = true
 local antiAFKLoop = nil
 local currentTab = "MAIN"
 
--- ===== CLAIM QUEST =====
-local autoClaimQuest = false
-local claimQuestLoop = nil
-local questTypes = {"Daily", "Weekly", "Monthly"}
-
-local function ClaimAllQuests()
-    for _, questType in ipairs(questTypes) do
-        for questNumber = 1, 10 do
-            pcall(function()
-                local args = {questType, questNumber}
-                ClaimQuest:FireServer(unpack(args))
-            end)
-            task.wait(0.05)
-        end
-    end
-end
-
-local function StartClaimQuestLoop()
-    if claimQuestLoop then return end
-    claimQuestLoop = task.spawn(function()
-        while autoClaimQuest do
-            ClaimAllQuests()
-            task.wait(1)
-        end
-    end)
-end
-
-local function StopClaimQuestLoop()
-    autoClaimQuest = false
-    if claimQuestLoop then
-        task.cancel(claimQuestLoop)
-        claimQuestLoop = nil
-    end
-end
-
--- ===== NICKNAME COLOR PRESETS =====
+-- ===== NICKNAME COLOR PRESETS (30+ WARNA) =====
 local nicknameColors = {
     ["🔴 Merah"] = Color3.fromRGB(255, 0, 0),
     ["🟢 Hijau"] = Color3.fromRGB(0, 255, 0),
@@ -134,6 +98,7 @@ local function ApplyNicknameColor(color)
             if usernameLabel then
                 pcall(function()
                     usernameLabel.TextColor3 = color
+                    print("✅ Nickname color changed!")
                 end)
             end
         end
@@ -192,6 +157,7 @@ local function ThrowCoin()
     }
     pcall(function()
         CoinLanded:FireServer(unpack(args))
+        print(" " .. selectedCoin .. " thrown!")
     end)
 end
 
@@ -219,6 +185,7 @@ StartCoinLoop()
 local function DoSellAll()
     pcall(function()
         SellAll:FireServer()
+        print("💰 Sell All executed!")
     end)
 end
 
@@ -246,6 +213,7 @@ local function DoUpgrade()
         if isEnabled then
             pcall(function()
                 RequestUpgrade:FireServer(upgradeName)
+                print("⚡ Upgraded: " .. upgradeName)
             end)
             task.wait(0.3)
         end
@@ -270,7 +238,8 @@ local function StopUpgradeLoop()
     end
 end
 
--- ===== PROXIMITY PROMPT =====
+-- ===== PROXIMITY PROMPT INSTAN (LOOP + AUTO CLICK) =====
+-- 🔄 LOOP CEK TIAP 2 DETIK
 task.spawn(function()
     while task.wait(2) do
         pcall(function()
@@ -284,14 +253,17 @@ task.spawn(function()
     end
 end)
 
+-- 📌 AUTO KLIK SAAT PROMPT MUNCUL
 ProximityPromptService.PromptShown:Connect(function(prompt)
     task.wait(0.05)
     pcall(function()
         prompt.HoldDuration = 0
         prompt:Hold()
+        print("✅ Prompt instan: " .. prompt.Name)
     end)
 end)
 
+-- 📌 CEK PROMPT YANG SUDAH ADA SEBELUM SCRIPT JALAN
 task.wait(1)
 pcall(function()
     for _, prompt in pairs(workspace:GetDescendants()) do
@@ -302,12 +274,14 @@ pcall(function()
     end
 end)
 
+-- 📌 CEK PROMPT BARU YANG MUNCUL
 workspace.DescendantAdded:Connect(function(desc)
     task.wait(0.1)
     if desc:IsA("ProximityPrompt") then
         pcall(function()
             desc.HoldDuration = 0
             desc.RequiresLineOfSight = false
+            print("✅ Prompt baru ditemukan: " .. desc.Name)
         end)
     end
 end)
@@ -325,6 +299,7 @@ local function TeleportToWorld3()
     if not RequestWorldTeleport then return end
     pcall(function()
         RequestWorldTeleport:FireServer(3)
+        print("✅ Teleport ke World 3!")
     end)
 end
 
@@ -338,6 +313,7 @@ local function TeleportToVIPPosition()
     if hrp then
         pcall(function()
             hrp.CFrame = CFrame.new(Vector3.new(-1152, 4, 52))
+            print("✅ Teleport ke VIP Position!")
         end)
     end
 end
@@ -365,6 +341,7 @@ local function AutoAcceptUI()
                     if userId then
                         pcall(function()
                             TradeRequestResponse:FireServer(userId, true)
+                            print("✅ Auto Accept UI dari User ID: " .. userId)
                         end)
                         child:Destroy()
                     end
@@ -392,6 +369,7 @@ local function AutoAcceptUI()
                                     if readyIcon and readyIcon.Enabled then
                                         pcall(function()
                                             acceptBtn:FireClick()
+                                            print("✅ Auto Accept UI - Lawan udah accept!")
                                         end)
                                     end
                                 end
@@ -457,6 +435,7 @@ local function StartAcceptRemoteLoop()
             if not IsWeReady() then
                 pcall(function()
                     TradeAccept:FireServer()
+                    print("⚡ Auto Accept Remote - Jaga status hijau!")
                 end)
                 task.wait(0.3)
             end
@@ -482,6 +461,7 @@ local function StartAddRandomItemLoop()
             local randomIndex = math.random(1, 10000)
             pcall(function()
                 TradeAddItem:FireServer(randomIndex)
+                print("📦 Auto Add Random Item: " .. randomIndex)
             end)
             task.wait(0)
         end
@@ -507,9 +487,10 @@ if not playerGui then
 end
 screenGui.Parent = playerGui
 
+-- MAIN UI
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 380, 0, 340)
-Main.Position = UDim2.new(0.5, -190, 0.5, -170)
+Main.Size = UDim2.new(0, 380, 0, 300)
+Main.Position = UDim2.new(0.5, -190, 0.5, -150)
 Main.BackgroundColor3 = Color3.fromRGB(20, 18, 35)
 Main.BackgroundTransparency = 0.1
 Main.BorderSizePixel = 2
@@ -562,7 +543,7 @@ SubTitle.TextSize = 10
 SubTitle.TextXAlignment = Enum.TextXAlignment.Left
 SubTitle.Parent = Header
 
--- BUBBLE
+-- ===== BUBBLE - KIRI ATAS =====
 local bubble = Instance.new("Frame")
 bubble.Size = UDim2.new(0, 55, 0, 55)
 bubble.Position = UDim2.new(0, 10, 0, 10)
@@ -596,12 +577,14 @@ bubbleIcon.ScaleType = Enum.ScaleType.Fit
 bubbleIcon.ZIndex = 60
 bubbleIcon.Parent = bubble
 
+-- VARIABLES UNTUK DRAG + CLICK
 local isDraggingBubble = false
 local dragStartPos = Vector2.new()
 local dragStartTime = 0
 local bubbleStartPos = UDim2.new()
 local hasMoved = false
 
+-- FUNGSI TOGGLE MINIMIZE
 local isMinimized = false
 local function ToggleMinimize()
     isMinimized = not isMinimized
@@ -614,6 +597,7 @@ local function ToggleMinimize()
     end
 end
 
+-- EVENT LISTENER BUBBLE
 local function OnBubbleInputBegan(input)
     if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
         isDraggingBubble = false
@@ -721,7 +705,6 @@ CloseBtn.MouseButton1Click:Connect(function()
     StopAcceptRemoteLoop()
     StopAddRandomItemLoop()
     StopAntiAFK()
-    StopClaimQuestLoop()
     screenGui:Destroy()
 end)
 
@@ -806,7 +789,7 @@ TabMiscCorner.Parent = TabMisc
 
 -- CONTENT
 local Content = Instance.new("Frame")
-Content.Size = UDim2.new(1, -14, 0, 225)
+Content.Size = UDim2.new(1, -14, 0, 185)
 Content.Position = UDim2.new(0, 7, 0, 74)
 Content.BackgroundTransparency = 0.8
 Content.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
@@ -855,7 +838,7 @@ coinTypeBox.BorderColor3 = Color3.fromRGB(255, 50, 50)
 coinTypeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 coinTypeBox.Font = Enum.Font.GothamBold
 coinTypeBox.TextSize = 11
-coinTypeBox.Text = "Phoenix Coin"
+coinTypeBox.Text = "Zeus Coin"
 coinTypeBox.TextXAlignment = Enum.TextXAlignment.Left
 coinTypeBox.ZIndex = 15
 coinTypeBox.Parent = coinTypeFrame
@@ -867,6 +850,7 @@ coinTypeBoxCorner.Parent = coinTypeBox
 coinTypeBox:GetPropertyChangedSignal("Text"):Connect(function()
     if coinTypeBox.Text ~= "" then
         selectedCoin = coinTypeBox.Text
+        print(" Coin changed to: " .. selectedCoin)
     end
 end)
 
@@ -945,85 +929,10 @@ local coinSwitchBtnCorner = Instance.new("UICorner")
 coinSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
 coinSwitchBtnCorner.Parent = coinSwitchBtn
 
--- ===== CLAIM QUEST =====
-local claimQuestFrame = Instance.new("Frame")
-claimQuestFrame.Size = UDim2.new(1, 0, 0, 34)
-claimQuestFrame.Position = UDim2.new(0, 0, 0, 78)
-claimQuestFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
-claimQuestFrame.BackgroundTransparency = 0.2
-claimQuestFrame.BorderSizePixel = 1
-claimQuestFrame.BorderColor3 = Color3.fromRGB(60, 60, 80)
-claimQuestFrame.Parent = MainContent
-
-local claimQuestCorner = Instance.new("UICorner")
-claimQuestCorner.CornerRadius = UDim.new(0, 6)
-claimQuestCorner.Parent = claimQuestFrame
-
-local claimQuestLabel = Instance.new("TextLabel")
-claimQuestLabel.Size = UDim2.new(0, 150, 1, 0)
-claimQuestLabel.Position = UDim2.new(0, 10, 0, 0)
-claimQuestLabel.BackgroundTransparency = 1
-claimQuestLabel.Text = "📋 AUTO CLAIM QUEST"
-claimQuestLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
-claimQuestLabel.Font = Enum.Font.FredokaOne
-claimQuestLabel.TextSize = 10
-claimQuestLabel.TextXAlignment = Enum.TextXAlignment.Left
-claimQuestLabel.Parent = claimQuestFrame
-
-local claimQuestSwitchBg = Instance.new("Frame")
-claimQuestSwitchBg.Size = UDim2.new(0, 55, 0, 24)
-claimQuestSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
-claimQuestSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
-claimQuestSwitchBg.BackgroundTransparency = 0.2
-claimQuestSwitchBg.BorderSizePixel = 2
-claimQuestSwitchBg.BorderColor3 = Color3.fromRGB(150, 150, 160)
-claimQuestSwitchBg.Parent = claimQuestFrame
-
-local claimQuestSwitchCorner = Instance.new("UICorner")
-claimQuestSwitchCorner.CornerRadius = UDim.new(0, 12)
-claimQuestSwitchCorner.Parent = claimQuestSwitchBg
-
-local claimQuestOffLabel = Instance.new("TextLabel")
-claimQuestOffLabel.Size = UDim2.new(0, 20, 1, 0)
-claimQuestOffLabel.Position = UDim2.new(0, 4, 0, 0)
-claimQuestOffLabel.BackgroundTransparency = 1
-claimQuestOffLabel.Text = "OFF"
-claimQuestOffLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-claimQuestOffLabel.Font = Enum.Font.FredokaOne
-claimQuestOffLabel.TextSize = 8
-claimQuestOffLabel.TextXAlignment = Enum.TextXAlignment.Center
-claimQuestOffLabel.Parent = claimQuestSwitchBg
-
-local claimQuestOnLabel = Instance.new("TextLabel")
-claimQuestOnLabel.Size = UDim2.new(0, 20, 1, 0)
-claimQuestOnLabel.Position = UDim2.new(1, -24, 0, 0)
-claimQuestOnLabel.BackgroundTransparency = 1
-claimQuestOnLabel.Text = "ON"
-claimQuestOnLabel.TextColor3 = Color3.fromRGB(150, 150, 160)
-claimQuestOnLabel.Font = Enum.Font.FredokaOne
-claimQuestOnLabel.TextSize = 8
-claimQuestOnLabel.TextXAlignment = Enum.TextXAlignment.Center
-claimQuestOnLabel.Parent = claimQuestSwitchBg
-
-local claimQuestSwitchBtn = Instance.new("TextButton")
-claimQuestSwitchBtn.Size = UDim2.new(0, 20, 0, 20)
-claimQuestSwitchBtn.Position = UDim2.new(0, 4, 0.5, -10)
-claimQuestSwitchBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-claimQuestSwitchBtn.BackgroundTransparency = 0.05
-claimQuestSwitchBtn.BorderSizePixel = 2
-claimQuestSwitchBtn.BorderColor3 = Color3.fromRGB(150, 150, 160)
-claimQuestSwitchBtn.Text = ""
-claimQuestSwitchBtn.ZIndex = 20
-claimQuestSwitchBtn.Parent = claimQuestSwitchBg
-
-local claimQuestSwitchBtnCorner = Instance.new("UICorner")
-claimQuestSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
-claimQuestSwitchBtnCorner.Parent = claimQuestSwitchBtn
-
 -- SELL ALL
 local sellAllFrame = Instance.new("Frame")
 sellAllFrame.Size = UDim2.new(1, 0, 0, 34)
-sellAllFrame.Position = UDim2.new(0, 0, 0, 116)
+sellAllFrame.Position = UDim2.new(0, 0, 0, 78)
 sellAllFrame.BackgroundColor3 = Color3.fromRGB(25, 23, 40)
 sellAllFrame.BackgroundTransparency = 0.2
 sellAllFrame.BorderSizePixel = 1
@@ -1316,6 +1225,11 @@ local function CreateUpgradeToggle(upgradeName)
         upgradeSettings[upgradeName] = not upgradeSettings[upgradeName]
         UpdateState(upgradeSettings[upgradeName])
         UpdateStatus()
+        if upgradeSettings[upgradeName] then
+            print("✅ " .. upgradeName .. ": ON")
+        else
+            print("❌ " .. upgradeName .. ": OFF")
+        end
     end)
 
     return {UpdateState = UpdateState}
@@ -1506,7 +1420,9 @@ addRandomLabel.TextColor3 = Color3.fromRGB(230, 230, 240)
 addRandomLabel.Font = Enum.Font.FredokaOne
 addRandomLabel.TextSize = 11
 addRandomLabel.TextXAlignment = Enum.TextXAlignment.Left
-addRandomLabel.Parent = addRandomFramelocal addRandomSwitchBg = Instance.new("Frame")
+addRandomLabel.Parent = addRandomFrame
+
+local addRandomSwitchBg = Instance.new("Frame")
 addRandomSwitchBg.Size = UDim2.new(0, 55, 0, 24)
 addRandomSwitchBg.Position = UDim2.new(1, -65, 0.5, -12)
 addRandomSwitchBg.BackgroundColor3 = Color3.fromRGB(150, 150, 160)
@@ -1556,7 +1472,7 @@ local addRandomSwitchBtnCorner = Instance.new("UICorner")
 addRandomSwitchBtnCorner.CornerRadius = UDim.new(0, 10)
 addRandomSwitchBtnCorner.Parent = addRandomSwitchBtn
 
--- MISC CONTENT
+-- ===== MISC CONTENT =====
 local MiscContent = Instance.new("Frame")
 MiscContent.Size = UDim2.new(1, 0, 1, 0)
 MiscContent.Position = UDim2.new(0, 0, 0, 0)
@@ -1564,6 +1480,7 @@ MiscContent.BackgroundTransparency = 1
 MiscContent.Visible = false
 MiscContent.Parent = Content
 
+-- CHANGE USERNAME
 local userFrame = Instance.new("Frame")
 userFrame.Size = UDim2.new(1, 0, 0, 60)
 userFrame.Position = UDim2.new(0, 0, 0, 2)
@@ -1628,7 +1545,10 @@ userApplyCorner.Parent = userApplyBtn
 
 userApplyBtn.MouseButton1Click:Connect(function()
     local newName = userBox.Text
-    if newName == "" then return end
+    if newName == "" then
+        print("❌ Username tidak boleh kosong!")
+        return
+    end
     for _, v in pairs(game:GetService("Players"):GetPlayers()) do
         local model = workspace:FindFirstChild(v.Name)
         if model and model:FindFirstChild("Head") then
@@ -1640,6 +1560,7 @@ userApplyBtn.MouseButton1Click:Connect(function()
                     pcall(function()
                         usernameLabel.Text = newName
                         usernameLabel.TextColor3 = selectedNicknameColor
+                        print("✅ " .. v.Name .. " → " .. newName)
                     end)
                 end
             end
@@ -1647,6 +1568,7 @@ userApplyBtn.MouseButton1Click:Connect(function()
     end
 end)
 
+-- NICKNAME COLOR DROPDOWN DENGAN SCROLL
 local colorLabel = Instance.new("TextLabel")
 colorLabel.Size = UDim2.new(1, -10, 0, 14)
 colorLabel.Position = UDim2.new(0, 8, 0, 68)
@@ -1676,6 +1598,7 @@ local colorCorner = Instance.new("UICorner")
 colorCorner.CornerRadius = UDim.new(0, 5)
 colorCorner.Parent = colorDropdown
 
+-- Dropdown Scrolling Frame (BISA DI-SCROLL/DOWN DRAG)
 local colorList = Instance.new("ScrollingFrame")
 colorList.Size = UDim2.new(0, 150, 0, 130)
 colorList.Position = UDim2.new(0, 8, 0, 116)
@@ -1698,9 +1621,11 @@ colorLayout.Padding = UDim.new(0, 2)
 colorLayout.SortOrder = Enum.SortOrder.LayoutOrder
 colorLayout.Parent = colorList
 
+-- Hitung jumlah warna
 local colorCount = 0
 for _ in pairs(nicknameColors) do colorCount = colorCount + 1 end
 
+-- Buat tombol warna dengan scroll
 for name, color in pairs(nicknameColors) do
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(1, -10, 0, 26)
@@ -1728,12 +1653,15 @@ for name, color in pairs(nicknameColors) do
     end)
 end
 
+-- Set canvas size biar bisa di-scroll
 colorList.CanvasSize = UDim2.new(0, 0, 0, (colorCount * 28) + 10)
 
+-- Toggle dropdown
 colorDropdown.MouseButton1Click:Connect(function()
     colorList.Visible = not colorList.Visible
 end)
 
+-- Sembunyikan dropdown kalo klik di luar
 UserInputService.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         task.wait(0.1)
@@ -1754,6 +1682,7 @@ UserInputService.InputBegan:Connect(function(input)
     end
 end)
 
+-- ANTI AFK
 local antiAFKFrame = Instance.new("Frame")
 antiAFKFrame.Size = UDim2.new(1, 0, 0, 34)
 antiAFKFrame.Position = UDim2.new(0, 0, 0, 150)
@@ -1856,9 +1785,8 @@ local function UpdateStatus()
     if autoAcceptRemote then count = count + 1 end
     if autoAddRandomItem then count = count + 1 end
     if antiAFK then count = count + 1 end
-    if autoClaimQuest then count = count + 1 end
     
-    if count == 8 then
+    if count == 7 then
         statusLabel.Text = "🟢 SEMUA ON"
         statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
     elseif count >= 4 then
@@ -1929,13 +1857,6 @@ coinSwitchBtn.MouseButton1Click:Connect(function()
     if autoCoin then StartCoinLoop() else StopCoinLoop() end
 end)
 
-claimQuestSwitchBtn.MouseButton1Click:Connect(function()
-    autoClaimQuest = not autoClaimQuest
-    SetToggleState(claimQuestSwitchBtn, autoClaimQuest, claimQuestSwitchBg, claimQuestOffLabel, claimQuestOnLabel)
-    UpdateStatus()
-    if autoClaimQuest then StartClaimQuestLoop() else StopClaimQuestLoop() end
-end)
-
 sellAllSwitchBtn.MouseButton1Click:Connect(function()
     autoSellAll = not autoSellAll
     SetToggleState(sellAllSwitchBtn, autoSellAll, sellAllSwitchBg, sellAllOffLabel, sellAllOnLabel)
@@ -1980,7 +1901,6 @@ end)
 
 -- SET DEFAULT STATES
 SetToggleState(coinSwitchBtn, true, coinSwitchBg, coinOffLabel, coinOnLabel)
-SetToggleState(claimQuestSwitchBtn, false, claimQuestSwitchBg, claimQuestOffLabel, claimQuestOnLabel)
 SetToggleState(sellAllSwitchBtn, false, sellAllSwitchBg, sellAllOffLabel, sellAllOnLabel)
 SetToggleState(autoUpgradeSwitchBtn, false, autoUpgradeSwitchBg, autoUpgradeOffLabel, autoUpgradeOnLabel)
 SetToggleState(acceptSwitchBtn, true, acceptSwitchBg, acceptOffLabel, acceptOnLabel)
@@ -1988,5 +1908,15 @@ SetToggleState(acceptRemoteSwitchBtn, true, acceptRemoteSwitchBg, acceptRemoteOf
 SetToggleState(addRandomSwitchBtn, false, addRandomSwitchBg, addRandomOffLabel, addRandomOnLabel)
 SetToggleState(antiAFKSwitchBtn, true, antiAFKSwitchBg, antiAFKOffLabel, antiAFKOnLabel)
 
+-- Apply default color
 ApplyNicknameColor(selectedNicknameColor)
+
 UpdateStatus()
+
+print("✅ BEGE IDN | THROW A COIN + AUTO TRADE + MISC")
+print("📌 Klik ➖ untuk minimize ke bubble")
+print("📌 Klik bubble untuk munculin GUI lagi (support mobile)")
+print("📌 Bubble bisa di-drag di mobile")
+print("🎨 " .. colorCount .. " pilihan warna nickname di tab MISC")
+print("📜 Dropdown warna bisa di-scroll/down drag!")
+print("⚡ ProximityPrompt instan! (Loop tiap 2 detik)")
