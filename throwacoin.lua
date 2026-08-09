@@ -19,7 +19,7 @@ local coinList = {
     "Mirage Coin", "Obsidian Coin", "Tempest Coin", "Soul Coin", "Paradox Coin",
     "Miracle Coin", "Nexus Coin", "Apex Coin", "Infinity Coin", "Grace Coin",
     "Dominion Coin", "Empyrean Coin", "Atlas Coin", "Judgement Coin", "Hercules Coin",
-    "Helios Coin", "Nyx Coin", "Titan Coin", "Zeus Coin"
+    "Helios Coin", "Nyx Coin", "Titan Coin", "Zeus Coin", "Phoenix Coin"
 }
 
 local selectedCoin = "Phoenix Coin"
