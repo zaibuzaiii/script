@@ -149,7 +149,7 @@ end)
 -- ===== COIN =====
 local function ThrowCoin()
     local args = {
-        2.0,
+        3.00,
         Vector3.new(-1162.6304931640625, 0.7260000109672546, 89.36738586425781),
         selectedCoin,
         Vector3.new(-1156.7032470703125, 0.7260000109672546, 88.43637084960938),
@@ -312,7 +312,7 @@ local function TeleportToVIPPosition()
     local hrp = character:FindFirstChild("HumanoidRootPart")
     if hrp then
         pcall(function()
-            hrp.CFrame = CFrame.new(Vector3.new(-1152, 4, 52))
+            hrp.CFrame = CFrame.new(Vector3.new(-1180, 72, 70))
             print("✅ Teleport ke VIP Position!")
         end)
     end
