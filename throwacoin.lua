@@ -25,7 +25,7 @@ local coinList = {
     "Immortal Coin", "Fate Coin", "Leviathan Coin"
 }
 
-local selectedCoin = "Phoenix Coin"
+local selectedCoin = "Leviathan Coin"
 local autoCoin = true
 local coinLoop = nil
 local autoSellAll = false
