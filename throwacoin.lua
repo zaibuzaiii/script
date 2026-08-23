@@ -22,15 +22,9 @@ local coinList = {
     "Helios Coin", "Nyx Coin", "Titan Coin", "Zeus Coin",
     "Runic Coin", "Amethyst Coin", "Merlin Coin", "Eldritch Coin", 
     "Avalon Coin", "Dragonhearth Coin", "Phoenix Coin",
-    "Immortal Coin", "Fate Coin", "Leviathan Coin",
-    -- ✅ TAMBAHAN COIN BARU
-    "Clockwork Coin",
-    "Steamheart Coin",
-    "Voltaris Coin",
-    "Gravitas Coin",
-    "Galvanis Coin",
-    "Overdrive Coin",
-    "Skyforge Coin"
+    "Immortal Coin", "Fate Coin", "Leviathan Coin", "Clockwork Coin",
+    "Steamheart Coin",  "Voltaris Coin", "Gravitas Coin",
+    "Galvanis Coin", "Overdrive Coin",  "Skyforge Coin"
 }
 
 local selectedCoin = "Skyforge Coin"
