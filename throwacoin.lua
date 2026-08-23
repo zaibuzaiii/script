@@ -22,10 +22,18 @@ local coinList = {
     "Helios Coin", "Nyx Coin", "Titan Coin", "Zeus Coin",
     "Runic Coin", "Amethyst Coin", "Merlin Coin", "Eldritch Coin", 
     "Avalon Coin", "Dragonhearth Coin", "Phoenix Coin",
-    "Immortal Coin", "Fate Coin", "Leviathan Coin"
+    "Immortal Coin", "Fate Coin", "Leviathan Coin",
+    -- ✅ TAMBAHAN COIN BARU
+    "Clockwork Coin",
+    "Steamheart Coin",
+    "Voltaris Coin",
+    "Gravitas Coin",
+    "Galvanis Coin",
+    "Overdrive Coin",
+    "Skyforge Coin"
 }
 
-local selectedCoin = "Leviathan Coin"
+local selectedCoin = "Skyforge Coin"
 local autoCoin = true
 local coinLoop = nil
 local autoSellAll = false
@@ -872,7 +880,7 @@ coinDropdown.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
 coinDropdown.BackgroundTransparency = 0.3
 coinDropdown.BorderSizePixel = 2
 coinDropdown.BorderColor3 = Color3.fromRGB(255, 50, 50)
-coinDropdown.Text = "Leviathan Coin"
+coinDropdown.Text = "Skyforge Coin"
 coinDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
 coinDropdown.Font = Enum.Font.GothamBold
 coinDropdown.TextSize = 11
