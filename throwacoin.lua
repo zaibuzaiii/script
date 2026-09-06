@@ -23,7 +23,9 @@ local coinList = {
     "Runic Coin", "Amethyst Coin", "Merlin Coin", "Eldritch Coin", "Avalon Coin", "Dragonhearth Coin",
     "Phoenix Coin", "Immortal Coin", "Fate Coin", "Leviathan Coin",
     "Clockwork Coin", "Steamheart Coin", "Voltaris Coin", "Gravitas Coin", "Galvanis Coin", "Overdrive Coin", "Skyforge Coin",
-    "Fluxion Coin", "Magnaris Coin", "Arclight Coin"
+    "Fluxion Coin", "Magnaris Coin", "Arclight Coin",
+    -- ===== JAPANESE SERIES =====
+    "Lotus Coin", "Kensei Coin", "Tengu Coin", "Damiyo Coin", "Torii Coin", "Ronin Coin", "Amaterasu Coin"
 }
 
 local selectedCoin = "Arclight Coin"
