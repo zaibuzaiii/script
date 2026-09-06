@@ -25,10 +25,10 @@ local coinList = {
     "Clockwork Coin", "Steamheart Coin", "Voltaris Coin", "Gravitas Coin", "Galvanis Coin", "Overdrive Coin", "Skyforge Coin",
     "Fluxion Coin", "Magnaris Coin", "Arclight Coin",
     -- ===== JAPANESE SERIES =====
-    "Lotus Coin", "Kensei Coin", "Tengu Coin", "Damiyo Coin", "Torii Coin", "Ronin Coin", "Amaterasu Coin"
+    "Lotus Coin", "Kensei Coin", "Tengu Coin", "Daimyo Coin", "Torii Coin", "Ronin Coin", "Amaterasu Coin"
 }
 
-local selectedCoin = "Arclight Coin"
+local selectedCoin = "Amaterasu Coin"
 local autoCoin = true
 local coinLoop = nil
 local autoSellAll = false
@@ -875,7 +875,7 @@ coinDropdown.BackgroundColor3 = Color3.fromRGB(15, 13, 30)
 coinDropdown.BackgroundTransparency = 0.3
 coinDropdown.BorderSizePixel = 2
 coinDropdown.BorderColor3 = Color3.fromRGB(255, 50, 50)
-coinDropdown.Text = "Arclight Coin"
+coinDropdown.Text = "Amaterasu Coin"
 coinDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
 coinDropdown.Font = Enum.Font.GothamBold
 coinDropdown.TextSize = 11
