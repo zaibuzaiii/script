@@ -39,7 +39,7 @@ local BREED1_B = 16
 local BREED2_A = 19        -- ← Breed 2: (19, 4)
 local BREED2_B = 4
 
-local BREED_DELAY = 1
+local BREED_DELAY = 0.4
 local HATCH_DELAY = 1
 local PLACE_EGG_DELAY = 0.1
 local PLACE_EGG_MIN = 1
