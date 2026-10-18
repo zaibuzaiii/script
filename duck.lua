@@ -34,16 +34,16 @@ local hatchLoop = nil
 local placeEggLoop = nil
 
 -- ===== SETTINGS =====
-local BREED1_A = 7
-local BREED1_B = 16
-local BREED2_A = 17
-local BREED2_B = 15
+local BREED1_A = 11        -- ← Breed 1: (11, 13)
+local BREED1_B = 13
+local BREED2_A = 86        -- ← Breed 2: (86, 82)
+local BREED2_B = 82
 
 local BREED_DELAY = 1
 local HATCH_DELAY = 1
 local PLACE_EGG_DELAY = 0.1
 local PLACE_EGG_MIN = 1
-local PLACE_EGG_MAX = 500    -- ← loop 1-500
+local PLACE_EGG_MAX = 500
 
 -- ===== AUTO BREED (BERGANTIAN) =====
 local function StartAutoBreed()
@@ -343,7 +343,7 @@ infoLabel.Size = UDim2.new(1, -16, 0, 34)
 infoLabel.Position = UDim2.new(0, 8, 0, 186)
 infoLabel.BackgroundColor3 = Color3.fromRGB(30, 26, 45)
 infoLabel.BorderSizePixel = 0
-infoLabel.Text = "Breed: (7,16) <-> (17,15) | Egg: 1-500"
+infoLabel.Text = "Breed: (11,13) <-> (86,82) | Egg: 1-500"
 infoLabel.TextColor3 = Color3.fromRGB(255, 200, 100)
 infoLabel.Font = Enum.Font.GothamBold
 infoLabel.TextSize = 10
@@ -400,4 +400,4 @@ bubble.InputEnded:Connect(function(input)
     end
 end)
 
-print("[DuckAuto] Loaded OK - Breed (7,16)<->(17,15) | Place Egg 1-500")
+print("[DuckAuto] Loaded OK - Breed (11,13)<->(86,82) | Place Egg 1-500")
