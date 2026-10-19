@@ -34,12 +34,12 @@ local hatchLoop = nil
 local placeEggLoop = nil
 
 -- ===== SETTINGS =====
-local BREED1_A = 15        -- ← Breed 1: (15, 16)
-local BREED1_B = 16
-local BREED2_A = 19        -- ← Breed 2: (19, 4)
-local BREED2_B = 4
+local BREED1_A = 6         -- ← Breed 1: (6, 12)
+local BREED1_B = 12
+local BREED2_A = 25        -- ← Breed 2: (25, 39)
+local BREED2_B = 39
 
-local BREED_DELAY = 0.4
+local BREED_DELAY = 1
 local HATCH_DELAY = 1
 local PLACE_EGG_DELAY = 0.1
 local PLACE_EGG_MIN = 1
@@ -343,7 +343,7 @@ infoLabel.Size = UDim2.new(1, -16, 0, 34)
 infoLabel.Position = UDim2.new(0, 8, 0, 186)
 infoLabel.BackgroundColor3 = Color3.fromRGB(30, 26, 45)
 infoLabel.BorderSizePixel = 0
-infoLabel.Text = "Breed: (15,16) <-> (19,4) | Egg: 1-500"
+infoLabel.Text = "Breed: (6,12) <-> (25,39) | Egg: 1-500"
 infoLabel.TextColor3 = Color3.fromRGB(255, 200, 100)
 infoLabel.Font = Enum.Font.GothamBold
 infoLabel.TextSize = 10
@@ -400,4 +400,4 @@ bubble.InputEnded:Connect(function(input)
     end
 end)
 
-print("[DuckAuto] Loaded OK - Breed (15,16)<->(19,4) | Place Egg 1-500")
+print("[DuckAuto] Loaded OK - Breed (6,12)<->(25,39) | Place Egg 1-500")
