@@ -50,7 +50,7 @@ local PLACE_EGG_MAX = 500
 
 -- Auto Buy Egg
 local BUY_EGG_ID = "egg_primordial"
-local BUY_EGG_DELAY = 0.3
+local BUY_EGG_DELAY = 0.9
 
 -- ===== AUTO BREED =====
 local function StartAutoBreed()
