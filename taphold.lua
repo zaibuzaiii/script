@@ -1,10 +1,11 @@
 -- ============================================
--- TAP SIM REBORN - AUTO TAP (screen) + AUTO HATCH
+-- TAP SIM REBORN - AUTO TAP + AUTO HATCH + ANTI AFK
 -- ============================================
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
+local VirtualUser = game:GetService("VirtualUser")
 
 local player = Players.LocalPlayer
 
@@ -35,14 +36,19 @@ local hatchLoop = nil
 _G.HatchSeq = _G.HatchSeq or 1
 local hatchSequence = _G.HatchSeq
 
--- ===== SETTINGS =====
-local TAP_DELAY = 0.05           -- CD tap
-local AUTO_MODE_TAP = false
-local TAP_SOURCE = "button_hold"      -- cuma pake screen
+-- ===== STATE - ANTI AFK =====
+local antiAFK = true
+local antiAFKLoop = nil
+local ANTI_AFK_INTERVAL = 45   -- detik
 
-local HATCH_DELAY = 0.5          -- CD hatch
-local HATCH_EGG = "Heaven"       -- nama egg
-local HATCH_COUNT = 8            -- jumlah
+-- ===== SETTINGS =====
+local TAP_DELAY = 0.05
+local AUTO_MODE_TAP = false
+local TAP_SOURCE = "button_hold"
+
+local HATCH_DELAY = 0.5
+local HATCH_EGG = "Heaven"
+local HATCH_COUNT = 8
 local AUTO_MODE_HATCH = false
 
 -- ============================================
@@ -66,7 +72,7 @@ end
 local function StartAutoTap()
     if tapLoop then return end
     autoTap = true
-    print("[AutoTap] ⚡ Started | Seq:", tapSequence, "| Source:", TAP_SOURCE)
+    print("[AutoTap] ⚡ Started | Seq:", tapSequence)
     tapLoop = task.spawn(function()
         while autoTap do
             DoTap()
@@ -119,6 +125,41 @@ local function StopAutoHatch()
 end
 
 -- ============================================
+-- ANTI AFK
+-- ============================================
+local function DoAntiAFK()
+    pcall(function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new(0, 0))
+        VirtualUser:ClickButton1(Vector2.new(0, 0))
+    end)
+    print("[AntiAFK] 🛡️ Ping")
+end
+
+local function StartAntiAFK()
+    if antiAFKLoop then return end
+    antiAFK = true
+    print("[AntiAFK] 🛡️ Started | Interval:", ANTI_AFK_INTERVAL, "s")
+    antiAFKLoop = task.spawn(function()
+        while antiAFK do
+            task.wait(ANTI_AFK_INTERVAL)
+            if antiAFK then
+                DoAntiAFK()
+            end
+        end
+    end)
+end
+
+local function StopAntiAFK()
+    antiAFK = false
+    if antiAFKLoop then task.cancel(antiAFKLoop); antiAFKLoop = nil end
+    print("[AntiAFK] ⏹️ Stopped")
+end
+
+-- Auto-start anti AFK
+StartAntiAFK()
+
+-- ============================================
 -- GUI
 -- ============================================
 local playerGui = player:WaitForChild("PlayerGui")
@@ -145,8 +186,8 @@ bubble.Parent = screenGui
 Instance.new("UICorner", bubble).CornerRadius = UDim.new(1, 0)
 
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 260, 0, 340)
-Main.Position = UDim2.new(0.5, -130, 0.5, -170)
+Main.Size = UDim2.new(0, 260, 0, 400)
+Main.Position = UDim2.new(0.5, -130, 0.5, -200)
 Main.BackgroundColor3 = Color3.fromRGB(20, 25, 40)
 Main.BorderSizePixel = 2
 Main.BorderColor3 = Color3.fromRGB(100, 200, 255)
@@ -198,7 +239,7 @@ CloseBtn.BorderSizePixel = 0
 CloseBtn.Parent = Header
 Instance.new("UICorner", CloseBtn).CornerRadius = UDim.new(0, 5)
 
-local function CreateToggle(name, yPos, callback)
+local function CreateToggle(name, yPos, defaultState, callback)
     local frame = Instance.new("Frame")
     frame.Size = UDim2.new(1, -16, 0, 50)
     frame.Position = UDim2.new(0, 8, 0, yPos)
@@ -241,7 +282,7 @@ local function CreateToggle(name, yPos, callback)
     knob.Parent = switchBg
     Instance.new("UICorner", knob).CornerRadius = UDim.new(1, 0)
 
-    local state = false
+    local state = defaultState
 
     local function UpdateVisual(isOn)
         local targetPos = isOn and UDim2.new(1, -24, 0.5, -11) or UDim2.new(0, 2, 0.5, -11)
@@ -264,20 +305,24 @@ local function CreateToggle(name, yPos, callback)
     knob.MouseButton1Click:Connect(DoToggle)
     switchBg.MouseButton1Click:Connect(DoToggle)
 
-    UpdateVisual(false)
+    UpdateVisual(defaultState)
 end
 
-CreateToggle("AUTO TAP ⚡", 42, function(on)
+CreateToggle("AUTO TAP ⚡", 42, false, function(on)
     if on then StartAutoTap() else StopAutoTap() end
 end)
 
-CreateToggle("AUTO HATCH 🥚", 96, function(on)
+CreateToggle("AUTO HATCH 🥚", 96, false, function(on)
     if on then StartAutoHatch() else StopAutoHatch() end
+end)
+
+CreateToggle("ANTI AFK 🛡️", 150, true, function(on)
+    if on then StartAntiAFK() else StopAntiAFK() end
 end)
 
 local infoLabel = Instance.new("TextLabel")
 infoLabel.Size = UDim2.new(1, -16, 0, 180)
-infoLabel.Position = UDim2.new(0, 8, 0, 150)
+infoLabel.Position = UDim2.new(0, 8, 0, 210)
 infoLabel.BackgroundColor3 = Color3.fromRGB(25, 30, 45)
 infoLabel.BorderSizePixel = 0
 infoLabel.Text = ""
@@ -300,6 +345,8 @@ task.spawn(function()
             "🥚 HATCH (CD %.1fs)\n" ..
             "   Seq: %d\n" ..
             "   Egg: %s | Count: %d\n\n" ..
+            "🛡️ ANTI AFK\n" ..
+            "   Interval: %ds\n\n" ..
             "✅ Sequence persist (no reset)",
             TAP_DELAY,
             tapSequence,
@@ -308,7 +355,8 @@ task.spawn(function()
             HATCH_DELAY,
             hatchSequence,
             HATCH_EGG,
-            HATCH_COUNT
+            HATCH_COUNT,
+            ANTI_AFK_INTERVAL
         )
     end
 end)
@@ -324,6 +372,7 @@ bubble.MouseButton1Click:Connect(ToggleMinimize)
 CloseBtn.MouseButton1Click:Connect(function()
     StopAutoTap()
     StopAutoHatch()
+    StopAntiAFK()
     screenGui:Destroy()
 end)
 
@@ -358,6 +407,6 @@ bubble.InputEnded:Connect(function(input)
     end
 end)
 
-print("[Auto] ✅ Loaded - TAP (screen) + HATCH")
-print("Tap seq:", tapSequence, "| Hatch seq:", hatchSequence)
+print("[Auto] ✅ Loaded - TAP + HATCH + ANTI AFK")
 print("Tap CD:", TAP_DELAY, "s | Hatch CD:", HATCH_DELAY, "s")
+print("Anti AFK: every", ANTI_AFK_INTERVAL, "s")
