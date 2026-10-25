@@ -1,5 +1,5 @@
 -- ============================================
--- TAP SIM REBORN - AUTO TAP 3x + AUTO HATCH
+-- TAP SIM REBORN - AUTO TAP (screen) + AUTO HATCH
 -- ============================================
 
 local Players = game:GetService("Players")
@@ -23,12 +23,11 @@ if not TapRequested or not EggHatchRequested then
     return
 end
 
--- ===== STATE - TAP (3 METODE) =====
+-- ===== STATE - TAP =====
 local autoTap = false
 local tapLoop = nil
-_G.TapSeqScreen = _G.TapSeqScreen or 1
-_G.TapSeqButton = _G.TapSeqButton or 1
-_G.TapSeqHold = _G.TapSeqHold or 1
+_G.TapSeq = _G.TapSeq or 1
+local tapSequence = _G.TapSeq
 
 -- ===== STATE - HATCH =====
 local autoHatch = false
@@ -37,49 +36,40 @@ _G.HatchSeq = _G.HatchSeq or 1
 local hatchSequence = _G.HatchSeq
 
 -- ===== SETTINGS =====
-local TAP_DELAY = 0
+local TAP_DELAY = 0.05           -- CD tap
 local AUTO_MODE_TAP = false
+local TAP_SOURCE = "screen"      -- cuma pake screen
 
--- 3 method tap
-local TAP_METHODS = {
-    { Source = "screen",      GetSeq = function() return _G.TapSeqScreen end,  SetSeq = function(v) _G.TapSeqScreen = v end },
-    { Source = "button",      GetSeq = function() return _G.TapSeqButton end,  SetSeq = function(v) _G.TapSeqButton = v end },
-    { Source = "button_hold", GetSeq = function() return _G.TapSeqHold end,    SetSeq = function(v) _G.TapSeqHold = v end },
-}
-
-local HATCH_DELAY = 0.5
-local HATCH_EGG = "Heaven"
-local HATCH_COUNT = 8
+local HATCH_DELAY = 0.5          -- CD hatch
+local HATCH_EGG = "Heaven"       -- nama egg
+local HATCH_COUNT = 8            -- jumlah
 local AUTO_MODE_HATCH = false
 
 -- ============================================
--- AUTO TAP - 3 METODE
+-- AUTO TAP
 -- ============================================
-local function DoTapAllMethods()
-    for _, method in ipairs(TAP_METHODS) do
-        local seq = method.GetSeq()
-        local args = {
-            {
-                ClientSequence = seq,
-                Auto = AUTO_MODE_TAP,
-                Source = method.Source
-            }
+local function DoTap()
+    local args = {
+        {
+            ClientSequence = tapSequence,
+            Auto = AUTO_MODE_TAP,
+            Source = TAP_SOURCE
         }
-        pcall(function()
-            TapRequested:FireServer(unpack(args))
-        end)
-        method.SetSeq(seq + 1)
-    end
+    }
+    pcall(function()
+        TapRequested:FireServer(unpack(args))
+    end)
+    tapSequence = tapSequence + 1
+    _G.TapSeq = tapSequence
 end
 
 local function StartAutoTap()
     if tapLoop then return end
     autoTap = true
-    print("[AutoTap] ⚡ Started (3x method)")
-    print("  Screen:", _G.TapSeqScreen, "| Button:", _G.TapSeqButton, "| Hold:", _G.TapSeqHold)
+    print("[AutoTap] ⚡ Started | Seq:", tapSequence, "| Source:", TAP_SOURCE)
     tapLoop = task.spawn(function()
         while autoTap do
-            DoTapAllMethods()
+            DoTap()
             task.wait(TAP_DELAY)
         end
     end)
@@ -88,8 +78,7 @@ end
 local function StopAutoTap()
     autoTap = false
     if tapLoop then task.cancel(tapLoop); tapLoop = nil end
-    print("[AutoTap] ⏹️ Stopped")
-    print("  Screen:", _G.TapSeqScreen, "| Button:", _G.TapSeqButton, "| Hold:", _G.TapSeqHold)
+    print("[AutoTap] ⏹️ Stopped | Seq:", tapSequence)
 end
 
 -- ============================================
@@ -156,8 +145,8 @@ bubble.Parent = screenGui
 Instance.new("UICorner", bubble).CornerRadius = UDim.new(1, 0)
 
 local Main = Instance.new("Frame")
-Main.Size = UDim2.new(0, 280, 0, 380)
-Main.Position = UDim2.new(0.5, -140, 0.5, -190)
+Main.Size = UDim2.new(0, 260, 0, 340)
+Main.Position = UDim2.new(0.5, -130, 0.5, -170)
 Main.BackgroundColor3 = Color3.fromRGB(20, 25, 40)
 Main.BorderSizePixel = 2
 Main.BorderColor3 = Color3.fromRGB(100, 200, 255)
@@ -178,10 +167,10 @@ local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, -80, 1, 0)
 Title.Position = UDim2.new(0, 10, 0, 0)
 Title.BackgroundTransparency = 1
-Title.Text = "⚡ AUTO TAP 3x + HATCH"
+Title.Text = "⚡ AUTO TAP + HATCH"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.Font = Enum.Font.FredokaOne
-Title.TextSize = 12
+Title.TextSize = 13
 Title.TextXAlignment = Enum.TextXAlignment.Left
 Title.Parent = Header
 
@@ -226,7 +215,7 @@ local function CreateToggle(name, yPos, callback)
     label.Text = name
     label.TextColor3 = Color3.fromRGB(230, 230, 240)
     label.Font = Enum.Font.FredokaOne
-    label.TextSize = 12
+    label.TextSize = 13
     label.TextXAlignment = Enum.TextXAlignment.Left
     label.Parent = frame
 
@@ -278,7 +267,7 @@ local function CreateToggle(name, yPos, callback)
     UpdateVisual(false)
 end
 
-CreateToggle("AUTO TAP 3x ⚡", 42, function(on)
+CreateToggle("AUTO TAP ⚡", 42, function(on)
     if on then StartAutoTap() else StopAutoTap() end
 end)
 
@@ -287,7 +276,7 @@ CreateToggle("AUTO HATCH 🥚", 96, function(on)
 end)
 
 local infoLabel = Instance.new("TextLabel")
-infoLabel.Size = UDim2.new(1, -16, 0, 220)
+infoLabel.Size = UDim2.new(1, -16, 0, 180)
 infoLabel.Position = UDim2.new(0, 8, 0, 150)
 infoLabel.BackgroundColor3 = Color3.fromRGB(25, 30, 45)
 infoLabel.BorderSizePixel = 0
@@ -304,20 +293,18 @@ task.spawn(function()
     while infoLabel and infoLabel.Parent do
         task.wait(0.2)
         infoLabel.Text = string.format(
-            "⚡ TAP 3x (CD %.2fs)\n" ..
-            "  📱 screen:      %d\n" ..
-            "  🔘 button:      %d\n" ..
-            "  ⏸️ button_hold: %d\n" ..
-            "  = %.0f tap/detik total\n\n" ..
+            "⚡ TAP (CD %.2fs)\n" ..
+            "   Seq: %d\n" ..
+            "   Source: %s\n" ..
+            "   %.0f tap/detik\n\n" ..
             "🥚 HATCH (CD %.1fs)\n" ..
-            "  Seq: %d\n" ..
-            "  Egg: %s | Count: %d\n\n" ..
+            "   Seq: %d\n" ..
+            "   Egg: %s | Count: %d\n\n" ..
             "✅ Sequence persist (no reset)",
             TAP_DELAY,
-            _G.TapSeqScreen,
-            _G.TapSeqButton,
-            _G.TapSeqHold,
-            (1 / TAP_DELAY) * 3,
+            tapSequence,
+            TAP_SOURCE,
+            1 / TAP_DELAY,
             HATCH_DELAY,
             hatchSequence,
             HATCH_EGG,
@@ -371,6 +358,6 @@ bubble.InputEnded:Connect(function(input)
     end
 end)
 
-print("[Auto] ✅ Loaded - TAP 3x + HATCH")
-print("Tap Sequences - Screen:", _G.TapSeqScreen, "| Button:", _G.TapSeqButton, "| Hold:", _G.TapSeqHold)
-print("Hatch Sequence:", hatchSequence)
+print("[Auto] ✅ Loaded - TAP (screen) + HATCH")
+print("Tap seq:", tapSequence, "| Hatch seq:", hatchSequence)
+print("Tap CD:", TAP_DELAY, "s | Hatch CD:", HATCH_DELAY, "s")
