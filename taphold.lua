@@ -1,5 +1,6 @@
 -- ============================================
--- TAP SIM REBORN - AUTO TAP + AUTO HATCH + ANTI AFK
+-- TAP SIM REBORN - AUTO TAP + HATCH + ANTI AFK
+-- AUTO-ON STARTUP
 -- ============================================
 
 local Players = game:GetService("Players")
@@ -24,27 +25,25 @@ if not TapRequested or not EggHatchRequested then
     return
 end
 
--- ===== STATE - TAP =====
+-- ===== STATE =====
 local autoTap = false
 local tapLoop = nil
 _G.TapSeq = _G.TapSeq or 1
 local tapSequence = _G.TapSeq
 
--- ===== STATE - HATCH =====
 local autoHatch = false
 local hatchLoop = nil
 _G.HatchSeq = _G.HatchSeq or 1
 local hatchSequence = _G.HatchSeq
 
--- ===== STATE - ANTI AFK =====
 local antiAFK = true
 local antiAFKLoop = nil
-local ANTI_AFK_INTERVAL = 45   -- detik
+local ANTI_AFK_INTERVAL = 45
 
 -- ===== SETTINGS =====
 local TAP_DELAY = 0.05
 local AUTO_MODE_TAP = false
-local TAP_SOURCE = "button_hold"
+local TAP_SOURCE = "screen"
 
 local HATCH_DELAY = 0.5
 local HATCH_EGG = "Heaven"
@@ -143,9 +142,7 @@ local function StartAntiAFK()
     antiAFKLoop = task.spawn(function()
         while antiAFK do
             task.wait(ANTI_AFK_INTERVAL)
-            if antiAFK then
-                DoAntiAFK()
-            end
+            if antiAFK then DoAntiAFK() end
         end
     end)
 end
@@ -155,9 +152,6 @@ local function StopAntiAFK()
     if antiAFKLoop then task.cancel(antiAFKLoop); antiAFKLoop = nil end
     print("[AntiAFK] ⏹️ Stopped")
 end
-
--- Auto-start anti AFK
-StartAntiAFK()
 
 -- ============================================
 -- GUI
@@ -306,9 +300,17 @@ local function CreateToggle(name, yPos, defaultState, callback)
     switchBg.MouseButton1Click:Connect(DoToggle)
 
     UpdateVisual(defaultState)
+
+    return {
+        SetState = function(v)
+            state = v
+            UpdateVisual(v)
+        end
+    }
 end
 
-CreateToggle("AUTO TAP ⚡", 42, false, function(on)
+-- ===== TOGGLE =====
+CreateToggle("AUTO TAP ⚡", 42, true, function(on)
     if on then StartAutoTap() else StopAutoTap() end
 end)
 
@@ -346,8 +348,7 @@ task.spawn(function()
             "   Seq: %d\n" ..
             "   Egg: %s | Count: %d\n\n" ..
             "🛡️ ANTI AFK\n" ..
-            "   Interval: %ds\n\n" ..
-            "✅ Sequence persist (no reset)",
+            "   Interval: %ds",
             TAP_DELAY,
             tapSequence,
             TAP_SOURCE,
@@ -407,6 +408,21 @@ bubble.InputEnded:Connect(function(input)
     end
 end)
 
-print("[Auto] ✅ Loaded - TAP + HATCH + ANTI AFK")
-print("Tap CD:", TAP_DELAY, "s | Hatch CD:", HATCH_DELAY, "s")
-print("Anti AFK: every", ANTI_AFK_INTERVAL, "s")
+-- ============================================
+-- AUTO-START ON EXECUTE
+-- ============================================
+task.wait(0.5)   -- kasih waktu GUI ke-load
+
+-- Start Auto Tap
+StartAutoTap()
+print("[Auto] 🚀 Auto Tap ON otomatis")
+
+-- Start Anti AFK (default ON)
+StartAntiAFK()
+
+-- Auto Hatch: default OFF (biar ga spam)
+-- Kalau mau langsung ON, uncomment line bawah:
+-- StartAutoHatch()
+-- print("[Auto] 🚀 Auto Hatch ON otomatis")
+
+print("[Auto] ✅ All set! Auto Tap + Anti AFK aktif")
